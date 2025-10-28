@@ -42,7 +42,7 @@ window.addEventListener('load', function (e) {
   setTimeout(() => {
     document.getElementById("spinner").classList.add("d-none");
     document.getElementById("page").classList.remove("d-none");
-    document.getElementById('age').innerHTML = diffDate(BIRTH, TODAY);
+    // document.getElementById('age').innerHTML = diffDate(BIRTH, TODAY);
     document.getElementById('experience').innerHTML = diffDate(START, TODAY);
     main();
 
