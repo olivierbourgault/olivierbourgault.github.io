@@ -33,7 +33,9 @@
 </head>
 
 <body class="index-page light">
+  <!-- #region Loaders -->
   <div id="spinner" class="d-flex flex-column justify-content-center align-items-center" style="padding-top: 35vh;">
+    <!-- #region Spinner -->
     <div class="pl">
       <div class="pl__outer-ring"></div>
       <div class="d-flex justify-content-center align-items-center pl__inner-ring">
@@ -47,16 +49,27 @@
         <div class="pl__ball-side-shadows"></div>
       </div>
     </div>
+    <!-- #endregion -->
+
+    <!-- #region Progress bar -->
     <div class="loading__bar"></div>
+    <!-- #endregion -->
   </div>
+  <!-- #endregion -->
+
+  <!-- #region Content -->
   <div id="page" class="d-none">
     <header id="header" class="header d-flex align-items-center sticky-top">
       <div
         class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+        <!-- #region Logo -->
         <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
           <img id="logo" src="assets/img/logo/light.png" alt="Logo du site">
           <h1 class="sitename">Olivier Bourgault</h1>
         </a>
+        <!-- #endregion -->
+
+        <!-- #region Navbar -->
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="#hero" class="active">Accueil</a></li>
@@ -67,6 +80,9 @@
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
+        <!-- #endregion -->
+
+        <!-- #region Social links & theme switcher -->
         <div class="d-flex align-items-center gap-1 me-2 header-social-links">
           <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
           <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
@@ -74,147 +90,204 @@
           <a type="button" onclick="switchTheme(document.body.classList.contains('dark'))"><i id="themeSwitcher"
               class="bi bi-moon-stars-fill"></i></a>
         </div>
+        <!-- #endregion -->
       </div>
     </header>
 
     <main class="main">
-      <!-- Hero Section -->
-      <section id="hero" class="hero section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row align-items-center content">
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-              <h2 aria-label="Je suis un développeur">
-                Je suis un <br>
-                <span class="text-decoration-underline typewriter nocaret"></span>
-              </h2>
-              <p class="lead" id="bio">Attaché à l'innovation et à la collaboration, je m'efforce d'apporter des
-                solutions techniques et optimisées tout en garantissant une expérience utilisateur accessible et
-                inclusive. Mon objectif est d'intégrer une équipe dynamique où je pourrai continuer à perfectionner mes
-                compétences et contribuer activement à des projets significatifs.
-                <!-- Je suis principalement attiré vers le développement d'applications Web avec des
+      <!-- #region Hero Section -->
+      <section id="hero" class="hero section container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center content">
+          <!-- #region Presentation -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <!-- #region Title -->
+            <h2 aria-label="Je suis un développeur">
+              Je suis un <br>
+              <span class="text-decoration-underline typewriter nocaret"></span>
+            </h2>
+            <!-- #endregion -->
+
+            <!-- #region Bio -->
+            <p class="lead" id="bio">Attaché à l'innovation et à la collaboration, je m'efforce d'apporter des
+              solutions techniques et optimisées tout en garantissant une expérience utilisateur accessible et
+              inclusive. Mon objectif est d'intégrer une équipe dynamique où je pourrai continuer à perfectionner mes
+              compétences et contribuer activement à des projets significatifs.
+              <!-- Je suis principalement attiré vers le développement d'applications Web avec des
                 outils qui me sont familiers. Mais j'apprécie également expérimenter et je suis toujours ouvert à
                 apprendre de nouvelles notions pour élargir mes compétences. -->
-              </p>
-              <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
-                <div class="mx-auto w-auto">
-                  <a href="assets/CV_CL.pdf" class="btn btn-outline" title="Télécharger mon CV (en PDF)" download><i
-                      class="bi bi-cloud-download"></i></a>
-                </div>
-                <div class="d-flex justify-content-around">
-                  <a href="#portfolio" class="btn btn-primary">Réalisations</a>
-                  <a href="#contact" class="btn btn-primary">Me contacter</a>
-                </div>
+            </p>
+            <!-- #endregion -->
+
+            <!-- #region CTA Buttons -->
+            <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
+              <div class="mx-auto w-auto">
+                <a href="assets/CV_CL.pdf" class="btn btn-outline" title="Télécharger mon CV (en PDF)" download><i
+                    class="bi bi-cloud-download"></i></a>
               </div>
-              <div class="d-flex justify-content-center">
-                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
-                  <div class="stat-item">
-                    <span class="stat-number"><span id="experience">4</span>+</span>
-                    <span class="stat-label">Années d'expérience</span>
-                  </div>
-                  <div class="stat-item">
-                    <span class="stat-number"><span id="projects">2</span>+</span>
-                    <span class="stat-label">Projets complétés</span>
-                  </div>
+              <div class="d-flex justify-content-around">
+                <a href="#portfolio" class="btn btn-primary">Réalisations</a>
+                <a href="#contact" class="btn btn-primary">Me contacter</a>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Stats -->
+            <div class="d-flex justify-content-center">
+              <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-item">
+                  <span class="stat-number"><span id="experience">4</span>+</span>
+                  <span class="stat-label">Années d'expérience</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number"><span id="projectsCount">2</span>+</span>
+                  <span class="stat-label">Projets complétés</span>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="hero-image">
-                <img id="avatar" src="assets/img/profil/Profil_Icon.png" alt="Portfolio Hero Image" class="img-fluid"
-                  data-aos="zoom-out" data-aos-delay="300">
-                <div class="shape-1"></div>
-                <div class="shape-2"></div>
-              </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Avatar -->
+          <div class="col-lg-6">
+            <div class="hero-image">
+              <img id="avatar" src="https://github.com/RinoShip77.png" alt="Portfolio Hero Image" class="img-fluid"
+                data-aos="zoom-out" data-aos-delay="300">
+              <div class="shape-1"></div>
+              <div class="shape-2"></div>
             </div>
           </div>
+          <!-- #endregion -->
         </div>
-      </section><!-- /Hero Section -->
-      <!-- About Section -->
-      <section id="about" class="about section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region About Section -->
+      <section id="about" class="about section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
           <h2>À propos</h2>
+
+          <!-- #region Wave underline -->
           <div class="title-shape">
             <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
                 stroke-width="2"></path>
             </svg>
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
           <p>Je suis un diplômé en technique de l'informatique qui affectionne plus particulièrement le développement
             Web. Je suis très fiable, consciencieux, ouvert d'esprit, organisé, responsable et autonome dans les tâches
             que j'entreprends.</p>
-        </div><!-- End Section Title -->
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row align-items-center">
-            <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
-              <div class="about-image">
-                <img src="assets/img/profil/Profil_Avatar.png" alt="Profile Image" class="img-fluid rounded-4">
-              </div>
-            </div>
-            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
-              <div class="about-content">
-                <span class="subtitle">À propos de moi</span>
-                <h2>Développeur Web &amp; Technicien en informatique</h2>
-                <p class="lead mb-4">Je me spécialise dans la création de nouvelles applications ou l'optimisation d'une
-                  structure déjà en place. Je désire plus particulièrement automatiser et résoudre des problématiques
-                  lors de la conception de logiciels. Je parle couramment le français et je peux facilement entretenir
-                  une conversation en anglais.</p>
-                <div class="personal-info">
-                  <div class="row g-4">
-                    <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Nom<i class="bi bi-person ms-2"></i></span>
-                        <span class="value">Olivier Bourgault</span>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Téléphone<i class="bi bi-phone ms-2"></i></span>
-                        <span class="value">+1 (819) 962-0709</span>
-                      </div>
-                    </div>
-                    <!-- <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Âge<i class="bi bi-backpack2 ms-2"></i></span>
-                        <span class="value" aria-label="24 ans"><span id="age">24</span> ans</span>
-                      </div>
-                    </div> -->
-                    <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Occupation<i class="bi bi-pc-display-horizontal ms-2"></i></span>
-                        <span class="value">Technicien en informatique</span>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Courriel<i class="bi bi-envelope-at ms-2"></i></span>
-                        <span class="value">bourgault.olivier8501@gmail.com</span>
-                      </div>
-                    </div>
-                    <!-- <div class="col-6">
-                      <div class="info-item">
-                        <span class="label">Adresse<i class="bi bi-geo-alt ms-2"></i></span>
-                        <span class="value">508 rue Costello, Gatineau, QC J8L 1Y3</span>
-                      </div>
-                    </div> -->
-                  </div>
-                  <!-- <div class="text-center mt-5">
-                    <a href="https://maps.app.goo.gl/ZZXjt6SFtjhXeJMb8"
-                      class="map-link d-inline-flex align-items-center">
-                      Ouvrir la carte
-                      <i class="bi bi-arrow-right ms-2"></i>
-                    </a>
-                  </div> -->
-                </div>
-              </div>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Avatar -->
+          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
+            <div class="about-image">
+              <img src="assets/img/profil/Profil_Avatar.png" alt="Profile Image" class="img-fluid rounded-4">
             </div>
           </div>
+          <!-- #endregion-->
+
+          <!-- #region Content -->
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="about-content">
+              <span class="subtitle">À propos de moi</span>
+
+              <h2>Développeur Web &amp; Technicien en informatique</h2>
+
+              <p class="lead mb-4">Je me spécialise dans la création de nouvelles applications ou l'optimisation d'une
+                structure déjà en place. Je désire plus particulièrement automatiser et résoudre des problématiques
+                lors de la conception de logiciels. Je parle couramment le français et je peux facilement entretenir
+                une conversation en anglais.</p>
+
+              <!-- #region Personal informations container -->
+              <div>
+                <!-- #region Informations container -->
+                <div class="row g-4 personal-info">
+                  <!-- #region Information -->
+                  <div class="col-6">
+                    <div class="info-item">
+                      <span class="label">Nom<i class="bi bi-person ms-2"></i></span>
+                      <span class="value">Olivier Bourgault</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-6">
+                    <div class="info-item">
+                      <span class="label">Téléphone<i class="bi bi-phone ms-2"></i></span>
+                      <span class="value">+1 (819) 962-0709</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <!-- <div class="col-6">
+                  <div class="info-item">
+                    <span class="label">Âge<i class="bi bi-backpack2 ms-2"></i></span>
+                    <span class="value" aria-label="24 ans"><span id="age">24</span> ans</span>
+                  </div>
+                </div> -->
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-6">
+                    <div class="info-item">
+                      <span class="label">Occupation<i class="bi bi-pc-display-horizontal ms-2"></i></span>
+                      <span class="value">Technicien en informatique</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-6">
+                    <div class="info-item">
+                      <span class="label">Courriel<i class="bi bi-envelope-at ms-2"></i></span>
+                      <span class="value">bourgault.olivier8501@gmail.com</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <!-- <div class="col-6">
+                  <div class="info-item">
+                    <span class="label">Adresse<i class="bi bi-geo-alt ms-2"></i></span>
+                    <span class="value">508 rue Costello, Gatineau, QC J8L 1Y3</span>
+                  </div>
+                </div> -->
+                  <!-- #endregion -->
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Link -->
+                <!-- <div class="text-center mt-5">
+                  <a href="https://maps.app.goo.gl/ZZXjt6SFtjhXeJMb8" class="map-link d-inline-flex align-items-center">
+                    Ouvrir la carte
+                    <i class="bi bi-arrow-right ms-2"></i>
+                  </a>
+                </div> -->
+                <!-- #endregion -->
+              </div>
+              <!-- #endregion -->
+            </div>
+          </div>
+          <!-- #endregion -->
         </div>
-      </section><!-- /About Section -->
-      <!-- Skills Section -->
-      <section id="skills" class="skills section">
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Skills Section -->
+      <section id="skills" class="skills section container" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+          <!-- #region Skills cards -->
           <div class="row g-4 skills-animation">
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -228,6 +301,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -241,6 +317,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -254,6 +333,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -267,6 +349,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -280,6 +365,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -293,6 +381,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -306,6 +397,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
             <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
               <div class="skill-box">
                 <div class="d-flex justify-content-between">
@@ -319,18 +413,28 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Dropdowns -->
           <div id="skills-collapsable" class="mt-5 cta-buttons">
             <div class="d-flex justify-content-center gap-5">
+              <!-- #region Language dropdown button -->
               <button class="btn btn-primary text-nowrap" type="button" data-bs-toggle="collapse"
                 data-bs-target="#languages" aria-expanded="false" aria-controls="languageCollapse">
                 Voir tous mes langages.
               </button>
+              <!-- #endregion -->
+
+              <!-- #region Software dropdown button -->
               <button class="btn btn-primary text-nowrap" type="button" data-bs-toggle="collapse"
                 data-bs-target="#softwares" aria-expanded="false" aria-controls="softwareCollapse">
                 Voir tous mes logiciels.
               </button>
+              <!-- #endregion -->
             </div>
+            <!-- #region Language dropdown content -->
             <div class="collapse mt-3" id="languages">
               <div class="card card-body rounded-3 text-center">
                 <div class="col-6 mx-auto w-auto">
@@ -366,6 +470,9 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Software dropdown content -->
             <div class="collapse mt-3" id="softwares">
               <div class="card card-body rounded-3 text-center">
                 <div class="col-6 mx-auto w-auto">
@@ -396,292 +503,348 @@
                 </div>
               </div>
             </div>
+            <!-- #endregion -->
           </div>
+          <!-- #endregion -->
         </div>
-      </section><!-- /Skills Section -->
-      <!-- Resume Section -->
-      <section id="resume" class="resume section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Resume Section -->
+      <section id="resume" class="resume section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
           <h2>CV</h2>
+
+          <!-- #region Wave underline -->
           <div class="title-shape">
             <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
                 stroke-width="2"></path>
             </svg>
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
           <p>Ceci est un simple aperçu de mon curriculum vitae. Je vous invite à consulter le <a href="assets/CV_CL.pdf"
               title="Télécharger mon CV (en PDF)" download>document</a> PDF.</p>
-        </div><!-- End Section Title -->
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="row">
-            <div class="col-12">
-              <div class="resume-wrapper">
-                <div class="resume-block" data-aos="fade-up">
-                  <h2>Expérience de travail</h2>
-                  <div class="timeline">
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-                      <div class="timeline-left">
-                        <h4 class="company">Chambre des Communes - House of Commons</h4>
-                        <span class="period">2023 - 2024</span>
-                      </div>
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-right">
-                        <span class="period">Été 2024</span>
-                        <h3 class="position">Technicien informatique</h3>
-                        <p class="description">Tester des sites et des applications pour s'assurer que ceux-ci soient
-                          accessibles selon les directives pour l'accessibilité du contenu Web (WCAG). Transcrire le
-                          résultat de mes tests dans Azure DevOps et ensuite créer des rapports Excel détaillés sur ces
-                          problèmes.</p>
-                        <span class="period">Été 2023</span>
-                        <h3 class="position">Technicien informatique</h3>
-                        <p class="description">Assister les utilisateurs dans la résolution de problèmes par l'entremise
-                          d'un système de billets. Si nécessaire, je regardais dans la base de données de l'application pour
-                          trouver la cause du problème. J'ai créé un script PowerShell pour aider mon équipe à accélérer
-                          le processus de résolution de problèmes. Celui-ci compare le contenu de deux dossiers en
-                          comparant une ligne après l'autre.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                      <div class="timeline-left">
-                        <h4 class="company">VIWEB</h4>
-                        <span class="period">2024</span>
-                      </div>
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-right">
-                        <h3 class="position">Stagiaire en développement Web</h3>
-                        <p class="description">
-                          Développer mon propre thème pour un site Wordpress de ventes en ligne avec l'aide de
-                          l'extension WooCommerce. Personnaliser le catalogue et automatiser le processus d'achat.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
-                      <div class="timeline-left">
-                        <h4 class="company">Cégep de Saint-Jérôme</h4>
-                        <span class="period">2023 - 2024</span>
-                      </div>
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-right">
-                        <h3 class="position">Tuteur TIC</h3>
-                        <p class="description">Accueillir et soutenir les cégépiens sur le plan technique. Les assister
-                          avec l'impression et dans l'accès aux principaux services en ligne du collège. Ainsi que
-                          d'aider ceux-ci dans l'utilisation de base avec la suite Microsoft 365.</p>
-                      </div>
-                    </div>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Resume -->
+          <div class="resume-wrapper">
+            <!-- #region Past jobs -->
+            <div class="resume-block" data-aos="fade-up">
+              <h2>Expérience de travail</h2>
+              <div class="timeline">
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Chambre des Communes - House of Commons</h4>
+                    <span class="period">2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <span class="period">Été 2024</span>
+                    <h3 class="position">Technicien informatique</h3>
+                    <p class="description">Tester des sites et des applications pour s'assurer que ceux-ci soient
+                      accessibles selon les directives pour l'accessibilité du contenu Web (WCAG). Transcrire le
+                      résultat de mes tests dans Azure DevOps et ensuite créer des rapports Excel détaillés sur ces
+                      problèmes.</p>
+                    <span class="period">Été 2023</span>
+                    <h3 class="position">Technicien informatique</h3>
+                    <p class="description">Assister les utilisateurs dans la résolution de problèmes par l'entremise
+                      d'un système de billets. Si nécessaire, je regardais dans la base de données de l'application
+                      pour
+                      trouver la cause du problème. J'ai créé un script PowerShell pour aider mon équipe à accélérer
+                      le processus de résolution de problèmes. Celui-ci compare le contenu de deux dossiers en
+                      comparant une ligne après l'autre.
+                    </p>
                   </div>
                 </div>
-                <div class="resume-block" data-aos="fade-up" data-aos-delay="100">
-                  <h2>Mon éducation</h2>
-                  <div class="timeline">
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-                      <div class="timeline-left">
-                        <h4 class="company">Cégep de Saint-Jérôme</h4>
-                        <span class="period">2024</span>
-                      </div>
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-right">
-                        <h3 class="position">Diplôme d'études collégiales en technique de l'informatique.</h3>
-                        <p class="description">J'ai débuté mon parcours en Sciences, informatique et mathématique. J'ai
-                          finalement changé de programme pour me spécialiser en informatique.</p>
-                      </div>
-                    </div>
-                    <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                      <div class="timeline-left">
-                        <h3 class="company">École secondaire Hormisdas-Gamelin</h3>
-                        <span class="period">2018</span>
-                      </div>
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-right">
-                        <h4 class="position">Diplôme d'études secondaires</h4>
-                        <p class="description">Mon parcours était dans le programme sportif.</p>
-                      </div>
-                    </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">VIWEB</h4>
+                    <span class="period">2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Stagiaire en développement Web</h3>
+                    <p class="description">
+                      Développer mon propre thème pour un site Wordpress de ventes en ligne avec l'aide de
+                      l'extension WooCommerce. personaliser le catalogue et automatiser le processus d'achat.
+                    </p>
                   </div>
                 </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Tuteur TIC</h3>
+                    <p class="description">Accueillir et soutenir les cégépiens sur le plan technique. Les assister
+                      avec l'impression et dans l'accès aux principaux services en ligne du collège. Ainsi que
+                      d'aider ceux-ci dans l'utilisation de base avec la suite Microsoft 365.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
               </div>
             </div>
+            <!-- #endregion -->
+
+            <!-- #region Education -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="100">
+              <h2>Mon éducation</h2>
+              <div class="timeline">
+                <!-- #region Formation -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Diplôme d'études collégiales en technique de l'informatique.</h3>
+                    <p class="description">J'ai débuté mon parcours en Sciences, informatique et mathématique. J'ai
+                      finalement changé de programme pour me spécialiser en informatique.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Formation -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h3 class="company">École secondaire Hormisdas-Gamelin</h3>
+                    <span class="period">2018</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h4 class="position">Diplôme d'études secondaires</h4>
+                    <p class="description">Mon parcours était dans le programme sportif.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
           </div>
+          <!-- #endregion -->
         </div>
-      </section><!-- /Resume Section -->
-      <!-- Portfolio Section -->
-      <section id="portfolio" class="portfolio section">
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Portfolio Section -->
+      <section id="portfolio" class="portfolio section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
           <h2>Portfolio</h2>
+
+          <!-- #region Wave underline -->
           <div class="title-shape">
             <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
                 stroke-width="2"></path>
             </svg>
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
           <p class='portfolio-text'>Ces projets ne sont qu'une partie de mes réalisations.<br>
             Pour voir l'ensemble de mon code, veuillez visiter mon dépôt <a
               href='https://github.com/RinoShip77/MesProjets' target='_blank'>GitHub</a>.</p>
-        </div><!-- End Section Title -->
-        <div class="container" data-aos="fade-up" data-aos-delay="100">
-          <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-            <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
-              <ul class="portfolio-filters isotope-filters" id="filters">
-                <li data-filter="*" class="filter-active">Tout</li>
-                <li data-filter=".filter-school">Scolaires</li>
-                <li data-filter=".filter-profesionnal">Professionnels</li>
-                <li data-filter=".filter-personnal">Personnels</li>
-              </ul>
-            </div>
-            <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/electrolib.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/electrolib.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-ProjetDeDeveloppement_5C8/Electrolib"
-                          target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Scolaires</span>
-                    <h3>Electrolib</h3>
-                    <p class="text-break">Il s'agit d'un logiciel de gestion d'inventaire à destination d'une
-                      bibliothèque.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-profesionnal">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/compareTools.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/compareTools.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/Emploi/HoC-CdC_E23/CompareTools"
-                          target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Professionnels</span>
-                    <h3>CompareTools</h3>
-                    <p class="text-break">C'est un script PowerShell qui effectue une comparaison complète de deux
-                      fichiers ou dossiers.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personnal">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/hubAI.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/hubAI.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/HubAI" target="_blank"
-                          class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Personnels</span>
-                    <h3>HubAI</h3>
-                    <p class="text-break">C'est une simple plateforme qui donne accès à quatre petites applications.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/kaomia.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/kaomia.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-SystemesMulticlients_5D4/Kaomia"
-                          target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Scolaires</span>
-                    <h3>Kaomia</h3>
-                    <p class="text-break">C'est un portail qui permet de voir les statistiques d'un jeu.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/evomeal.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/evomeal.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/H23-DeveloppementWeb_4D6/EVOMEAL"
-                          target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Scolaires</span>
-                    <h3>EVOMEAL</h3>
-                    <p class="text-break">C'est un site de vente en ligne avec Symfony.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-              <!-- Start Portfolio Item -->
-              <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personnal">
-                <div class="portfolio-card">
-                  <div class="portfolio-image">
-                    <img src="assets/img/portfolio/shopro.png" class="img-fluid" alt="" loading="lazy">
-                    <div class="portfolio-overlay">
-                      <div class="portfolio-actions">
-                        <a href="assets/img/portfolio/shopro.png" class="glightbox preview-link"
-                          data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
-                        <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/Shopro" target="_blank"
-                          class="details-link"><i class="bi bi-arrow-right"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="portfolio-content">
-                    <span class="category">Personnels</span>
-                    <h3>Shopro</h3>
-                    <p class="text-break">C'est un site de vente en ligne.</p>
-                  </div>
-                </div>
-              </div>
-              <!-- End Portfolio Item -->
-            </div><!-- End Portfolio Container -->
-          </div>
+          <!-- #endregion -->
         </div>
-      </section><!-- /Portfolio Section -->
-      <!-- Contact Section -->
-      <section id="contact" class="contact section">
-        <!-- <div class="container" data-aos="fade-up" data-aos-delay="100"> -->
-        <div class="container section-title" data-aos="fade-up" data-aos-delay="100">
+        <!-- #endregion -->
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <!-- #region Project Filters -->
+          <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
+            <ul class="portfolio-filters isotope-filters" id="filters">
+              <li data-filter="*" class="filter-active">Tout</li>
+              <li data-filter=".filter-school">Scolaires</li>
+              <li data-filter=".filter-professional">Professionnels</li>
+              <li data-filter=".filter-personal">Personnels</li>
+            </ul>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Projects container -->
+          <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/electrolib.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/electrolib.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-ProjetDeDeveloppement_5C8/Electrolib"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires</span>
+                  <h3>Electrolib</h3>
+                  <p class="text-break">Il s'agit d'un logiciel de gestion d'inventaire à destination d'une
+                    bibliothèque.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-professional">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/compareTools.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/compareTools.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Emploi/HoC-CdC_E23/CompareTools"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Professionnels</span>
+                  <h3>CompareTools</h3>
+                  <p class="text-break">C'est un script PowerShell qui effectue une comparaison complète de deux
+                    fichiers ou dossiers.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/hubAI.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/hubAI.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/HubAI" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels</span>
+                  <h3>HubAI</h3>
+                  <p class="text-break">C'est une simple plateforme qui donne accès à quatre petites applications.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/kaomia.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/kaomia.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-SystemesMulticlients_5D4/Kaomia"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires</span>
+                  <h3>Kaomia</h3>
+                  <p class="text-break">C'est un portail qui permet de voir les statistiques d'un jeu.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/evomeal.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/evomeal.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/H23-DeveloppementWeb_4D6/EVOMEAL"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires</span>
+                  <h3>EVOMEAL</h3>
+                  <p class="text-break">C'est un site de vente en ligne avec Symfony.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/shopro.png" class="img-fluid" alt="" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/shopro.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/Shopro" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels</span>
+                  <h3>Shopro</h3>
+                  <p class="text-break">C'est un site de vente en ligne.</p>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Contact Section -->
+      <section id="contact" class="contact section container" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
           <h2>Contact</h2>
+
+          <!-- #region Wave underline -->
           <div class="title-shape">
             <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
                 stroke-width="2"></path>
             </svg>
           </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
           <p class="lead mb-4">Un simple courriel et je pourrai aider votre entreprise à changer le monde.</p>
+          <!-- #endregion -->
         </div>
+        <!-- #endregion -->
+
+        <!-- #region Form -->
         <div class="contact-form card mx-5" data-aos="fade-up" data-aos-delay="300">
           <div class="card-body p-4 p-lg-5">
             <form action="" class="email-form">
@@ -706,41 +869,45 @@
             </form>
           </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <div class="badge-base LI-profile-badge mt-5" data-locale="fr_FR" data-size="large" data-theme="light"
-            data-type="HORIZONTAL" data-vanity="olivier-bourgault-5b950428a" data-version="v1"><a
-              class="badge-base__link LI-simple-link"
-              href="https://ca.linkedin.com/in/olivier-bourgault-5b950428a?trk=profile-badge"></a>
-          </div>
-        </div>
-      </section><!-- /Contact Section -->
+        <!-- #endregion -->
+      </section>
+      <!-- #endregion -->
     </main>
+
     <footer id="footer" class="footer">
-      <div class="container">
-        <div class="copyright text-center ">
-          <p>© <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong></p><span>Tous droits
-            réservés</span>
-          </p>
-        </div>
-        <div class="social-links d-flex justify-content-center">
-          <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
-          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
-              class="bi bi-linkedin"></i></a>
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you've purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
+      <!-- #region Right -->
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong></p><span>Tous droits
+          réservés</span>
+        </p>
       </div>
+      <!-- #endregion -->
+
+      <!-- #region Social links -->
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
+            class="bi bi-linkedin"></i></a>
+      </div>
+      <!-- #endregion -->
+
+      <!-- #region Credits -->
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+      <!-- #endregion -->
     </footer>
   </div>
 
   <!-- Scroll Top -->
   <a id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
+
+  <!-- #region Scripts -->
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -752,6 +919,7 @@
   <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- #endregion -->
 </body>
 
 </html>

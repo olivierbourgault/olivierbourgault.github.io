@@ -73,10 +73,11 @@ window.addEventListener('resize', function (e) {
   */
 function main() {
   if (location.href.includes("https")) {
-    document.getElementById("projects").innerHTML = 0;
-
+    document.getElementById("projectsCount").innerHTML = 0;
     getData('https://api.github.com/repos/rinoship77/mesprojets');
   }
+
+  fetchPersonalProjects()
 
   aosInit();
   positionSkills();
@@ -243,7 +244,7 @@ function displayData(url, data) {
 function countProjects(projects) {
   projects.forEach(project => {
     if (project.type === "dir")
-      document.getElementById("projects").innerHTML = parseInt(document.getElementById("projects").innerHTML) + 1;
+      document.getElementById("projectsCount").innerHTML = parseInt(document.getElementById("projectsCount").innerHTML) + 1;
   });
 }
 
@@ -331,5 +332,123 @@ async function getData(url) {
     }
   } catch (error) {
     console.error('There was an error!', error);
+  }
+}
+
+//**********************************************************************
+/**
+ * FETCH PERSONAL PROJECTS DYNAMICALLY
+ * This function adds projects from your GitHub 'Personnel' folder that aren't already in the HTML.
+ */
+async function fetchPersonalProjects() {
+  const repoOwner = "RinoShip77";
+  const repoName = "MesProjets";
+  const path = "Personnel";
+  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+  const readmeUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}/README.md`;
+
+  try {
+    // 1. Get existing projects to prevent duplicates
+    const existingProjects = Array.from(document.querySelectorAll('.portfolio-item h3'))
+                                  .map(el => el.innerText.trim().toLowerCase());
+
+    // 2. Fetch Repository Contents and README in parallel
+    const [contentsRes, readmeRes] = await Promise.all([
+      fetch(apiUrl),
+      fetch(readmeUrl)
+    ]);
+
+    if (!contentsRes.ok) throw new Error("Could not fetch projects");
+    
+    const items = await contentsRes.json();
+    const readmeText = await readmeRes.text();
+
+    // 3. Filter for directories (projects) that don't exist in the HTML
+    const newProjects = items.filter(item => 
+      item.type === 'dir' && !existingProjects.includes(item.name.toLowerCase())
+    );
+
+    if (newProjects.length === 0) return; // Nothing to add
+
+    // 4. Generate HTML for new projects
+    const container = document.querySelector('.isotope-container');
+    const newElements = [];
+
+    newProjects.forEach(project => {
+      // Extract description from README (Simple parser: looks for ProjectName and grabs the line/paragraph after it)
+      // Adjust regex based on your actual README format. This assumes: "- **Project**: Description" or "### Project \n Description"
+      let description = "Voir le projet pour plus de détails.";
+      
+      // 1. Trouver la ligne dans le README
+      // On cherche une ligne qui contient le lien vers le dossier du projet: ](NomDuProjet)
+      // Le drapeau 'im' permet de chercher ligne par ligne (multiligne) et insensible à la casse
+      const lineRegex = new RegExp(`^.*?\\]\\(${project.name}\\).*$`, 'im');
+      const match = readmeText.match(lineRegex);
+
+      if (match) {
+        description = match[0];
+
+        // 2. Nettoyage du texte (Ordre important)
+        
+        // A. Remplacer les liens Markdown [Texte](URL) par juste "Texte"
+        description = description.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
+        // B. Enlever les caractères de formatage (***, **, *, _, `)
+        description = description.replace(/[*_`]/g, '');
+
+        // C. Enlever le préfixe de liste et citation (> 1. )
+        // Explication: ^ (début) > (citation) \s* (espace optionnel) \d+ (chiffre) \. (point)
+        description = description.replace(/^>\s*\d+\.\s*/, '');
+
+        // D. Nettoyer les espaces superflus au début/fin
+        description = description.trim();
+      }
+
+      // Image URL (Assumes a preview.png exists, otherwise falls back to logo via onerror)
+      const imgUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}/${project.name}/preview.png`;
+      const projectUrl = `https://github.com/${repoOwner}/${repoName}/tree/main/${path}/${project.name}`;
+
+      const div = document.createElement('div');
+      div.className = 'col-lg-6 col-md-6 portfolio-item isotope-item filter-personal';
+      div.innerHTML = `
+        <div class="portfolio-card">
+          <div class="portfolio-image">
+            <img src="${imgUrl}" class="img-fluid" alt="${project.name}" loading="lazy" 
+                 onerror="this.onerror=null; this.src='assets/img/logo/light.png';">
+            <div class="portfolio-overlay">
+              <div class="portfolio-actions">
+                <a href="${imgUrl}" class="glightbox preview-link" data-gallery="portfolio-gallery-new" 
+                   onerror="this.href='assets/img/logo/light.png'"><i class="bi bi-eye"></i></a>
+                <a href="${projectUrl}" target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-content">
+            <span class="category">Personnels</span>
+            <h3>${project.name}</h3>
+            <p class="text-break">${description}</p>
+          </div>
+        </div>
+      `;
+      container.appendChild(div);
+      newElements.push(div);
+    });
+
+    // 5. Update Isotope layout
+    // We need to retrieve the Isotope instance. Since it's local in the existing code, 
+    // we re-access it via the data attribute which Isotope automatically stores.
+    const iso = Isotope.data(container);
+    if (iso) {
+      iso.appended(newElements);
+      
+      // Re-init lightbox for new items
+      const newLightbox = GLightbox({ selector: '.glightbox' });
+      
+      // Wait for images to load (if using real images) or just relayout
+      iso.layout();
+    }
+
+  } catch (error) {
+    console.error("Error loading personal projects:", error);
   }
 }
