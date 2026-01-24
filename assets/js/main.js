@@ -400,7 +400,7 @@ async function fetchPersonalProjects() {
         description = description.trim();
       }
 
-      // Image URL (Assumes a preview.png exists, fallback to logo)
+      // Image URL (Assumes a preview.png exists)
       const imgUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}/${project.name}/preview.png`;
       const projectUrl = `https://github.com/${repoOwner}/${repoName}/tree/main/${path}/${project.name}`;
 
@@ -410,12 +410,12 @@ async function fetchPersonalProjects() {
         <div class="portfolio-card">
           <div class="portfolio-image">
             <img src="${imgUrl}" class="img-fluid" alt="${project.name}" loading="lazy" 
-                 onerror="this.onerror=null; this.src='assets/img/logo/light.png';">
+                 onerror="handleImageError(this)">
             <div class="portfolio-overlay">
               <div class="portfolio-actions">
-                <a href="${imgUrl}" class="glightbox preview-link" data-gallery="portfolio-gallery-new" 
-                   onerror="this.href='assets/img/logo/light.png'"><i class="bi bi-eye"></i></a>
-                <a href="${projectUrl}" target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                <a href="${projectUrl}" target="_blank" class="details-link">
+                  <i class="bi bi-arrow-right"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -441,6 +441,20 @@ async function fetchPersonalProjects() {
   } catch (error) {
     console.error("Error loading personal projects:", error);
   }
+}
+
+/**
+ * Replaces a failed image with a centered Bootstrap folder icon.
+ * @param {HTMLElement} imgElement - The image element that failed to load.
+ */
+function handleImageError(imgElement) {
+  const folderIconHtml = `
+    <div class="d-flex justify-content-center align-items-center w-100" style="height: 200px; min-height: 100%;">
+      <i class="bi bi-folder-symlink-fill text-warning" style="font-size: 10rem;"></i>
+    </div>
+  `;
+  // Replace the entire <img> tag with our new centered icon container
+  imgElement.outerHTML = folderIconHtml;
 }
 
 /**
