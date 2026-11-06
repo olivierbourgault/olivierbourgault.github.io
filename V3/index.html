@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Olivier Bourgault | Développeur Full-Stack, IA &amp; Technicien TI</title>
+  <meta name="description"
+    content="Portfolio d'Olivier Bourgault, diplômé en technique de l'informatique et étudiant en intelligence artificielle. Spécialisé en développement d'applications, automatisation et accessibilité Web.">
+  <meta name="keywords"
+    content="Portfolio, Olivier Bourgault, Développeur Web, Intelligence Artificielle, Technicien informatique, Automatisation, Gatineau, Angular, Vue, Symfony, C#, Python, PowerShell">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial:wght@400&display=swap&family=Fira+Code&display=swap"
+    rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet">
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page light">
+  <!-- Ambient Background Blobs -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- #region Loaders -->
+  <div id="spinner" class="d-flex flex-column justify-content-center align-items-center" style="padding-top: 35vh;">
+    <!-- #region Spinner -->
+    <div class="pl">
+      <div class="pl__outer-ring"></div>
+      <div class="d-flex justify-content-center align-items-center pl__inner-ring">
+        <img src="assets/img/favicon.png" class="img-fluid" alt="Logo">
+      </div>
+      <div class="pl__track-cover"></div>
+      <div class="pl__ball">
+        <div class="pl__ball-texture"></div>
+        <div class="pl__ball-outer-shadow"></div>
+        <div class="pl__ball-inner-shadow"></div>
+        <div class="pl__ball-side-shadows"></div>
+      </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Progress bar -->
+    <div class="loading__bar"></div>
+    <!-- #endregion -->
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Content -->
+  <div id="page" class="d-none">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="header-container container-fluid position-relative d-flex align-items-center justify-content-between w-75 mx-auto">
+        <!-- #region Logo -->
+        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0 text-reset">
+          <img id="logo" src="assets/img/logo/light.png" alt="Logo du site">
+          <span class="fs-4 text-decoration-none text-reset align-items-center">Olivier Bourgault</span>
+        </a>
+        <!-- #endregion -->
+
+        <!-- #region Navbar -->
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Accueil</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#resume">CV</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        <!-- #endregion -->
+
+        <!-- #region Social links & theme switcher -->
+        <div class="d-flex align-items-center gap-1 me-2 header-social-links">
+          <a href="../index.html" aria-label="Portail des versions" title="Changer de version"><i
+              class="bi bi-layers"></i></a>
+          <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
+              class="bi bi-linkedin"></i></a>
+          <a type="button" onclick="switchTheme(document.body.classList.contains('dark'))"><i id="themeSwitcher"
+              class="bi bi-moon-stars-fill"></i></a>
+        </div>
+        <!-- #endregion -->
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- #region Hero Section -->
+      <section id="hero" class="hero section" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center content">
+          <!-- #region Presentation -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <!-- #region Title -->
+            <h2 aria-label="Je suis un développeur">
+              Je suis un <br>
+              <span class="typewriter nocaret"></span>
+            </h2>
+            <!-- #endregion -->
+
+            <!-- #region Bio -->
+            <p class="lead" id="bio">Diplômé en technique de l'informatique et actuellement en spécialisation en
+              <strong>intelligence artificielle</strong>, je conçois de nouvelles applications et optimise les systèmes
+              existants. Passionné par l'automatisation, la résolution de problématiques techniques et l'accessibilité
+              Web (WCAG), je mets ma rigueur et mon autonomie au service de projets innovants.
+            </p>
+            <!-- #endregion -->
+
+            <!-- #region CTA Buttons -->
+            <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
+              <div class="mx-auto w-auto">
+                <a href="assets/CV_CL.pdf" class="btn btn-outline" title="Télécharger mon CV (en PDF)" download><i
+                    class="bi bi-cloud-download"></i></a>
+              </div>
+              <div class="d-flex justify-content-around gap-3">
+                <a href="#portfolio" class="btn btn-primary">Réalisations</a>
+                <a href="#contact" class="btn btn-secondary-accent">Me contacter</a>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Stats -->
+            <div class="d-flex justify-content-center">
+              <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-item">
+                  <span class="stat-number"><span id="experience">5</span>+</span>
+                  <span class="stat-label">Années d'expérience</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number"><span id="projectsCount">6</span>+</span>
+                  <span class="stat-label">Projets complétés</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Avatar -->
+          <div class="col-lg-6">
+            <div class="hero-image">
+              <img id="avatar" src="https://github.com/RinoShip77.png" alt="Portfolio Hero Image"
+                class="img-fluid d-block mx-auto" data-aos="zoom-out" data-aos-delay="300">
+              <div class="shape-1"></div>
+              <div class="shape-2"></div>
+            </div>
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region About Section -->
+      <section id="about" class="about section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>À propos</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p>Diplômé en technique de l'informatique et poursuivant une attestation d'études collégiales en intelligence
+            artificielle, je suis fiable, rigoureux, organisé, autonome et responsable dans toutes les réalisations que
+            j'entreprends.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Avatar -->
+          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
+            <div class="about-image">
+              <img src="assets/img/profil/Profil_Avatar.png" alt="Profile Image" class="img-fluid rounded-4">
+            </div>
+          </div>
+          <!-- #endregion-->
+
+          <!-- #region Content -->
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="about-content">
+              <span class="subtitle">À propos de moi</span>
+
+              <h2>Développeur Full-Stack, IA &amp; Technicien en informatique</h2>
+
+              <p class="lead mb-4">Spécialisé dans la création de nouvelles applications Web, mobiles et logicielles
+                ainsi que dans l'optimisation de systèmes existants. J'ai un fort intérêt pour l'automatisation des
+                processus, l'intelligence artificielle et la conformité aux normes d'accessibilité (WCAG). Je parle
+                couramment le français et je communique aisément en anglais.</p>
+
+              <!-- #region Personal informations container -->
+              <div>
+                <!-- #region Informations container -->
+                <div class="row g-4 personal-info">
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Nom<i class="bi bi-person ms-2"></i></span>
+                      <span class="value">Olivier Bourgault</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Téléphone<i class="bi bi-phone ms-2"></i></span>
+                      <span class="value">+1 (819) 962-0709</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Spécialisation<i class="bi bi-pc-display-horizontal ms-2"></i></span>
+                      <span class="value">Développement, TI &amp; IA</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Courriel<i class="bi bi-envelope-at ms-2"></i></span>
+                      <span class="value">bourgault.olivier8501@gmail.com</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Région<i class="bi bi-geo-alt ms-2"></i></span>
+                      <span class="value">Gatineau / Ottawa, QC</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Formation actuelle<i class="bi bi-mortarboard ms-2"></i></span>
+                      <span class="value">AEC en Intelligence Artificielle</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+                </div>
+                <!-- #endregion -->
+              </div>
+              <!-- #endregion -->
+            </div>
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Skills Section -->
+      <section id="skills" class="skills section" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+          <!-- #region Skills cards -->
+          <div class="row g-4 skills-animation">
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>HTML / CSS</h3>
+                  <img src="assets/img/portfolio/html_icon.png" width="15" height="15" alt="HTML & CSS">
+                </div>
+                <span class="text-end d-block">95%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>JavaScript / TS</h3>
+                  <i class="bi bi-javascript"></i>
+                </div>
+                <span class="text-end d-block">85%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>Angular / Vue / React</h3>
+                  <i class="bi bi-code-slash"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>C# / .NET / MAUI</h3>
+                  <i class="bi bi-window-stack"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>PHP / Symfony</h3>
+                  <i class="bi bi-hdd-network"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>Python &amp; IA</h3>
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <span class="text-end d-block">75%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>SQL &amp; NoSQL</h3>
+                  <i class="bi bi-database"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>PowerShell &amp; Git</h3>
+                  <i class="bi bi-terminal"></i>
+                </div>
+                <span class="text-end d-block">85%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Dropdowns -->
+          <div id="skills-collapsable" class="mt-5 cta-buttons">
+            <div class="d-flex justify-content-center gap-5">
+              <!-- #region Language dropdown button -->
+              <button class="btn btn-primary text-nowrap" type="button" data-bs-toggle="collapse"
+                data-bs-target="#languages" aria-expanded="false" aria-controls="languages">
+                Langages &amp; Frameworks
+              </button>
+              <!-- #endregion -->
+
+              <!-- #region Software dropdown button -->
+              <button class="btn btn-secondary-accent text-nowrap" type="button" data-bs-toggle="collapse"
+                data-bs-target="#softwares" aria-expanded="false" aria-controls="softwares">
+                Logiciels &amp; Environnements
+              </button>
+              <!-- #endregion -->
+            </div>
+            <!-- #region Language dropdown content -->
+            <div class="collapse mt-3" id="languages">
+              <div class="card card-body rounded-3 text-center">
+                <div class="col-6 mx-auto w-auto">
+                  <span class="btn btn-outline">HTML</span>
+                  <span class="btn btn-outline">CSS</span>
+                  <span class="btn btn-outline">JavaScript</span>
+                  <span class="btn btn-outline">TypeScript</span>
+                  <span class="btn btn-outline">Python</span>
+                  <span class="btn btn-outline">C#</span>
+                  <span class="btn btn-outline">C++</span>
+                  <span class="btn btn-outline">PHP</span>
+                  <span class="btn btn-outline">Kotlin</span>
+                  <span class="btn btn-outline">Dart</span>
+                  <span class="btn btn-outline">SQL (MySQL / MariaDB)</span>
+                  <span class="btn btn-outline">MongoDB</span>
+                  <span class="btn btn-outline">PowerShell</span>
+                  <span class="btn btn-outline">Batch</span>
+                  <span class="btn btn-outline">YAML</span>
+                  <span class="btn btn-outline">JSON</span>
+                  <span class="btn btn-outline">XAML</span>
+                  <span class="btn btn-outline">Angular</span>
+                  <span class="btn btn-outline">Vue</span>
+                  <span class="btn btn-outline">React</span>
+                  <span class="btn btn-outline">Vite</span>
+                  <span class="btn btn-outline">NodeJS</span>
+                  <span class="btn btn-outline">Symfony</span>
+                  <span class="btn btn-outline">Twig</span>
+                  <span class="btn btn-outline">.NET / .NET MAUI</span>
+                  <span class="btn btn-outline">WPF</span>
+                  <span class="btn btn-outline">Flutter</span>
+                  <span class="btn btn-outline">Expo / React Native</span>
+                  <span class="btn btn-outline">Electron</span>
+                  <span class="btn btn-outline">Bootstrap</span>
+                  <span class="btn btn-outline">jQuery</span>
+                  <span class="btn btn-outline">Docker</span>
+                  <span class="btn btn-outline">Kubernetes</span>
+                  <span class="btn btn-outline">NPM / YARN</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Software dropdown content -->
+            <div class="collapse mt-3" id="softwares">
+              <div class="card card-body rounded-3 text-center">
+                <div class="col-6 mx-auto w-auto">
+                  <span class="btn btn-outline">Visual Studio</span>
+                  <span class="btn btn-outline">Visual Studio Code</span>
+                  <span class="btn btn-outline">Antigravity</span>
+                  <span class="btn btn-outline">GitHub</span>
+                  <span class="btn btn-outline">Azure DevOps</span>
+                  <span class="btn btn-outline">Android Studio</span>
+                  <span class="btn btn-outline">Postman</span>
+                  <span class="btn btn-outline">Mockoon</span>
+                  <span class="btn btn-outline">Node-RED</span>
+                  <span class="btn btn-outline">MongoDB Compass</span>
+                  <span class="btn btn-outline">SQL Developer</span>
+                  <span class="btn btn-outline">phpMyAdmin</span>
+                  <span class="btn btn-outline">WampServer</span>
+                  <span class="btn btn-outline">WordPress</span>
+                  <span class="btn btn-outline">cPanel</span>
+                  <span class="btn btn-outline">Arduino / Arduino IDE</span>
+                  <span class="btn btn-outline">Windows</span>
+                  <span class="btn btn-outline">Linux</span>
+                  <span class="btn btn-outline">Android</span>
+                  <span class="btn btn-outline">Word</span>
+                  <span class="btn btn-outline">Excel</span>
+                  <span class="btn btn-outline">PowerPoint</span>
+                  <span class="btn btn-outline">OneDrive</span>
+                  <span class="btn btn-outline">Outlook</span>
+                  <span class="btn btn-outline">Visio</span>
+                  <span class="btn btn-outline">Teams</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Resume Section -->
+      <section id="resume" class="resume section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>CV</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p>Voici un aperçu complet de mon parcours académique et professionnel. Vous pouvez également télécharger la
+            version complète de mon <a href="assets/CV_CL.pdf" title="Télécharger mon CV (en PDF)" download>curriculum
+              vitae en PDF</a>.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Resume -->
+          <div class="resume-wrapper">
+            <!-- #region Past IT jobs -->
+            <div class="resume-block" data-aos="fade-up">
+              <h2>Expériences professionnelles en informatique</h2>
+              <div class="timeline">
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Chambre des Communes - House of Commons</h4>
+                    <span class="period">Ottawa | 2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <span class="period">Été 2024</span>
+                    <h3 class="position">Technicien informatique (Accessibilité &amp; Assurance qualité)</h3>
+                    <p class="description">Tester des sites et des applications afin d'assurer leur conformité aux
+                      directives pour l'accessibilité du contenu Web (WCAG). Consigner les résultats dans Azure DevOps
+                      et produire des rapports Excel détaillés pour guider les équipes de développement.</p>
+                    <span class="period">Été 2023</span>
+                    <h3 class="position">Technicien informatique (Support &amp; Automatisation)</h3>
+                    <p class="description">Assister les utilisateurs via un système de billets, incluant l'analyse de la
+                      base de données pour identifier les causes profondes des incidents. Concevoir et mettre en œuvre le
+                      script PowerShell <em>CompareTools</em> pour automatiser la comparaison de fichiers et accélérer
+                      le dépannage par l'équipe de support.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">VIWEB</h4>
+                    <span class="period">Saint-Jérôme | 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Développeur Web</h3>
+                    <p class="description">
+                      Développer mon propre thème sur mesure pour un site WordPress de vente en ligne avec l'extension
+                      WooCommerce. Personnaliser le catalogue de produits et automatiser le processus d'achat.
+                    </p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Agent de soutien aux utilisateurs (Tuteur TIC)</h3>
+                    <p class="description">Accueillir et soutenir techniquement les étudiants et usagers du cégep,
+                      incluant l'assistance à l'impression, l'accès aux services en ligne du collège et l'utilisation de
+                      la suite Microsoft 365.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Education -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="100">
+              <h2>Formation académique</h2>
+              <div class="timeline">
+                <!-- #region Formation IA -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="150">
+                  <div class="timeline-left">
+                    <h4 class="company">Collège O'Sullivan de Québec</h4>
+                    <span class="period">Québec | 2026 - 2027 (en cours)</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Attestation d'études collégiales (AEC) en intelligence artificielle</h3>
+                    <p class="description">Spécialisation dans le développement de solutions d'intelligence
+                      artificielle, l'apprentissage automatique, l'analyse de données et l'intégration de modèles IA au
+                      sein d'applications modernes.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Formation DEC -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Diplôme d'études collégiales (DEC) en technique de l'informatique</h3>
+                    <p class="description">Formation approfondie en développement d'applications Web, mobiles et
+                      logicielles, gestion de bases de données, architecture client-serveur et méthodologies agiles.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Formation DES -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">École secondaire Hormisdas-Gamelin</h4>
+                    <span class="period">Gatineau | 2018</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Diplôme d'études secondaires</h3>
+                    <p class="description">Parcours réalisé au sein du programme profil sportif.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Other Experiences -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="150">
+              <h2>Autres expériences professionnelles</h2>
+              <div class="timeline">
+                <!-- #region Election Canada -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Élections Canada</h4>
+                    <span class="period">Gatineau | 2025</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Préposé à l'information</h3>
+                    <p class="description">Accueillir et orienter les électeurs, incluant la validation des pièces
+                      d'identité et la gestion des flux. Participer à la logistique du site de vote (installation,
+                      signalisation, démantèlement), à la gestion des documents électoraux et au dépouillement, tout en
+                      appliquant les protocoles d'assistance aux personnes à mobilité réduite.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Animateur -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="250">
+                  <div class="timeline-left">
+                    <h4 class="company">Sportmax &amp; Club de Tennis de Buckingham</h4>
+                    <span class="period">Gatineau | 2016 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Animateur et Aide-instructeur</h3>
+                    <p class="description">Planifier, organiser et animer des activités pour des groupes d'enfants tout
+                      en assurant leur sécurité. Être responsable de l'accueil et des départs, superviser les collègues
+                      animateurs et assister les entraîneurs.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Concierge -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2020 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Concierge</h3>
+                    <p class="description">Nettoyer et désinfecter rigoureusement les aires communes des résidences
+                      étudiantes afin d'assurer un environnement sécuritaire et sanitaire.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Perfectionnement -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="200">
+              <h2>Perfectionnement &amp; Certifications</h2>
+              <div class="timeline">
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Microsoft Learn</h4>
+                    <span class="period">Gatineau / Ottawa</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Modules de formation continue</h3>
+                    <p class="description">Autoformation continue via les parcours techniques Microsoft Learn (.NET,
+                      C#, Azure DevOps, développement Web et outils infonuagiques).</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="250">
+                  <div class="timeline-left">
+                    <h4 class="company">Formations complémentaires</h4>
+                    <span class="period">2020 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Secourisme, SIMDUT &amp; Mobilité</h3>
+                    <p class="description">Cours en premiers soins (2022), Formation SIMDUT (2020), Cours de secourisme
+                      (2020) et Permis de conduire Classe 5.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Portfolio Section -->
+      <section id="portfolio" class="portfolio section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>Portfolio</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p class='portfolio-text'>Découvrez une sélection de mes réalisations scolaires, professionnelles et
+            personnelles.<br>
+            Pour explorer l'ensemble de mon code source, visitez mon dépôt <a
+              href='https://github.com/RinoShip77/MesProjets' target='_blank'>GitHub</a>.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <!-- #region Project Filters -->
+          <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
+            <ul class="portfolio-filters isotope-filters" id="filters">
+              <li data-filter="*" class="filter-active">Tout</li>
+              <li data-filter=".filter-school">Scolaires</li>
+              <li data-filter=".filter-professional">Professionnels</li>
+              <li data-filter=".filter-personal">Personnels</li>
+            </ul>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Projects container -->
+          <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
+            <!-- #region Project: Electrolib -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/electrolib.png" class="img-fluid" alt="Aperçu du projet Electrolib"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/electrolib.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-ProjetDeDeveloppement_5C8/Electrolib"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>Electrolib</h3>
+                  <p class="text-break">Logiciel complet de gestion d'inventaire destiné à une bibliothèque (Projet de
+                    développement 420-5C8-JR), reposant sur une application cliente en <strong>Angular</strong> et un
+                    serveur back-end en <strong>Symfony</strong>.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Angular</span>
+                    <span class="badge badge-tech">TypeScript</span>
+                    <span class="badge badge-tech">Symfony</span>
+                    <span class="badge badge-tech">PHP / SQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: CompareTools -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-professional">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/compareTools.png" class="img-fluid"
+                    alt="Aperçu du projet CompareTools" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/compareTools.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Emploi/HoC-CdC_E23/CompareTools"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Professionnels • Chambre des Communes (2023)</span>
+                  <h3>CompareTools</h3>
+                  <p class="text-break">Outil d'automatisation en <strong>PowerShell</strong> conçu pour comparer
+                    finement des fichiers et dossiers ligne par ligne, accélérant le diagnostic des incidents et
+                    l'efficacité de l'équipe de support TI.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">PowerShell</span>
+                    <span class="badge badge-tech">Automatisation</span>
+                    <span class="badge badge-tech">Diagnostic TI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: HubAI -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/hubAI.png" class="img-fluid" alt="Aperçu du projet HubAI"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/hubAI.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/HubAI" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels • IA</span>
+                  <h3>HubAI</h3>
+                  <p class="text-break">Plateforme modulaire regroupant quatre applications interactives propulsées par
+                    l'intelligence artificielle au sein d'une interface unifiée.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Intelligence Artificielle</span>
+                    <span class="badge badge-tech">JavaScript</span>
+                    <span class="badge badge-tech">Web API</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: Kaomia -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/kaomia.png" class="img-fluid" alt="Aperçu du projet Kaomia"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/kaomia.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-SystemesMulticlients_5D4/Kaomia"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>Kaomia</h3>
+                  <p class="text-break">Portail multi-clients de consultation des statistiques d'un jeu (cours
+                    420-5D4-JR), intégrant un client Web en <strong>Vue.js</strong>, une application mobile en
+                    <strong>Kotlin</strong> et un serveur <strong>Node.js</strong>.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Vue.js</span>
+                    <span class="badge badge-tech">Kotlin (Android)</span>
+                    <span class="badge badge-tech">Node.js</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: EVOMEAL -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/evomeal.png" class="img-fluid" alt="Aperçu du projet EVOMEAL"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/evomeal.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/H23-DeveloppementWeb_4D6/EVOMEAL"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>EVOMEAL</h3>
+                  <p class="text-break">Plateforme Web de commerce en ligne développée avec le framework
+                    <strong>Symfony</strong>, incluant la gestion dynamique des produits, des commandes et des
+                    utilisateurs.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Symfony</span>
+                    <span class="badge badge-tech">Twig</span>
+                    <span class="badge badge-tech">PHP</span>
+                    <span class="badge badge-tech">MySQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: Shopro -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/shopro.png" class="img-fluid" alt="Aperçu du projet Shopro"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/shopro.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/Shopro" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels • E-Commerce</span>
+                  <h3>Shopro</h3>
+                  <p class="text-break">Boutique de vente en ligne avec thème personnalisé, catalogue sur mesure et
+                    automatisation du parcours d'achat.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">WordPress</span>
+                    <span class="badge badge-tech">WooCommerce</span>
+                    <span class="badge badge-tech">PHP / CSS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Contact Section -->
+      <section id="contact" class="contact section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>Contact</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p class="lead mb-4">Un simple courriel et je pourrai contribuer au succès de vos projets.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+
+        <!-- #region Form -->
+        <div class="contact-form card mx-5" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-body p-4 p-lg-5">
+            <form action="javascript:void(0);" onsubmit="sendEmail()" class="email-form">
+              <div class="row gy-4">
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Votre nom" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Votre courriel" required>
+                </div>
+                <div class="col-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Votre message"
+                    required></textarea>
+                </div>
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn btn-submit w-100">Envoyer</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- #region LinkedIn Profile -->
+        <div class="d-flex justify-content-center">
+          <div class="badge-base LI-profile-badge mt-5" data-locale="fr_FR" data-size="large" data-theme="light"
+            data-type="HORIZONTAL" data-vanity="olivier-bourgault-5b950428a" data-version="v1"><a
+              class="badge-base__link LI-simple-link"
+              href="https://ca.linkedin.com/in/olivier-bourgault-5b950428a?trk=profile-badge"></a>
+          </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #endregion -->
+      </section>
+      <!-- #endregion -->
+    </main>
+
+    <footer id="footer" class="footer">
+      <!-- #region Right -->
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong></p><span>Tous droits
+          réservés</span>
+      </div>
+      <!-- #endregion -->
+
+      <!-- #region Social links -->
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
+            class="bi bi-linkedin"></i></a>
+      </div>
+      <!-- #endregion -->
+
+      <!-- #region Credits -->
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+      <!-- #endregion -->
+    </footer>
+  </div>
+
+  <!-- Scroll Top -->
+  <a id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- #region Scripts -->
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
+  <!-- LinkedIn profile -->
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- #endregion -->
+</body>
+
+</html>
