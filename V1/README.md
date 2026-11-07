@@ -1,3 +1,4 @@
+# olivierbourgault.github.io — Version 1 (V1)
 
-# RinoShip77.github.io
-Ce répertoire est pour mon portfolio. Le code du site est dans 'index.html'. Mais celui-ci dépends de tous ce qui ce trouve dans le dossier './assets'. Ce site est inspiré d'un [modèle](V3\assets\README.md) en ligne.
+Ce dossier contient la **Version 1 (archive initiale)** de mon portfolio ([https://olivierbourgault.github.io/V1/](https://olivierbourgault.github.io/V1/)).
+Le code du site se trouve dans [`index.html`](index.html) et dépend des ressources situées dans le dossier [`./assets`](assets/). Ce site est inspiré d'un [modèle](assets/README.md) en ligne.

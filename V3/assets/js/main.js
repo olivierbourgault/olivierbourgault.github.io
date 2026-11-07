@@ -340,6 +340,7 @@ function displayData(url, data) {
 
 function countProjects(projects) {
   const projectCounter = document.getElementById("projectsCount");
+  if (!Array.isArray(projects)) return;
   projects.forEach(project => {
     if (project.type === "dir") {
       projectCounter.innerHTML = parseInt(projectCounter.innerHTML) + 1;

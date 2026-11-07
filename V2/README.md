@@ -1,3 +1,6 @@
+# olivierbourgault.github.io — Version 2 (V2)
 
-# RinoShip77.github.io
-Ce répertoire est pour mon portfolio. Le code du site est dans 'index.html'. Mais celui-ci dépends de tous ce qui ce trouve dans le dossier './assets'. Ce site est inspiré d'un [modèle](V3\assets\README.md) en ligne.
+Ce dossier contient la **Version 2 (édition enrichie)** de mon portfolio ([https://olivierbourgault.github.io/V2/](https://olivierbourgault.github.io/V2/)).
+Elle intègre mon parcours en intelligence artificielle (AEC au Collège O'Sullivan), mes expériences professionnelles récentes (Élections Canada 2025, perfectionnement Microsoft Learn), une refonte de mes compétences techniques ainsi que des fiches projets détaillées avec badges technologiques.
+
+Le code du site se trouve dans [`index.html`](index.html) et dépend des ressources situées dans le dossier [`./assets`](assets/). Ce site est inspiré d'un [modèle](assets/README.md) en ligne.
