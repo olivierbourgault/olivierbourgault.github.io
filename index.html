@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Olivier Bourgault | Portail du Portfolio (olivierbourgault.github.io)</title>
   <meta name="description"
-    content="Portail officiel du portfolio d'Olivier Bourgault (https://olivierbourgault.github.io) — Accès aux versions V1, V2, V3 et versions futures.">
+    content="Portail officiel du portfolio d'Olivier Bourgault (https://olivierbourgault.github.io) — Accès aux versions V1, V2, V3 (4 styles visuels) et versions futures.">
   <meta name="keywords"
     content="Portfolio, Olivier Bourgault, olivierbourgault.github.io, Versions, V1, V2, V3, Développeur, TI, IA">
   <link rel="canonical" href="https://olivierbourgault.github.io/">
@@ -288,7 +288,7 @@
     .feature-list {
       list-style: none;
       padding-left: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       font-size: 0.92rem;
     }
 
@@ -304,6 +304,41 @@
       margin-top: 2px;
     }
 
+    .palette-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .palette-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      padding: 0.28rem 0.68rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--default-color);
+      border: 1px solid var(--border-color);
+      background: color-mix(in srgb, var(--surface-color), var(--default-color) 4%);
+      transition: all 0.2s ease;
+    }
+
+    .palette-chip:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .palette-chip .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
     footer {
       margin-top: auto;
       padding: 2rem 0;
@@ -313,7 +348,7 @@
   </style>
 </head>
 
-<body>
+<body class="dark">
   <!-- Ambient Background Blobs -->
   <div class="ambient-blobs" aria-hidden="true">
     <div class="blob blob-1"></div>
@@ -325,11 +360,14 @@
     <div class="container">
       <div class="header-container d-flex align-items-center justify-content-between mx-auto">
         <a href="index.html" class="logo d-flex align-items-center text-decoration-none text-reset">
-          <img id="logo" src="V3/assets/img/logo/light.png" alt="Logo Olivier Bourgault">
+          <img id="logo" src="V3/assets/img/logo/dark.png" alt="Logo Olivier Bourgault">
           <span class="fs-5 fw-semibold">Olivier Bourgault</span>
         </a>
 
         <div class="d-flex align-items-center gap-1 header-social-links">
+          <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo">
+            <i class="bi bi-palette2"></i>
+          </a>
           <a href="https://github.com/RinoShip77" target="_blank" aria-label="Profil GitHub" title="GitHub">
             <i class="bi bi-github"></i>
           </a>
@@ -338,7 +376,7 @@
             <i class="bi bi-linkedin"></i>
           </a>
           <a role="button" onclick="toggleTheme()" aria-label="Changer le thème" title="Thème clair / sombre">
-            <i id="themeSwitcher" class="bi bi-moon-stars-fill"></i>
+            <i id="themeSwitcher" class="bi bi-sun-fill"></i>
           </a>
         </div>
       </div>
@@ -356,11 +394,14 @@
       <h1 class="display-5 fw-bold mb-3">Portfolio d'Olivier Bourgault</h1>
       <p class="lead mx-auto mb-4" style="max-width: 680px; color: var(--muted-color);">
         Bienvenue sur le portail officiel de mon site personnel. Choisissez la version du portfolio que vous souhaitez
-        explorer ou accédez directement à la dernière édition recommandée.
+        explorer ou accédez directement à l'un des 4 styles visuels de la V3.
       </p>
       <div class="d-flex flex-wrap justify-content-center gap-3">
         <a id="latestVersionBtn" href="V3/index.html" class="btn btn-accent">
           <i class="bi bi-rocket-takeoff me-2"></i>Ouvrir la dernière version (V3)
+        </a>
+        <a href="logo_proposals.html" class="btn btn-outline-accent">
+          <i class="bi bi-palette2 me-2"></i>Propositions de Logo &amp; Identité
         </a>
         <a href="V3/assets/CV_CL.pdf" class="btn btn-secondary-accent" download>
           <i class="bi bi-file-earmark-person me-2"></i>Télécharger mon CV (PDF)
@@ -397,17 +438,23 @@
     const VERSIONS = [
       {
         id: "V3",
-        title: "Version 3.0 — Thème Fuchsia & Améthyste",
+        title: "Version 3.0 — Édition Multi-Styles (4 Thèmes)",
         path: "V3/index.html",
         date: "2026",
         status: "Recommandée",
         featured: true,
-        description: "Refonte visuelle complète avec nouvelle direction artistique (Mode Clair Lavande/Fuchsia & Mode Sombre Améthyste/Néon).",
+        description: "Refonte visuelle complète intégrant 4 styles visuels commutables en temps réel (en mode sombre ou clair) ainsi qu'un pointeur laser interactif.",
         highlights: [
-          "Palette Mode Clair (#FAF7FD, fuchsia #D946EF, mauve #9333EA, texte #181124)",
-          "Palette Mode Sombre (#0A0812, rose néon #E11484, mauve électrique #A855F7 et grille subtile)",
-          "Blobs d'arrière-plan diffus (blur 45px) et cartes en glassmorphisme",
-          "Intègre l'ensemble du contenu enrichi de la V2"
+          "1. Original (Améthyste & Fuchsia néon #E11484 / #A855F7)",
+          "2. Active Theory (Cyberpunk Synthwave cyan #00F0FF & magenta #C026D3)",
+          "3. Ethiack (Terminal Matrix Hacker émeraude #10B981 & trame binaire)",
+          "4. Tech Présentation (Keynote orange #FF6600, bleu #38BDF8 & pointeur Laser touche L)"
+        ],
+        palettes: [
+          { name: "Original", url: "V3/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
+          { name: "Active Theory", url: "V3/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
+          { name: "Ethiack", url: "V3/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
+          { name: "Tech Présentation", url: "V3/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" }
         ]
       },
       {
@@ -452,6 +499,17 @@
         .map(item => `<li><i class="bi bi-check2-circle"></i><span>${item}</span></li>`)
         .join("");
 
+      const palettesHtml = v.palettes
+        ? `<div class="palette-quick-links">
+            ${v.palettes.map(p => `
+              <a href="${p.url}" class="palette-chip" title="Ouvrir V3 avec le style ${p.name}">
+                <span class="dot" style="background: ${p.color};"></span>
+                <span>${p.name}</span>
+              </a>
+            `).join("")}
+           </div>`
+        : "";
+
       return `
         <div class="col-md-6 col-lg-4">
           <div class="${cardClass}">
@@ -465,6 +523,7 @@
               <ul class="feature-list">
                 ${highlightsHtml}
               </ul>
+              ${palettesHtml}
             </div>
             <div>
               <a href="${v.path}" class="${btnClass}">

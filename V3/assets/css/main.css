@@ -23,14 +23,15 @@
 /*--------------------------------------------------------------
 # 1. Font & Color Variables
 --------------------------------------------------------------*/
-:root {
+:root,
+body[data-palette="amethyst"] {
   /* Fonts */
-  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   --heading-font: "Questrial", sans-serif;
   --coding-font: "Fira Code", monospace;
   --nav-font: "Noto Sans", sans-serif;
 
-  /* Global Colors — Mode Clair (Light Default) */
+  /* 1. PALETTE ORIGINALE : AMÉTHYSTE & FUCHSIA — Mode Clair */
   --background-color: #FAF7FD;
   --default-color: #181124;
   --heading-color: #181124;
@@ -39,11 +40,11 @@
   --secondary-accent: #9333EA;
   --surface-color: #FFFFFF;
   --contrast-color: #FFFFFF;
-  --card-border: rgba(147, 51, 234, 0.1);
+  --card-border: rgba(147, 51, 234, 0.12);
   --card-shadow: 0 10px 30px rgba(147, 51, 234, 0.07);
   --header-shadow: rgba(147, 51, 234, 0.1);
-  --blob-primary: rgba(217, 70, 239, 0.06);
-  --blob-secondary: rgba(147, 51, 234, 0.06);
+  --blob-primary: rgba(217, 70, 239, 0.07);
+  --blob-secondary: rgba(147, 51, 234, 0.07);
 
   /* Nav Menu Colors */
   --nav-color: #181124;
@@ -57,8 +58,9 @@
   scroll-behavior: smooth;
 }
 
-/* Mode Sombre (Dark Theme Presets) */
-.dark {
+/* 1. PALETTE ORIGINALE : AMÉTHYSTE & FUCHSIA — Mode Sombre */
+body.dark,
+body.dark[data-palette="amethyst"] {
   --background-color: #0A0812;
   --default-color: #F8FAFC;
   --heading-color: #F8FAFC;
@@ -70,8 +72,8 @@
   --card-border: rgba(255, 255, 255, 0.08);
   --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
   --header-shadow: rgba(225, 20, 132, 0.18);
-  --blob-primary: rgba(225, 20, 132, 0.11);
-  --blob-secondary: rgba(168, 85, 247, 0.10);
+  --blob-primary: rgba(225, 20, 132, 0.12);
+  --blob-secondary: rgba(168, 85, 247, 0.11);
 
   /* Nav Menu Dark */
   --nav-color: #F8FAFC;
@@ -80,6 +82,155 @@
   --nav-dropdown-background-color: #120E1E;
   --nav-dropdown-color: #F8FAFC;
   --nav-dropdown-hover-color: #A855F7;
+}
+
+/* --------------------------------------------------------------------------
+   2. PALETTE ACTIVE THEORY : CYBERPUNK SYNTHWAVE (Cyan Néon & Magenta)
+-------------------------------------------------------------------------- */
+body[data-palette="synthwave"] {
+  --background-color: #F2F7FB;
+  --default-color: #0F172A;
+  --heading-color: #090D16;
+  --accent-color: #06B6D4;
+  --accent-alt-color: #EC4899;
+  --secondary-accent: #A855F7;
+  --surface-color: rgba(255, 255, 255, 0.9);
+  --contrast-color: #FFFFFF;
+  --card-border: rgba(6, 182, 212, 0.22);
+  --card-shadow: 0 10px 30px rgba(6, 182, 212, 0.1);
+  --header-shadow: rgba(6, 182, 212, 0.15);
+  --blob-primary: rgba(236, 72, 153, 0.09);
+  --blob-secondary: rgba(6, 182, 212, 0.09);
+  --nav-color: #0F172A;
+  --nav-hover-color: #06B6D4;
+  --nav-mobile-background-color: #FFFFFF;
+  --nav-dropdown-background-color: #FFFFFF;
+  --nav-dropdown-color: #0F172A;
+  --nav-dropdown-hover-color: #A855F7;
+}
+
+body.dark[data-palette="synthwave"] {
+  --background-color: #070814;
+  --default-color: #E2E8F0;
+  --heading-color: #FFFFFF;
+  --accent-color: #00F0FF;
+  --accent-alt-color: #FF2A85;
+  --secondary-accent: #C026D3;
+  --surface-color: rgba(13, 16, 33, 0.78);
+  --contrast-color: #060814;
+  --card-border: rgba(0, 240, 255, 0.2);
+  --card-shadow: 0 12px 35px rgba(192, 38, 211, 0.16), 0 0 25px rgba(0, 240, 255, 0.07);
+  --header-shadow: rgba(0, 240, 255, 0.2);
+  --blob-primary: rgba(255, 42, 133, 0.16);
+  --blob-secondary: rgba(0, 240, 255, 0.14);
+  --nav-color: #E2E8F0;
+  --nav-hover-color: #00F0FF;
+  --nav-mobile-background-color: #0B0E20;
+  --nav-dropdown-background-color: #0B0E20;
+  --nav-dropdown-color: #E2E8F0;
+  --nav-dropdown-hover-color: #00F0FF;
+}
+
+/* --------------------------------------------------------------------------
+   3. PALETTE ETHIACK : TERMINAL MATRIX HACKER (Émeraude & Carbone)
+-------------------------------------------------------------------------- */
+body[data-palette="ethiack"] {
+  --heading-font: "JetBrains Mono", "Fira Code", monospace;
+  --background-color: #F2FBF7;
+  --default-color: #06281E;
+  --heading-color: #041F17;
+  --accent-color: #10B981;
+  --accent-alt-color: #34D399;
+  --secondary-accent: #047857;
+  --surface-color: #FFFFFF;
+  --contrast-color: #FFFFFF;
+  --card-border: rgba(16, 185, 129, 0.22);
+  --card-shadow: 0 10px 30px rgba(16, 185, 129, 0.09);
+  --header-shadow: rgba(16, 185, 129, 0.14);
+  --blob-primary: rgba(16, 185, 129, 0.08);
+  --blob-secondary: rgba(4, 120, 87, 0.08);
+  --nav-color: #06281E;
+  --nav-hover-color: #10B981;
+  --nav-mobile-background-color: #FFFFFF;
+  --nav-dropdown-background-color: #FFFFFF;
+  --nav-dropdown-color: #06281E;
+  --nav-dropdown-hover-color: #10B981;
+}
+
+body.dark[data-palette="ethiack"] {
+  --heading-font: "JetBrains Mono", "Fira Code", monospace;
+  --background-color: #060D0A;
+  --default-color: #D1FAE5;
+  --heading-color: #ECFDF5;
+  --accent-color: #10B981;
+  --accent-alt-color: #00E676;
+  --secondary-accent: #059669;
+  --surface-color: rgba(10, 22, 17, 0.82);
+  --contrast-color: #04130C;
+  --card-border: rgba(16, 185, 129, 0.24);
+  --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 22px rgba(16, 185, 129, 0.09);
+  --header-shadow: rgba(16, 185, 129, 0.22);
+  --blob-primary: rgba(16, 185, 129, 0.14);
+  --blob-secondary: rgba(5, 150, 105, 0.12);
+  --nav-color: #D1FAE5;
+  --nav-hover-color: #10B981;
+  --nav-mobile-background-color: #08130E;
+  --nav-dropdown-background-color: #08130E;
+  --nav-dropdown-color: #D1FAE5;
+  --nav-dropdown-hover-color: #10B981;
+}
+
+/* --------------------------------------------------------------------------
+   4. PALETTE TECH PRÉSENTATION : KEYNOTE ORANGE (Inspiré du fichier joint)
+-------------------------------------------------------------------------- */
+body[data-palette="tech"] {
+  --default-font: "Inter", "Roboto", system-ui, sans-serif;
+  --heading-font: "Inter", "Questrial", sans-serif;
+  --coding-font: "JetBrains Mono", "Fira Code", monospace;
+  --background-color: #F8F9FA;
+  --default-color: #121316;
+  --heading-color: #121316;
+  --accent-color: #FF6600;
+  --accent-alt-color: #FF8533;
+  --secondary-accent: #0284C7;
+  --surface-color: #FFFFFF;
+  --contrast-color: #121316;
+  --card-border: #E2E8F0;
+  --card-shadow: 0 12px 30px rgba(18, 19, 22, 0.07);
+  --header-shadow: rgba(255, 102, 0, 0.14);
+  --blob-primary: rgba(255, 102, 0, 0.08);
+  --blob-secondary: rgba(56, 189, 248, 0.08);
+  --nav-color: #121316;
+  --nav-hover-color: #FF6600;
+  --nav-mobile-background-color: #FFFFFF;
+  --nav-dropdown-background-color: #FFFFFF;
+  --nav-dropdown-color: #121316;
+  --nav-dropdown-hover-color: #FF6600;
+}
+
+body.dark[data-palette="tech"] {
+  --default-font: "Inter", "Roboto", system-ui, sans-serif;
+  --heading-font: "Inter", "Questrial", sans-serif;
+  --coding-font: "JetBrains Mono", "Fira Code", monospace;
+  --background-color: #121316;
+  --default-color: #F3F4F6;
+  --heading-color: #FFFFFF;
+  --accent-color: #FF6600;
+  --accent-alt-color: #FF8533;
+  --secondary-accent: #38BDF8;
+  --surface-color: rgba(28, 30, 36, 0.85);
+  --contrast-color: #121316;
+  --card-border: #343844;
+  --card-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.65);
+  --header-shadow: rgba(255, 102, 0, 0.22);
+  --blob-primary: rgba(255, 102, 0, 0.13);
+  --blob-secondary: rgba(255, 133, 51, 0.09);
+  --nav-color: #F3F4F6;
+  --nav-hover-color: #FF6600;
+  --nav-mobile-background-color: #1C1E24;
+  --nav-dropdown-background-color: #1C1E24;
+  --nav-dropdown-color: #F3F4F6;
+  --nav-dropdown-hover-color: #FF6600;
 }
 
 /*--------------------------------------------------------------
@@ -820,7 +971,7 @@
 }
 
 .dark .typewriter {
-  text-shadow: 0 0 22px rgba(225, 20, 132, 0.35);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--accent-color), transparent 55%);
 }
 
 .typewriter::before {
@@ -849,7 +1000,7 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
-/* Subtle tech grid in Dark Mode (matching mockup) */
+/* 1. Amethyst subtle tech grid in Dark Mode */
 body.dark::before {
   content: "";
   position: fixed;
@@ -858,6 +1009,45 @@ body.dark::before {
     linear-gradient(to right, rgba(168, 85, 247, 0.045) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(225, 20, 132, 0.045) 1px, transparent 1px);
   background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* 2. Active Theory / Cyberpunk Synthwave background grid */
+body.dark[data-palette="synthwave"]::before {
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(255, 42, 133, 0.14), transparent 35%),
+    radial-gradient(circle at 20% 75%, rgba(0, 240, 255, 0.12), transparent 40%),
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(192, 38, 211, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 56px 56px, 56px 56px;
+}
+
+/* 3. Ethiack / Terminal Matrix Hacker background (binary & cyber scanlines) */
+body.dark[data-palette="ethiack"]::before {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='%2310B981' fill-opacity='0.065' font-family='monospace' font-size='11'%3E%3Ctext x='8' y='18'%3E01001101 1011%3C/text%3E%3Ctext x='95' y='36'%3E11010010 01%3C/text%3E%3Ctext x='22' y='58'%3E00101110 110%3C/text%3E%3Ctext x='110' y='82'%3E10110100 001%3C/text%3E%3Ctext x='14' y='108'%3E01110010 101%3C/text%3E%3Ctext x='88' y='134'%3E11001011 010%3C/text%3E%3Ctext x='30' y='162'%3E01011001 111%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(to right, rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+  background-size: 180px 180px, 40px 40px, 40px 40px;
+}
+
+/* 4. Tech Présentation Keynote 40x40 grid (from attached HTML file) */
+body.dark[data-palette="tech"]::before {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+body[data-palette="tech"]:not(.dark)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(18, 19, 22, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(18, 19, 22, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
   pointer-events: none;
   z-index: -2;
 }
@@ -925,7 +1115,7 @@ h6 {
 .cta-buttons .btn {
   padding: 0.8rem 2rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 50px;
   transition: all 0.3s ease;
 }
@@ -934,7 +1124,7 @@ h6 {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--contrast-color);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color), transparent 65%);
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--accent-color), transparent 60%);
 }
 
 .cta-buttons .btn.btn-primary:hover {
@@ -946,14 +1136,146 @@ h6 {
 .cta-buttons .btn.btn-secondary-accent {
   background-color: var(--secondary-accent);
   border-color: var(--secondary-accent);
-  color: var(--contrast-color);
-  box-shadow: 0 6px 20px color-mix(in srgb, var(--secondary-accent), transparent 65%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--secondary-accent), transparent 60%);
 }
 
 .cta-buttons .btn.btn-secondary-accent:hover {
   background-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
   border-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
   transform: translateY(-2px);
+}
+
+/* Palette-specific secondary button refinements matching mockups */
+body.dark[data-palette="ethiack"] .cta-buttons .btn.btn-secondary-accent {
+  background-color: rgba(16, 185, 129, 0.16);
+  border: 1.5px solid #10B981;
+  color: #ECFDF5;
+}
+
+body.dark[data-palette="tech"] .cta-buttons .btn.btn-secondary-accent {
+  background-color: #252830;
+  border: 1.5px solid #FF6600;
+  color: #F3F4F6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+body.dark[data-palette="tech"] .cta-buttons .btn.btn-secondary-accent:hover {
+  background-color: #FF6600;
+  color: #121316;
+}
+
+/* Palette-specific card accents (matching Mockups 1, 2, 3 & attached HTML) */
+body[data-palette="synthwave"] .skill-box,
+body[data-palette="synthwave"] .portfolio-card,
+body[data-palette="synthwave"] .personal-info {
+  border-top: 2px solid color-mix(in srgb, var(--accent-color), transparent 35%);
+}
+
+body[data-palette="ethiack"] .skill-box,
+body[data-palette="ethiack"] .portfolio-card,
+body[data-palette="ethiack"] .personal-info {
+  border-top: 2px solid color-mix(in srgb, var(--accent-color), transparent 30%);
+}
+
+body[data-palette="tech"] .skill-box,
+body[data-palette="tech"] .portfolio-card {
+  border-left: 4px solid #FF6600;
+}
+
+body[data-palette="tech"] .personal-info,
+body[data-palette="tech"] .contact-form {
+  border-top: 4px solid #FF6600;
+}
+
+/* Tech Presentation geometric avatar shapes (Mockup 3) */
+body[data-palette="tech"] .hero .hero-image .shape-1 {
+  filter: none;
+  width: 9rem;
+  height: 9rem;
+  background-color: rgba(255, 102, 0, 0.85);
+  top: 8%;
+  right: 8%;
+}
+
+body[data-palette="tech"] .hero .hero-image .shape-2 {
+  filter: none;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: #38BDF8;
+  bottom: 10%;
+  left: 18%;
+}
+
+/* Virtual Laser Pointer (from attached Keynote HTML file) */
+#laser-dot {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, var(--accent-color) 20%, color-mix(in srgb, var(--accent-color), transparent 20%) 50%, transparent 80%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  box-shadow: 0 0 20px 6px color-mix(in srgb, var(--accent-color), transparent 25%);
+  display: none;
+  transform: translate(-50%, -50%);
+}
+
+/* Floating Style / Palette Switcher Bar */
+.palette-switcher-bar {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+  background: var(--surface-color);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--card-shadow);
+  border-radius: 50px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 95vw;
+}
+
+.palette-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--default-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.palette-btn:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  color: var(--accent-color);
+}
+
+.palette-btn.active {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-color), transparent 55%);
+}
+
+.palette-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .cta-buttons .btn.btn-outline {

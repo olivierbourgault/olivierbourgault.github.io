@@ -480,3 +480,92 @@ function diffDate(date1, date2) {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
   return Math.round(diffDays / 365.25);
 }
+
+
+/**
+ * V3 MULTI-STYLE PALETTE SWITCHER
+ * Styles disponibles :
+ *  - 'amethyst'  : Original (Améthyste & Fuchsia)
+ *  - 'synthwave' : Active Theory (Cyberpunk Synthwave)
+ *  - 'ethiack'   : Ethiack (Terminal Matrix Hacker)
+ *  - 'tech'      : Tech Présentation (Keynote Orange & Bleu Ciel)
+ */
+const VALID_PALETTES = ['amethyst', 'synthwave', 'ethiack', 'tech'];
+
+function setPalette(palette, updateUrl = true) {
+  const chosen = VALID_PALETTES.includes(palette) ? palette : 'amethyst';
+  document.body.setAttribute('data-palette', chosen);
+
+  document.querySelectorAll('.palette-btn[data-palette-btn]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-palette-btn') === chosen);
+  });
+
+  try {
+    localStorage.setItem('v3_palette', chosen);
+  } catch (e) {
+    // Ignore storage errors
+  }
+
+  if (updateUrl && window.history && window.history.replaceState) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('palette', chosen);
+    window.history.replaceState({}, '', url.toString());
+  }
+}
+
+/**
+ * POINTEUR LASER VIRTUEL (Inspiré du template de présentation)
+ * Raccourci clavier : Touche 'L' (hors champs de saisie)
+ */
+let isLaserActive = false;
+
+function toggleLaser() {
+  const laserDot = document.getElementById('laser-dot');
+  const laserBtn = document.getElementById('laser-btn');
+  if (!laserDot) return;
+
+  isLaserActive = !isLaserActive;
+  if (isLaserActive) {
+    laserDot.style.display = 'block';
+    document.body.style.cursor = 'none';
+    if (laserBtn) laserBtn.classList.add('laser-active');
+  } else {
+    laserDot.style.display = 'none';
+    document.body.style.cursor = 'default';
+    if (laserBtn) laserBtn.classList.remove('laser-active');
+  }
+}
+
+document.addEventListener('mousemove', (e) => {
+  if (!isLaserActive) return;
+  const laserDot = document.getElementById('laser-dot');
+  if (laserDot) {
+    laserDot.style.left = `${e.clientX}px`;
+    laserDot.style.top = `${e.clientY}px`;
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (e.target && e.target.isContentEditable)) {
+    return;
+  }
+  if (e.key === 'l' || e.key === 'L') {
+    toggleLaser();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const urlPalette = params.get('palette');
+  let savedPalette = null;
+  try {
+    savedPalette = localStorage.getItem('v3_palette');
+  } catch (e) {
+    savedPalette = null;
+  }
+  const initialPalette = VALID_PALETTES.includes(urlPalette)
+    ? urlPalette
+    : (VALID_PALETTES.includes(savedPalette) ? savedPalette : 'amethyst');
+  setPalette(initialPalette, Boolean(urlPalette));
+});
