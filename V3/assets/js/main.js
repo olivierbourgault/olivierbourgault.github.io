@@ -490,7 +490,7 @@ function diffDate(date1, date2) {
  *  - 'ethiack'   : Ethiack (Terminal Matrix Hacker)
  *  - 'tech'      : Tech Présentation (Keynote Orange & Bleu Ciel)
  */
-const VALID_PALETTES = ['amethyst', 'synthwave', 'ethiack', 'tech'];
+const VALID_PALETTES = ['amethyst', 'synthwave', 'ethiack', 'tech', 'shabnam'];
 
 function setPalette(palette, updateUrl = true) {
   const chosen = VALID_PALETTES.includes(palette) ? palette : 'amethyst';

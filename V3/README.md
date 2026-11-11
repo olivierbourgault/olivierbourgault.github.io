@@ -1,7 +1,7 @@
 # olivierbourgault.github.io — Version 3 (V3 Multi-Styles)
 
 Ce dossier contient la **Version 3 (Édition Multi-Styles)** de mon portfolio ([https://olivierbourgault.github.io/V3/](https://olivierbourgault.github.io/V3/)).
-En plus de l'ensemble du contenu enrichi de la V2, cette version intègre un **sélecteur flottant de 4 styles visuels** (commutables en temps réel en mode sombre et en mode clair, ou accessibles directement par paramètre d'URL) :
+En plus de l'ensemble du contenu enrichi de la V2, cette version intègre un **sélecteur flottant de 5 styles visuels** (commutables en temps réel en mode sombre et en mode clair, ou accessibles directement par paramètre d'URL) :
 
 1. **Original — Améthyste & Fuchsia** (`?palette=amethyst`) :
    - **Mode Sombre** : Fond noir améthyste (`#0A0812`), accents rose fuchsia néon (`#E11484`) et mauve électrique (`#A855F7`), grille subtile et halos diffus (`blur(45px)`).
@@ -12,5 +12,7 @@ En plus de l'ensemble du contenu enrichi de la V2, cette version intègre un **s
    - **Mode Sombre** : Fond terminal sombre (`#060D0A`), vert émeraude néon (`#10B981`) et vert profond (`#059669`), typographie `JetBrains Mono` pour les titres, et trame matricielle binaire (`01001101...`) en arrière-plan.
 4. **Tech Présentation — Keynote Orange** (`?palette=tech`, inspiré du gabarit de présentation technique) :
    - **Mode Sombre** : Fond carbone (`#121316`), panneaux `#1C1E24` / `#252830`, bordures `#343844`, orange vif (`#FF6600`), accents géométriques bleu ciel (`#38BDF8`), grille technique `40px × 40px` et **Pointeur Laser Virtuel** activable via le bouton dédié ou la touche `L`.
+5. **Shabnam — Atelier Papier & Vermillon** (`?palette=shabnam`, inspiré du portfolio de [Shabnam Raghavan](https://www.shabnamraghavan.com/)) :
+   - **Mode Sombre & Clair** : Planche Hero rouge vermillon (`#C02D0C`) quadrillée (`56px × 56px`), typographies `Staatliches` & `Manrope`, cadre de sélection vectoriel façon Figma autour du titre principal, surlignage au marqueur jaune (`#F2D987`), statistiques en post-its papier (`#CDC9B6`) inclinés et cartes ornées d'un ruban adhésif translucide.
 
 Le code du site se trouve dans [`index.html`](index.html) et dépend des ressources situées dans le dossier [`./assets`](assets/). Ce site est inspiré d'un [modèle](assets/README.md) en ligne.
