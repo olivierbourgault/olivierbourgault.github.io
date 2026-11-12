@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Logo Olivier Bourgault — OB Tech">
+  <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+</svg>

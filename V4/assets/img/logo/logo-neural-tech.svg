@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Logo Nœud Neuronal &amp; Systèmes Tech">
+  <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+  <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+  <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+  <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+  <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+  <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+  <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+  <circle cx="50" cy="53" r="5" fill="#ffffff"/>
+</svg>
