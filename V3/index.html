@@ -95,10 +95,13 @@
 
         <!-- #region Social links & theme switcher -->
         <div class="d-flex align-items-center gap-1 me-2 header-social-links">
+          <a href="../versions.html" class="btn btn-sm btn-outline-primary d-none d-sm-inline-flex align-items-center gap-1 py-1 px-2 me-1 versions-browser-btn" aria-label="Navigateur de versions" title="Accéder au navigateur de versions du portfolio">
+            <i class="bi bi-clock-history"></i> <span style="font-size: 0.8rem; font-weight: 600;">Versions</span>
+          </a>
+          <a href="../versions.html" class="d-inline-flex d-sm-none" aria-label="Navigateur de versions" title="Navigateur de versions"><i
+              class="bi bi-clock-history"></i></a>
           <a href="../logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo"><i
               class="bi bi-palette2"></i></a>
-          <a href="../index.html" aria-label="Portail des versions" title="Changer de version"><i
-              class="bi bi-layers"></i></a>
           <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
           <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
               class="bi bi-linkedin"></i></a>
@@ -1070,8 +1073,8 @@
     </footer>
   </div>
 
-  <!-- Sélecteur de Styles Visuels V3 -->
-  <div class="palette-switcher-bar" role="region" aria-label="Sélecteur de style visuel V3">
+  <!-- Sélecteur de Styles Visuels V3 & Navigateur de Versions -->
+  <div class="palette-switcher-bar" role="region" aria-label="Sélecteur de style visuel et versions">
     <span class="palette-label d-none d-md-inline"><i class="bi bi-palette2 me-1"></i>Style V3</span>
     <button type="button" class="palette-btn active" data-palette-btn="amethyst" onclick="setPalette('amethyst')" title="Original — Améthyste &amp; Fuchsia">
       <span class="swatch" style="background: linear-gradient(135deg, #E11484, #A855F7);"></span>
@@ -1097,6 +1100,10 @@
       <span class="swatch" style="background: #ef4444; box-shadow: 0 0 8px #ef4444;"></span>
       <span class="d-none d-sm-inline">Laser (L)</span>
     </button>
+    <a href="../versions.html" class="palette-btn versions-link-btn" title="Ouvrir le navigateur de versions (V1, V2, V3, V4)">
+      <span class="swatch" style="background: linear-gradient(135deg, #38BDF8, #9333EA);"></span>
+      <span><i class="bi bi-clock-history me-1"></i>Versions</span>
+    </a>
   </div>
 
   <!-- Scroll Top -->

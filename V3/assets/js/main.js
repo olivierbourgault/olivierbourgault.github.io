@@ -483,17 +483,19 @@ function diffDate(date1, date2) {
 
 
 /**
- * V3 MULTI-STYLE PALETTE SWITCHER
+ * V4 MULTI-STYLE PALETTE SWITCHER (Tech & Identité Vectorielle)
  * Styles disponibles :
+ *  - 'tech'      : Tech Présentation (Défaut V4 — Orange #FF6600 & Bleu Ciel #38BDF8)
  *  - 'amethyst'  : Original (Améthyste & Fuchsia)
  *  - 'synthwave' : Active Theory (Cyberpunk Synthwave)
  *  - 'ethiack'   : Ethiack (Terminal Matrix Hacker)
- *  - 'tech'      : Tech Présentation (Keynote Orange & Bleu Ciel)
+ *  - 'shabnam'   : Shabnam (Atelier Papier & Vermillon)
+ *  - 'aahil'     : Aahil Tech (Néo-brutalisme Orange & Noir/Gris foncé, hybride Tech + Shabnam + aahil-khan.xyz)
  */
-const VALID_PALETTES = ['amethyst', 'synthwave', 'ethiack', 'tech', 'shabnam'];
+const VALID_PALETTES = ['tech', 'amethyst', 'synthwave', 'ethiack', 'shabnam', 'aahil'];
 
 function setPalette(palette, updateUrl = true) {
-  const chosen = VALID_PALETTES.includes(palette) ? palette : 'amethyst';
+  const chosen = VALID_PALETTES.includes(palette) ? palette : 'tech';
   document.body.setAttribute('data-palette', chosen);
 
   document.querySelectorAll('.palette-btn[data-palette-btn]').forEach(btn => {
@@ -501,7 +503,7 @@ function setPalette(palette, updateUrl = true) {
   });
 
   try {
-    localStorage.setItem('v3_palette', chosen);
+    localStorage.setItem('v4_palette', chosen);
   } catch (e) {
     // Ignore storage errors
   }
@@ -560,12 +562,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const urlPalette = params.get('palette');
   let savedPalette = null;
   try {
-    savedPalette = localStorage.getItem('v3_palette');
+    savedPalette = localStorage.getItem('v4_palette');
   } catch (e) {
     savedPalette = null;
   }
   const initialPalette = VALID_PALETTES.includes(urlPalette)
     ? urlPalette
-    : (VALID_PALETTES.includes(savedPalette) ? savedPalette : 'amethyst');
+    : (VALID_PALETTES.includes(savedPalette) ? savedPalette : 'tech');
   setPalette(initialPalette, Boolean(urlPalette));
 });

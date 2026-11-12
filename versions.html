@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Navigateur de versions | Portfolio d'Olivier Bourgault (olivierbourgault.github.io)</title>
+  <meta name="description"
+    content="Navigateur d'historique et des versions officielles du portfolio d'Olivier Bourgault — Accès direct aux versions V1, V2, V3 (5 styles) et V4 (OB Tech).">
+  <meta name="keywords"
+    content="Navigateur de versions, Portfolio, Olivier Bourgault, olivierbourgault.github.io, Versions, V1, V2, V3, V4, Développeur, TI, IA">
+  <link rel="canonical" href="https://olivierbourgault.github.io/versions.html">
+  <meta property="og:title" content="Navigateur de versions | Portfolio d'Olivier Bourgault">
+  <meta property="og:url" content="https://olivierbourgault.github.io/versions.html">
+  <meta property="og:type" content="website">
+  <!-- Favicons -->
+  <link href="V4/assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
+  <link href="V3/assets/img/favicon.png" rel="alternate icon">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --default-font: "Inter", "Roboto", system-ui, sans-serif;
+      --heading-font: "Inter", "Questrial", sans-serif;
+      --coding-font: "JetBrains Mono", "Fira Code", monospace;
+      /* Mode Clair (Tech Presentation Light) */
+      --background-color: #F8F9FA;
+      --surface-color: #FFFFFF;
+      --default-color: #121316;
+      --muted-color: #4B5563;
+      --heading-color: #121316;
+      --accent-color: #FF6600;
+      --accent-alt-color: #FF8533;
+      --secondary-accent: #0284C7;
+      --contrast-color: #FFFFFF;
+      --border-color: #E2E8F0;
+      --card-shadow: 0 12px 30px rgba(18, 19, 22, 0.07);
+      --header-shadow: rgba(255, 102, 0, 0.14);
+      --blob-primary: rgba(255, 102, 0, 0.08);
+      --blob-secondary: rgba(56, 189, 248, 0.08);
+    }
+
+    body.dark {
+      /* Mode Sombre (Tech Presentation Dark) */
+      --background-color: #121316;
+      --surface-color: rgba(28, 30, 36, 0.85);
+      --default-color: #F3F4F6;
+      --muted-color: #9CA3AF;
+      --heading-color: #FFFFFF;
+      --accent-color: #FF6600;
+      --accent-alt-color: #FF8533;
+      --secondary-accent: #38BDF8;
+      --contrast-color: #121316;
+      --border-color: #343844;
+      --card-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.65);
+      --header-shadow: rgba(255, 102, 0, 0.22);
+      --blob-primary: rgba(255, 102, 0, 0.13);
+      --blob-secondary: rgba(56, 189, 248, 0.09);
+    }
+
+    body {
+      background-color: var(--background-color);
+      color: var(--default-color);
+      font-family: var(--default-font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body:not(.dark)::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(18, 19, 22, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(18, 19, 22, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .ambient-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .ambient-blobs .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(45px);
+    }
+
+    .ambient-blobs .blob-1 {
+      width: 34rem;
+      height: 34rem;
+      top: -8rem;
+      left: -8rem;
+      background: radial-gradient(circle, var(--blob-primary) 0%, transparent 70%);
+    }
+
+    .ambient-blobs .blob-2 {
+      width: 38rem;
+      height: 38rem;
+      top: 15%;
+      right: -8rem;
+      background: radial-gradient(circle, var(--blob-secondary) 0%, transparent 70%);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--heading-color);
+      font-family: var(--heading-font);
+    }
+
+    /* Header */
+    .portal-header {
+      padding: 20px 0;
+    }
+
+    .header-container {
+      background: var(--surface-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 50px;
+      box-shadow: 0 4px 20px var(--header-shadow);
+      padding: 10px 25px;
+      border: 1px solid var(--border-color);
+    }
+
+    .logo img {
+      max-height: 36px;
+      margin-right: 10px;
+    }
+
+    .header-social-links a {
+      color: var(--default-color);
+      font-size: 1.2rem;
+      padding: 6px 10px;
+      border-radius: 50%;
+      transition: 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .header-social-links a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Hero */
+    .portal-hero {
+      padding: 2.5rem 0 2rem;
+      text-align: center;
+    }
+
+    .avatar-ring {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-color);
+      padding: 3px;
+      background: var(--surface-color);
+      box-shadow: 0 0 25px color-mix(in srgb, var(--secondary-accent), transparent 65%);
+    }
+
+    .code-pill {
+      font-family: var(--coding-font);
+      font-size: 0.85rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 50px;
+      background: color-mix(in srgb, var(--secondary-accent), transparent 86%);
+      color: var(--secondary-accent);
+      border: 1px solid color-mix(in srgb, var(--secondary-accent), transparent 68%);
+      display: inline-block;
+    }
+
+    /* Buttons */
+    .btn-accent {
+      background-color: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #ffffff;
+      border-radius: 50px;
+      padding: 0.7rem 1.75rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color), transparent 65%);
+      transition: all 0.25s ease;
+    }
+
+    .btn-accent:hover {
+      background-color: var(--accent-alt-color);
+      border-color: var(--accent-alt-color);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-color), transparent 50%);
+    }
+
+    .btn-secondary-accent {
+      background-color: var(--secondary-accent);
+      border-color: var(--secondary-accent);
+      color: var(--contrast-color);
+      border-radius: 50px;
+      padding: 0.7rem 1.75rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px color-mix(in srgb, var(--secondary-accent), transparent 65%);
+      transition: all 0.25s ease;
+    }
+
+    .btn-secondary-accent:hover {
+      background-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
+      color: var(--contrast-color);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-accent {
+      border: 2px solid color-mix(in srgb, var(--secondary-accent), transparent 55%);
+      color: var(--secondary-accent);
+      background: transparent;
+      border-radius: 50px;
+      padding: 0.65rem 1.5rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+    }
+
+    .btn-outline-accent:hover {
+      background-color: var(--secondary-accent);
+      border-color: var(--secondary-accent);
+      color: var(--contrast-color);
+      transform: translateY(-2px);
+    }
+
+    /* Tech Identity Badge */
+    .tech-identity-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--coding-font);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FF6600;
+      background: rgba(255, 102, 0, 0.12);
+      border: 1px solid rgba(255, 102, 0, 0.3);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+    }
+
+    /* Version Cards */
+    .version-card {
+      background: var(--surface-color);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 1.25rem;
+      padding: 1.75rem;
+      height: 100%;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .version-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-color);
+    }
+
+    .version-card.featured {
+      border: 2px solid var(--accent-color);
+    }
+
+    .version-card.upcoming {
+      border-style: dashed;
+      opacity: 0.85;
+    }
+
+    .version-tag {
+      font-family: var(--coding-font);
+      font-weight: 600;
+      font-size: 1.35rem;
+      color: var(--accent-color);
+    }
+
+    .badge-featured {
+      background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
+      color: #ffffff;
+    }
+
+    .version-desc {
+      color: var(--muted-color);
+      font-size: 0.96rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.25rem;
+      font-size: 0.92rem;
+    }
+
+    .feature-list li {
+      margin-bottom: 0.45rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .feature-list li i {
+      color: var(--accent-color);
+      margin-top: 2px;
+    }
+
+    .palette-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .palette-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      padding: 0.28rem 0.68rem;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--default-color);
+      border: 1px solid var(--border-color);
+      background: color-mix(in srgb, var(--surface-color), var(--default-color) 4%);
+      transition: all 0.2s ease;
+    }
+
+    .palette-chip:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .palette-chip .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 2rem 0;
+      color: var(--muted-color);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body class="dark">
+  <!-- Ambient Background Blobs -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="portal-header">
+    <div class="container">
+      <div class="header-container d-flex align-items-center justify-content-between mx-auto">
+        <a href="index.html" class="logo d-flex align-items-center text-decoration-none text-reset gap-2">
+          <svg viewBox="0 0 100 100" width="36" height="36" aria-label="Logo OB Tech" style="filter: drop-shadow(0 0 8px rgba(255,102,0,0.4));">
+            <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+          </svg>
+          <div class="d-flex flex-column">
+            <span class="fs-5 fw-semibold lh-1">Olivier Bourgault</span>
+            <span style="font-size: 0.68rem; font-family: var(--coding-font); color: var(--accent-color); letter-spacing: 0.05em; text-transform: uppercase;">Navigateur de versions</span>
+          </div>
+        </a>
+
+        <div class="d-flex align-items-center gap-1 header-social-links">
+          <a href="index.html" class="btn btn-sm btn-outline-accent d-none d-sm-inline-flex align-items-center gap-1 py-1 px-3 me-2" style="font-size: 0.85rem;" title="Retour à l'accueil du portfolio">
+            <i class="bi bi-house-door"></i> Accueil
+          </a>
+          <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo">
+            <i class="bi bi-palette2"></i>
+          </a>
+          <a href="https://github.com/RinoShip77" target="_blank" aria-label="Profil GitHub" title="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" aria-label="Profil LinkedIn"
+            title="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a role="button" onclick="toggleTheme()" aria-label="Changer le thème" title="Thème clair / sombre">
+            <i id="themeSwitcher" class="bi bi-sun-fill"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container pb-5">
+    <!-- Hero -->
+    <section class="portal-hero">
+      <div class="mb-3">
+        <span class="tech-identity-badge">
+          <svg viewBox="0 0 100 100" width="16" height="16" style="vertical-align: middle;">
+            <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="9" stroke-linejoin="round"/>
+            <circle cx="50" cy="50" r="10" fill="#38BDF8"/>
+          </svg>
+          OB Tech &bull; Navigateur d'archives
+        </span>
+      </div>
+      <img src="https://github.com/RinoShip77.png" alt="Olivier Bourgault" class="avatar-ring mb-3">
+      <div class="mb-2">
+        <span class="code-pill"><i class="bi bi-globe2 me-1"></i>olivierbourgault.github.io</span>
+      </div>
+      <h1 class="display-5 fw-bold mb-3">Navigateur de versions</h1>
+      <p class="lead mx-auto mb-4" style="max-width: 680px; color: var(--muted-color);">
+        Explorez l'historique complet des versions de mon portfolio Web ou testez les différents styles visuels.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a href="index.html" class="btn btn-accent">
+          <i class="bi bi-house-door me-2"></i>Aller au portfolio actuel (Accueil)
+        </a>
+        <a href="logo_proposals.html" class="btn btn-outline-accent">
+          <i class="bi bi-palette2 me-2"></i>Propositions de Logo &amp; Identité
+        </a>
+        <a href="assets/CV_CL.pdf" class="btn btn-secondary-accent" download>
+          <i class="bi bi-file-earmark-person me-2"></i>Télécharger mon CV (PDF)
+        </a>
+      </div>
+    </section>
+
+    <!-- Versions Grid -->
+    <section class="mt-4">
+      <div id="versionsGrid" class="row g-4 justify-content-center">
+        <!-- Populated dynamically from the VERSIONS configuration below -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center border-top" style="border-color: var(--border-color) !important;">
+    <div class="container">
+      <p class="mb-1">© Copyright <strong>Olivier Bourgault</strong> (<a href="https://olivierbourgault.github.io"
+          style="color: var(--secondary-accent); text-decoration: none;">olivierbourgault.github.io</a>) — Tous droits
+        réservés</p>
+      <small>Astuce : consultez les versions archivées (V1, V2, V3) ou revenez à tout moment à l'<a href="index.html" style="color: var(--secondary-accent);">accueil principal</a>.</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    /**
+     * CONFIGURATION DES VERSIONS DU PORTFOLIO
+     * Pour ajouter manuellement une nouvelle version (V4, V5, etc.), ajoutez simplement
+     * un objet dans ce tableau, ou créez un dossier "V4/index.html" (il sera aussi détecté automatiquement).
+     */
+    const VERSIONS = [
+      {
+        id: "V4",
+        title: "Version 4.0 — Édition Tech & Identité Vectorielle (Actuelle)",
+        path: "index.html",
+        date: "2026",
+        status: "Accueil Actuel",
+        featured: true,
+        description: "Adoption officielle du nouveau logo principal « OB Tech » (hexagone orange et circuits bleu ciel), déploiement des logos thématiques Terminal et Nœud Neuronal, et palette Tech activée par défaut.",
+        highlights: [
+          "Nouveau logo principal officiel OB Tech vectoriel (Hexagone orange #FF6600 & circuits #38BDF8)",
+          "Écosystème des logos Tech thématiques : Terminal Code </> pour le Full-Stack & Nœud Neuronal pour l'IA",
+          "Thème Tech Présentation activé par défaut (fond carbone #121316, grille technique et pointeur laser interactif)",
+          "Section Piliers Technologiques & bannière d'identité visuelle avec lien vers les propositions",
+          "Favicon vectoriel SVG et loader dynamique intégrant le nouveau monogramme OB"
+        ],
+        palettes: [
+          { name: "Tech Présentation (Défaut)", url: "index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
+          { name: "Tech Canvas (Hybride)", url: "index.html?palette=tech-canvas", color: "linear-gradient(135deg,#FF6600,#121316)" },
+          { name: "Obsidian Blaze (Fusion)", url: "index.html?palette=obsidian-blaze", color: "linear-gradient(135deg,#FF5A1F,#FFBC42)" },
+          { name: "Original Améthyste", url: "index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
+          { name: "Active Theory", url: "index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
+          { name: "Ethiack", url: "index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
+          { name: "Shabnam", url: "index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
+        ]
+      },
+      {
+        id: "V3",
+        title: "Version 3.0 — Édition Multi-Styles (5 Thèmes)",
+        path: "V3/index.html",
+        date: "2026",
+        status: "Stable",
+        featured: false,
+        description: "Refonte visuelle complète intégrant 4 styles visuels commutables en temps réel (en mode sombre ou clair) ainsi qu'un pointeur laser interactif.",
+        highlights: [
+          "1. Original (Améthyste & Fuchsia néon #E11484 / #A855F7)",
+          "2. Active Theory (Cyberpunk Synthwave cyan #00F0FF & magenta #C026D3)",
+          "3. Ethiack (Terminal Matrix Hacker émeraude #10B981 & trame binaire)",
+          "4. Tech Présentation (Keynote orange #FF6600, bleu #38BDF8 & pointeur Laser touche L)",
+          "5. Shabnam (Atelier Papier #CDC9B6, Vermillon #C02D0C, surligneur #F2D987 & cadre Figma)"
+        ],
+        palettes: [
+          { name: "Original", url: "V3/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
+          { name: "Active Theory", url: "V3/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
+          { name: "Ethiack", url: "V3/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
+          { name: "Tech Présentation", url: "V3/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
+          { name: "Shabnam", url: "V3/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
+        ]
+      },
+      {
+        id: "V2",
+        title: "Version 2.0 — Édition IA & Enrichie",
+        path: "V2/index.html",
+        date: "2026",
+        status: "Stable",
+        featured: false,
+        description: "Mise à jour complète alignée avec mon parcours actuel en intelligence artificielle et mes dernières expériences.",
+        highlights: [
+          "Ajout de l'AEC en Intelligence Artificielle (Collège O'Sullivan)",
+          "Ajout des expériences récentes (Élections Canada 2025, perfectionnement Microsoft Learn)",
+          "Refonte des jauges de compétences techniques (C#, .NET MAUI, Python/IA, Angular/Vue, Symfony)",
+          "Fiches projets détaillées avec badges technologiques et formulaire de contact corrigé"
+        ]
+      },
+      {
+        id: "V1",
+        title: "Version 1.0 — Édition Initiale",
+        path: "V1/index.html",
+        date: "2025",
+        status: "Archive",
+        featured: false,
+        description: "Première version complète de mon portfolio Web présentant mon DEC en informatique et mes premières réalisations.",
+        highlights: [
+          "Présentation générale, compétences et intégration dynamique GitHub",
+          "Parcours au Cégep de Saint-Jérôme, Chambre des Communes et VIWEB",
+          "Galerie de projets filtrable (Scolaires, Professionnels, Personnels)"
+        ]
+      }
+    ];
+
+    /**
+     * Génère le HTML d'une carte de version active
+     */
+    function createVersionCard(v) {
+      const badgeClass = v.featured ? "badge-featured" : "bg-secondary";
+      const cardClass = v.featured ? "version-card featured" : "version-card";
+      const btnClass = v.featured ? "btn btn-accent w-100" : "btn btn-outline-accent w-100";
+      const highlightsHtml = (v.highlights || [])
+        .map(item => `<li><i class="bi bi-check2-circle"></i><span>${item}</span></li>`)
+        .join("");
+
+      const palettesHtml = v.palettes
+        ? `<div class="palette-quick-links">
+            ${v.palettes.map(p => `
+              <a href="${p.url}" class="palette-chip" title="Ouvrir V3 avec le style ${p.name}">
+                <span class="dot" style="background: ${p.color};"></span>
+                <span>${p.name}</span>
+              </a>
+            `).join("")}
+           </div>`
+        : "";
+
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="${cardClass}">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="version-tag">${v.id}</span>
+                <span class="badge rounded-pill ${badgeClass}">${v.status} • ${v.date}</span>
+              </div>
+              <h3 class="h4 mb-2">${v.title}</h3>
+              <p class="version-desc mb-3">${v.description}</p>
+              <ul class="feature-list">
+                ${highlightsHtml}
+              </ul>
+              ${palettesHtml}
+            </div>
+            <div>
+              <a href="${v.path}" class="${btnClass}">
+                Consulter la ${v.id} <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /**
+     * Carte indicative pour les futures versions (V4, V5, etc.)
+     */
+    function createUpcomingCard(nextVersionNum) {
+      return `
+        <div class="col-md-6 col-lg-4">
+          <div class="version-card upcoming">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="version-tag text-muted">V${nextVersionNum}+</span>
+                <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">À venir</span>
+              </div>
+              <h3 class="h4 mb-2">Futures évolutions (V${nextVersionNum}, V${nextVersionNum + 1}…)</h3>
+              <p class="version-desc mb-3">
+                Emplacement prévu pour les prochaines itérations de mon portfolio (nouveaux projets en IA, refontes graphiques et démonstrations interactives).
+              </p>
+              <ul class="feature-list text-muted">
+                <li><i class="bi bi-plus-circle"></i><span>Détection automatique dès qu'un dossier <code>V${nextVersionNum}/index.html</code> est publié</span></li>
+                <li><i class="bi bi-plus-circle"></i><span>Historique complet des versions conservé sur <code>olivierbourgault.github.io</code></span></li>
+              </ul>
+            </div>
+            <div>
+              <button class="btn btn-outline-secondary rounded-pill w-100" disabled>
+                Prochainement disponible
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    /**
+     * Détecte automatiquement si des dossiers V4, V5... existent sur le serveur
+     * même s'ils n'ont pas encore été inscrits manuellement dans le tableau VERSIONS.
+     */
+    async function discoverAdditionalVersions() {
+      const knownIds = new Set(VERSIONS.map(v => v.id.toUpperCase()));
+      const discovered = [];
+
+      for (let num = 4; num <= 10; num++) {
+        const id = `V${num}`;
+        if (knownIds.has(id)) continue;
+
+        try {
+          const response = await fetch(`${id}/index.html`, { method: "HEAD" });
+          if (response.ok) {
+            discovered.push({
+              id: id,
+              title: `Version ${num}.0`,
+              path: `${id}/index.html`,
+              date: "Nouveau",
+              status: "Disponible",
+              featured: true,
+              description: `Nouvelle version (${id}) détectée automatiquement dans le dépôt.`,
+              highlights: [
+                `Accès direct au dossier ${id}/index.html`
+              ]
+            });
+          } else {
+            break;
+          }
+        } catch (e) {
+          break;
+        }
+      }
+
+      if (discovered.length > 0) {
+        VERSIONS.forEach(v => v.featured = false);
+        discovered[discovered.length - 1].featured = true;
+        return [...discovered.reverse(), ...VERSIONS];
+      }
+      return VERSIONS;
+    }
+
+    async function renderPortal() {
+      const grid = document.getElementById("versionsGrid");
+      const allVersions = await discoverAdditionalVersions();
+
+      const maxNum = Math.max(...allVersions.map(v => parseInt(v.id.replace(/\D/g, "")) || 1));
+      grid.innerHTML = allVersions.map(createVersionCard).join("") + createUpcomingCard(maxNum + 1);
+    }
+
+    /**
+     * Bascule du thème Clair / Sombre
+     */
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle("dark");
+      const icon = document.getElementById("themeSwitcher");
+
+      if (isDark) {
+        icon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+      } else {
+        icon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderPortal);
+  </script>
+</body>
+
+</html>

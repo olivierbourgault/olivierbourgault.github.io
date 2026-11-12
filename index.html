@@ -4,675 +4,1388 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Olivier Bourgault | Portail du Portfolio (olivierbourgault.github.io)</title>
+  <title>Olivier Bourgault | Développeur Full-Stack, IA &amp; Technicien TI</title>
   <meta name="description"
-    content="Portail officiel du portfolio d'Olivier Bourgault (https://olivierbourgault.github.io) — Accès aux versions V1, V2, V3 (4 styles visuels) et versions futures.">
+    content="Portfolio officiel d'Olivier Bourgault, diplômé en technique de l'informatique et étudiant en intelligence artificielle. Spécialisé en développement d'applications, automatisation et accessibilité Web.">
   <meta name="keywords"
-    content="Portfolio, Olivier Bourgault, olivierbourgault.github.io, Versions, V1, V2, V3, Développeur, TI, IA">
-  <link rel="canonical" href="https://olivierbourgault.github.io/">
-  <meta property="og:title" content="Olivier Bourgault | Portail du Portfolio">
-  <meta property="og:url" content="https://olivierbourgault.github.io/">
-  <meta property="og:type" content="website">
+    content="Portfolio, Olivier Bourgault, Développeur Web, Intelligence Artificielle, Technicien informatique, Automatisation, Gatineau, Angular, Vue, Symfony, C#, Python, PowerShell">
   <!-- Favicons -->
-  <link href="V4/assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
-  <link href="V3/assets/img/favicon.png" rel="alternate icon">
+  <link rel="canonical" href="https://olivierbourgault.github.io/">
+  <link href="assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
+  <link href="assets/img/favicon.png" rel="alternate icon">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;600;700&family=Questrial&family=Fira+Code:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial:wght@400&family=Fira+Code&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Staatliches&family=Manrope:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <!-- Vendor CSS Files -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-  <style>
-    :root {
-      --default-font: "Roboto", system-ui, -apple-system, sans-serif;
-      --heading-font: "Questrial", sans-serif;
-      --coding-font: "Fira Code", monospace;
-      /* Mode Clair (Light) */
-      --background-color: #FAF7FD;
-      --surface-color: #FFFFFF;
-      --default-color: #181124;
-      --muted-color: #5b4d70;
-      --heading-color: #181124;
-      --accent-color: #D946EF;
-      --secondary-accent: #9333EA;
-      --contrast-color: #FFFFFF;
-      --border-color: rgba(147, 51, 234, 0.12);
-      --card-shadow: 0 10px 30px rgba(147, 51, 234, 0.08);
-      --header-shadow: rgba(147, 51, 234, 0.1);
-      --blob-primary: rgba(217, 70, 239, 0.06);
-      --blob-secondary: rgba(147, 51, 234, 0.06);
-    }
-
-    body.dark {
-      /* Mode Sombre (Dark) */
-      --background-color: #0A0812;
-      --surface-color: rgba(26, 20, 38, 0.75);
-      --default-color: #F8FAFC;
-      --muted-color: #cbd5e1;
-      --heading-color: #F8FAFC;
-      --accent-color: #E11484;
-      --secondary-accent: #A855F7;
-      --contrast-color: #F8FAFC;
-      --border-color: rgba(255, 255, 255, 0.08);
-      --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
-      --header-shadow: rgba(225, 20, 132, 0.18);
-      --blob-primary: rgba(225, 20, 132, 0.11);
-      --blob-secondary: rgba(168, 85, 247, 0.10);
-    }
-
-    body {
-      background-color: var(--background-color);
-      color: var(--default-color);
-      font-family: var(--default-font);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.dark::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(168, 85, 247, 0.045) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(225, 20, 132, 0.045) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    .ambient-blobs {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .ambient-blobs .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(45px);
-    }
-
-    .ambient-blobs .blob-1 {
-      width: 34rem;
-      height: 34rem;
-      top: -8rem;
-      left: -8rem;
-      background: radial-gradient(circle, var(--blob-primary) 0%, transparent 70%);
-    }
-
-    .ambient-blobs .blob-2 {
-      width: 38rem;
-      height: 38rem;
-      top: 15%;
-      right: -8rem;
-      background: radial-gradient(circle, var(--blob-secondary) 0%, transparent 70%);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--heading-color);
-      font-family: var(--heading-font);
-    }
-
-    /* Header */
-    .portal-header {
-      padding: 20px 0;
-    }
-
-    .header-container {
-      background: var(--surface-color);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 50px;
-      box-shadow: 0 4px 20px var(--header-shadow);
-      padding: 10px 25px;
-      border: 1px solid var(--border-color);
-    }
-
-    .logo img {
-      max-height: 36px;
-      margin-right: 10px;
-    }
-
-    .header-social-links a {
-      color: var(--default-color);
-      font-size: 1.2rem;
-      padding: 6px 10px;
-      border-radius: 50%;
-      transition: 0.25s;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .header-social-links a:hover {
-      color: var(--accent-color);
-    }
-
-    /* Hero */
-    .portal-hero {
-      padding: 2.5rem 0 2rem;
-      text-align: center;
-    }
-
-    .avatar-ring {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-color);
-      padding: 3px;
-      background: var(--surface-color);
-      box-shadow: 0 0 25px color-mix(in srgb, var(--secondary-accent), transparent 65%);
-    }
-
-    .code-pill {
-      font-family: var(--coding-font);
-      font-size: 0.85rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 50px;
-      background: color-mix(in srgb, var(--secondary-accent), transparent 86%);
-      color: var(--secondary-accent);
-      border: 1px solid color-mix(in srgb, var(--secondary-accent), transparent 68%);
-      display: inline-block;
-    }
-
-    /* Buttons */
-    .btn-accent {
-      background-color: var(--accent-color);
-      border-color: var(--accent-color);
-      color: var(--contrast-color);
-      border-radius: 50px;
-      padding: 0.7rem 1.75rem;
-      font-weight: 500;
-      box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color), transparent 65%);
-      transition: all 0.25s ease;
-    }
-
-    .btn-accent:hover {
-      background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
-      color: var(--contrast-color);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary-accent {
-      background-color: var(--secondary-accent);
-      border-color: var(--secondary-accent);
-      color: var(--contrast-color);
-      border-radius: 50px;
-      padding: 0.7rem 1.75rem;
-      font-weight: 500;
-      box-shadow: 0 6px 20px color-mix(in srgb, var(--secondary-accent), transparent 65%);
-      transition: all 0.25s ease;
-    }
-
-    .btn-secondary-accent:hover {
-      background-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
-      color: var(--contrast-color);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline-accent {
-      border: 2px solid color-mix(in srgb, var(--secondary-accent), transparent 55%);
-      color: var(--secondary-accent);
-      background: transparent;
-      border-radius: 50px;
-      padding: 0.65rem 1.5rem;
-      font-weight: 500;
-      transition: all 0.25s ease;
-    }
-
-    .btn-outline-accent:hover {
-      background-color: var(--secondary-accent);
-      border-color: var(--secondary-accent);
-      color: var(--contrast-color);
-      transform: translateY(-2px);
-    }
-
-    /* Version Cards */
-    .version-card {
-      background: var(--surface-color);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-color);
-      border-radius: 1.25rem;
-      padding: 1.75rem;
-      height: 100%;
-      box-shadow: var(--card-shadow);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .version-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-color);
-    }
-
-    .version-card.featured {
-      border: 2px solid var(--accent-color);
-    }
-
-    .version-card.upcoming {
-      border-style: dashed;
-      opacity: 0.85;
-    }
-
-    .version-tag {
-      font-family: var(--coding-font);
-      font-weight: 600;
-      font-size: 1.35rem;
-      color: var(--accent-color);
-    }
-
-    .badge-featured {
-      background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
-      color: #ffffff;
-    }
-
-    .version-desc {
-      color: var(--muted-color);
-      font-size: 0.96rem;
-    }
-
-    .feature-list {
-      list-style: none;
-      padding-left: 0;
-      margin-bottom: 1.25rem;
-      font-size: 0.92rem;
-    }
-
-    .feature-list li {
-      margin-bottom: 0.45rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .feature-list li i {
-      color: var(--accent-color);
-      margin-top: 2px;
-    }
-
-    .palette-quick-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .palette-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.38rem;
-      padding: 0.28rem 0.68rem;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--default-color);
-      border: 1px solid var(--border-color);
-      background: color-mix(in srgb, var(--surface-color), var(--default-color) 4%);
-      transition: all 0.2s ease;
-    }
-
-    .palette-chip:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-      transform: translateY(-1px);
-    }
-
-    .palette-chip .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 2rem 0;
-      color: var(--muted-color);
-      font-size: 0.9rem;
-    }
-  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css" rel="stylesheet">
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
-<body class="dark">
+<body class="index-page dark" data-bs-theme="dark" data-palette="tech">
+  <!-- Pointeur Laser Virtuel (Touche L ou bouton) -->
+  <div id="laser-dot" aria-hidden="true"></div>
   <!-- Ambient Background Blobs -->
   <div class="ambient-blobs" aria-hidden="true">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
 
-  <!-- Header -->
-  <header class="portal-header">
-    <div class="container">
-      <div class="header-container d-flex align-items-center justify-content-between mx-auto">
-        <a href="index.html" class="logo d-flex align-items-center text-decoration-none text-reset gap-2">
-          <svg viewBox="0 0 100 100" width="36" height="36" aria-label="Logo OB Tech" style="filter: drop-shadow(0 0 8px rgba(255,102,0,0.4));">
+  <!-- #region Loaders -->
+  <div id="spinner" class="d-flex flex-column justify-content-center align-items-center" style="padding-top: 35vh;">
+    <!-- #region Spinner -->
+    <div class="pl">
+      <div class="pl__outer-ring"></div>
+      <div class="d-flex justify-content-center align-items-center pl__inner-ring p-1">
+        <svg viewBox="0 0 100 100" width="46" height="46" aria-hidden="true">
+          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="#121316" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+        </svg>
+      </div>
+      <div class="pl__track-cover"></div>
+      <div class="pl__ball">
+        <div class="pl__ball-texture"></div>
+        <div class="pl__ball-outer-shadow"></div>
+        <div class="pl__ball-inner-shadow"></div>
+        <div class="pl__ball-side-shadows"></div>
+      </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Progress bar -->
+    <div class="loading__bar"></div>
+    <!-- #endregion -->
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Content -->
+  <div id="page" class="d-none">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="header-container container-fluid position-relative d-flex align-items-center justify-content-between w-75 mx-auto">
+        <!-- #region Logo -->
+        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0 text-reset gap-2">
+          <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="38" height="38" aria-label="Logo OB Tech">
             <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
             <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
             <circle cx="50" cy="50" r="4" fill="#FF6600"/>
           </svg>
-          <span class="fs-5 fw-semibold">Olivier Bourgault</span>
+          <div class="d-flex flex-column">
+            <span class="fs-4 text-decoration-none text-reset align-items-center fw-semibold lh-1">Olivier Bourgault</span>
+            <span style="font-size: 0.68rem; font-family: var(--coding-font); color: #FF6600; letter-spacing: 0.08em; text-transform: uppercase;">OB Tech &bull; V4</span>
+          </div>
         </a>
+        <!-- #endregion -->
 
-        <div class="d-flex align-items-center gap-1 header-social-links">
-          <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo">
-            <i class="bi bi-palette2"></i>
+        <!-- #region Navbar -->
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Accueil</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#resume">CV</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        <!-- #endregion -->
+
+        <!-- #region Social links & theme switcher -->
+        <div class="d-flex align-items-center gap-1 me-2 header-social-links">
+          <a href="versions.html" class="btn btn-sm btn-outline-primary d-none d-sm-inline-flex align-items-center gap-1 py-1 px-2 me-1 versions-browser-btn" aria-label="Navigateur de versions" title="Accéder au navigateur de versions du portfolio">
+            <i class="bi bi-clock-history"></i> <span style="font-size: 0.8rem; font-weight: 600;">Versions</span>
           </a>
-          <a href="https://github.com/RinoShip77" target="_blank" aria-label="Profil GitHub" title="GitHub">
-            <i class="bi bi-github"></i>
+          <a href="versions.html" class="d-inline-flex d-sm-none" aria-label="Navigateur de versions" title="Navigateur de versions">
+            <i class="bi bi-clock-history"></i>
           </a>
-          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" aria-label="Profil LinkedIn"
-            title="LinkedIn">
-            <i class="bi bi-linkedin"></i>
-          </a>
-          <a role="button" onclick="toggleTheme()" aria-label="Changer le thème" title="Thème clair / sombre">
-            <i id="themeSwitcher" class="bi bi-sun-fill"></i>
-          </a>
+          <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo"><i
+              class="bi bi-palette2"></i></a>
+          <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
+              class="bi bi-linkedin"></i></a>
+          <a type="button" onclick="switchTheme(document.body.classList.contains('dark'))"><i id="themeSwitcher"
+              class="bi bi-sun-fill"></i></a>
         </div>
+        <!-- #endregion -->
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Main Content -->
-  <main class="container pb-5">
-    <!-- Hero -->
-    <section class="portal-hero">
-      <img src="https://github.com/RinoShip77.png" alt="Olivier Bourgault" class="avatar-ring mb-3">
-      <div class="mb-2">
-        <span class="code-pill"><i class="bi bi-globe2 me-1"></i>olivierbourgault.github.io</span>
-      </div>
-      <h1 class="display-5 fw-bold mb-3">Portfolio d'Olivier Bourgault</h1>
-      <p class="lead mx-auto mb-4" style="max-width: 680px; color: var(--muted-color);">
-        Bienvenue sur le portail officiel de mon site personnel. Choisissez la version du portfolio que vous souhaitez
-        explorer ou accédez directement à l'un des 4 styles visuels de la V3.
-      </p>
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a id="latestVersionBtn" href="V4/index.html" class="btn btn-accent">
-          <i class="bi bi-rocket-takeoff me-2"></i>Ouvrir la dernière version (V4)
-        </a>
-        <a href="logo_proposals.html" class="btn btn-outline-accent">
-          <i class="bi bi-palette2 me-2"></i>Propositions de Logo &amp; Identité
-        </a>
-        <a href="V3/assets/CV_CL.pdf" class="btn btn-secondary-accent" download>
-          <i class="bi bi-file-earmark-person me-2"></i>Télécharger mon CV (PDF)
-        </a>
-      </div>
-    </section>
-
-    <!-- Versions Grid -->
-    <section class="mt-4">
-      <div id="versionsGrid" class="row g-4 justify-content-center">
-        <!-- Populated dynamically from the VERSIONS configuration below -->
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="text-center border-top" style="border-color: var(--border-color) !important;">
-    <div class="container">
-      <p class="mb-1">© Copyright <strong>Olivier Bourgault</strong> (<a href="https://olivierbourgault.github.io"
-          style="color: var(--secondary-accent); text-decoration: none;">olivierbourgault.github.io</a>) — Tous droits
-        réservés</p>
-      <small>Astuce : ajoutez un dossier <code>V4/</code>, <code>V5/</code>, etc. pour faire évoluer automatiquement ce
-        portail.</small>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    /**
-     * CONFIGURATION DES VERSIONS DU PORTFOLIO
-     * Pour ajouter manuellement une nouvelle version (V4, V5, etc.), ajoutez simplement
-     * un objet dans ce tableau, ou créez un dossier "V4/index.html" (il sera aussi détecté automatiquement).
-     */
-    const VERSIONS = [
-      {
-        id: "V4",
-        title: "Version 4.0 — Édition Tech & Identité Vectorielle",
-        path: "V4/index.html",
-        date: "2026",
-        status: "Recommandée",
-        featured: true,
-        description: "Adoption officielle du nouveau logo principal « OB Tech » (hexagone orange et circuits bleu ciel), déploiement des logos thématiques Terminal et Nœud Neuronal, et palette Tech activée par défaut.",
-        highlights: [
-          "Nouveau logo principal officiel OB Tech vectoriel (Hexagone orange #FF6600 & circuits #38BDF8)",
-          "Écosystème des logos Tech thématiques : Terminal Code </> pour le Full-Stack & Nœud Neuronal pour l'IA",
-          "Thème Tech Présentation activé par défaut (fond carbone #121316, grille technique et pointeur laser interactif)",
-          "Section Piliers Technologiques & bannière d'identité visuelle avec lien vers les propositions",
-          "Favicon vectoriel SVG et loader dynamique intégrant le nouveau monogramme OB"
-        ],
-        palettes: [
-          { name: "Tech Présentation (Défaut)", url: "V4/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
-          { name: "Original Améthyste", url: "V4/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
-          { name: "Active Theory", url: "V4/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
-          { name: "Ethiack", url: "V4/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
-          { name: "Shabnam", url: "V4/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
-        ]
-      },
-      {
-        id: "V3",
-        title: "Version 3.0 — Édition Multi-Styles (5 Thèmes)",
-        path: "V3/index.html",
-        date: "2026",
-        status: "Stable",
-        featured: false,
-        description: "Refonte visuelle complète intégrant 4 styles visuels commutables en temps réel (en mode sombre ou clair) ainsi qu'un pointeur laser interactif.",
-        highlights: [
-          "1. Original (Améthyste & Fuchsia néon #E11484 / #A855F7)",
-          "2. Active Theory (Cyberpunk Synthwave cyan #00F0FF & magenta #C026D3)",
-          "3. Ethiack (Terminal Matrix Hacker émeraude #10B981 & trame binaire)",
-          "4. Tech Présentation (Keynote orange #FF6600, bleu #38BDF8 & pointeur Laser touche L)",
-          "5. Shabnam (Atelier Papier #CDC9B6, Vermillon #C02D0C, surligneur #F2D987 & cadre Figma)"
-        ],
-        palettes: [
-          { name: "Original", url: "V3/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
-          { name: "Active Theory", url: "V3/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
-          { name: "Ethiack", url: "V3/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
-          { name: "Tech Présentation", url: "V3/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
-          { name: "Shabnam", url: "V3/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
-        ]
-      },
-      {
-        id: "V2",
-        title: "Version 2.0 — Édition IA & Enrichie",
-        path: "V2/index.html",
-        date: "2026",
-        status: "Stable",
-        featured: false,
-        description: "Mise à jour complète alignée avec mon parcours actuel en intelligence artificielle et mes dernières expériences.",
-        highlights: [
-          "Ajout de l'AEC en Intelligence Artificielle (Collège O'Sullivan)",
-          "Ajout des expériences récentes (Élections Canada 2025, perfectionnement Microsoft Learn)",
-          "Refonte des jauges de compétences techniques (C#, .NET MAUI, Python/IA, Angular/Vue, Symfony)",
-          "Fiches projets détaillées avec badges technologiques et formulaire de contact corrigé"
-        ]
-      },
-      {
-        id: "V1",
-        title: "Version 1.0 — Édition Initiale",
-        path: "V1/index.html",
-        date: "2025",
-        status: "Archive",
-        featured: false,
-        description: "Première version complète de mon portfolio Web présentant mon DEC en informatique et mes premières réalisations.",
-        highlights: [
-          "Présentation générale, compétences et intégration dynamique GitHub",
-          "Parcours au Cégep de Saint-Jérôme, Chambre des Communes et VIWEB",
-          "Galerie de projets filtrable (Scolaires, Professionnels, Personnels)"
-        ]
-      }
-    ];
-
-    /**
-     * Génère le HTML d'une carte de version active
-     */
-    function createVersionCard(v) {
-      const badgeClass = v.featured ? "badge-featured" : "bg-secondary";
-      const cardClass = v.featured ? "version-card featured" : "version-card";
-      const btnClass = v.featured ? "btn btn-accent w-100" : "btn btn-outline-accent w-100";
-      const highlightsHtml = (v.highlights || [])
-        .map(item => `<li><i class="bi bi-check2-circle"></i><span>${item}</span></li>`)
-        .join("");
-
-      const palettesHtml = v.palettes
-        ? `<div class="palette-quick-links">
-            ${v.palettes.map(p => `
-              <a href="${p.url}" class="palette-chip" title="Ouvrir V3 avec le style ${p.name}">
-                <span class="dot" style="background: ${p.color};"></span>
-                <span>${p.name}</span>
-              </a>
-            `).join("")}
-           </div>`
-        : "";
-
-      return `
-        <div class="col-md-6 col-lg-4">
-          <div class="${cardClass}">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="version-tag">${v.id}</span>
-                <span class="badge rounded-pill ${badgeClass}">${v.status} • ${v.date}</span>
-              </div>
-              <h3 class="h4 mb-2">${v.title}</h3>
-              <p class="version-desc mb-3">${v.description}</p>
-              <ul class="feature-list">
-                ${highlightsHtml}
-              </ul>
-              ${palettesHtml}
+    <main class="main">
+      <!-- #region Hero Section -->
+      <section id="hero" class="hero section" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center content">
+          <!-- #region Presentation -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <!-- #region Tech Badge -->
+            <div class="mb-3" data-aos="fade-down" data-aos-delay="150">
+              <span class="tech-identity-badge">
+                <svg viewBox="0 0 100 100" width="16" height="16" style="vertical-align: middle;">
+                  <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="9" stroke-linejoin="round"/>
+                  <circle cx="50" cy="50" r="10" fill="#38BDF8"/>
+                </svg>
+                Édition Tech V4 &bull; Identité Vectorielle
+              </span>
             </div>
-            <div>
-              <a href="${v.path}" class="${btnClass}">
-                Consulter la ${v.id} <i class="bi bi-arrow-right ms-1"></i>
-              </a>
+            <!-- #endregion -->
+
+            <!-- #region Title -->
+            <h2 aria-label="Je suis un développeur">
+              Je suis un <br>
+              <span class="typewriter nocaret"></span>
+            </h2>
+            <!-- #endregion -->
+
+            <!-- #region Bio -->
+            <p class="lead" id="bio">Diplômé en technique de l'informatique et actuellement en spécialisation en
+              <strong>intelligence artificielle</strong>, je conçois de nouvelles applications et optimise les systèmes
+              existants. Passionné par l'automatisation, la résolution de problématiques techniques et l'accessibilité
+              Web (WCAG), je mets ma rigueur et mon autonomie au service de projets innovants.
+            </p>
+            <!-- #endregion -->
+
+            <!-- #region CTA Buttons -->
+            <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
+              <div class="mx-auto w-auto">
+                <a href="assets/CV_CL.pdf" class="btn btn-outline" title="Télécharger mon CV (en PDF)" download><i
+                    class="bi bi-cloud-download"></i></a>
+              </div>
+              <div class="d-flex justify-content-around gap-3">
+                <a href="#portfolio" class="btn btn-primary">Réalisations</a>
+                <a href="#contact" class="btn btn-secondary-accent">Me contacter</a>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Stats -->
+            <div class="d-flex justify-content-center">
+              <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-item">
+                  <span class="stat-number"><span id="experience">5</span>+</span>
+                  <span class="stat-label">Années d'expérience</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number"><span id="projectsCount">6</span>+</span>
+                  <span class="stat-label">Projets complétés</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Avatar -->
+          <div class="col-lg-6">
+            <div class="hero-image">
+              <img id="avatar" src="https://github.com/RinoShip77.png" alt="Portfolio Hero Image"
+                class="img-fluid d-block mx-auto" data-aos="zoom-out" data-aos-delay="300">
+              <div class="shape-1"></div>
+              <div class="shape-2"></div>
+            </div>
+          </div>
+
+            <!-- #region Tech Branding Banner -->
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="tech-identity-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <svg class="site-main-logo" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink: 0;">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div>
+                    <h4 class="mb-1 fw-bold" style="color: var(--heading-color);">Identité Visuelle « OB Tech » (Orange &amp; Bleu)</h4>
+                    <p class="mb-0 text-muted" style="font-size: 0.92rem;">
+                      Symbole officiel de la Version 4.0 : le <strong>O</strong> forme le bouclier hexagonal de protection et d'infrastructure réseau, tandis que le <strong>B</strong> structure les pistes de circuits et flux de données informatiques.
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <a href="logo_proposals.html" class="btn btn-outline-accent text-nowrap" style="border-color: #FF6600; color: #FF6600;">
+                    <i class="bi bi-palette2 me-2"></i>Voir toutes les propositions
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Tech Pillars Section with 3 Tech Logos -->
+      <section id="expertise" class="section py-5" style="background: color-mix(in srgb, var(--surface-color), transparent 50%); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title text-center mb-5">
+            <span class="tech-identity-badge mb-2">Architectures &amp; Expertises</span>
+            <h2>Piliers Technologiques &amp; Logos Tech</h2>
+            <p class="text-muted mx-auto" style="max-width: 650px;">
+              Une identité visuelle unifiée où chaque symbole incarne une facette de mes compétences en ingénierie logicielle, intelligence artificielle et systèmes TI.
+            </p>
+          </div>
+
+          <div class="row g-4 justify-content-center">
+            <!-- Pilier 1: Full-Stack avec Logo Terminal Code -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="tech-pillar-card">
+                <div class="tech-pillar-icon">
+                  <svg viewBox="0 0 100 100" width="38" height="38" aria-label="Logo Terminal Code Tech">
+                    <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                    <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Développement Full-Stack</h3>
+                <p class="text-muted small mb-3 flex-grow-1">
+                  Conception d'applications Web et logicielles réactives, modulaires et accessibles (WCAG). Maîtrise des écosystèmes modernes : C# / .NET MAUI, Angular, Vue, React, Symfony et architectures RESTful.
+                </p>
+                <div class="d-flex flex-wrap gap-1 mt-auto">
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">C# .NET</span>
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">Angular / Vue</span>
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">Symfony</span>
+                  <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 500;">Terminal &lt;/&gt;</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pilier 2: IA avec Logo Noeud Neuronal -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="tech-pillar-card">
+                <div class="tech-pillar-icon">
+                  <svg viewBox="0 0 100 100" width="38" height="38" aria-label="Logo Nœud Neuronal IA Tech">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                    <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+                    <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+                    <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+                    <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <circle cx="50" cy="53" r="5" fill="#fff"/>
+                  </svg>
+                </div>
+                <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Intelligence Artificielle</h3>
+                <p class="text-muted small mb-3 flex-grow-1">
+                  Spécialisation avancée (AEC IA Collège O'Sullivan). Entraînement et déploiement de modèles de Machine Learning, Deep Learning, pipelines de traitement de données (Python, Pandas, Scikit-Learn) et agents intelligents.
+                </p>
+                <div class="d-flex flex-wrap gap-1 mt-auto">
+                  <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 500;">Python &amp; ML</span>
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">Réseaux Neuronaux</span>
+                  <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 500;">Agents IA</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pilier 3: Systèmes TI & Infrastructure avec Logo Hexagonal OB Tech -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="tech-pillar-card">
+                <div class="tech-pillar-icon">
+                  <svg viewBox="0 0 100 100" width="38" height="38" aria-label="Logo Monogramme OB Hexagonal Tech">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                </div>
+                <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Systèmes TI &amp; Automatisation</h3>
+                <p class="text-muted small mb-3 flex-grow-1">
+                  Rigueur issue d'expériences concrètes (Chambre des communes, Élections Canada). Automatisation de tâches complexes via PowerShell / Batch, gestion d'infrastructures réseaux, Active Directory et contrôle de versions Git.
+                </p>
+                <div class="d-flex flex-wrap gap-1 mt-auto">
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">PowerShell</span>
+                  <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 500;">Active Directory</span>
+                  <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 500;">DevOps / Git</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      `;
-    }
+      </section>
+      <!-- #endregion -->
 
-    /**
-     * Carte indicative pour les futures versions (V4, V5, etc.)
-     */
-    function createUpcomingCard(nextVersionNum) {
-      return `
-        <div class="col-md-6 col-lg-4">
-          <div class="version-card upcoming">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="version-tag text-muted">V${nextVersionNum}+</span>
-                <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">À venir</span>
-              </div>
-              <h3 class="h4 mb-2">Futures évolutions (V${nextVersionNum}, V${nextVersionNum + 1}…)</h3>
-              <p class="version-desc mb-3">
-                Emplacement prévu pour les prochaines itérations de mon portfolio (nouveaux projets en IA, refontes graphiques et démonstrations interactives).
-              </p>
-              <ul class="feature-list text-muted">
-                <li><i class="bi bi-plus-circle"></i><span>Détection automatique dès qu'un dossier <code>V${nextVersionNum}/index.html</code> est publié</span></li>
-                <li><i class="bi bi-plus-circle"></i><span>Historique complet des versions conservé sur <code>olivierbourgault.github.io</code></span></li>
-              </ul>
+      <!-- #region About Section -->
+      <section id="about" class="about section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>À propos</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p>Diplômé en technique de l'informatique et poursuivant une attestation d'études collégiales en intelligence
+            artificielle, je suis fiable, rigoureux, organisé, autonome et responsable dans toutes les réalisations que
+            j'entreprends.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Avatar -->
+          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
+            <div class="about-image">
+              <img src="assets/img/profil/Profil_Avatar.png" alt="Profile Image" class="img-fluid rounded-4">
             </div>
-            <div>
-              <button class="btn btn-outline-secondary rounded-pill w-100" disabled>
-                Prochainement disponible
+          </div>
+          <!-- #endregion-->
+
+          <!-- #region Content -->
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="about-content">
+              <span class="subtitle">À propos de moi</span>
+
+              <h2>Développeur Full-Stack, IA &amp; Technicien en informatique</h2>
+
+              <p class="lead mb-4">Spécialisé dans la création de nouvelles applications Web, mobiles et logicielles
+                ainsi que dans l'optimisation de systèmes existants. J'ai un fort intérêt pour l'automatisation des
+                processus, l'intelligence artificielle et la conformité aux normes d'accessibilité (WCAG). Je parle
+                couramment le français et je communique aisément en anglais.</p>
+
+              <!-- #region Personal informations container -->
+              <div>
+                <!-- #region Informations container -->
+                <div class="row g-4 personal-info">
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Nom<i class="bi bi-person ms-2"></i></span>
+                      <span class="value">Olivier Bourgault</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Téléphone<i class="bi bi-phone ms-2"></i></span>
+                      <span class="value">+1 (819) 962-0709</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Spécialisation<i class="bi bi-pc-display-horizontal ms-2"></i></span>
+                      <span class="value">Développement, TI &amp; IA</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Courriel<i class="bi bi-envelope-at ms-2"></i></span>
+                      <span class="value">bourgault.olivier8501@gmail.com</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Région<i class="bi bi-geo-alt ms-2"></i></span>
+                      <span class="value">Gatineau / Ottawa, QC</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+
+                  <!-- #region Information -->
+                  <div class="col-sm-6">
+                    <div class="info-item">
+                      <span class="label">Formation actuelle<i class="bi bi-mortarboard ms-2"></i></span>
+                      <span class="value">AEC en Intelligence Artificielle</span>
+                    </div>
+                  </div>
+                  <!-- #endregion -->
+                </div>
+                <!-- #endregion -->
+              </div>
+              <!-- #endregion -->
+            </div>
+          </div>
+
+            <!-- #region Tech Branding Banner -->
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="tech-identity-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <svg class="site-main-logo" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink: 0;">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div>
+                    <h4 class="mb-1 fw-bold" style="color: var(--heading-color);">Identité Visuelle « OB Tech » (Orange &amp; Bleu)</h4>
+                    <p class="mb-0 text-muted" style="font-size: 0.92rem;">
+                      Symbole officiel de la Version 4.0 : le <strong>O</strong> forme le bouclier hexagonal de protection et d'infrastructure réseau, tandis que le <strong>B</strong> structure les pistes de circuits et flux de données informatiques.
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <a href="logo_proposals.html" class="btn btn-outline-accent text-nowrap" style="border-color: #FF6600; color: #FF6600;">
+                    <i class="bi bi-palette2 me-2"></i>Voir toutes les propositions
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Skills Section -->
+      <section id="skills" class="skills section" data-aos="fade-up" data-aos-delay="100">
+        <div class="container">
+          <!-- #region Skills cards -->
+          <div class="row g-4 skills-animation">
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>HTML / CSS</h3>
+                  <img src="assets/img/portfolio/html_icon.png" width="15" height="15" alt="HTML & CSS">
+                </div>
+                <span class="text-end d-block">95%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>JavaScript / TS</h3>
+                  <i class="bi bi-javascript"></i>
+                </div>
+                <span class="text-end d-block">85%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>Angular / Vue / React</h3>
+                  <i class="bi bi-code-slash"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>C# / .NET / MAUI</h3>
+                  <i class="bi bi-window-stack"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>PHP / Symfony</h3>
+                  <i class="bi bi-hdd-network"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>Python &amp; IA</h3>
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <span class="text-end d-block">75%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>SQL &amp; NoSQL</h3>
+                  <i class="bi bi-database"></i>
+                </div>
+                <span class="text-end d-block">80%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Skill -->
+            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="skill-box">
+                <div class="d-flex justify-content-between">
+                  <h3>PowerShell &amp; Git</h3>
+                  <i class="bi bi-terminal"></i>
+                </div>
+                <span class="text-end d-block">85%</span>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Dropdowns -->
+          <div id="skills-collapsable" class="mt-5 cta-buttons">
+            <div class="d-flex justify-content-center gap-5">
+              <!-- #region Language dropdown button -->
+              <button class="btn btn-primary text-nowrap" type="button" data-bs-toggle="collapse"
+                data-bs-target="#languages" aria-expanded="false" aria-controls="languages">
+                Langages &amp; Frameworks
               </button>
+              <!-- #endregion -->
+
+              <!-- #region Software dropdown button -->
+              <button class="btn btn-secondary-accent text-nowrap" type="button" data-bs-toggle="collapse"
+                data-bs-target="#softwares" aria-expanded="false" aria-controls="softwares">
+                Logiciels &amp; Environnements
+              </button>
+              <!-- #endregion -->
             </div>
+            <!-- #region Language dropdown content -->
+            <div class="collapse mt-3" id="languages">
+              <div class="card card-body rounded-3 text-center">
+                <div class="col-6 mx-auto w-auto">
+                  <span class="btn btn-outline">HTML</span>
+                  <span class="btn btn-outline">CSS</span>
+                  <span class="btn btn-outline">JavaScript</span>
+                  <span class="btn btn-outline">TypeScript</span>
+                  <span class="btn btn-outline">Python</span>
+                  <span class="btn btn-outline">C#</span>
+                  <span class="btn btn-outline">C++</span>
+                  <span class="btn btn-outline">PHP</span>
+                  <span class="btn btn-outline">Kotlin</span>
+                  <span class="btn btn-outline">Dart</span>
+                  <span class="btn btn-outline">SQL (MySQL / MariaDB)</span>
+                  <span class="btn btn-outline">MongoDB</span>
+                  <span class="btn btn-outline">PowerShell</span>
+                  <span class="btn btn-outline">Batch</span>
+                  <span class="btn btn-outline">YAML</span>
+                  <span class="btn btn-outline">JSON</span>
+                  <span class="btn btn-outline">XAML</span>
+                  <span class="btn btn-outline">Angular</span>
+                  <span class="btn btn-outline">Vue</span>
+                  <span class="btn btn-outline">React</span>
+                  <span class="btn btn-outline">Vite</span>
+                  <span class="btn btn-outline">NodeJS</span>
+                  <span class="btn btn-outline">Symfony</span>
+                  <span class="btn btn-outline">Twig</span>
+                  <span class="btn btn-outline">.NET / .NET MAUI</span>
+                  <span class="btn btn-outline">WPF</span>
+                  <span class="btn btn-outline">Flutter</span>
+                  <span class="btn btn-outline">Expo / React Native</span>
+                  <span class="btn btn-outline">Electron</span>
+                  <span class="btn btn-outline">Bootstrap</span>
+                  <span class="btn btn-outline">jQuery</span>
+                  <span class="btn btn-outline">Docker</span>
+                  <span class="btn btn-outline">Kubernetes</span>
+                  <span class="btn btn-outline">NPM / YARN</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Software dropdown content -->
+            <div class="collapse mt-3" id="softwares">
+              <div class="card card-body rounded-3 text-center">
+                <div class="col-6 mx-auto w-auto">
+                  <span class="btn btn-outline">Visual Studio</span>
+                  <span class="btn btn-outline">Visual Studio Code</span>
+                  <span class="btn btn-outline">Antigravity</span>
+                  <span class="btn btn-outline">GitHub</span>
+                  <span class="btn btn-outline">Azure DevOps</span>
+                  <span class="btn btn-outline">Android Studio</span>
+                  <span class="btn btn-outline">Postman</span>
+                  <span class="btn btn-outline">Mockoon</span>
+                  <span class="btn btn-outline">Node-RED</span>
+                  <span class="btn btn-outline">MongoDB Compass</span>
+                  <span class="btn btn-outline">SQL Developer</span>
+                  <span class="btn btn-outline">phpMyAdmin</span>
+                  <span class="btn btn-outline">WampServer</span>
+                  <span class="btn btn-outline">WordPress</span>
+                  <span class="btn btn-outline">cPanel</span>
+                  <span class="btn btn-outline">Arduino / Arduino IDE</span>
+                  <span class="btn btn-outline">Windows</span>
+                  <span class="btn btn-outline">Linux</span>
+                  <span class="btn btn-outline">Android</span>
+                  <span class="btn btn-outline">Word</span>
+                  <span class="btn btn-outline">Excel</span>
+                  <span class="btn btn-outline">PowerPoint</span>
+                  <span class="btn btn-outline">OneDrive</span>
+                  <span class="btn btn-outline">Outlook</span>
+                  <span class="btn btn-outline">Visio</span>
+                  <span class="btn btn-outline">Teams</span>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+
+            <!-- #region Tech Branding Banner -->
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="tech-identity-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <svg class="site-main-logo" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink: 0;">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div>
+                    <h4 class="mb-1 fw-bold" style="color: var(--heading-color);">Identité Visuelle « OB Tech » (Orange &amp; Bleu)</h4>
+                    <p class="mb-0 text-muted" style="font-size: 0.92rem;">
+                      Symbole officiel de la Version 4.0 : le <strong>O</strong> forme le bouclier hexagonal de protection et d'infrastructure réseau, tandis que le <strong>B</strong> structure les pistes de circuits et flux de données informatiques.
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <a href="logo_proposals.html" class="btn btn-outline-accent text-nowrap" style="border-color: #FF6600; color: #FF6600;">
+                    <i class="bi bi-palette2 me-2"></i>Voir toutes les propositions
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Resume Section -->
+      <section id="resume" class="resume section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>CV</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p>Voici un aperçu complet de mon parcours académique et professionnel. Vous pouvez également télécharger la
+            version complète de mon <a href="assets/CV_CL.pdf" title="Télécharger mon CV (en PDF)" download>curriculum
+              vitae en PDF</a>.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="row align-items-center">
+          <!-- #region Resume -->
+          <div class="resume-wrapper">
+            <!-- #region Past IT jobs -->
+            <div class="resume-block" data-aos="fade-up">
+              <h2>Expériences professionnelles en informatique</h2>
+              <div class="timeline">
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Chambre des Communes - House of Commons</h4>
+                    <span class="period">Ottawa | 2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <span class="period">Été 2024</span>
+                    <h3 class="position">Technicien informatique (Accessibilité &amp; Assurance qualité)</h3>
+                    <p class="description">Tester des sites et des applications afin d'assurer leur conformité aux
+                      directives pour l'accessibilité du contenu Web (WCAG). Consigner les résultats dans Azure DevOps
+                      et produire des rapports Excel détaillés pour guider les équipes de développement.</p>
+                    <span class="period">Été 2023</span>
+                    <h3 class="position">Technicien informatique (Support &amp; Automatisation)</h3>
+                    <p class="description">Assister les utilisateurs via un système de billets, incluant l'analyse de la
+                      base de données pour identifier les causes profondes des incidents. Concevoir et mettre en œuvre le
+                      script PowerShell <em>CompareTools</em> pour automatiser la comparaison de fichiers et accélérer
+                      le dépannage par l'équipe de support.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">VIWEB</h4>
+                    <span class="period">Saint-Jérôme | 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Développeur Web</h3>
+                    <p class="description">
+                      Développer mon propre thème sur mesure pour un site WordPress de vente en ligne avec l'extension
+                      WooCommerce. Personnaliser le catalogue de produits et automatiser le processus d'achat.
+                    </p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Job -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2023 - 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Agent de soutien aux utilisateurs (Tuteur TIC)</h3>
+                    <p class="description">Accueillir et soutenir techniquement les étudiants et usagers du cégep,
+                      incluant l'assistance à l'impression, l'accès aux services en ligne du collège et l'utilisation de
+                      la suite Microsoft 365.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Education -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="100">
+              <h2>Formation académique</h2>
+              <div class="timeline">
+                <!-- #region Formation IA -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="150">
+                  <div class="timeline-left">
+                    <h4 class="company">Collège O'Sullivan de Québec</h4>
+                    <span class="period">Québec | 2026 - 2027 (en cours)</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Attestation d'études collégiales (AEC) en intelligence artificielle</h3>
+                    <p class="description">Spécialisation dans le développement de solutions d'intelligence
+                      artificielle, l'apprentissage automatique, l'analyse de données et l'intégration de modèles IA au
+                      sein d'applications modernes.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Formation DEC -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2024</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Diplôme d'études collégiales (DEC) en technique de l'informatique</h3>
+                    <p class="description">Formation approfondie en développement d'applications Web, mobiles et
+                      logicielles, gestion de bases de données, architecture client-serveur et méthodologies agiles.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Formation DES -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">École secondaire Hormisdas-Gamelin</h4>
+                    <span class="period">Gatineau | 2018</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Diplôme d'études secondaires</h3>
+                    <p class="description">Parcours réalisé au sein du programme profil sportif.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Other Experiences -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="150">
+              <h2>Autres expériences professionnelles</h2>
+              <div class="timeline">
+                <!-- #region Election Canada -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Élections Canada</h4>
+                    <span class="period">Gatineau | 2025</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Préposé à l'information</h3>
+                    <p class="description">Accueillir et orienter les électeurs, incluant la validation des pièces
+                      d'identité et la gestion des flux. Participer à la logistique du site de vote (installation,
+                      signalisation, démantèlement), à la gestion des documents électoraux et au dépouillement, tout en
+                      appliquant les protocoles d'assistance aux personnes à mobilité réduite.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Animateur -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="250">
+                  <div class="timeline-left">
+                    <h4 class="company">Sportmax &amp; Club de Tennis de Buckingham</h4>
+                    <span class="period">Gatineau | 2016 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Animateur et Aide-instructeur</h3>
+                    <p class="description">Planifier, organiser et animer des activités pour des groupes d'enfants tout
+                      en assurant leur sécurité. Être responsable de l'accueil et des départs, superviser les collègues
+                      animateurs et assister les entraîneurs.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+
+                <!-- #region Concierge -->
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="timeline-left">
+                    <h4 class="company">Cégep de Saint-Jérôme</h4>
+                    <span class="period">Saint-Jérôme | 2020 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Concierge</h3>
+                    <p class="description">Nettoyer et désinfecter rigoureusement les aires communes des résidences
+                      étudiantes afin d'assurer un environnement sécuritaire et sanitaire.</p>
+                  </div>
+                </div>
+                <!-- #endregion -->
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Perfectionnement -->
+            <div class="resume-block" data-aos="fade-up" data-aos-delay="200">
+              <h2>Perfectionnement &amp; Certifications</h2>
+              <div class="timeline">
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="timeline-left">
+                    <h4 class="company">Microsoft Learn</h4>
+                    <span class="period">Gatineau / Ottawa</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Modules de formation continue</h3>
+                    <p class="description">Autoformation continue via les parcours techniques Microsoft Learn (.NET,
+                      C#, Azure DevOps, développement Web et outils infonuagiques).</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-up" data-aos-delay="250">
+                  <div class="timeline-left">
+                    <h4 class="company">Formations complémentaires</h4>
+                    <span class="period">2020 - 2022</span>
+                  </div>
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-right">
+                    <h3 class="position">Secourisme, SIMDUT &amp; Mobilité</h3>
+                    <p class="description">Cours en premiers soins (2022), Formation SIMDUT (2020), Cours de secourisme
+                      (2020) et Permis de conduire Classe 5.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+
+            <!-- #region Tech Branding Banner -->
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="tech-identity-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <svg class="site-main-logo" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink: 0;">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div>
+                    <h4 class="mb-1 fw-bold" style="color: var(--heading-color);">Identité Visuelle « OB Tech » (Orange &amp; Bleu)</h4>
+                    <p class="mb-0 text-muted" style="font-size: 0.92rem;">
+                      Symbole officiel de la Version 4.0 : le <strong>O</strong> forme le bouclier hexagonal de protection et d'infrastructure réseau, tandis que le <strong>B</strong> structure les pistes de circuits et flux de données informatiques.
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <a href="logo_proposals.html" class="btn btn-outline-accent text-nowrap" style="border-color: #FF6600; color: #FF6600;">
+                    <i class="bi bi-palette2 me-2"></i>Voir toutes les propositions
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Portfolio Section -->
+      <section id="portfolio" class="portfolio section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>Portfolio</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p class='portfolio-text'>Découvrez une sélection de mes réalisations scolaires, professionnelles et
+            personnelles.<br>
+            Pour explorer l'ensemble de mon code source, visitez mon dépôt <a
+              href='https://github.com/RinoShip77/MesProjets' target='_blank'>GitHub</a>.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <!-- #region Project Filters -->
+          <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
+            <ul class="portfolio-filters isotope-filters" id="filters">
+              <li data-filter="*" class="filter-active">Tout</li>
+              <li data-filter=".filter-school">Scolaires</li>
+              <li data-filter=".filter-professional">Professionnels</li>
+              <li data-filter=".filter-personal">Personnels</li>
+            </ul>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Projects container -->
+          <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
+            <!-- #region Project: Electrolib -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/electrolib.png" class="img-fluid" alt="Aperçu du projet Electrolib"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/electrolib.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-ProjetDeDeveloppement_5C8/Electrolib"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>Electrolib</h3>
+                  <p class="text-break">Logiciel complet de gestion d'inventaire destiné à une bibliothèque (Projet de
+                    développement 420-5C8-JR), reposant sur une application cliente en <strong>Angular</strong> et un
+                    serveur back-end en <strong>Symfony</strong>.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Angular</span>
+                    <span class="badge badge-tech">TypeScript</span>
+                    <span class="badge badge-tech">Symfony</span>
+                    <span class="badge badge-tech">PHP / SQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: CompareTools -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-professional">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/compareTools.png" class="img-fluid"
+                    alt="Aperçu du projet CompareTools" loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/compareTools.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Emploi/HoC-CdC_E23/CompareTools"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Professionnels • Chambre des Communes (2023)</span>
+                  <h3>CompareTools</h3>
+                  <p class="text-break">Outil d'automatisation en <strong>PowerShell</strong> conçu pour comparer
+                    finement des fichiers et dossiers ligne par ligne, accélérant le diagnostic des incidents et
+                    l'efficacité de l'équipe de support TI.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">PowerShell</span>
+                    <span class="badge badge-tech">Automatisation</span>
+                    <span class="badge badge-tech">Diagnostic TI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: HubAI -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/hubAI.png" class="img-fluid" alt="Aperçu du projet HubAI"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/hubAI.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/HubAI" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels • IA</span>
+                  <h3>HubAI</h3>
+                  <p class="text-break">Plateforme modulaire regroupant quatre applications interactives propulsées par
+                    l'intelligence artificielle au sein d'une interface unifiée.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Intelligence Artificielle</span>
+                    <span class="badge badge-tech">JavaScript</span>
+                    <span class="badge badge-tech">Web API</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: Kaomia -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/kaomia.png" class="img-fluid" alt="Aperçu du projet Kaomia"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/kaomia.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/A23-SystemesMulticlients_5D4/Kaomia"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>Kaomia</h3>
+                  <p class="text-break">Portail multi-clients de consultation des statistiques d'un jeu (cours
+                    420-5D4-JR), intégrant un client Web en <strong>Vue.js</strong>, une application mobile en
+                    <strong>Kotlin</strong> et un serveur <strong>Node.js</strong>.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Vue.js</span>
+                    <span class="badge badge-tech">Kotlin (Android)</span>
+                    <span class="badge badge-tech">Node.js</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: EVOMEAL -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-school">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/evomeal.png" class="img-fluid" alt="Aperçu du projet EVOMEAL"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/evomeal.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/C%C3%A9gep%20(CSTJ)/H23-DeveloppementWeb_4D6/EVOMEAL"
+                        target="_blank" class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Scolaires • 2023</span>
+                  <h3>EVOMEAL</h3>
+                  <p class="text-break">Plateforme Web de commerce en ligne développée avec le framework
+                    <strong>Symfony</strong>, incluant la gestion dynamique des produits, des commandes et des
+                    utilisateurs.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">Symfony</span>
+                    <span class="badge badge-tech">Twig</span>
+                    <span class="badge badge-tech">PHP</span>
+                    <span class="badge badge-tech">MySQL</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Project: Shopro -->
+            <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-personal">
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img src="assets/img/portfolio/shopro.png" class="img-fluid" alt="Aperçu du projet Shopro"
+                    loading="lazy">
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a href="assets/img/portfolio/shopro.png" class="glightbox preview-link"
+                        data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
+                      <a href="https://github.com/RinoShip77/MesProjets/tree/main/Personnel/Shopro" target="_blank"
+                        class="details-link"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">Personnels • E-Commerce</span>
+                  <h3>Shopro</h3>
+                  <p class="text-break">Boutique de vente en ligne avec thème personnalisé, catalogue sur mesure et
+                    automatisation du parcours d'achat.</p>
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    <span class="badge badge-tech">WordPress</span>
+                    <span class="badge badge-tech">WooCommerce</span>
+                    <span class="badge badge-tech">PHP / CSS</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+          </div>
+
+            <!-- #region Tech Branding Banner -->
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="350">
+              <div class="tech-identity-banner d-flex flex-column flex-md-row align-items-center justify-content-between gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <svg class="site-main-logo" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink: 0;">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div>
+                    <h4 class="mb-1 fw-bold" style="color: var(--heading-color);">Identité Visuelle « OB Tech » (Orange &amp; Bleu)</h4>
+                    <p class="mb-0 text-muted" style="font-size: 0.92rem;">
+                      Symbole officiel de la Version 4.0 : le <strong>O</strong> forme le bouclier hexagonal de protection et d'infrastructure réseau, tandis que le <strong>B</strong> structure les pistes de circuits et flux de données informatiques.
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <a href="logo_proposals.html" class="btn btn-outline-accent text-nowrap" style="border-color: #FF6600; color: #FF6600;">
+                    <i class="bi bi-palette2 me-2"></i>Voir toutes les propositions
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+          <!-- #endregion -->
+        </div>
+      </section>
+      <!-- #endregion -->
+
+      <!-- #region Contact Section -->
+      <section id="contact" class="contact section" data-aos="fade-up" data-aos-delay="100">
+        <!-- #region Section Title -->
+        <div class="section-title">
+          <h2>Contact</h2>
+
+          <!-- #region Wave underline -->
+          <div class="title-shape">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor"
+                stroke-width="2"></path>
+            </svg>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Summary -->
+          <p class="lead mb-4">Un simple courriel et je pourrai contribuer au succès de vos projets.</p>
+          <!-- #endregion -->
+        </div>
+        <!-- #endregion -->
+
+        <!-- #region Form -->
+        <div class="contact-form card mx-5" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-body p-4 p-lg-5">
+            <form action="javascript:void(0);" onsubmit="sendEmail()" class="email-form">
+              <div class="row gy-4">
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Votre nom" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Votre courriel" required>
+                </div>
+                <div class="col-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Votre message"
+                    required></textarea>
+                </div>
+                <div class="col-12 text-center">
+                  <button type="submit" class="btn btn-submit w-100">Envoyer</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      `;
-    }
 
-    /**
-     * Détecte automatiquement si des dossiers V4, V5... existent sur le serveur
-     * même s'ils n'ont pas encore été inscrits manuellement dans le tableau VERSIONS.
-     */
-    async function discoverAdditionalVersions() {
-      const knownIds = new Set(VERSIONS.map(v => v.id.toUpperCase()));
-      const discovered = [];
+        <!-- #region LinkedIn Profile -->
+        <div class="d-flex justify-content-center">
+          <div class="badge-base LI-profile-badge mt-5" data-locale="fr_FR" data-size="large" data-theme="light"
+            data-type="HORIZONTAL" data-vanity="olivier-bourgault-5b950428a" data-version="v1"><a
+              class="badge-base__link LI-simple-link"
+              href="https://ca.linkedin.com/in/olivier-bourgault-5b950428a?trk=profile-badge"></a>
+          </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #endregion -->
+      </section>
+      <!-- #endregion -->
+    </main>
 
-      for (let num = 4; num <= 10; num++) {
-        const id = `V${num}`;
-        if (knownIds.has(id)) continue;
+    <footer id="footer" class="footer">
+      <!-- #region OB Tech Footer Brand -->
+      <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+        <svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">
+          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+        </svg>
+        <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; VERSION 4.0</span>
+      </div>
+      <!-- #endregion -->
 
-        try {
-          const response = await fetch(`${id}/index.html`, { method: "HEAD" });
-          if (response.ok) {
-            discovered.push({
-              id: id,
-              title: `Version ${num}.0`,
-              path: `${id}/index.html`,
-              date: "Nouveau",
-              status: "Disponible",
-              featured: true,
-              description: `Nouvelle version (${id}) détectée automatiquement dans le dépôt.`,
-              highlights: [
-                `Accès direct au dossier ${id}/index.html`
-              ]
-            });
-          } else {
-            break;
-          }
-        } catch (e) {
-          break;
-        }
-      }
+      <!-- #region Right -->
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong></p><span>Tous droits
+          réservés</span>
+      </div>
+      <!-- #endregion -->
 
-      if (discovered.length > 0) {
-        VERSIONS.forEach(v => v.featured = false);
-        discovered[discovered.length - 1].featured = true;
-        return [...discovered.reverse(), ...VERSIONS];
-      }
-      return VERSIONS;
-    }
+      <!-- #region Social links -->
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/RinoShip77" aria-label="Profil Github"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" aria-label="Profil Linkedin"><i
+            class="bi bi-linkedin"></i></a>
+      </div>
+      <!-- #endregion -->
 
-    async function renderPortal() {
-      const grid = document.getElementById("versionsGrid");
-      const allVersions = await discoverAdditionalVersions();
+      <!-- #region Credits -->
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+      <!-- #endregion -->
+    </footer>
+  </div>
 
-      const latest = allVersions.find(v => v.featured) || allVersions[0];
-      const latestBtn = document.getElementById("latestVersionBtn");
-      if (latest && latestBtn) {
-        latestBtn.href = latest.path;
-        latestBtn.innerHTML = `<i class="bi bi-rocket-takeoff me-2"></i>Ouvrir la dernière version (${latest.id})`;
-      }
+  <!-- Sélecteur de Styles Visuels V3 & Navigateur de Versions -->
+  <div class="palette-switcher-bar" role="region" aria-label="Sélecteur de style visuel et versions">
+    <span class="palette-label d-none d-md-inline"><i class="bi bi-palette2 me-1"></i>Style V3</span>
+    <button type="button" class="palette-btn" data-palette-btn="amethyst" onclick="setPalette('amethyst')" title="Original — Améthyste &amp; Fuchsia">
+      <span class="swatch" style="background: linear-gradient(135deg, #E11484, #A855F7);"></span>
+      <span>Original</span>
+    </button>
+    <button type="button" class="palette-btn" data-palette-btn="synthwave" onclick="setPalette('synthwave')" title="Inspiré d'Active Theory — Cyberpunk Synthwave">
+      <span class="swatch" style="background: linear-gradient(135deg, #00F0FF, #C026D3);"></span>
+      <span>Active Theory</span>
+    </button>
+    <button type="button" class="palette-btn" data-palette-btn="ethiack" onclick="setPalette('ethiack')" title="Inspiré d'Ethiack — Terminal Matrix Hacker">
+      <span class="swatch" style="background: linear-gradient(135deg, #10B981, #059669);"></span>
+      <span>Ethiack</span>
+    </button>
+    <button type="button" class="palette-btn active" data-palette-btn="tech" onclick="setPalette('tech')" title="Inspiré du Template — Tech Présentation">
+      <span class="swatch" style="background: linear-gradient(135deg, #FF6600, #38BDF8);"></span>
+      <span>Tech Présentation</span>
+    </button>
+    <button type="button" class="palette-btn" data-palette-btn="shabnam" onclick="setPalette('shabnam')" title="Inspiré de Shabnam Raghavan — Atelier Papier &amp; Vermillon">
+      <span class="swatch" style="background: linear-gradient(135deg, #C02D0C, #F2D987);"></span>
+      <span>Shabnam</span>
+    </button>
+    <button type="button" class="palette-btn" data-palette-btn="tech-canvas" onclick="setPalette('tech-canvas')" title="Hybride : Tech Orange + Shabnam + Aahil Khan (Néo-Brutalisme Canvas)">
+      <span class="swatch" style="background: linear-gradient(135deg, #FF6600, #121316); border: 1px solid #FF6600;"></span>
+      <span>Tech Canvas</span>
+    </button>
+    <button type="button" class="palette-btn" data-palette-btn="obsidian-blaze" onclick="setPalette('obsidian-blaze')" title="Fusion : Keynote + Shabnam + Aahil + Obsidian Blaze (#0D0E12 / #FF5A1F / #FFBC42)">
+      <span class="swatch" style="background: linear-gradient(135deg, #FF5A1F, #FFBC42); border: 1px solid #0D0E12;"></span>
+      <span>Obsidian Blaze</span>
+    </button>
+    <button type="button" id="laser-btn" class="palette-btn" onclick="toggleLaser()" title="Pointeur Laser (Raccourci : touche L)">
+      <span class="swatch" style="background: #ef4444; box-shadow: 0 0 8px #ef4444;"></span>
+      <span class="d-none d-sm-inline">Laser (L)</span>
+    </button>
+    <a href="versions.html" class="palette-btn versions-link-btn" title="Ouvrir le navigateur de versions (V1, V2, V3, V4)">
+      <span class="swatch" style="background: linear-gradient(135deg, #38BDF8, #9333EA);"></span>
+      <span><i class="bi bi-clock-history me-1"></i>Versions</span>
+    </a>
+  </div>
 
-      const maxNum = Math.max(...allVersions.map(v => parseInt(v.id.replace(/\D/g, "")) || 1));
-      grid.innerHTML = allVersions.map(createVersionCard).join("") + createUpcomingCard(maxNum + 1);
-    }
+  <!-- Scroll Top -->
+  <a id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-    /**
-     * Bascule du thème Clair / Sombre
-     */
-    function toggleTheme() {
-      const isDark = document.body.classList.toggle("dark");
-      const icon = document.getElementById("themeSwitcher");
-      const logo = document.getElementById("logo");
-
-      if (isDark) {
-        icon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
-        logo.src = "V3/assets/img/logo/dark.png";
-      } else {
-        icon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
-        logo.src = "V3/assets/img/logo/light.png";
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", renderPortal);
-  </script>
+  <!-- #region Scripts -->
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js"></script>
+  <!-- LinkedIn profile -->
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <!-- #endregion -->
 </body>
 
 </html>

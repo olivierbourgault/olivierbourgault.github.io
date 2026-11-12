@@ -2076,3 +2076,23 @@ section,
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
+/* Bouton du Navigateur de Versions dans le Header */
+.versions-browser-btn {
+  border-radius: 50px;
+  font-family: var(--coding-font, monospace);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.versions-browser-btn:hover {
+  background: #38BDF8;
+  color: #0A0812;
+  border-color: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}

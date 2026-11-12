@@ -2905,3 +2905,686 @@ section,
   border-radius: 50px;
   padding: 0.35rem 1rem;
 }
+
+/* Bouton du Navigateur de Versions dans le Header */
+.versions-browser-btn {
+  border-radius: 50px;
+  font-family: var(--coding-font);
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.08);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.versions-browser-btn:hover {
+  background: #38BDF8;
+  color: #0A0812;
+  border-color: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1px);
+}
+
+.versions-link-btn {
+  text-decoration: none;
+  color: inherit;
+}
+
+.versions-link-btn:hover {
+  color: #38BDF8;
+}
+
+/* ==========================================================================
+   6. PALETTE HYBRIDE : TECH CANVAS (Tech Orange + Shabnam + Aahil Khan)
+   ========================================================================== */
+body[data-palette="tech-canvas"] {
+  --default-font: "Manrope", "Space Grotesk", system-ui, sans-serif;
+  --heading-font: "Space Grotesk", "Staatliches", sans-serif;
+  --coding-font: "JetBrains Mono", "Fira Code", monospace;
+  --nav-font: "Space Grotesk", sans-serif;
+
+  /* Mode Clair (Ivory Brutalism + Orange Tech) */
+  --background-color: #F4F1EA;
+  --default-color: #161616;
+  --heading-color: #121316;
+  --accent-color: #FF6600;
+  --accent-alt-color: #FF8533;
+  --secondary-accent: #161616;
+  --surface-color: #FFFFFF;
+  --contrast-color: #FFFFFF;
+  --card-border: #161616;
+  --card-shadow: 5px 5px 0px #161616;
+  --header-shadow: rgba(22, 22, 22, 0.14);
+  --blob-primary: rgba(255, 102, 0, 0.08);
+  --blob-secondary: rgba(255, 167, 38, 0.08);
+
+  --nav-color: #161616;
+  --nav-hover-color: #FF6600;
+  --nav-mobile-background-color: #F4F1EA;
+  --nav-dropdown-background-color: #FFFFFF;
+  --nav-dropdown-color: #161616;
+  --nav-dropdown-hover-color: #FF6600;
+}
+
+body.dark[data-palette="tech-canvas"] {
+  /* Mode Sombre (Carbone #121316 + Orange #FF6600 + Néo-Brutalisme) */
+  --background-color: #121316;
+  --default-color: #F5F5F7;
+  --heading-color: #FFFFFF;
+  --accent-color: #FF6600;
+  --accent-alt-color: #FFA726;
+  --secondary-accent: #38BDF8;
+  --surface-color: #1A1C20;
+  --contrast-color: #121316;
+  --card-border: #2E323B;
+  --card-shadow: 5px 5px 0px #FF6600;
+  --header-shadow: rgba(255, 102, 0, 0.2);
+  --blob-primary: rgba(255, 102, 0, 0.12);
+  --blob-secondary: rgba(255, 167, 38, 0.06);
+
+  --nav-color: #F5F5F7;
+  --nav-hover-color: #FF6600;
+  --nav-mobile-background-color: #1A1C20;
+  --nav-dropdown-background-color: #1A1C20;
+  --nav-dropdown-color: #F5F5F7;
+  --nav-dropdown-hover-color: #FF6600;
+}
+
+/* Planche de découpe / grille technique hybride */
+body.dark[data-palette="tech-canvas"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 102, 0, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 102, 0, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body[data-palette="tech-canvas"]:not(.dark)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(22, 22, 22, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 22, 22, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Header & Dock style OS Néo-Brutaliste (Aahil Khan) */
+body[data-palette="tech-canvas"] .header .header-container {
+  border: 2px solid var(--card-border);
+  box-shadow: 4px 4px 0px var(--accent-color);
+  border-radius: 16px;
+}
+
+body[data-palette="tech-canvas"] .palette-switcher-bar {
+  border: 2px solid var(--card-border);
+  box-shadow: 4px 4px 0px var(--accent-color);
+  border-radius: 16px;
+}
+
+/* Hero Canvas (Shabnam Cutting Mat + Aahil OS Window) */
+body[data-palette="tech-canvas"] .hero {
+  background-color: #181A1F;
+  background-image:
+    linear-gradient(to right, rgba(255, 102, 0, 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 102, 0, 0.11) 1px, transparent 1px);
+  background-size: 56px 56px;
+  border-radius: 20px;
+  padding: 58px 40px;
+  margin-top: 14px;
+  border: 2px solid #FF6600;
+  box-shadow: 8px 8px 0px #000000;
+  --default-color: #F5F5F7;
+  --heading-color: #FFFFFF;
+}
+
+body[data-palette="tech-canvas"]:not(.dark) .hero {
+  background-color: #FFFFFF;
+  background-image:
+    linear-gradient(to right, rgba(22, 22, 22, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(22, 22, 22, 0.07) 1px, transparent 1px);
+  border: 2px solid #161616;
+  box-shadow: 8px 8px 0px #FF6600;
+  --default-color: #161616;
+  --heading-color: #121316;
+}
+
+@media (max-width: 768px) {
+  body[data-palette="tech-canvas"] .hero {
+    padding: 36px 20px;
+  }
+}
+
+/* Cadre de sélection Figma Orange + Poignées carrées (Shabnam) */
+body[data-palette="tech-canvas"] .hero .content h2 {
+  position: relative;
+  border: 1.5px solid #FF6600;
+  padding: 18px 22px 14px;
+  margin-top: 1.75rem;
+  display: inline-block;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+body[data-palette="tech-canvas"] .hero .content h2::before {
+  content: "TECH · CANVAS · OS";
+  position: absolute;
+  top: -25px;
+  left: -1.5px;
+  background: #FF6600;
+  color: #121316;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 3px 10px;
+  border-radius: 4px 4px 0 0;
+  line-height: 1.3;
+}
+
+body[data-palette="tech-canvas"] .hero .content h2::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #FFFFFF;
+  border: 2px solid #FF6600;
+  bottom: -5px;
+  right: -5px;
+}
+
+/* Surligneur dynamique orange / ambre (Shabnam + Tech) */
+body[data-palette="tech-canvas"] .hero .content h2 span.typewriter {
+  background-color: #FF6600;
+  color: #121316 !important;
+  -webkit-text-fill-color: #121316 !important;
+  padding: 2px 12px;
+  border-radius: 4px;
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Boutons Néo-Brutalistes (Aahil Khan) */
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-primary,
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-secondary-accent,
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-outline {
+  border-radius: 12px;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-primary {
+  background-color: #FF6600;
+  color: #121316;
+}
+
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-secondary-accent {
+  background-color: #22252B;
+  color: #FFFFFF;
+  border-color: #FF6600;
+  box-shadow: 4px 4px 0px #FF6600;
+}
+
+body[data-palette="tech-canvas"]:not(.dark) .hero .cta-buttons .btn.btn-secondary-accent {
+  background-color: #161616;
+  color: #FFFFFF;
+}
+
+body[data-palette="tech-canvas"] .hero .cta-buttons .btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Cartes Néo-Brutalistes + Ruban Adhésif Tech (Shabnam + Aahil) */
+body[data-palette="tech-canvas"] .skill-box,
+body[data-palette="tech-canvas"] .portfolio-card,
+body[data-palette="tech-canvas"] .tech-pillar-card,
+body[data-palette="tech-canvas"] .personal-info,
+body[data-palette="tech-canvas"] .contact-form {
+  position: relative;
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+
+body[data-palette="tech-canvas"] .skill-box:hover,
+body[data-palette="tech-canvas"] .portfolio-card:hover,
+body[data-palette="tech-canvas"] .tech-pillar-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0px var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+body[data-palette="tech-canvas"] .portfolio-card .portfolio-image {
+  border-radius: 14px 14px 0 0;
+  border-bottom: 2px solid var(--card-border);
+}
+
+/* Ruban adhésif translucide ambre/orange façon atelier sur cartes */
+body[data-palette="tech-canvas"] .portfolio-card::before,
+body[data-palette="tech-canvas"] .tech-pillar-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 68px;
+  height: 18px;
+  background: rgba(255, 102, 0, 0.35);
+  border: 1px solid rgba(255, 102, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Post-it KPI Brutaliste */
+body[data-palette="tech-canvas"] .hero .hero-stats .stat-item {
+  position: relative;
+  background: #22252B;
+  border: 2px solid #FF6600;
+  box-shadow: 4px 4px 0px #000000;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease;
+}
+
+body[data-palette="tech-canvas"]:not(.dark) .hero .hero-stats .stat-item {
+  background: #FFFBF2;
+  border-color: #161616;
+  box-shadow: 4px 4px 0px #FF6600;
+}
+
+body[data-palette="tech-canvas"] .hero .hero-stats .stat-item:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+body[data-palette="tech-canvas"] .hero .hero-stats .stat-item:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+body[data-palette="tech-canvas"] .hero .hero-stats .stat-item .stat-number {
+  font-family: "Space Grotesk", sans-serif;
+  color: #FF6600;
+  font-weight: 700;
+}
+
+/* Formes géométriques d'avatar (Aahil + Tech) */
+body[data-palette="tech-canvas"] .hero .hero-image .shape-1 {
+  filter: none;
+  border-radius: 16px;
+  border: 2px solid #000000;
+  background-color: #FF6600;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+body[data-palette="tech-canvas"] .hero .hero-image .shape-2 {
+  filter: none;
+  border-radius: 12px;
+  border: 2px solid #000000;
+  background-color: #22252B;
+  box-shadow: 4px 4px 0px #FF6600;
+}
+
+/* ==========================================================================
+   7. PALETTE FUSION : OBSIDIAN BLAZE (Image 1 + Shabnam + Aahil + Image 2)
+   ========================================================================== */
+body[data-palette="obsidian-blaze"] {
+  --default-font: "Manrope", "Inter", system-ui, sans-serif;
+  --heading-font: "Space Grotesk", "Inter", sans-serif;
+  --coding-font: "JetBrains Mono", "Fira Code", monospace;
+  --nav-font: "Space Grotesk", sans-serif;
+
+  /* Mode Clair (Off-White + Noir Obsidienne + Electric Blaze) */
+  --background-color: #F3F4F6;
+  --default-color: #0D0E12;
+  --heading-color: #0D0E12;
+  --accent-color: #FF5A1F;
+  --accent-alt-color: #FFBC42;
+  --secondary-accent: #181A20;
+  --surface-color: #FFFFFF;
+  --contrast-color: #FFFFFF;
+  --card-border: #272A34;
+  --card-shadow: 4px 4px 0px #0D0E12;
+  --header-shadow: rgba(13, 14, 18, 0.14);
+  --blob-primary: rgba(255, 90, 31, 0.08);
+  --blob-secondary: rgba(255, 188, 66, 0.08);
+
+  --nav-color: #0D0E12;
+  --nav-hover-color: #FF5A1F;
+  --nav-mobile-background-color: #FFFFFF;
+  --nav-dropdown-background-color: #FFFFFF;
+  --nav-dropdown-color: #0D0E12;
+  --nav-dropdown-hover-color: #FF5A1F;
+}
+
+body.dark[data-palette="obsidian-blaze"] {
+  /* Mode Sombre (Obsidian Charcoal #0D0E12 + Slate Dark #181A20 + Electric Blaze #FF5A1F) */
+  --background-color: #0D0E12;
+  --default-color: #F3F4F6;
+  --heading-color: #FFFFFF;
+  --accent-color: #FF5A1F;
+  --accent-alt-color: #FFBC42;
+  --secondary-accent: #38BDF8;
+  --surface-color: #181A20;
+  --contrast-color: #FFFFFF;
+  --card-border: #272A34;
+  --card-shadow: 5px 5px 0px #000000;
+  --header-shadow: rgba(255, 90, 31, 0.18);
+  --blob-primary: rgba(255, 90, 31, 0.12);
+  --blob-secondary: rgba(255, 188, 66, 0.07);
+
+  --nav-color: #F3F4F6;
+  --nav-hover-color: #FF5A1F;
+  --nav-mobile-background-color: #181A20;
+  --nav-dropdown-background-color: #181A20;
+  --nav-dropdown-color: #F3F4F6;
+  --nav-dropdown-hover-color: #FF5A1F;
+}
+
+/* Grille de fond subtile type Keynote / Cutting Mat */
+body.dark[data-palette="obsidian-blaze"]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(13, 14, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 14, 18, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Header & Dock style macOS / Browser Window (Image 2 + Aahil) */
+body[data-palette="obsidian-blaze"] .header .header-container {
+  background: var(--surface-color);
+  border: 1.5px solid #272A34;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+}
+
+body[data-palette="obsidian-blaze"] .palette-switcher-bar {
+  background: rgba(24, 26, 32, 0.92);
+  border: 1.5px solid #272A34;
+  border-radius: 14px;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark) .palette-switcher-bar {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid #272A34;
+}
+
+/* Fenêtre Navigateur macOS dans la section Hero (Image 2 + Image 1 + Shabnam) */
+body[data-palette="obsidian-blaze"] .hero {
+  position: relative;
+  background-color: #181A20;
+  background-image:
+    linear-gradient(to right, rgba(255, 90, 31, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 90, 31, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  border-radius: 16px;
+  padding: 68px 42px 52px;
+  margin-top: 16px;
+  border: 1.5px solid #272A34;
+  border-top: 2px solid #FF5A1F;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 6px 6px 0px #000000;
+  --default-color: #F3F4F6;
+  --heading-color: #FFFFFF;
+}
+
+/* Barre de fenêtre macOS simulée en haut du Hero (Image 2) */
+body[data-palette="obsidian-blaze"] .hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: #121419;
+  border-bottom: 1px solid #272A34;
+  border-radius: 14px 14px 0 0;
+  background-image:
+    radial-gradient(circle at 22px 18px, #FF5F56 5px, transparent 5.5px),
+    radial-gradient(circle at 42px 18px, #FFBD2E 5px, transparent 5.5px),
+    radial-gradient(circle at 62px 18px, #27C93F 5px, transparent 5.5px);
+  background-repeat: no-repeat;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark) .hero {
+  background-color: #FFFFFF;
+  background-image:
+    linear-gradient(to right, rgba(13, 14, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 14, 18, 0.05) 1px, transparent 1px);
+  border: 2px solid #0D0E12;
+  box-shadow: 6px 6px 0px #FF5A1F;
+  --default-color: #0D0E12;
+  --heading-color: #0D0E12;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark) .hero::before {
+  background-color: #E5E7EB;
+  border-bottom: 1.5px solid #0D0E12;
+}
+
+@media (max-width: 768px) {
+  body[data-palette="obsidian-blaze"] .hero {
+    padding: 58px 20px 36px;
+  }
+}
+
+/* Cadre Figma (Shabnam) + Curseur Terminal Orange (Image 2: \_) + Amber Glow (Image 1) */
+body[data-palette="obsidian-blaze"] .hero .content h2 {
+  position: relative;
+  border: 1.5px solid rgba(255, 90, 31, 0.7);
+  padding: 18px 22px 14px;
+  margin-top: 1.65rem;
+  display: inline-block;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+body[data-palette="obsidian-blaze"] .hero .content h2::before {
+  content: "ALEX/OB · DEV · OS";
+  position: absolute;
+  top: -24px;
+  left: -1.5px;
+  background: #FF5A1F;
+  color: #0D0E12;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 3px 10px;
+  border-radius: 4px 4px 0 0;
+  line-height: 1.3;
+}
+
+body[data-palette="obsidian-blaze"] .hero .content h2::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #FFBC42;
+  border: 1.5px solid #0D0E12;
+  bottom: -5px;
+  right: -5px;
+}
+
+/* Mot-clé mis en valeur Amber Glow #FFBC42 + Electric Blaze #FF5A1F (Image 1 + Shabnam) */
+body[data-palette="obsidian-blaze"] .hero .content h2 span.typewriter {
+  color: #FFBC42 !important;
+  -webkit-text-fill-color: #FFBC42 !important;
+  background: rgba(255, 90, 31, 0.16);
+  border-bottom: 3px solid #FF5A1F;
+  padding: 0 8px;
+  border-radius: 4px;
+  text-shadow: 0 0 18px rgba(255, 90, 31, 0.45);
+}
+
+/* Boutons Electric Blaze #FF5A1F + Bordures Aahil */
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-primary,
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-secondary-accent,
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-outline {
+  border-radius: 8px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-primary {
+  background-color: #FF5A1F;
+  border: 2px solid #0D0E12;
+  color: #FFFFFF;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-primary:hover {
+  background-color: #FFBC42;
+  color: #0D0E12;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-secondary-accent {
+  background-color: #272A34;
+  border: 1.5px solid #FF5A1F;
+  color: #F3F4F6;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+/* Cartes KPI Keynote avec bordure gauche colorée (Image 1 : Orange, Vert, Cyan + Aahil) */
+body[data-palette="obsidian-blaze"] .hero .hero-stats .stat-item {
+  position: relative;
+  background: #121419;
+  border: 1.5px solid #272A34;
+  border-left: 4px solid #FF5A1F;
+  border-radius: 12px;
+  padding: 1rem 1.35rem;
+  box-shadow: 4px 4px 0px #000000;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+body[data-palette="obsidian-blaze"] .hero .hero-stats .stat-item:nth-child(2) {
+  border-left-color: #10B981;
+}
+
+body[data-palette="obsidian-blaze"] .hero .hero-stats .stat-item:nth-child(3) {
+  border-left-color: #38BDF8;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark) .hero .hero-stats .stat-item {
+  background: #FFFFFF;
+  border-color: #272A34;
+  border-left-width: 4px;
+}
+
+body[data-palette="obsidian-blaze"] .hero .hero-stats .stat-item .stat-number {
+  font-family: "Space Grotesk", sans-serif;
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+body[data-palette="obsidian-blaze"]:not(.dark) .hero .hero-stats .stat-item .stat-number {
+  color: #0D0E12;
+}
+
+/* Cartes Projets & Compétences (Image 1 encadré orange top + Image 2 Slate Dark + Shabnam Tape + Aahil shadow) */
+body[data-palette="obsidian-blaze"] .skill-box,
+body[data-palette="obsidian-blaze"] .portfolio-card,
+body[data-palette="obsidian-blaze"] .tech-pillar-card,
+body[data-palette="obsidian-blaze"] .personal-info,
+body[data-palette="obsidian-blaze"] .contact-form {
+  position: relative;
+  background: var(--surface-color);
+  border: 1.5px solid #272A34;
+  border-top: 3px solid #FF5A1F;
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  overflow: visible;
+}
+
+body[data-palette="obsidian-blaze"] .skill-box:hover,
+body[data-palette="obsidian-blaze"] .portfolio-card:hover,
+body[data-palette="obsidian-blaze"] .tech-pillar-card:hover {
+  transform: translate(-2px, -2px);
+  border-color: #FF5A1F;
+  box-shadow: 6px 6px 0px #FF5A1F;
+}
+
+body[data-palette="obsidian-blaze"] .portfolio-card .portfolio-image {
+  border-radius: 12px 12px 0 0;
+  border-bottom: 1.5px solid #272A34;
+}
+
+/* Ruban adhésif translucide ambre/obsidienne (Shabnam) */
+body[data-palette="obsidian-blaze"] .portfolio-card::before,
+body[data-palette="obsidian-blaze"] .tech-pillar-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.8deg);
+  width: 64px;
+  height: 16px;
+  background: rgba(255, 188, 66, 0.28);
+  border: 1px solid rgba(255, 90, 31, 0.65);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Badges & Tags monospace (Image 2 #272A34 + Image 1) */
+body[data-palette="obsidian-blaze"] .tech-identity-badge {
+  background: rgba(255, 90, 31, 0.14);
+  border: 1px solid #FF5A1F;
+  color: #FFBC42;
+}
+
+/* Formes Avatar */
+body[data-palette="obsidian-blaze"] .hero .hero-image .shape-1 {
+  filter: none;
+  border-radius: 14px;
+  border: 2px solid #0D0E12;
+  background: linear-gradient(135deg, #FF5A1F, #FFBC42);
+  box-shadow: 5px 5px 0px #000000;
+}
+
+body[data-palette="obsidian-blaze"] .hero .hero-image .shape-2 {
+  filter: none;
+  border-radius: 10px;
+  border: 1.5px solid #272A34;
+  background-color: #181A20;
+  box-shadow: 4px 4px 0px #FF5A1F;
+}

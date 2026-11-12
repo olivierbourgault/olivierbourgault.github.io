@@ -8,17 +8,18 @@ Bienvenue sur le dépôt officiel de mon portfolio Web, accessible à l'adresse:
 
 Ce répertoire organise mon portfolio par versions afin de conserver l'historique complet de ses évolutions :
 
-- **[`index.html`](index.html)** : Portail d'entrée interactif permettant de naviguer entre les différentes versions du site (`V1`, `V2`, `V3`, `V4`, etc.).
-- **[`V4/`](V4/index.html)** *(Recommandée — Version actuelle)* : **Édition Tech & Identité Vectorielle**. Adopte le logo officiel vectoriel **« OB Tech »** (hexagone orange `#FF6600` et circuits bleu ciel `#38BDF8`), intègre les logos thématiques Tech (**Terminal Code `</>`** pour le développement logiciel et **Nœud Neuronal** pour l'IA), avec la palette **Tech Présentation** activée par défaut et le sélecteur multi-styles préservé.
-- **[`V3/`](V3/index.html)** *(Stable)* : Version Multi-Styles intégrant 5 directions artistiques commutables en temps réel (Améthyste, Synthwave, Ethiack, Tech, Shabnam) et un pointeur laser virtuel.
-- **[`V2/`](V2/index.html)** *(Archive)* : Version enrichie intégrant mon parcours en intelligence artificielle (AEC au Collège O'Sullivan), mes expériences récentes (Élections Canada, Microsoft Learn), mes nouvelles compétences techniques et des fiches de projets détaillées avec badges.
-- **[`V1/`](V1/index.html)** *(Archive)* : Version initiale de mon portfolio (sauvegarde complète avec ses `assets`).
+- **[`index.html`](index.html)** *(Page d'accueil)* : **Portfolio officiel (Édition Tech V4)** avec identité vectorielle OB Tech, mode multi-styles interactif et accès direct au CV et aux réalisations.
+- **[`versions.html`](versions.html)** : **Navigateur de versions** permettant de consulter l'historique complet des versions du site (`V1`, `V2`, `V3`, `V4`), leurs nouveautés et les différents thèmes visuels.
+- **[`V4/`](V4/index.html)** : Archive autonome de la Version 4.0 (Tech Edition & Identité Vectorielle).
+- **[`V3/`](V3/index.html)** : Version 3.0 Multi-Styles (5 directions artistiques commutables en temps réel et pointeur laser).
+- **[`V2/`](V2/index.html)** : Version 2.0 enrichie (AEC en Intelligence Artificielle, Élections Canada, Microsoft Learn).
+- **[`V1/`](V1/index.html)** : Version 1.0 initiale (DEC en informatique et premières réalisations).
 - **[`logo_proposals.html`](logo_proposals.html)** : Galerie interactive des propositions de logos et identité visuelle adaptative multi-thèmes.
 
 ## Liens utiles
 
-- **Site en direct** : [https://olivierbourgault.github.io](https://olivierbourgault.github.io)
-- **Portail V4** : [https://olivierbourgault.github.io/V4/](https://olivierbourgault.github.io/V4/)
+- **Site en direct (Accueil Portfolio)** : [https://olivierbourgault.github.io](https://olivierbourgault.github.io)
+- **Navigateur de versions** : [https://olivierbourgault.github.io/versions.html](https://olivierbourgault.github.io/versions.html)
 - **Propositions de Logo** : [https://olivierbourgault.github.io/logo_proposals.html](https://olivierbourgault.github.io/logo_proposals.html)
 - **Dépôt de mes projets** : [https://github.com/RinoShip77/MesProjets](https://github.com/RinoShip77/MesProjets)
 - **Profil GitHub** : [https://github.com/RinoShip77](https://github.com/RinoShip77)
