@@ -1,6 +1,6 @@
 # olivierbourgault.github.io
 
-Bienvenue sur le dépôt officiel de mon portfolio Web, accessible à l'adresse :
+Bienvenue sur le dépôt officiel de mon portfolio Web, accessible à l'adresse:
 👉 **[https://olivierbourgault.github.io](https://olivierbourgault.github.io)**
 *(L'ancienne adresse `https://rinoship77.github.io` redirige automatiquement vers ce domaine).*
 
