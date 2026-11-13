@@ -12,7 +12,6 @@
 /* CONSTANTS                                 */
 /* -------------------------------------------------------------------------- */
 const TODAY = new Date();
-const BIRTH = new Date("2001-05-08");
 const START = new Date("2021-01-25");
 
 /* -------------------------------------------------------------------------- */
@@ -483,49 +482,36 @@ function diffDate(date1, date2) {
 
 
 /**
- * V4 MULTI-STYLE PALETTE SWITCHER (Tech & Identité Vectorielle)
- * Styles disponibles :
- *  - 'tech'      : Tech Présentation (Défaut V4 — Orange #FF6600 & Bleu Ciel #38BDF8)
- *  - 'amethyst'  : Original (Améthyste & Fuchsia)
- *  - 'synthwave' : Active Theory (Cyberpunk Synthwave)
- *  - 'ethiack'   : Ethiack (Terminal Matrix Hacker)
- *  - 'shabnam'   : Shabnam (Atelier Papier & Vermillon)
+ * DIRECTION ARTISTIQUE V5 — STYLE UNIQUE : TECH CANVAS
+ * La Version 5 adopte exclusivement l'identité visuelle Tech Canvas.
  */
-const VALID_PALETTES = ['tech', 'amethyst', 'synthwave', 'ethiack', 'shabnam', 'tech-canvas', 'obsidian-blaze'];
+const V5_PALETTE = 'tech-canvas';
 
-function setPalette(palette, updateUrl = true) {
-  const chosen = VALID_PALETTES.includes(palette) ? palette : 'tech';
-  document.body.setAttribute('data-palette', chosen);
-
-  document.querySelectorAll('.palette-btn[data-palette-btn]').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-palette-btn') === chosen);
-  });
-
-  try {
-    localStorage.setItem('v4_palette', chosen);
-  } catch (e) {
-    // Ignore storage errors
-  }
-
-  if (updateUrl && window.history && window.history.replaceState) {
-    const url = new URL(window.location.href);
-    url.searchParams.set('palette', chosen);
-    window.history.replaceState({}, '', url.toString());
-  }
+function setPalette(palette = V5_PALETTE) {
+  document.body.setAttribute('data-palette', V5_PALETTE);
 }
 
 /**
  * POINTEUR LASER VIRTUEL (Inspiré du template de présentation)
  * Raccourci clavier : Touche 'L' (hors champs de saisie)
  */
-let isLaserActive = false;
+let isLaserActive = true;
 
-function toggleLaser() {
+function toggleLaser(forceState) {
   const laserDot = document.getElementById('laser-dot');
   const laserBtn = document.getElementById('laser-btn');
   if (!laserDot) return;
 
-  isLaserActive = !isLaserActive;
+  if (typeof forceState === 'boolean') {
+    isLaserActive = forceState;
+  } else {
+    isLaserActive = !isLaserActive;
+  }
+
+  try {
+    localStorage.setItem('laser_active', isLaserActive ? '1' : '0');
+  } catch (e) {}
+
   if (isLaserActive) {
     laserDot.style.display = 'block';
     document.body.style.cursor = 'none';
@@ -557,16 +543,86 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(window.location.search);
-  const urlPalette = params.get('palette');
-  let savedPalette = null;
+  setPalette(V5_PALETTE);
+
+  // Initialisation du pointeur laser (activé par défaut)
+  let savedLaser = '1';
   try {
-    savedPalette = localStorage.getItem('v4_palette');
-  } catch (e) {
-    savedPalette = null;
+    const item = localStorage.getItem('laser_active');
+    if (item !== null) savedLaser = item;
+  } catch (e) {}
+  if (savedLaser !== '0') {
+    toggleLaser(true);
   }
-  const initialPalette = VALID_PALETTES.includes(urlPalette)
-    ? urlPalette
-    : (VALID_PALETTES.includes(savedPalette) ? savedPalette : 'tech');
-  setPalette(initialPalette, Boolean(urlPalette));
+
+  // Synchronisation automatique de l'état du bouton "Tout afficher"
+  const langEl = document.getElementById('languages');
+  const softEl = document.getElementById('softwares');
+  const toggleBtn = document.getElementById('btn-toggle-all-skills');
+  const toggleBtnText = document.getElementById('toggle-all-text');
+
+  function syncToggleAllState() {
+    if (!langEl || !softEl || !toggleBtn || !toggleBtnText) return;
+    setTimeout(() => {
+      const bothOpen = langEl.classList.contains('show') && softEl.classList.contains('show');
+      if (bothOpen) {
+        toggleBtnText.textContent = 'Masquer tout';
+        toggleBtn.classList.add('active-all');
+        const icon = toggleBtn.querySelector('i');
+        if (icon) icon.className = 'bi bi-chevron-up me-2';
+      } else {
+        toggleBtnText.textContent = 'Tout afficher (Tous)';
+        toggleBtn.classList.remove('active-all');
+        const icon = toggleBtn.querySelector('i');
+        if (icon) icon.className = 'bi bi-grid-3x3-gap-fill me-2';
+      }
+    }, 150);
+  }
+
+  if (langEl) {
+    langEl.addEventListener('shown.bs.collapse', syncToggleAllState);
+    langEl.addEventListener('hidden.bs.collapse', syncToggleAllState);
+  }
+  if (softEl) {
+    softEl.addEventListener('shown.bs.collapse', syncToggleAllState);
+    softEl.addEventListener('hidden.bs.collapse', syncToggleAllState);
+  }
 });
+
+/**
+ * AFFICHAGE MANUEL DE TOUTES LES COMPÉTENCES (TOUT AFFICHER / MASQUER)
+ */
+function toggleAllSkills() {
+  const langEl = document.getElementById('languages');
+  const softEl = document.getElementById('softwares');
+  const toggleBtn = document.getElementById('btn-toggle-all-skills');
+  const toggleBtnText = document.getElementById('toggle-all-text');
+  if (!langEl || !softEl) return;
+
+  const langOpen = langEl.classList.contains('show');
+  const softOpen = softEl.classList.contains('show');
+  const shouldOpen = !(langOpen && softOpen);
+
+  const langCollapse = bootstrap.Collapse.getOrCreateInstance(langEl, { toggle: false });
+  const softCollapse = bootstrap.Collapse.getOrCreateInstance(softEl, { toggle: false });
+
+  if (shouldOpen) {
+    langCollapse.show();
+    softCollapse.show();
+    if (toggleBtnText) toggleBtnText.textContent = 'Masquer tout';
+    if (toggleBtn) {
+      toggleBtn.classList.add('active-all');
+      const icon = toggleBtn.querySelector('i');
+      if (icon) icon.className = 'bi bi-chevron-up me-2';
+    }
+  } else {
+    langCollapse.hide();
+    softCollapse.hide();
+    if (toggleBtnText) toggleBtnText.textContent = 'Tout afficher (Tous)';
+    if (toggleBtn) {
+      toggleBtn.classList.remove('active-all');
+      const icon = toggleBtn.querySelector('i');
+      if (icon) icon.className = 'bi bi-grid-3x3-gap-fill me-2';
+    }
+  }
+}

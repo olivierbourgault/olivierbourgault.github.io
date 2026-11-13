@@ -8,8 +8,9 @@ Bienvenue sur le dépôt officiel de mon portfolio Web, accessible à l'adresse:
 
 Ce répertoire organise mon portfolio par versions afin de conserver l'historique complet de ses évolutions :
 
-- **[`index.html`](index.html)** *(Page d'accueil)* : **Portfolio officiel (Édition Tech V4)** avec identité vectorielle OB Tech, mode multi-styles interactif et accès direct au CV et aux réalisations.
-- **[`versions.html`](versions.html)** : **Navigateur de versions** permettant de consulter l'historique complet des versions du site (`V1`, `V2`, `V3`, `V4`), leurs nouveautés et les différents thèmes visuels.
+- **[`index.html`](index.html)** *(Page d'accueil)* : **Portfolio officiel (Édition Tech Canvas V5)** avec identité vectorielle OB Tech, direction artistique exclusive Tech Canvas (grille carbone 48px, cadre Figma orange, néo-brutalisme interactif) et accès direct au CV et aux réalisations.
+- **[`versions.html`](versions.html)** : **Navigateur de versions** permettant de consulter l'historique complet des versions du site (`V1`, `V2`, `V3`, `V4`, `V5`), leurs nouveautés et les différents thèmes visuels.
+- **[`V5/`](V5/index.html)** : Archive autonome de la Version 5.0 (Édition Tech Canvas & Néo-Brutalisme).
 - **[`V4/`](V4/index.html)** : Archive autonome de la Version 4.0 (Tech Edition & Identité Vectorielle).
 - **[`V3/`](V3/index.html)** : Version 3.0 Multi-Styles (5 directions artistiques commutables en temps réel et pointeur laser).
 - **[`V2/`](V2/index.html)** : Version 2.0 enrichie (AEC en Intelligence Artificielle, Élections Canada, Microsoft Learn).

@@ -269,6 +269,45 @@
       padding: 0.35rem 1rem;
     }
 
+    /* Modal CV */
+    #cvDownloadModal .modal-content {
+      background-color: var(--surface-color);
+      border: 2px solid var(--accent-color);
+      border-radius: 14px;
+      box-shadow: 6px 6px 0px var(--accent-color), 0 20px 40px rgba(0,0,0,0.4);
+      color: var(--default-color);
+    }
+    .cv-option-card {
+      background: color-mix(in srgb, var(--surface-color), #000 6%);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+    .cv-option-card:hover {
+      transform: translateY(-4px);
+    }
+    .cv-option-card.card-fr:hover {
+      border-color: #FF6600;
+      box-shadow: 4px 4px 0px #FF6600;
+    }
+    .cv-option-card.card-en:hover {
+      border-color: #0284C7;
+      box-shadow: 4px 4px 0px #0284C7;
+    }
+    .cv-lang-badge {
+      font-family: var(--coding-font);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+    }
+
     /* Version Cards */
     .version-card {
       background: var(--surface-color);
@@ -372,6 +411,20 @@
       display: inline-block;
     }
 
+    /* Laser Pointer */
+    #laser-dot {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, var(--accent-color) 20%, color-mix(in srgb, var(--accent-color), transparent 20%) 50%, transparent 80%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      box-shadow: 0 0 20px 6px color-mix(in srgb, var(--accent-color), transparent 25%);
+      display: none;
+      transform: translate(-50%, -50%);
+    }
+
     footer {
       margin-top: auto;
       padding: 2rem 0;
@@ -382,6 +435,8 @@
 </head>
 
 <body class="dark">
+  <!-- Pointeur Laser Virtuel -->
+  <div id="laser-dot" aria-hidden="true"></div>
   <!-- Ambient Background Blobs -->
   <div class="ambient-blobs" aria-hidden="true">
     <div class="blob blob-1"></div>
@@ -454,7 +509,7 @@
         <a href="logo_proposals.html" class="btn btn-outline-accent">
           <i class="bi bi-palette2 me-2"></i>Propositions de Logo &amp; Identité
         </a>
-        <a href="assets/CV_CL.pdf" class="btn btn-secondary-accent" download>
+        <a href="#cvDownloadModal" data-bs-toggle="modal" data-bs-target="#cvDownloadModal" class="btn btn-secondary-accent" role="button">
           <i class="bi bi-file-earmark-person me-2"></i>Télécharger mon CV (PDF)
         </a>
       </div>
@@ -474,11 +529,89 @@
       <p class="mb-1">© Copyright <strong>Olivier Bourgault</strong> (<a href="https://olivierbourgault.github.io"
           style="color: var(--secondary-accent); text-decoration: none;">olivierbourgault.github.io</a>) — Tous droits
         réservés</p>
-      <small>Astuce : consultez les versions archivées (V1, V2, V3) ou revenez à tout moment à l'<a href="index.html" style="color: var(--secondary-accent);">accueil principal</a>.</small>
+      <small>Astuce : consultez les versions archivées (V1, V2, V3, V4) ou revenez à tout moment à l'<a href="index.html" style="color: var(--secondary-accent);">accueil principal (V5)</a>.</small>
     </div>
   </footer>
 
+  <!-- Modal Téléchargement CV (FR / EN) -->
+  <div class="modal fade" id="cvDownloadModal" tabindex="-1" aria-labelledby="cvDownloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header d-flex align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <div class="p-2 rounded-3" style="background: rgba(255, 102, 0, 0.15); border: 1px solid #FF6600;">
+              <i class="bi bi-file-earmark-pdf-fill fs-4" style="color: #FF6600;"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="cvDownloadModalLabel">Télécharger mon CV / Resume</h5>
+              <small class="text-muted" style="font-family: var(--coding-font);">Format PDF &bull; Choisissez votre langue de consultation</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <!-- Option Français -->
+            <div class="col-md-6">
+              <div class="cv-option-card card-fr">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="cv-lang-badge" style="background: rgba(255, 102, 0, 0.15); color: #FF6600; border: 1px solid #FF6600;">FRANÇAIS</span>
+                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 Mo</span>
+                  </div>
+                  <h4 class="h5 fw-bold mb-2">Curriculum Vitae</h4>
+                  <p class="text-muted small mb-3">
+                    Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
+                  </p>
+                </div>
+                <div class="mt-3">
+                  <a href="assets/CV_CL-FR.pdf" class="btn btn-accent w-100 fw-bold py-2 mb-2" download="CV_Olivier_Bourgault_FR.pdf">
+                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Télécharger en français
+                  </a>
+                  <a href="assets/CV_CL-FR.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-accent w-100 btn-sm">
+                    <i class="bi bi-eye me-1"></i>Ouvrir l'aperçu PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Option Anglais -->
+            <div class="col-md-6">
+              <div class="cv-option-card card-en">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="cv-lang-badge" style="background: rgba(2, 132, 199, 0.15); color: #0284C7; border: 1px solid #0284C7;">ENGLISH</span>
+                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 MB</span>
+                  </div>
+                  <h4 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h4>
+                  <p class="text-muted small mb-3">
+                    Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
+                  </p>
+                </div>
+                <div class="mt-3">
+                  <a href="assets/CV_CL-EN.pdf" class="btn btn-secondary-accent w-100 fw-bold py-2 mb-2" download="Resume_Olivier_Bourgault_EN.pdf">
+                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download in English
+                  </a>
+                  <a href="assets/CV_CL-EN.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-accent w-100 btn-sm">
+                    <i class="bi bi-eye me-1"></i>Open PDF preview
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between align-items-center">
+          <small class="text-muted" style="font-family: var(--coding-font); font-size: 0.78rem;">
+            <i class="bi bi-shield-check text-success me-1"></i>Document officiel certifié &bull; Olivier Bourgault
+          </small>
+          <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     /**
      * CONFIGURATION DES VERSIONS DU PORTFOLIO
@@ -487,12 +620,32 @@
      */
     const VERSIONS = [
       {
-        id: "V4",
-        title: "Version 4.0 — Édition Tech & Identité Vectorielle (Actuelle)",
+        id: "V5",
+        title: "Version 5.0 — Édition Tech Canvas & Néo-Brutalisme (Actuelle)",
         path: "index.html",
         date: "2026",
-        status: "Accueil Actuel",
+        status: "Accueil Actuel (Recommandée)",
         featured: true,
+        description: "Direction artistique exclusive « Tech Canvas », fusionnant la rigueur technique Orange #FF6600 et Carbone #121316, le studio Figma & papier de Shabnam Raghavan, et le néo-brutalisme interactif d'Aahil Khan.",
+        highlights: [
+          "Direction artistique exclusive Tech Canvas (Fond Carbone #121316, traits néo-brutalistes et ombres dures orange #FF6600)",
+          "Section Hero style Canvas de découpe avec cadre de sélection Figma vectoriel « TECH · CANVAS · OS » et poignées d'angle",
+          "Surlignage dactylo dynamique au marqueur contrasté sur les compétences clés",
+          "Cartes projets et piliers technologiques ornées d'un ruban adhésif d'atelier translucide ambre/orange",
+          "Typographies Space Grotesk, Manrope et JetBrains Mono intégrées",
+          "Interface épurée et dédiée sans barre flottante de sélecteur de style"
+        ],
+        palettes: [
+          { name: "Tech Canvas (Style exclusif V5)", url: "index.html", color: "linear-gradient(135deg,#FF6600,#121316)" }
+        ]
+      },
+      {
+        id: "V4",
+        title: "Version 4.0 — Édition Tech & Identité Vectorielle",
+        path: "V4/index.html",
+        date: "2026",
+        status: "Stable",
+        featured: false,
         description: "Adoption officielle du nouveau logo principal « OB Tech » (hexagone orange et circuits bleu ciel), déploiement des logos thématiques Terminal et Nœud Neuronal, et palette Tech activée par défaut.",
         highlights: [
           "Nouveau logo principal officiel OB Tech vectoriel (Hexagone orange #FF6600 & circuits #38BDF8)",
@@ -502,13 +655,13 @@
           "Favicon vectoriel SVG et loader dynamique intégrant le nouveau monogramme OB"
         ],
         palettes: [
-          { name: "Tech Présentation (Défaut)", url: "index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
-          { name: "Tech Canvas (Hybride)", url: "index.html?palette=tech-canvas", color: "linear-gradient(135deg,#FF6600,#121316)" },
-          { name: "Obsidian Blaze (Fusion)", url: "index.html?palette=obsidian-blaze", color: "linear-gradient(135deg,#FF5A1F,#FFBC42)" },
-          { name: "Original Améthyste", url: "index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
-          { name: "Active Theory", url: "index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
-          { name: "Ethiack", url: "index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
-          { name: "Shabnam", url: "index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
+          { name: "Tech Présentation (Défaut V4)", url: "V4/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
+          { name: "Tech Canvas", url: "V4/index.html?palette=tech-canvas", color: "linear-gradient(135deg,#FF6600,#121316)" },
+          { name: "Obsidian Blaze", url: "V4/index.html?palette=obsidian-blaze", color: "linear-gradient(135deg,#FF5A1F,#FFBC42)" },
+          { name: "Original Améthyste", url: "V4/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
+          { name: "Active Theory", url: "V4/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
+          { name: "Ethiack", url: "V4/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
+          { name: "Shabnam", url: "V4/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
         ]
       },
       {
@@ -579,7 +732,7 @@
       const palettesHtml = v.palettes
         ? `<div class="palette-quick-links">
             ${v.palettes.map(p => `
-              <a href="${p.url}" class="palette-chip" title="Ouvrir V3 avec le style ${p.name}">
+              <a href="${p.url}" class="palette-chip" title="Ouvrir avec le style ${p.name}">
                 <span class="dot" style="background: ${p.color};"></span>
                 <span>${p.name}</span>
               </a>
@@ -651,7 +804,7 @@
       const knownIds = new Set(VERSIONS.map(v => v.id.toUpperCase()));
       const discovered = [];
 
-      for (let num = 4; num <= 10; num++) {
+      for (let num = 6; num <= 10; num++) {
         const id = `V${num}`;
         if (knownIds.has(id)) continue;
 
@@ -708,7 +861,66 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", renderPortal);
+    /**
+     * POINTEUR LASER VIRTUEL
+     * Raccourci clavier : Touche 'L'
+     */
+    let isLaserActive = true;
+
+    function toggleLaser(forceState) {
+      const laserDot = document.getElementById('laser-dot');
+      if (!laserDot) return;
+
+      if (typeof forceState === 'boolean') {
+        isLaserActive = forceState;
+      } else {
+        isLaserActive = !isLaserActive;
+      }
+
+      try {
+        localStorage.setItem('laser_active', isLaserActive ? '1' : '0');
+      } catch (e) {}
+
+      if (isLaserActive) {
+        laserDot.style.display = 'block';
+        document.body.style.cursor = 'none';
+      } else {
+        laserDot.style.display = 'none';
+        document.body.style.cursor = 'default';
+      }
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isLaserActive) return;
+      const laserDot = document.getElementById('laser-dot');
+      if (laserDot) {
+        laserDot.style.left = `${e.clientX}px`;
+        laserDot.style.top = `${e.clientY}px`;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (e.target && e.target.isContentEditable)) {
+        return;
+      }
+      if (e.key === 'l' || e.key === 'L') {
+        toggleLaser();
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPortal();
+
+      let savedLaser = '1';
+      try {
+        const item = localStorage.getItem('laser_active');
+        if (item !== null) savedLaser = item;
+      } catch (e) {}
+      if (savedLaser !== '0') {
+        toggleLaser(true);
+      }
+    });
   </script>
 </body>
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Olivier Bourgault | Développeur Full-Stack, IA &amp; Technicien TI</title>
+  <title>Olivier Bourgault | Développeur Full-Stack, IA &amp; Technicien TI — V5 Tech Canvas</title>
   <meta name="description"
     content="Portfolio officiel d'Olivier Bourgault, diplômé en technique de l'informatique et étudiant en intelligence artificielle. Spécialisé en développement d'applications, automatisation et accessibilité Web.">
   <meta name="keywords"
@@ -35,7 +35,7 @@
   ======================================================== -->
 </head>
 
-<body class="index-page dark" data-bs-theme="dark" data-palette="tech">
+<body class="index-page dark" data-bs-theme="dark" data-palette="tech-canvas">
   <!-- Pointeur Laser Virtuel (Touche L ou bouton) -->
   <div id="laser-dot" aria-hidden="true"></div>
   <!-- Ambient Background Blobs -->
@@ -87,7 +87,7 @@
           </svg>
           <div class="d-flex flex-column">
             <span class="fs-4 text-decoration-none text-reset align-items-center fw-semibold lh-1">Olivier Bourgault</span>
-            <span style="font-size: 0.68rem; font-family: var(--coding-font); color: #FF6600; letter-spacing: 0.08em; text-transform: uppercase;">OB Tech &bull; V4</span>
+            <span style="font-size: 0.68rem; font-family: var(--coding-font); color: #FF6600; letter-spacing: 0.08em; text-transform: uppercase;">OB Tech &bull; V5</span>
           </div>
         </a>
         <!-- #endregion -->
@@ -131,22 +131,12 @@
         <div class="row align-items-center content">
           <!-- #region Presentation -->
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <!-- #region Tech Badge -->
-            <div class="mb-3" data-aos="fade-down" data-aos-delay="150">
-              <span class="tech-identity-badge">
-                <svg viewBox="0 0 100 100" width="16" height="16" style="vertical-align: middle;">
-                  <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="9" stroke-linejoin="round"/>
-                  <circle cx="50" cy="50" r="10" fill="#38BDF8"/>
-                </svg>
-                Édition Tech V4 &bull; Identité Vectorielle
-              </span>
-            </div>
-            <!-- #endregion -->
-
             <!-- #region Title -->
             <h2 aria-label="Je suis un développeur">
-              Je suis un <br>
-              <span class="typewriter nocaret"></span>
+              <span class="hero-layer-tag"><i class="bi bi-terminal me-1"></i><span class="typewriter nocaret"></span></span>
+              Olivier bourgault
+              <!-- Je suis un <br>
+              <span class="hero-title-highlight">Développeur Full-Stack &amp; IA</span> -->
             </h2>
             <!-- #endregion -->
 
@@ -161,7 +151,7 @@
             <!-- #region CTA Buttons -->
             <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
               <div class="mx-auto w-auto">
-                <a href="assets/CV_CL.pdf" class="btn btn-outline" title="Télécharger mon CV (en PDF)" download><i
+                <a href="#cvDownloadModal" data-bs-toggle="modal" data-bs-target="#cvDownloadModal" class="btn btn-outline" title="Télécharger mon CV (PDF — Français ou Anglais)" aria-label="Télécharger mon CV (Français ou Anglais)"><i
                     class="bi bi-cloud-download"></i></a>
               </div>
               <div class="d-flex justify-content-around gap-3">
@@ -229,7 +219,7 @@
       <!-- #endregion -->
 
       <!-- #region Tech Pillars Section with 3 Tech Logos -->
-      <section id="expertise" class="section py-5" style="background: color-mix(in srgb, var(--surface-color), transparent 50%); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);">
+      <section id="expertise" class="section py-5">
         <div class="container" data-aos="fade-up">
           <div class="section-title text-center mb-5">
             <span class="tech-identity-badge mb-2">Architectures &amp; Expertises</span>
@@ -457,152 +447,128 @@
       <!-- #region Skills Section -->
       <section id="skills" class="skills section" data-aos="fade-up" data-aos-delay="100">
         <div class="container">
-          <!-- #region Skills cards -->
-          <div class="row g-4 skills-animation">
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>HTML / CSS</h3>
-                  <img src="assets/img/portfolio/html_icon.png" width="15" height="15" alt="HTML & CSS">
-                </div>
-                <span class="text-end d-block">95%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
 
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>JavaScript / TS</h3>
-                  <i class="bi bi-javascript"></i>
-                </div>
-                <span class="text-end d-block">85%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+          <!-- #region Infinite Skills Marquee (Shabnam Style) -->
+          <div class="tech-marquee-wrapper" data-aos="fade-up" data-aos-delay="150" aria-label="Compétences et technologies en continu">
+            <div class="tech-marquee-ruler tech-marquee-ruler-top" aria-hidden="true"></div>
+            <div class="tech-marquee-inner">
+              <div class="tech-marquee-label">
+                <span class="pulse-dot"></span>
+                <span>STACK TECH EN CONTINU</span>
+              </div>
+              <div class="tech-marquee-viewport" tabindex="0" role="region" aria-label="Défilement continu des compétences">
+                <div class="tech-marquee-track">
+                  <!-- Group 1 -->
+                  <div class="tech-marquee-group">
+                    <span class="tech-marquee-item"><i class="bi bi-cpu"></i> Python &amp; IA</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-window-stack"></i> C# / .NET MAUI</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-code-slash"></i> Angular</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-filetype-tsx"></i> TypeScript</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-code"></i> Vue.js</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-lightning-charge"></i> React</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-box-seam"></i> Docker &amp; K8s</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-terminal-fill"></i> PowerShell</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-github"></i> Git &amp; GitHub</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-cloud-check"></i> Azure DevOps</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-robot"></i> Antigravity IA</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-hdd-network"></i> Symfony &amp; PHP</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-database"></i> SQL &amp; MongoDB</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-filetype-html"></i> HTML5 / CSS3</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-universal-access"></i> WCAG &amp; A11Y</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-phone"></i> Kotlin &amp; Android</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-app-indicator"></i> Flutter &amp; Dart</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-send"></i> Postman &amp; REST</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-server"></i> Node.js &amp; Vite</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-braces"></i> VS Code &amp; Visual Studio</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-diagram-3"></i> Node-RED &amp; IoT</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-wordpress"></i> WordPress &amp; cPanel</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-pc-display"></i> Windows &amp; Linux</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                  </div>
+                  <!-- Group 2 (duplicate for seamless infinite loop) -->
+                  <div class="tech-marquee-group" aria-hidden="true">
+                    <span class="tech-marquee-item"><i class="bi bi-cpu"></i> Python &amp; IA</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-window-stack"></i> C# / .NET MAUI</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-code-slash"></i> Angular</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-filetype-tsx"></i> TypeScript</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-code"></i> Vue.js</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-lightning-charge"></i> React</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-box-seam"></i> Docker &amp; K8s</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-terminal-fill"></i> PowerShell</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-github"></i> Git &amp; GitHub</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-cloud-check"></i> Azure DevOps</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-robot"></i> Antigravity IA</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-hdd-network"></i> Symfony &amp; PHP</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-database"></i> SQL &amp; MongoDB</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-filetype-html"></i> HTML5 / CSS3</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-universal-access"></i> WCAG &amp; A11Y</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-phone"></i> Kotlin &amp; Android</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-app-indicator"></i> Flutter &amp; Dart</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-send"></i> Postman &amp; REST</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-server"></i> Node.js &amp; Vite</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-braces"></i> VS Code &amp; Visual Studio</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-diagram-3"></i> Node-RED &amp; IoT</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-wordpress"></i> WordPress &amp; cPanel</span>
+                    <span class="tech-marquee-sep">&bull;</span>
+                    <span class="tech-marquee-item"><i class="bi bi-pc-display"></i> Windows &amp; Linux</span>
+                    <span class="tech-marquee-sep">&bull;</span>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>Angular / Vue / React</h3>
-                  <i class="bi bi-code-slash"></i>
-                </div>
-                <span class="text-end d-block">80%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>C# / .NET / MAUI</h3>
-                  <i class="bi bi-window-stack"></i>
-                </div>
-                <span class="text-end d-block">80%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>PHP / Symfony</h3>
-                  <i class="bi bi-hdd-network"></i>
-                </div>
-                <span class="text-end d-block">80%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>Python &amp; IA</h3>
-                  <i class="bi bi-cpu"></i>
-                </div>
-                <span class="text-end d-block">75%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>SQL &amp; NoSQL</h3>
-                  <i class="bi bi-database"></i>
-                </div>
-                <span class="text-end d-block">80%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
-
-            <!-- #region Skill -->
-            <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-              <div class="skill-box">
-                <div class="d-flex justify-content-between">
-                  <h3>PowerShell &amp; Git</h3>
-                  <i class="bi bi-terminal"></i>
-                </div>
-                <span class="text-end d-block">85%</span>
-                <div class="progress">
-                  <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- #endregion -->
+            <div class="tech-marquee-ruler tech-marquee-ruler-bottom" aria-hidden="true"></div>
           </div>
           <!-- #endregion -->
 
-          <!-- #region Dropdowns -->
-          <div id="skills-collapsable" class="mt-5 cta-buttons">
-            <div class="d-flex justify-content-center gap-5">
-              <!-- #region Language dropdown button -->
-              <button class="btn btn-primary text-nowrap" type="button" data-bs-toggle="collapse"
-                data-bs-target="#languages" aria-expanded="false" aria-controls="languages">
-                Langages &amp; Frameworks
-              </button>
-              <!-- #endregion -->
-
-              <!-- #region Software dropdown button -->
-              <button class="btn btn-secondary-accent text-nowrap" type="button" data-bs-toggle="collapse"
-                data-bs-target="#softwares" aria-expanded="false" aria-controls="softwares">
-                Logiciels &amp; Environnements
+          <!-- #region Dropdowns & Manual Display Buttons -->
+          <div id="skills-collapsable" class="mt-4 cta-buttons text-center">
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+              <!-- #region Button Show All -->
+              <button id="btn-toggle-all-skills" class="btn text-nowrap" type="button" onclick="toggleAllSkills()" aria-label="Afficher ou masquer toutes les compétences">
+                <i class="bi bi-grid-3x3-gap-fill me-2"></i><span id="toggle-all-text">Tout afficher (Tous)</span>
               </button>
               <!-- #endregion -->
             </div>
@@ -732,7 +698,7 @@
 
           <!-- #region Summary -->
           <p>Voici un aperçu complet de mon parcours académique et professionnel. Vous pouvez également télécharger la
-            version complète de mon <a href="assets/CV_CL.pdf" title="Télécharger mon CV (en PDF)" download>curriculum
+            version complète de mon <a href="#cvDownloadModal" data-bs-toggle="modal" data-bs-target="#cvDownloadModal" title="Télécharger mon CV (Français ou Anglais)" role="button" style="color: var(--secondary-accent); font-weight: 600; text-decoration: underline;">curriculum
               vitae en PDF</a>.</p>
           <!-- #endregion -->
         </div>
@@ -1274,16 +1240,6 @@
             </form>
           </div>
         </div>
-
-        <!-- #region LinkedIn Profile -->
-        <div class="d-flex justify-content-center">
-          <div class="badge-base LI-profile-badge mt-5" data-locale="fr_FR" data-size="large" data-theme="light"
-            data-type="HORIZONTAL" data-vanity="olivier-bourgault-5b950428a" data-version="v1"><a
-              class="badge-base__link LI-simple-link"
-              href="https://ca.linkedin.com/in/olivier-bourgault-5b950428a?trk=profile-badge"></a>
-          </div>
-        </div>
-        <!-- #endregion -->
         <!-- #endregion -->
       </section>
       <!-- #endregion -->
@@ -1297,7 +1253,7 @@
           <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
           <circle cx="50" cy="50" r="4" fill="#FF6600"/>
         </svg>
-        <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; VERSION 4.0</span>
+        <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; VERSION 5.0</span>
       </div>
       <!-- #endregion -->
 
@@ -1328,45 +1284,83 @@
     </footer>
   </div>
 
-  <!-- Sélecteur de Styles Visuels V3 & Navigateur de Versions -->
-  <div class="palette-switcher-bar" role="region" aria-label="Sélecteur de style visuel et versions">
-    <span class="palette-label d-none d-md-inline"><i class="bi bi-palette2 me-1"></i>Style V3</span>
-    <button type="button" class="palette-btn" data-palette-btn="amethyst" onclick="setPalette('amethyst')" title="Original — Améthyste &amp; Fuchsia">
-      <span class="swatch" style="background: linear-gradient(135deg, #E11484, #A855F7);"></span>
-      <span>Original</span>
-    </button>
-    <button type="button" class="palette-btn" data-palette-btn="synthwave" onclick="setPalette('synthwave')" title="Inspiré d'Active Theory — Cyberpunk Synthwave">
-      <span class="swatch" style="background: linear-gradient(135deg, #00F0FF, #C026D3);"></span>
-      <span>Active Theory</span>
-    </button>
-    <button type="button" class="palette-btn" data-palette-btn="ethiack" onclick="setPalette('ethiack')" title="Inspiré d'Ethiack — Terminal Matrix Hacker">
-      <span class="swatch" style="background: linear-gradient(135deg, #10B981, #059669);"></span>
-      <span>Ethiack</span>
-    </button>
-    <button type="button" class="palette-btn active" data-palette-btn="tech" onclick="setPalette('tech')" title="Inspiré du Template — Tech Présentation">
-      <span class="swatch" style="background: linear-gradient(135deg, #FF6600, #38BDF8);"></span>
-      <span>Tech Présentation</span>
-    </button>
-    <button type="button" class="palette-btn" data-palette-btn="shabnam" onclick="setPalette('shabnam')" title="Inspiré de Shabnam Raghavan — Atelier Papier &amp; Vermillon">
-      <span class="swatch" style="background: linear-gradient(135deg, #C02D0C, #F2D987);"></span>
-      <span>Shabnam</span>
-    </button>
-    <button type="button" class="palette-btn" data-palette-btn="tech-canvas" onclick="setPalette('tech-canvas')" title="Hybride : Tech Orange + Shabnam + Aahil Khan (Néo-Brutalisme Canvas)">
-      <span class="swatch" style="background: linear-gradient(135deg, #FF6600, #121316); border: 1px solid #FF6600;"></span>
-      <span>Tech Canvas</span>
-    </button>
-    <button type="button" class="palette-btn" data-palette-btn="obsidian-blaze" onclick="setPalette('obsidian-blaze')" title="Fusion : Keynote + Shabnam + Aahil + Obsidian Blaze (#0D0E12 / #FF5A1F / #FFBC42)">
-      <span class="swatch" style="background: linear-gradient(135deg, #FF5A1F, #FFBC42); border: 1px solid #0D0E12;"></span>
-      <span>Obsidian Blaze</span>
-    </button>
-    <button type="button" id="laser-btn" class="palette-btn" onclick="toggleLaser()" title="Pointeur Laser (Raccourci : touche L)">
-      <span class="swatch" style="background: #ef4444; box-shadow: 0 0 8px #ef4444;"></span>
-      <span class="d-none d-sm-inline">Laser (L)</span>
-    </button>
-    <a href="versions.html" class="palette-btn versions-link-btn" title="Ouvrir le navigateur de versions (V1, V2, V3, V4)">
-      <span class="swatch" style="background: linear-gradient(135deg, #38BDF8, #9333EA);"></span>
-      <span><i class="bi bi-clock-history me-1"></i>Versions</span>
-    </a>
+
+
+  <!-- Modal Téléchargement CV (FR / EN) -->
+  <div class="modal fade" id="cvDownloadModal" tabindex="-1" aria-labelledby="cvDownloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header d-flex align-items-center">
+          <div class="d-flex align-items-center gap-3">
+            <div class="p-2 rounded-3" style="background: rgba(255, 102, 0, 0.15); border: 1px solid #FF6600;">
+              <i class="bi bi-file-earmark-pdf-fill fs-4" style="color: #FF6600;"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold mb-0" id="cvDownloadModalLabel">Télécharger mon CV / Resume</h5>
+              <small class="text-muted" style="font-family: var(--coding-font);">Format PDF &bull; Choisissez votre langue de consultation</small>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4">
+            <!-- Option Français -->
+            <div class="col-md-6">
+              <div class="cv-option-card card-fr">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="cv-lang-badge" style="background: rgba(255, 102, 0, 0.15); color: #FF6600; border: 1px solid #FF6600;">FRANÇAIS</span>
+                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 Mo</span>
+                  </div>
+                  <h4 class="h5 fw-bold mb-2">Curriculum Vitae</h4>
+                  <p class="text-muted small mb-3">
+                    Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
+                  </p>
+                </div>
+                <div class="mt-3">
+                  <a href="assets/CV_CL-FR.pdf" class="btn btn-accent w-100 fw-bold py-2 mb-2" download="CV_Olivier_Bourgault_FR.pdf">
+                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Télécharger en français
+                  </a>
+                  <a href="assets/CV_CL-FR.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary w-100 btn-sm">
+                    <i class="bi bi-eye me-1"></i>Ouvrir l'aperçu PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Option Anglais -->
+            <div class="col-md-6">
+              <div class="cv-option-card card-en">
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="cv-lang-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid #38BDF8;">ENGLISH</span>
+                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 MB</span>
+                  </div>
+                  <h4 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h4>
+                  <p class="text-muted small mb-3">
+                    Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
+                  </p>
+                </div>
+                <div class="mt-3">
+                  <a href="assets/CV_CL-EN.pdf" class="btn btn-secondary-accent w-100 fw-bold py-2 mb-2" download="Resume_Olivier_Bourgault_EN.pdf">
+                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download in English
+                  </a>
+                  <a href="assets/CV_CL-EN.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary w-100 btn-sm">
+                    <i class="bi bi-eye me-1"></i>Open PDF preview
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between align-items-center">
+          <small class="text-muted" style="font-family: var(--coding-font); font-size: 0.78rem;">
+            <i class="bi bi-shield-check text-success me-1"></i>Document officiel certifié &bull; Olivier Bourgault
+          </small>
+          <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Scroll Top -->
