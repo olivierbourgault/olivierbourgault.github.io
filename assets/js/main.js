@@ -13,6 +13,21 @@
 /* -------------------------------------------------------------------------- */
 const TODAY = new Date();
 const START = new Date("2021-01-25");
+const IMAGE_GENERIQUE = "assets/img/logo/dark.png";
+const GITHUB_REPO_OWNER = "RinoShip77";
+const GITHUB_REPO_NAME = "MesProjets";
+const GITHUB_BRANCH = "main";
+const PORTFOLIO_CACHE_KEY = "ob_portfolio_projects_cache";
+
+const LOCAL_PROJECT_IMAGES = {
+  electrolib: "assets/img/portfolio/electrolib.png",
+  comparetools: "assets/img/portfolio/compareTools.png",
+  hubai: "assets/img/portfolio/hubAI.png",
+  kaomia: "assets/img/portfolio/kaomia.png",
+  evomeal: "assets/img/portfolio/evomeal.png",
+  shopro: "assets/img/portfolio/shopro.png",
+  phoneword: "assets/img/portfolio/phoneword.png"
+};
 
 /* -------------------------------------------------------------------------- */
 /* INITIALIZATION                               */
@@ -108,16 +123,8 @@ if (scrollTopBtn) {
  * Main Logic Driver
  */
 function main() {
-  // Only fetch GitHub data if running on the live site (HTTPS)
-  if (location.href.includes("https")) {
-    document.getElementById("projectsCount").innerHTML = 0;
-    
-    // 1. Fetch general repo data (counts projects)
-    getData('https://api.github.com/repos/rinoship77/mesprojets');
-
-    // 2. Fetch specific personal projects from "Personnel" folder
-    fetchPersonalProjects();
-  }
+  // Chargement dynamique des projets depuis GitHub (Git Trees API + cache sessionStorage)
+  loadGitHubPortfolio();
 
   aosInit();
   positionSkills();
@@ -137,10 +144,11 @@ document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
   let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
   let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
   let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
+  let container = isotopeItem.querySelector('.isotope-container');
   let initIsotope;
 
-  imagesLoaded(isotopeItem.querySelector('.isotope-container'), function () {
-    initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
+  imagesLoaded(container, function () {
+    initIsotope = Isotope.data(container) || new Isotope(container, {
       itemSelector: '.isotope-item',
       layoutMode: layout,
       filter: filter,
@@ -150,11 +158,16 @@ document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
 
   isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filters) {
     filters.addEventListener('click', function () {
-      isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
+      const activeEl = isotopeItem.querySelector('.isotope-filters .filter-active');
+      if (activeEl) activeEl.classList.remove('filter-active');
       this.classList.add('filter-active');
-      initIsotope.arrange({
-        filter: this.getAttribute('data-filter')
-      });
+      const isoInstance = initIsotope || Isotope.data(container);
+      if (isoInstance) {
+        isoInstance.arrange({
+          filter: this.getAttribute('data-filter')
+        });
+        isoInstance.layout();
+      }
       if (typeof aosInit === 'function') {
         aosInit();
       }
@@ -199,19 +212,45 @@ document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
 const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 function mobileNavToogle() {
   document.body.classList.toggle('mobile-nav-active');
-  mobileNavToggleBtn.classList.toggle('bi-list');
-  mobileNavToggleBtn.classList.toggle('bi-x');
-}
-if (mobileNavToggleBtn) {
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.classList.toggle('bi-list');
+    mobileNavToggleBtn.classList.toggle('bi-x');
+  }
 }
 
-document.querySelectorAll('#navmenu a').forEach(navmenu => {
-  navmenu.addEventListener('click', () => {
-    if (document.querySelector('.mobile-nav-active')) {
+if (mobileNavToggleBtn) {
+  mobileNavToggleBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    mobileNavToogle();
+  });
+}
+
+// Fermeture au clic sur un lien du menu
+document.querySelectorAll('#navmenu a').forEach(navmenulink => {
+  navmenulink.addEventListener('click', () => {
+    if (document.body.classList.contains('mobile-nav-active')) {
       mobileNavToogle();
     }
   });
+});
+
+// Fermeture au clic sur l'arrière-plan du menu mobile
+const navmenuElement = document.querySelector('#navmenu');
+if (navmenuElement) {
+  navmenuElement.addEventListener('click', function (e) {
+    if (document.body.classList.contains('mobile-nav-active')) {
+      if (e.target === navmenuElement) {
+        mobileNavToogle();
+      }
+    }
+  });
+}
+
+// Fermeture avec la touche Échap
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.body.classList.contains('mobile-nav-active')) {
+    mobileNavToogle();
+  }
 });
 
 /**
@@ -304,157 +343,493 @@ function adjustSkills(categoryId) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* DATA & API FUNCTIONS                            */
+/* DATA & API FUNCTIONS                                                       */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Fetch Data from GitHub API recursively (Project Counters)
+ * Encode chaque segment d'un chemin GitHub pour supporter espaces, accents et caractères spéciaux.
+ * @param {string} path
+ * @returns {string}
  */
-async function getData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const data = await response.json();
-
-    if (!url.includes("?")) {
-      const subPath = url.substring(url.indexOf("github.com/") + 11);
-      displayData(subPath, data);
-    } else {
-      countProjects(data);
-    }
-  } catch (error) {
-    console.error('There was an error fetching GitHub data:', error);
-  }
+function encodeGitHubPath(path) {
+  return path
+    .split('/')
+    .map(segment => encodeURIComponent(segment))
+    .join('/');
 }
 
-function displayData(url, data) {
-  if (url.includes("rinoship77")) {
-    getData(data.contents_url.slice(0, (data.contents_url.lastIndexOf("/") + 1)));
-  } else {
-    for (let index = 0; index < data.length; index++) {
-       getData(data[index].url);
+/**
+ * Nettoie le contenu brut d'un fichier README.md :
+ * - Ignore les lignes de titres (#), séparateurs, tableaux et métadonnées administratives
+ * - Extrait uniquement le premier paragraphe descriptif
+ * - Supprime les balises Markdown (**, *, `, [texte](lien), images) et HTML inline
+ * @param {string} rawMarkdown
+ * @returns {string}
+ */
+function cleanReadmeDescription(rawMarkdown) {
+  if (!rawMarkdown || typeof rawMarkdown !== 'string') return '';
+
+  // Supprimer les blocs de code clôturés (```...```)
+  const withoutCodeBlocks = rawMarkdown.replace(/```[\s\S]*?```/g, '');
+  const lines = withoutCodeBlocks.split(/\r?\n/);
+
+  const paragraphLines = [];
+  let collecting = false;
+
+  for (const rawLine of lines) {
+    const trimmed = rawLine.trim();
+
+    if (!trimmed) {
+      if (collecting) break;
+      continue;
     }
+
+    // Ignorer titres (#), séparateurs (--- / ***), tableaux (|...) et lignes purement HTML/images
+    if (
+      /^\s*#+/.test(trimmed) ||
+      /^\s*[-*_]{3,}\s*$/.test(trimmed) ||
+      /^\s*\|/.test(trimmed) ||
+      /^!\[[^\]]*\]\([^)]*\)$/.test(trimmed) ||
+      /^(Prénom|Nom|Matricule|Équipier|Name|Author|Last edit)\s*:/i.test(trimmed) ||
+      /^(SHORT DESCRIPTION|LONG DESCRIPTION|NOTES)\s*:/i.test(trimmed)
+    ) {
+      if (collecting) break;
+      continue;
+    }
+
+    collecting = true;
+    paragraphLines.push(trimmed);
   }
+
+  if (paragraphLines.length === 0) return '';
+
+  let cleaned = paragraphLines.join(' ');
+  // Retirer les images Markdown ![alt](url)
+  cleaned = cleaned.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
+  // Remplacer les liens Markdown [texte](lien) par texte
+  cleaned = cleaned.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  // Supprimer les balises HTML inline (<br>, <a>, <font>, etc.)
+  cleaned = cleaned.replace(/<[^>]+>/g, ' ');
+  // Retirer les balises de formatage Markdown (**, *, `) et _ délimitant des mots
+  cleaned = cleaned.replace(/(\*{1,3}|`+)/g, '');
+  cleaned = cleaned.replace(/(^|[^\w/])_{1,3}|_{1,3}([^\w/]|$)/g, '$1$2');
+  // Retirer les préfixes de citation ou de liste (> 1., 1., -, *)
+  cleaned = cleaned.replace(/^>?\s*(?:\d+(?:\.\d+)*[.)]\s*|[-*•]\s*)/, '');
+  // Normaliser les espaces
+  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+
+  return cleaned;
 }
 
-function countProjects(projects) {
-  const projectCounter = document.getElementById("projectsCount");
-  if (!Array.isArray(projects)) return;
-  projects.forEach(project => {
-    if (project.type === "dir") {
-      projectCounter.innerHTML = parseInt(projectCounter.innerHTML) + 1;
+/**
+ * Extrait la description d'un projet à partir du README.md du dossier parent lorsque
+ * le projet n'a pas son propre README.md exploitable.
+ * @param {string} parentMarkdown
+ * @param {string} projectName
+ * @returns {string}
+ */
+function extractProjectFromParentReadme(parentMarkdown, projectName) {
+  if (!parentMarkdown || !projectName) return '';
+
+  const escapedName = projectName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Cas 1 : Liste avec lien vers le dossier du projet (ex: >1. [***HubAI***](HubAI) est...)
+  const linkLineRegex = new RegExp(`^.*\\]\\(${escapedName}\\/?\\).*$`, 'im');
+  const linkMatch = parentMarkdown.match(linkLineRegex);
+  if (linkMatch) {
+    const cleaned = cleanReadmeDescription(linkMatch[0]);
+    if (cleaned) return cleaned;
+  }
+
+  // Cas 2 : Section numérotée (ex: "1. PowerFitness\n\nPowerFitness est...")
+  const lines = parentMarkdown.split(/\r?\n/);
+  const headingRegex = new RegExp(`^\\s*(?:>\\s*)?(?:\\d+(?:\\.\\d+)*[.)]|#+)\\s*(?:\\[?[*_]*${escapedName}[*_]*\\]?)\\s*$`, 'i');
+  for (let i = 0; i < lines.length; i++) {
+    if (headingRegex.test(lines[i].trim())) {
+      const rest = lines.slice(i + 1).join('\n');
+      const cleaned = cleanReadmeDescription(rest);
+      if (cleaned) return cleaned;
+    }
+  }
+
+  return '';
+}
+
+/**
+ * Recherche une image représentative d'un projet dans l'arborescence GitHub.
+ * @param {Array} tree
+ * @param {string} projectPath
+ * @param {string} projectName
+ * @returns {string}
+ */
+function findProjectImageInTree(tree, projectPath, projectName) {
+  const prefix = `${projectPath}/`;
+  const imageRegex = /\.(png|jpe?g|webp|gif|ico)$/i;
+  const ignoredDirRegex = /\/(node_modules|vendor|obj|bin|\.gradle|build|dist|packages|Assets\.xcassets|res\/mipmap|res\/drawable|flutter_assets)\//i;
+  const ignoredFileRegex = /(icon-\d+|app_icon|launch_background)/i;
+
+  const candidates = tree.filter(item => {
+    if (item.type !== 'blob' || !item.path.startsWith(prefix)) return false;
+    if (!imageRegex.test(item.path)) return false;
+    const relativePath = item.path.slice(prefix.length);
+    if (ignoredDirRegex.test('/' + relativePath)) return false;
+    if (ignoredFileRegex.test(relativePath)) return false;
+    return true;
+  });
+
+  if (candidates.length > 0) {
+    candidates.sort((a, b) => {
+      const relA = a.path.slice(prefix.length);
+      const relB = b.path.slice(prefix.length);
+      const fileA = relA.split('/').pop().toLowerCase();
+      const fileB = relB.split('/').pop().toLowerCase();
+
+      const priorityRegex = /^(preview|screenshot|demo|accueil|ecran-depart|banner|cover)\./;
+      const prioA = priorityRegex.test(fileA) ? 0 : 1;
+      const prioB = priorityRegex.test(fileB) ? 0 : 1;
+      if (prioA !== prioB) return prioA - prioB;
+
+      const depthA = relA.split('/').length;
+      const depthB = relB.split('/').length;
+      if (depthA !== depthB) return depthA - depthB;
+
+      return relA.localeCompare(relB);
+    });
+
+    return `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}/${encodeGitHubPath(candidates[0].path)}`;
+  }
+
+  return LOCAL_PROJECT_IMAGES[projectName.toLowerCase()] || IMAGE_GENERIQUE;
+}
+
+/**
+ * Retourne un gestionnaire d'erreur uniforme pour basculer vers IMAGE_GENERIQUE.
+ * @param {HTMLImageElement} imgElement
+ */
+function handleImageError(imgElement) {
+  if (!imgElement) return;
+  imgElement.onerror = null;
+  imgElement.src = IMAGE_GENERIQUE;
+  imgElement.classList.add('portfolio-img-generic');
+}
+
+/**
+ * Met à jour le compteur global #projectsCount et les compteurs sur les boutons de filtre.
+ * @param {Array} projects
+ */
+function updateProjectCounters(projects) {
+  const totalCount = projects.length;
+  const schoolCount = projects.filter(p => p.filterClass === 'filter-school').length;
+  const proCount = projects.filter(p => p.filterClass === 'filter-professional').length;
+  const personalCount = projects.filter(p => p.filterClass === 'filter-personal').length;
+
+  const projectCounterEl = document.getElementById('projectsCount');
+  if (projectCounterEl) {
+    projectCounterEl.textContent = String(totalCount);
+  }
+
+  const filterLabels = {
+    '*': `Tout (${totalCount})`,
+    '.filter-school': `Scolaires (${schoolCount})`,
+    '.filter-professional': `Professionnels (${proCount})`,
+    '.filter-personal': `Personnels (${personalCount})`
+  };
+
+  document.querySelectorAll('#filters li[data-filter]').forEach(li => {
+    const key = li.getAttribute('data-filter');
+    if (filterLabels[key]) {
+      li.textContent = filterLabels[key];
     }
   });
 }
 
 /**
- * FETCH PERSONAL PROJECTS DYNAMICALLY
- * Reads the 'Personnel' folder and the 'README.md' to create cards automatically.
+ * Construit proprement une carte de projet via createElement (DOM sécurisé).
+ * @param {Object} project
+ * @returns {HTMLElement}
  */
-async function fetchPersonalProjects() {
-  const repoOwner = "RinoShip77";
-  const repoName = "MesProjets";
-  const path = "Personnel";
-  const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
-  const readmeUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}/README.md`;
+function createPortfolioCardElement(project) {
+  const itemCol = document.createElement('div');
+  itemCol.className = `col-lg-6 col-md-6 portfolio-item isotope-item ${project.filterClass}`;
+  itemCol.dataset.projectPath = project.path;
 
-  try {
-    // 1. Get existing projects to prevent duplicates
-    const existingProjects = Array.from(document.querySelectorAll('.portfolio-item h3'))
-      .map(el => el.innerText.trim().toLowerCase());
+  const card = document.createElement('div');
+  card.className = 'portfolio-card';
 
-    // 2. Fetch Repository Contents and README in parallel
-    const [contentsRes, readmeRes] = await Promise.all([
-      fetch(apiUrl),
-      fetch(readmeUrl)
-    ]);
+  const imageWrapper = document.createElement('div');
+  imageWrapper.className = 'portfolio-image';
 
-    if (!contentsRes.ok) throw new Error("Could not fetch projects");
+  const img = document.createElement('img');
+  img.src = project.imageUrl || IMAGE_GENERIQUE;
+  img.alt = `Aperçu du projet ${project.name}`;
+  img.className = 'img-fluid';
+  if (img.src.endsWith(IMAGE_GENERIQUE) || img.src === IMAGE_GENERIQUE) {
+    img.classList.add('portfolio-img-generic');
+  }
+  img.loading = 'lazy';
+  img.onerror = function () {
+    handleImageError(this);
+  };
 
-    const items = await contentsRes.json();
-    const readmeText = await readmeRes.text();
+  const overlay = document.createElement('div');
+  overlay.className = 'portfolio-overlay';
 
-    // 3. Filter for directories (projects) that don't exist in the HTML
-    const newProjects = items.filter(item =>
-      item.type === 'dir' && !existingProjects.includes(item.name.toLowerCase())
-    );
+  const actions = document.createElement('div');
+  actions.className = 'portfolio-actions';
 
-    if (newProjects.length === 0) return;
+  if (project.imageUrl && project.imageUrl !== IMAGE_GENERIQUE) {
+    const previewLink = document.createElement('a');
+    previewLink.href = project.imageUrl;
+    previewLink.className = 'glightbox preview-link';
+    previewLink.setAttribute('data-gallery', `portfolio-gallery-${project.filterClass}`);
+    previewLink.setAttribute('aria-label', `Agrandir l'aperçu de ${project.name}`);
+    const eyeIcon = document.createElement('i');
+    eyeIcon.className = 'bi bi-eye';
+    previewLink.appendChild(eyeIcon);
+    actions.appendChild(previewLink);
+  }
 
-    // 4. Generate HTML for new projects
-    const container = document.querySelector('.isotope-container');
-    const newElements = [];
+  const detailsLink = document.createElement('a');
+  detailsLink.href = project.repoUrl;
+  detailsLink.target = '_blank';
+  detailsLink.rel = 'noopener noreferrer';
+  detailsLink.className = 'details-link';
+  detailsLink.setAttribute('aria-label', `Voir le code source de ${project.name} sur GitHub`);
+  const arrowIcon = document.createElement('i');
+  arrowIcon.className = 'bi bi-arrow-right';
+  detailsLink.appendChild(arrowIcon);
 
-    newProjects.forEach(project => {
-      // Logic: Find regex match for >1. [Name](Name) ... description
-      let description = "Voir le projet pour plus de détails.";
-      const lineRegex = new RegExp(`^.*?\\]\\(${project.name}\\).*$`, 'im');
-      const match = readmeText.match(lineRegex);
+  actions.appendChild(detailsLink);
+  overlay.appendChild(actions);
+  imageWrapper.appendChild(img);
+  imageWrapper.appendChild(overlay);
 
-      if (match) {
-        description = match[0];
-        // Clean markdown: remove links, bold/italic, list numbers
-        description = description.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-        description = description.replace(/[*_`]/g, '');
-        description = description.replace(/^>\s*\d+\.\s*/, '');
-        description = description.trim();
-      }
+  const content = document.createElement('div');
+  content.className = 'portfolio-content';
 
-      // Image URL (Assumes a preview.png exists)
-      const imgUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}/${project.name}/preview.png`;
-      const projectUrl = `https://github.com/${repoOwner}/${repoName}/tree/main/${path}/${project.name}`;
+  const categorySpan = document.createElement('span');
+  categorySpan.className = 'category';
+  categorySpan.textContent = project.categoryLabel;
 
-      const div = document.createElement('div');
-      div.className = 'col-lg-6 col-md-6 portfolio-item isotope-item filter-personal';
-      div.innerHTML = `
-        <div class="portfolio-card">
-          <div class="portfolio-image">
-            <img src="${imgUrl}" class="img-fluid" alt="${project.name}" loading="lazy" 
-                 onerror="handleImageError(this)">
-            <div class="portfolio-overlay">
-              <div class="portfolio-actions">
-                <a href="${projectUrl}" target="_blank" class="details-link">
-                  <i class="bi bi-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-content">
-            <span class="category">Personnels</span>
-            <h3>${project.name}</h3>
-            <p class="text-break">${description}</p>
-          </div>
-        </div>
-      `;
-      container.appendChild(div);
-      newElements.push(div);
-    });
+  const title = document.createElement('h3');
+  title.textContent = project.name;
 
-    // 5. Update Isotope layout
+  const descriptionP = document.createElement('p');
+  descriptionP.className = 'text-break';
+  descriptionP.textContent = project.description;
+
+  content.appendChild(categorySpan);
+  content.appendChild(title);
+  content.appendChild(descriptionP);
+
+  card.appendChild(imageWrapper);
+  card.appendChild(content);
+  itemCol.appendChild(card);
+
+  return itemCol;
+}
+
+/**
+ * Rendu des projets détectés dans la grille Portfolio sans dupliquer les cartes déjà présentes.
+ * @param {Array} projects
+ */
+function renderPortfolioProjects(projects) {
+  updateProjectCounters(projects);
+
+  const container = document.querySelector('.isotope-container');
+  if (!container) return;
+
+  const existingItems = Array.from(container.querySelectorAll('.portfolio-item'));
+  const existingPaths = new Set();
+
+  existingItems.forEach(item => {
+    const pathAttr = item.dataset.projectPath;
+    if (pathAttr) {
+      existingPaths.add(pathAttr.toLowerCase());
+    }
+  });
+
+  const newElements = [];
+  projects.forEach(project => {
+    if (existingPaths.has(project.path.toLowerCase())) return;
+    const cardEl = createPortfolioCardElement(project);
+    container.appendChild(cardEl);
+    newElements.push(cardEl);
+    existingPaths.add(project.path.toLowerCase());
+  });
+
+  if (newElements.length > 0) {
     const iso = Isotope.data(container);
     if (iso) {
       iso.appended(newElements);
-      const newLightbox = GLightbox({ selector: '.glightbox' });
-      iso.layout();
+      const activeFilterBtn = document.querySelector('#filters .filter-active');
+      const currentFilter = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : '*';
+      iso.arrange({ filter: currentFilter });
+      imagesLoaded(container, () => {
+        iso.layout();
+      });
     }
-
-  } catch (error) {
-    console.error("Error loading personal projects:", error);
+    GLightbox({ selector: '.glightbox' });
   }
 }
 
 /**
- * Replaces a failed image with a centered Bootstrap folder icon.
- * @param {HTMLElement} imgElement - The image element that failed to load.
+ * Extrait la liste structurée des projets à partir de la réponse Git Trees API
+ * selon les profondeurs par catégorie :
+ * - Personnels (profondeur 2 : Personnels/[Projet])
+ * - Professionnels (profondeur 3 : Professionnels/[Employeur]/[Projet])
+ * - Scolaires (profondeur 4 : Scolaires/[Etablissement]/[Cours]/[Projet])
+ * @param {Array} tree
+ * @returns {Array}
  */
-function handleImageError(imgElement) {
-  const folderIconHtml = `
-    <div class="d-flex justify-content-center align-items-center w-100" style="height: 200px; min-height: 100%;">
-      <i class="bi bi-folder-symlink-fill text-warning" style="font-size: 10rem;"></i>
-    </div>
-  `;
-  // Replace the entire <img> tag with our new centered icon container
-  imgElement.outerHTML = folderIconHtml;
+function extractProjectsFromTree(tree) {
+  const projects = [];
+
+  tree.forEach(entry => {
+    if (entry.type !== 'tree' || !entry.path) return;
+    const parts = entry.path.split('/');
+
+    if (parts[0] === 'Personnels' && parts.length === 2) {
+      const name = parts[1];
+      projects.push({
+        name,
+        path: entry.path,
+        parentPath: 'Personnels',
+        filterClass: 'filter-personal',
+        categoryLabel: 'Personnels',
+        repoUrl: `https://github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/tree/${GITHUB_BRANCH}/${encodeGitHubPath(entry.path)}`,
+        imageUrl: findProjectImageInTree(tree, entry.path, name)
+      });
+    } else if (parts[0] === 'Professionnels' && parts.length === 3) {
+      const context = parts[1];
+      const name = parts[2];
+      projects.push({
+        name,
+        path: entry.path,
+        parentPath: `Professionnels/${context}`,
+        filterClass: 'filter-professional',
+        categoryLabel: `Professionnels • ${context}`,
+        repoUrl: `https://github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/tree/${GITHUB_BRANCH}/${encodeGitHubPath(entry.path)}`,
+        imageUrl: findProjectImageInTree(tree, entry.path, name)
+      });
+    } else if (parts[0] === 'Scolaires' && parts.length === 4) {
+      const school = parts[1];
+      const course = parts[2];
+      const name = parts[3];
+      const sessionCode = course.split('-')[0];
+      projects.push({
+        name,
+        path: entry.path,
+        parentPath: `Scolaires/${school}/${course}`,
+        filterClass: 'filter-school',
+        categoryLabel: `Scolaires • ${school} (${sessionCode})`,
+        repoUrl: `https://github.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/tree/${GITHUB_BRANCH}/${encodeGitHubPath(entry.path)}`,
+        imageUrl: findProjectImageInTree(tree, entry.path, name)
+      });
+    }
+  });
+
+  return projects;
+}
+
+/**
+ * Récupère un fichier texte brut sur raw.githubusercontent.com en gérant les erreurs silencieusement.
+ * @param {string} repoPath
+ * @returns {Promise<string>}
+ */
+async function fetchRawGitHubText(repoPath) {
+  try {
+    const url = `https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}/${encodeGitHubPath(repoPath)}`;
+    const res = await fetch(url);
+    if (!res.ok) return '';
+    return await res.text();
+  } catch (e) {
+    return '';
+  }
+}
+
+/**
+ * Charge l'arborescence complète de RinoShip77/MesProjets via un appel unique à l'API Git Trees
+ * avec mise en cache dans sessionStorage et extraction des descriptions README.md.
+ */
+async function loadGitHubPortfolio() {
+  try {
+    const cachedRaw = sessionStorage.getItem(PORTFOLIO_CACHE_KEY);
+    if (cachedRaw) {
+      const cachedProjects = JSON.parse(cachedRaw);
+      if (Array.isArray(cachedProjects) && cachedProjects.length > 0) {
+        renderPortfolioProjects(cachedProjects);
+        return;
+      }
+    }
+  } catch (e) {
+    // Ignorer une erreur éventuelle de lecture du sessionStorage
+  }
+
+  const treeApiUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+
+  try {
+    const response = await fetch(treeApiUrl);
+    if (!response.ok) {
+      throw new Error(`GitHub Git Trees API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const tree = Array.isArray(data.tree) ? data.tree : [];
+    const blobSet = new Set(tree.filter(item => item.type === 'blob').map(item => item.path));
+
+    const projects = extractProjectsFromTree(tree);
+    updateProjectCounters(projects);
+
+    // Pré-charger les README.md des dossiers parents existants dans l'arbre (cache en mémoire)
+    const parentReadmeCache = new Map();
+    const uniqueParentPaths = [...new Set(projects.map(p => p.parentPath))];
+    await Promise.all(
+      uniqueParentPaths.map(async parentPath => {
+        const readmePath = `${parentPath}/README.md`;
+        if (blobSet.has(readmePath)) {
+          const text = await fetchRawGitHubText(readmePath);
+          parentReadmeCache.set(parentPath, text);
+        }
+      })
+    );
+
+    // Récupérer et nettoyer la description de chaque projet depuis son README.md (ou fallback parent)
+    const resolvedProjects = await Promise.all(
+      projects.map(async project => {
+        let description = '';
+        const projectReadmePath = `${project.path}/README.md`;
+
+        if (blobSet.has(projectReadmePath)) {
+          const rawProjectReadme = await fetchRawGitHubText(projectReadmePath);
+          description = cleanReadmeDescription(rawProjectReadme);
+        }
+
+        if (!description && parentReadmeCache.has(project.parentPath)) {
+          description = extractProjectFromParentReadme(parentReadmeCache.get(project.parentPath), project.name);
+        }
+
+        if (!description) {
+          description = `Projet ${project.categoryLabel.toLowerCase()} réalisé par Olivier Bourgault. Consultez le dépôt GitHub pour explorer le code source.`;
+        }
+
+        return {
+          ...project,
+          description
+        };
+      })
+    );
+
+    try {
+      sessionStorage.setItem(PORTFOLIO_CACHE_KEY, JSON.stringify(resolvedProjects));
+    } catch (e) {
+      // Ignorer si quota sessionStorage atteint
+    }
+
+    renderPortfolioProjects(resolvedProjects);
+  } catch (error) {
+    console.error('Erreur lors du chargement dynamique des projets GitHub :', error);
+  }
 }
 
 /**
@@ -482,25 +857,43 @@ function diffDate(date1, date2) {
 
 
 /**
- * DIRECTION ARTISTIQUE V5 — STYLE UNIQUE : TECH CANVAS
- * La Version 5 adopte exclusivement l'identité visuelle Tech Canvas.
+ * DIRECTION ARTISTIQUE — STYLE UNIQUE : TECH CANVAS
+ * Le portfolio adopte exclusivement l'identité visuelle Tech Canvas.
  */
-const V5_PALETTE = 'tech-canvas';
+const DEFAULT_PALETTE = 'tech-canvas';
 
-function setPalette(palette = V5_PALETTE) {
-  document.body.setAttribute('data-palette', V5_PALETTE);
+function setPalette(palette = DEFAULT_PALETTE) {
+  document.body.setAttribute('data-palette', DEFAULT_PALETTE);
 }
 
 /**
- * POINTEUR LASER VIRTUEL (Inspiré du template de présentation)
- * Raccourci clavier : Touche 'L' (hors champs de saisie)
+ * POINTEUR / CURSEUR INTERACTIF (Inspiré de Aahil Khan & Tech Canvas)
+ * Physique fluide par interpolation (LERP) avec morphing contextuel (.big, .precise)
+ * Raccourci clavier : Touche 'L' (hors champs de saisie) pour activer/désactiver
  */
 let isLaserActive = true;
+let cursorCurrentX = window.innerWidth / 2;
+let cursorCurrentY = window.innerHeight / 2;
+let cursorTargetX = cursorCurrentX;
+let cursorTargetY = cursorCurrentY;
+let cursorRafId = null;
+
+function updateCursorPhysics() {
+  if (!isLaserActive) return;
+  const cursorDot = document.getElementById('laser-dot') || document.getElementById('cursor');
+  if (cursorDot) {
+    cursorCurrentX += (cursorTargetX - cursorCurrentX) * 0.35;
+    cursorCurrentY += (cursorTargetY - cursorCurrentY) * 0.35;
+    cursorDot.style.left = `${cursorCurrentX}px`;
+    cursorDot.style.top = `${cursorCurrentY}px`;
+  }
+  cursorRafId = requestAnimationFrame(updateCursorPhysics);
+}
 
 function toggleLaser(forceState) {
-  const laserDot = document.getElementById('laser-dot');
+  const cursorDot = document.getElementById('laser-dot') || document.getElementById('cursor');
   const laserBtn = document.getElementById('laser-btn');
-  if (!laserDot) return;
+  if (!cursorDot) return;
 
   if (typeof forceState === 'boolean') {
     isLaserActive = forceState;
@@ -513,23 +906,52 @@ function toggleLaser(forceState) {
   } catch (e) {}
 
   if (isLaserActive) {
-    laserDot.style.display = 'block';
+    cursorDot.style.display = 'block';
+    cursorDot.classList.add('on');
     document.body.style.cursor = 'none';
     if (laserBtn) laserBtn.classList.add('laser-active');
+    if (!cursorRafId) {
+      cursorRafId = requestAnimationFrame(updateCursorPhysics);
+    }
   } else {
-    laserDot.style.display = 'none';
+    cursorDot.style.display = 'none';
+    cursorDot.classList.remove('on');
     document.body.style.cursor = 'default';
     if (laserBtn) laserBtn.classList.remove('laser-active');
+    if (cursorRafId) {
+      cancelAnimationFrame(cursorRafId);
+      cursorRafId = null;
+    }
   }
 }
 
-document.addEventListener('mousemove', (e) => {
-  if (!isLaserActive) return;
-  const laserDot = document.getElementById('laser-dot');
-  if (laserDot) {
-    laserDot.style.left = `${e.clientX}px`;
-    laserDot.style.top = `${e.clientY}px`;
-  }
+document.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch' || !isLaserActive) return;
+  const cursorDot = document.getElementById('laser-dot') || document.getElementById('cursor');
+  if (!cursorDot) return;
+
+  cursorTargetX = e.clientX;
+  cursorTargetY = e.clientY;
+  cursorDot.classList.add('on');
+
+  const target = e.target;
+  // Détection des états contextuels :
+  // État Precise : liens, badges, tags, chips, icônes, champs texte
+  const isPrecise = Boolean(
+    target && target.closest('a, .badge, .btn-outline, .social-links a, .header-social-links a, input, textarea, select, .chip, .tech-marquee-item, [role="button"]')
+  );
+  // État Big Ring : boutons principaux, cartes de projets, header cartes, accordéons
+  const isBig = Boolean(
+    !isPrecise && target && target.closest('.btn, button, .portfolio-card, .tech-pillar-card, .hero-stats .stat-item, .modal-content, .logo')
+  );
+
+  cursorDot.classList.toggle('precise', isPrecise);
+  cursorDot.classList.toggle('big', isBig);
+});
+
+document.addEventListener('pointerleave', () => {
+  const cursorDot = document.getElementById('laser-dot') || document.getElementById('cursor');
+  if (cursorDot) cursorDot.classList.remove('on');
 });
 
 document.addEventListener('keydown', (e) => {
@@ -543,7 +965,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  setPalette(V5_PALETTE);
+  setPalette(DEFAULT_PALETTE);
 
   // Initialisation du pointeur laser (activé par défaut)
   let savedLaser = '1';
