@@ -78,44 +78,65 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
       <div
         class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
-        <!-- #region Logo -->
-        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0 text-reset gap-2">
-          <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="38" height="38" aria-label="Logo OB Tech">
+        <!-- #region Logo / Wordmark -->
+        <a href="index.html" class="logo d-flex align-items-center text-reset gap-2" aria-label="Olivier Bourgault Accueil">
+          <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
             <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
             <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
             <circle cx="50" cy="50" r="4" fill="#FF6600"/>
           </svg>
-          <div class="d-flex flex-column">
-            <span class="fs-4 text-decoration-none text-reset align-items-center fw-semibold lh-1 logo-name">Olivier Bourgault</span>
-            <span class="logo-sub">OB Tech &bull; Portfolio</span>
-          </div>
+          <span class="logo-name">Olivier Bourgault</span>
         </a>
         <!-- #endregion -->
 
-        <!-- #region Navbar -->
-        <nav id="navmenu" class="navmenu">
+        <!-- #region Mobile Drawer Scrim -->
+        <div class="menu-scrim d-xl-none" id="menuScrim" aria-hidden="true"></div>
+        <!-- #endregion -->
+
+        <!-- #region Primary Navigation & Mobile Slide-Out Drawer -->
+        <nav id="navmenu" class="navmenu" aria-label="Navigation principale">
+          <button class="menu-close d-xl-none" id="menuCloseBtn" type="button" aria-label="Fermer le menu">
+            <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+              <path d="M6 6l10 10M16 6L6 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+            </svg>
+          </button>
           <ul>
-            <li><a href="#hero" class="active">Accueil</a></li>
+            <li><a href="#hero" class="active" aria-current="page">Accueil</a></li>
             <li><a href="#about">À propos</a></li>
             <li><a href="#resume">CV</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          <div class="menu-foot d-xl-none">
+            <a href="mailto:bourgault.olivier8501@gmail.com" class="menu-foot-email">bourgault.olivier8501@gmail.com</a>
+            <div class="menu-foot-socials">
+              <a href="versions.html" aria-label="Navigateur de versions" title="Navigateur de versions"><i class="bi bi-clock-history" aria-hidden="true"></i></a>
+              <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Propositions de Logo"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+              <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil Github"><i class="bi bi-github" aria-hidden="true"></i></a>
+              <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil Linkedin"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+            </div>
+          </div>
         </nav>
         <!-- #endregion -->
 
-        <!-- #region Social links & theme switcher -->
-        <div class="d-flex align-items-center gap-1 me-2 header-social-links">
-          <a href="versions.html" aria-label="Navigateur de versions" title="Accéder au navigateur de versions du portfolio"><i
-              class="bi bi-clock-history"></i></a>
-          <a href="logo_proposals.html" class="d-none d-sm-inline-block" aria-label="Propositions de Logo" title="Voir les propositions de Logo"><i
-              class="bi bi-palette2"></i></a>
-          <a href="https://github.com/RinoShip77" class="d-none d-sm-inline-block" aria-label="Profil Github"><i class="bi bi-github"></i></a>
-          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" class="d-none d-sm-inline-block" aria-label="Profil Linkedin"><i
-              class="bi bi-linkedin"></i></a>
-          <a type="button" onclick="switchTheme(document.body.classList.contains('dark'))"><i id="themeSwitcher"
-              class="bi bi-sun-fill"></i></a>
+        <!-- #region Right Actions: Social links, Theme switcher & Mobile 3-line Hamburger -->
+        <div class="d-flex align-items-center gap-1 header-actions">
+          <div class="d-flex align-items-center gap-1 header-social-links">
+            <a href="versions.html" aria-label="Navigateur de versions" title="Accéder au navigateur de versions du portfolio"><i
+                class="bi bi-clock-history" aria-hidden="true"></i></a>
+            <a href="logo_proposals.html" class="d-none d-sm-inline-block" aria-label="Propositions de Logo" title="Voir les propositions de Logo"><i
+                class="bi bi-palette2" aria-hidden="true"></i></a>
+            <a href="https://github.com/RinoShip77" class="d-none d-sm-inline-block" aria-label="Profil Github"><i class="bi bi-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" class="d-none d-sm-inline-block" aria-label="Profil Linkedin"><i
+                class="bi bi-linkedin" aria-hidden="true"></i></a>
+            <a type="button" onclick="switchTheme(document.body.classList.contains('dark'))" aria-label="Basculer le thème clair/sombre"><i id="themeSwitcher"
+                class="bi bi-sun-fill" aria-hidden="true"></i></a>
+          </div>
+          <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu">
+            <i aria-hidden="true"></i>
+            <i aria-hidden="true"></i>
+            <i aria-hidden="true"></i>
+          </button>
         </div>
         <!-- #endregion -->
       </div>
