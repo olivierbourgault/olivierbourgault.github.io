@@ -1,0 +1,117 @@
+---
+import { withBase } from '../../utils/paths';
+
+interface Props {
+  idPrefix: string;
+  tablistLabel: string;
+  viewboxTag: string;
+  surfaceLabel: string;
+  svgLabel: string;
+  svgFile: string;
+  svgFilename: string;
+  captionLogoHtml: string;
+  captionConstructionHtml: string;
+  captionLectureHtml: string;
+}
+
+const {
+  idPrefix,
+  tablistLabel,
+  viewboxTag,
+  surfaceLabel,
+  svgLabel,
+  svgFile,
+  svgFilename,
+  captionLogoHtml,
+  captionConstructionHtml,
+  captionLectureHtml
+} = Astro.props;
+
+const assetUrl = withBase(svgFile);
+---
+<div class="logo-inspector" data-inspector-id={idPrefix}>
+  <div class="inspector-tablist" role="tablist" focusgroup="tablist nomemory" aria-label={tablistLabel}>
+    <button
+      type="button"
+      role="tab"
+      id={`${idPrefix}-tab-logo`}
+      class="inspector-tab"
+      data-inspector-mode="logo"
+      aria-selected="true"
+      focusgroupstart
+      tabindex="0"
+    >
+      Le logo
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id={`${idPrefix}-tab-construction`}
+      class="inspector-tab"
+      data-inspector-mode="construction"
+      aria-selected="false"
+      tabindex="-1"
+    >
+      La construction
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id={`${idPrefix}-tab-lecture`}
+      class="inspector-tab"
+      data-inspector-mode="lecture"
+      aria-selected="false"
+      tabindex="-1"
+    >
+      La lecture
+    </button>
+  </div>
+
+  <div class="inspector-stage" data-mode="logo" data-surface="dark">
+    <div class="inspector-stage-top">
+      <span class="inspector-viewbox-tag">{viewboxTag}</span>
+      <div class="surface-switcher" role="group" aria-label={surfaceLabel}>
+        <button type="button" class="surface-btn" data-stage-surface="dark" aria-pressed="true">Carbone</button>
+        <button type="button" class="surface-btn" data-stage-surface="light" aria-pressed="false">Ivoire</button>
+        <button type="button" class="surface-btn" data-stage-surface="grid" aria-pressed="false">Grille</button>
+      </div>
+    </div>
+
+    <div class="inspector-svg-wrap">
+      <svg class="blueprint-svg" viewBox="-34 -24 168 148" role="img" aria-label={svgLabel}>
+        <slot />
+      </svg>
+    </div>
+
+    <div class="inspector-stage-footer">
+      <div class="favicon-scale-strip" aria-label="Test de lisibilité en petite taille">
+        <span class="favicon-scale-label">Échelles :</span>
+        <span class="favicon-scale-item">
+          <img src={assetUrl} alt="" width="16" height="16" />16px
+        </span>
+        <span class="favicon-scale-item">
+          <img src={assetUrl} alt="" width="24" height="24" />24px
+        </span>
+        <span class="favicon-scale-item">
+          <img src={assetUrl} alt="" width="34" height="34" />34px
+        </span>
+      </div>
+      <a href={assetUrl} download={svgFilename} class="svg-dl-btn">
+        <i class="bi bi-download" aria-hidden="true"></i>
+        <span>SVG</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="inspector-captions">
+    <div id={`${idPrefix}-panel-logo`} class="inspector-caption-panel" role="tabpanel" aria-labelledby={`${idPrefix}-tab-logo`} tabindex="0">
+      <div class="inspector-caption-inner" set:html={captionLogoHtml} />
+    </div>
+    <div id={`${idPrefix}-panel-construction`} class="inspector-caption-panel" role="tabpanel" aria-labelledby={`${idPrefix}-tab-construction`} hidden="until-found">
+      <div class="inspector-caption-inner" set:html={captionConstructionHtml} />
+    </div>
+    <div id={`${idPrefix}-panel-lecture`} class="inspector-caption-panel" role="tabpanel" aria-labelledby={`${idPrefix}-tab-lecture`} hidden="until-found">
+      <div class="inspector-caption-inner" set:html={captionLectureHtml} />
+    </div>
+  </div>
+</div>

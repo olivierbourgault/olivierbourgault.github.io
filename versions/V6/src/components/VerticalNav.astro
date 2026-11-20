@@ -1,0 +1,55 @@
+---
+export interface VerticalNavItem {
+  targetId: string;
+  title: string;
+  sub?: string;
+}
+
+interface Props {
+  id: string;
+  heading: string;
+  ariaLabel: string;
+  items: VerticalNavItem[];
+  layoutClass?: string;
+  contentClass?: string;
+  contentId?: string;
+}
+
+const {
+  id,
+  heading,
+  ariaLabel,
+  items,
+  layoutClass = '',
+  contentClass = '',
+  contentId
+} = Astro.props;
+---
+<div class={`vnav-layout ${layoutClass}`.trim()}>
+  <aside class="vnav-sidebar" aria-label={ariaLabel}>
+    <div class="vnav-heading">{heading}</div>
+    <ul id={id} class="vnav-list">
+      {
+        items.map((item, idx) => (
+          <li>
+            <button
+              type="button"
+              class={`vnav-item-btn${idx === 0 ? ' is-active' : ''}`}
+              data-vnav-target={item.targetId}
+            >
+              <span class="vnav-dot" aria-hidden="true"></span>
+              <span class="vnav-text">
+                <span class="vnav-title">{item.title}</span>
+                {item.sub && <span class="vnav-sub">{item.sub}</span>}
+              </span>
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+  </aside>
+
+  <div id={contentId} class={`vnav-content ${contentClass}`.trim()}>
+    <slot />
+  </div>
+</div>

@@ -1,0 +1,72 @@
+---
+import 'aos/dist/aos.css';
+import 'glightbox/dist/css/glightbox.min.css';
+
+import BootLoader from '../components/BootLoader.astro';
+import CvDownloadDialog from '../components/CvDownloadDialog.astro';
+import ScrollTop from '../components/ScrollTop.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import About from '../components/home/About.astro';
+import Contact from '../components/home/Contact.astro';
+import Hero from '../components/home/Hero.astro';
+import Portfolio from '../components/home/Portfolio.astro';
+import Resume from '../components/home/Resume.astro';
+import Skills from '../components/home/Skills.astro';
+import TechPillars from '../components/home/TechPillars.astro';
+import { type NavLinkItem } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Accueil', href: '#hero', active: true },
+  { label: 'À propos', href: '#about' },
+  { label: 'CV', href: '#resume' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Contact', href: '#contact' }
+];
+---
+<BaseLayout
+  title="Olivier Bourgault | Développeur Full-Stack, IA & Technicien TI — Tech Canvas"
+  description="Portfolio officiel d'Olivier Bourgault, diplômé en technique de l'informatique et étudiant en intelligence artificielle. Spécialisé en développement d'applications, automatisation et accessibilité Web."
+  keywords="Portfolio, Olivier Bourgault, Développeur Web, Intelligence Artificielle, Technicien informatique, Automatisation, Gatineau, Angular, Vue, Symfony, C#, Python, PowerShell"
+  canonicalPath=""
+  bodyClass="index-page dark"
+>
+  <BootLoader />
+
+  <div id="page" class="d-none">
+    <SiteHeader
+      links={navLinks}
+      currentPage="home"
+      drawerExtras={[
+        { href: withBase('versions.html'), icon: 'bi-layers', label: 'Versions et identité visuelle', title: 'Versions & Identité visuelle' }
+      ]}
+    />
+
+    <main id="main-content" class="main" tabindex="-1">
+      <Hero />
+      <TechPillars />
+      <About />
+      <Skills />
+      <Resume />
+      <Portfolio />
+      <Contact />
+    </main>
+
+    <SiteFooter brandText="OB TECH • PORTFOLIO" showNavIcons={false} creditsMode="home" />
+  </div>
+
+  <CvDownloadDialog />
+  <ScrollTop />
+
+  <script>
+    import { initHomePage } from '../scripts/home';
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHomePage);
+    } else {
+      initHomePage();
+    }
+  </script>
+</BaseLayout>

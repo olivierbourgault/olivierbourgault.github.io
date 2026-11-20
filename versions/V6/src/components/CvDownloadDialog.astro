@@ -1,0 +1,78 @@
+---
+import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
+---
+<dialog id="cvDownloadDialog" class="ob-dialog" closedby="any" aria-labelledby="cvDialogTitle">
+  <div class="ob-dialog-header">
+    <div class="ob-dialog-title-wrap">
+      <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+      <div>
+        <h2 id="cvDialogTitle" class="ob-dialog-title">Télécharger mon CV / Resume</h2>
+        <span class="ob-dialog-sub">Format PDF &bull; Français ou Anglais</span>
+      </div>
+    </div>
+    <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer la fenêtre CV" autofocus>
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <div class="ob-dialog-body">
+    <div class="versions-cv-grid">
+      <div class="versions-cv-card is-fr">
+        <div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="ob-cv-badge-fr">FRANÇAIS</span>
+            <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 Mo</span>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Curriculum Vitae</h3>
+          <p class="small mb-3 ob-dialog-sub-copy">
+            Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
+          </p>
+        </div>
+        <div class="d-grid gap-2 mt-2">
+          <a href={withBase(SITE.cvFrPdf)} class="versions-btn-primary w-100" download={SITE.cvFrFilename}>
+            <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+            <span>Télécharger (FR)</span>
+          </a>
+          <a href={withBase(SITE.cvFrPdf)} target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100 ob-dialog-btn-preview">
+            <i class="bi bi-eye" aria-hidden="true"></i>
+            <span>Aperçu PDF</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="versions-cv-card is-en">
+        <div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="ob-cv-badge-en">ENGLISH</span>
+            <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 MB</span>
+          </div>
+          <h3 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h3>
+          <p class="small mb-3 ob-dialog-sub-copy">
+            Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
+          </p>
+        </div>
+        <div class="d-grid gap-2 mt-2">
+          <a href={withBase(SITE.cvEnPdf)} class="versions-btn-secondary w-100" download={SITE.cvEnFilename}>
+            <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+            <span>Download (EN)</span>
+          </a>
+          <a href={withBase(SITE.cvEnPdf)} target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100 ob-dialog-btn-preview">
+            <i class="bi bi-eye" aria-hidden="true"></i>
+            <span>Open PDF preview</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-dialog-footer">
+    <a href={withBase('cv-apercu.html')} class="versions-btn-outline ob-dialog-btn-sm">
+      <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+      <span>Consulter le CV Web interactif</span>
+    </a>
+    <button type="button" class="versions-btn-outline ob-dialog-btn-sm" data-close-dialog>
+      Fermer
+    </button>
+  </div>
+</dialog>

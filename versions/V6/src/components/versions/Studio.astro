@@ -1,0 +1,148 @@
+---
+import { PORTFOLIO_VERSIONS } from '../../data/versions';
+import LogoOB from '../LogoOB.astro';
+import SectionTitle from '../SectionTitle.astro';
+
+const defaultVersion = PORTFOLIO_VERSIONS.find((v) => v.featured) || PORTFOLIO_VERSIONS[0];
+---
+<section id="studio" class="section studio-section" aria-labelledby="studioHeading">
+  <div class="container">
+    <SectionTitle
+      pillText="Prévisualisation en direct"
+      pillIcon="bi-display"
+      title="Studio Interactif"
+      headingId="studioHeading"
+    >
+      <p>
+        Sélectionnez une génération ci-dessous pour la manipuler en temps réel, changer de format d’appareil ou basculer instantanément entre les palettes historiques des versions V3 et V4.
+      </p>
+    </SectionTitle>
+
+    <!-- Single-Row Scrollable Accessible Tablist -->
+    <div class="studio-tablist-wrap">
+      <div
+        id="studioTablist"
+        class="studio-tablist"
+        role="tablist"
+        focusgroup="tablist nomemory"
+        aria-label="Sélection de la version à prévisualiser"
+      >
+        {
+          PORTFOLIO_VERSIONS.map((v) => {
+            const isSelected = v.id === defaultVersion.id;
+            return (
+              <button
+                type="button"
+                role="tab"
+                id={`studio-tab-${v.id}`}
+                class="studio-tab"
+                data-version-tab={v.id}
+                aria-selected={isSelected ? 'true' : 'false'}
+                tabindex={isSelected ? 0 : -1}
+                focusgroupstart={isSelected ? '' : undefined}
+              >
+                <span class="studio-tab-id">{v.id}</span>
+                <span>{v.shortLabel}</span>
+                <span class="studio-tab-badge">{v.featured ? 'Actuelle' : v.date}</span>
+              </button>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Studio OS Window Panel -->
+    <div
+      id="studioTabpanel"
+      class="studio-window"
+      role="tabpanel"
+      aria-labelledby={`studio-tab-${defaultVersion.id}`}
+    >
+      <div class="studio-toolbar">
+        <div class="studio-chrome-left">
+          <div class="studio-dots" aria-hidden="true">
+            <span class="studio-dot is-orange"></span>
+            <span class="studio-dot is-sky"></span>
+            <span class="studio-dot is-slate"></span>
+          </div>
+          <div class="studio-address-bar" title="URL active dans l'aperçu">
+            <i class="bi bi-lock-fill" aria-hidden="true"></i>
+            <span id="studioAddressText" class="studio-address-text">
+              olivierbourgault.github.io{defaultVersion.path}
+            </span>
+          </div>
+        </div>
+
+        <div class="studio-chrome-right">
+          <div class="viewport-switcher" role="group" aria-label="Format d'affichage de l'aperçu">
+            <button type="button" class="viewport-btn" data-device="desktop" aria-pressed="true" title="Aperçu Desktop (1366 px)">
+              <i class="bi bi-display" aria-hidden="true"></i>
+              <span>Desktop</span>
+            </button>
+            <button type="button" class="viewport-btn" data-device="tablet" aria-pressed="false" title="Aperçu Tablette (768 px)">
+              <i class="bi bi-tablet" aria-hidden="true"></i>
+              <span>Tablette</span>
+            </button>
+            <button type="button" class="viewport-btn" data-device="mobile" aria-pressed="false" title="Aperçu Mobile (390 px)">
+              <i class="bi bi-phone" aria-hidden="true"></i>
+              <span>Mobile</span>
+            </button>
+          </div>
+
+          <div class="studio-action-group">
+            <button type="button" id="studioReloadBtn" class="studio-icon-btn" title="Recharger l'aperçu" aria-label="Recharger l'aperçu">
+              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="studio-icon-btn" data-open-dialog="fullscreenPreviewDialog" title="Ouvrir l'aperçu en plein écran" aria-label="Ouvrir l'aperçu en plein écran">
+              <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+              <span>Plein écran</span>
+            </button>
+            <a id="studioOpenExternal" href={defaultVersion.path} target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet">
+              <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+              <span>Ouvrir</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="studioPaletteBar" class="studio-palette-bar">
+        <span id="studioPaletteLabel" class="studio-palette-label">
+          <i class="bi bi-palette2" aria-hidden="true"></i> Direction {defaultVersion.id}
+        </span>
+        <div id="studioPaletteChips" class="studio-palette-chips" role="group" aria-label="Palettes disponibles pour cette version"></div>
+        <span id="studioDimensionsPill" class="studio-dimensions-pill" aria-live="polite">1366 &times; 820 px</span>
+      </div>
+
+      <div id="studioStage" class="studio-stage">
+        <div id="studioDeviceBezel" class="device-bezel" data-device="desktop">
+          <div id="studioScaleWrap" class="device-scale-wrap">
+            <div id="studioLoader" class="studio-loader is-loading" role="status" aria-live="polite">
+              <LogoOB size={48} class="studio-loader-hex" ariaHidden={true} />
+              <span id="studioLoaderText">Initialisation du Studio…</span>
+            </div>
+            <iframe
+              id="studioIframe"
+              class="studio-iframe"
+              src="about:blank"
+              title={`Aperçu en direct de ${defaultVersion.title}`}
+              loading="eager"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="studio-meta-bar">
+        <div class="studio-meta-info">
+          <h3 id="studioMetaTitle" class="studio-meta-title">{defaultVersion.title}</h3>
+          <p id="studioMetaDesc" class="studio-meta-desc">{defaultVersion.description}</p>
+        </div>
+        <div class="studio-meta-actions">
+          <a id="studioJumpTimeline" href={`#version-${defaultVersion.id}`} class="versions-btn-outline ob-dialog-btn-preview">
+            <span>Fiche détaillée</span>
+            <i class="bi bi-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

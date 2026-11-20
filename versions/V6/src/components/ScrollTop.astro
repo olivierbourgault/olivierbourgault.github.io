@@ -1,0 +1,16 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '#', label = 'Retour en haut' } = Astro.props;
+---
+<a
+  id="scroll-top"
+  href={href}
+  class="scroll-top d-flex align-items-center justify-content-center"
+  aria-label={label}
+>
+  <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+</a>

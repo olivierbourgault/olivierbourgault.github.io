@@ -1,0 +1,68 @@
+name: Déploiement Portfolio V6 (Astro + Archives)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build Astro V6 & Assemble Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: versions/V6/package-lock.json
+
+      - name: Install V6 dependencies
+        working-directory: versions/V6
+        run: npm ci
+
+      - name: Typecheck Astro (astro check)
+        working-directory: versions/V6
+        run: npm run check
+
+      - name: Build Astro static output
+        working-directory: versions/V6
+        run: npm run build
+
+      - name: Assemble root, archives V1..V5 & V6 build
+        working-directory: versions/V6
+        run: npm run site:assemble
+
+      - name: Verify archive integrity & internal links
+        working-directory: versions/V6
+        run: npm run site:links
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: versions/V6/.site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

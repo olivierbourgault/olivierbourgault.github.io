@@ -1,0 +1,76 @@
+---
+import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
+import SectionTitle from '../SectionTitle.astro';
+---
+<section id="about" class="about section" data-aos="fade-up" data-aos-delay="100">
+  <SectionTitle title="À propos">
+    <p>
+      Diplômé en technique de l'informatique et poursuivant une attestation d'études collégiales en intelligence
+      artificielle, je suis fiable, rigoureux, organisé, autonome et responsable dans toutes les réalisations que
+      j'entreprends.
+    </p>
+  </SectionTitle>
+
+  <div class="row align-items-center">
+    <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
+      <div class="about-image">
+        <img
+          src={withBase('assets/img/profil/Profil_Avatar.png')}
+          alt="Portrait de profil d'Olivier Bourgault"
+          class="img-fluid rounded-4"
+        />
+      </div>
+    </div>
+
+    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+      <div class="about-content">
+        <span class="subtitle">À propos de moi</span>
+        <h2>Développeur Full-Stack, IA &amp; Technicien en informatique</h2>
+        <p class="lead mb-4">
+          Spécialisé dans la création de nouvelles applications Web, mobiles et logicielles ainsi que dans
+          l'optimisation de systèmes existants. J'ai un fort intérêt pour l'automatisation des processus,
+          l'intelligence artificielle et la conformité aux normes d'accessibilité (WCAG). Je parle couramment le
+          français et je communique aisément en anglais.
+        </p>
+
+        <div class="row g-4 personal-info">
+          <div class="col-sm-6">
+            <div class="info-item">
+              <span class="label">Nom<i class="bi bi-person ms-2" aria-hidden="true"></i></span>
+              <span class="value">{SITE.author}</span>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="info-item">
+              <span class="label">Spécialisation<i class="bi bi-pc-display-horizontal ms-2" aria-hidden="true"></i></span>
+              <span class="value">Développement, TI &amp; IA</span>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="info-item">
+              <span class="label">Courriel<i class="bi bi-envelope-at ms-2" aria-hidden="true"></i></span>
+              <span class="value">{SITE.email}</span>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="info-item">
+              <span class="label">Région<i class="bi bi-geo-alt ms-2" aria-hidden="true"></i></span>
+              <span class="value">{SITE.location}</span>
+            </div>
+          </div>
+
+          <div class="col-12 text-center">
+            <div class="info-item">
+              <span class="label">Formation actuelle<i class="bi bi-mortarboard ms-2" aria-hidden="true"></i></span>
+              <span class="value">AEC en Intelligence Artificielle</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

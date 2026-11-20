@@ -1,0 +1,151 @@
+---
+import '@fontsource/oswald/500.css';
+import '@fontsource/oswald/600.css';
+import '@fontsource/oswald/700.css';
+import '@fontsource/chakra-petch/500.css';
+import '@fontsource/chakra-petch/600.css';
+import '@fontsource/chakra-petch/700.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/400-italic.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource/ibm-plex-mono/700.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.min.css';
+import '../styles/tokens.css';
+import '../styles/main.css';
+import '../styles/components/dialog.css';
+
+import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalPath?: string;
+  bodyClass: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  isCvPage?: boolean;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  canonicalPath = '',
+  bodyClass,
+  ogTitle = title,
+  ogDescription = description,
+  isCvPage = false
+} = Astro.props;
+
+const canonicalUrl = `https://olivierbourgault.github.io/versions/V6/${canonicalPath}`;
+---
+<!DOCTYPE html>
+<html lang="fr" data-cv-version={isCvPage ? 'portfolio' : undefined}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Résolution synchrone du thème avant le premier rendu (zéro FOUC) -->
+    <script is:inline define:vars={{ themeKey: SITE.themeStorageKey }}>
+      (function () {
+        var mode = 'dark';
+        try {
+          if (localStorage.getItem(themeKey) === 'light') mode = 'light';
+        } catch (e) {}
+        var isDark = mode === 'dark';
+        var html = document.documentElement;
+        html.dataset.theme = mode;
+        html.dataset.bsTheme = mode;
+        html.classList.toggle('dark', isDark);
+        html.classList.toggle('theme-light', !isDark);
+        var meta = document.querySelector('meta[name="color-scheme"]');
+        if (meta) meta.setAttribute('content', mode);
+      })();
+    </script>
+    <style is:inline>
+      html {
+        background-color: #121316;
+        transition: background-color 0.35s ease;
+      }
+      html.theme-light {
+        background-color: #F4F1EA;
+      }
+    </style>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicons -->
+    <link href={withBase('assets/img/logo/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
+    <link href={withBase('assets/img/favicon.png')} rel="alternate icon" />
+
+    <slot name="head" />
+  </head>
+
+  <body
+    class={bodyClass}
+    data-bs-theme="dark"
+    data-palette="tech-canvas"
+    data-cv-version={isCvPage ? 'portfolio' : undefined}
+  >
+    <script is:inline>
+      (function () {
+        var isDark = !document.documentElement.classList.contains('theme-light');
+        document.body.classList.toggle('dark', isDark);
+        if (isDark) {
+          document.body.setAttribute('data-bs-theme', 'dark');
+        } else {
+          document.body.removeAttribute('data-bs-theme');
+        }
+      })();
+    </script>
+
+    <a href="#main-content" class="skip-link visually-hidden-focusable">Aller au contenu principal</a>
+
+    <!-- Curseur interactif Aahil Khan + Halo radial orange -->
+    <div id="laser-dot" aria-hidden="true"></div>
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <slot />
+
+    <script>
+      import { initTheme } from '../scripts/theme';
+      import { initNavbar } from '../scripts/navbar';
+      import { initInteractiveCursor } from '../scripts/cursor';
+      import { initNativeDialogs } from '../scripts/dialogs';
+
+      const runBaseInit = () => {
+        initTheme();
+        initNavbar();
+        initInteractiveCursor();
+        initNativeDialogs();
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runBaseInit);
+      } else {
+        runBaseInit();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+---
+import '../styles/pages/versions.css';
+
+import CvDownloadDialog from '../components/CvDownloadDialog.astro';
+import ScrollTop from '../components/ScrollTop.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import FullscreenDialog from '../components/versions/FullscreenDialog.astro';
+import Studio from '../components/versions/Studio.astro';
+import StudioHero from '../components/versions/StudioHero.astro';
+import Timeline from '../components/versions/Timeline.astro';
+import { type NavLinkItem } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Accueil', href: withBase('') },
+  { label: 'Studio', href: '#studio', active: true },
+  { label: 'Évolution', href: '#timeline' },
+  { label: 'CV', href: withBase('cv-apercu.html') },
+  { label: 'Identité', href: withBase('identite.html') }
+];
+---
+<BaseLayout
+  title="Navigateur de versions — Studio Interactif V1 à V6 | Olivier Bourgault"
+  description="Explorez et testez en direct toutes les versions du portfolio d'Olivier Bourgault (V1, V2, V3, V4, V5 et V6 Astro) : prévisualisation interactive multi-écrans, bascule de palettes et historique complet."
+  keywords="Versions, Historique Portfolio, Olivier Bourgault, V1, V2, V3, V4, V5, V6, Tech Canvas, Studio Interactif"
+  canonicalPath="versions.html"
+  bodyClass="versions-page dark"
+>
+  <SiteHeader
+    links={navLinks}
+    currentPage="versions"
+    drawerExtras={[
+      { href: withBase(''), icon: 'bi-house-door', label: 'Portfolio actuel', title: 'Portfolio actuel' },
+      { href: withBase('identite.html'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
+    ]}
+  />
+
+  <main id="main-content" class="main" tabindex="-1">
+    <StudioHero />
+    <Studio />
+    <Timeline />
+  </main>
+
+  <SiteFooter brandText="OB TECH • ARCHIVE STUDIO" creditsMode="subpage" />
+  <ScrollTop href="#versions-hero" label="Retour en haut de page" />
+
+  <CvDownloadDialog />
+  <FullscreenDialog />
+
+  <script>
+    import { initVersionsStudio } from '../scripts/versions-studio';
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVersionsStudio);
+    } else {
+      initVersionsStudio();
+    }
+  </script>
+</BaseLayout>

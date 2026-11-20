@@ -1,0 +1,103 @@
+---
+import LogoOB from './LogoOB.astro';
+import VersionsHubMenu from './VersionsHubMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { SITE, type NavLinkItem } from '../data/site';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  links: NavLinkItem[];
+  currentPage?: 'home' | 'versions' | 'identite' | 'cv' | '404';
+  stickyTop?: boolean;
+  drawerExtras?: Array<{ href: string; icon: string; label: string; title: string; external?: boolean }>;
+}
+
+const {
+  links,
+  currentPage = 'home',
+  stickyTop = false,
+  drawerExtras = [
+    { href: withBase('versions.html'), icon: 'bi-clock-history', label: 'Navigateur de versions', title: 'Navigateur de versions' },
+    { href: withBase('identite.html'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
+  ]
+} = Astro.props;
+---
+<header id="header" class={`header d-flex align-items-center${stickyTop ? ' sticky-top' : ''}`}>
+  <div class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
+    <!-- Logo / Wordmark -->
+    <a href={withBase('')} class="logo d-flex align-items-center text-reset gap-2" aria-label="Olivier Bourgault Accueil">
+      <LogoOB id="logo" class="site-main-logo" size={32} ariaHidden={true} />
+      <span class="logo-name">{SITE.author}</span>
+    </a>
+
+    <!-- Mobile Drawer Scrim -->
+    <div class="menu-scrim d-xl-none" id="menuScrim" aria-hidden="true"></div>
+
+    <!-- Primary Navigation & Mobile Slide-Out Drawer -->
+    <nav id="navmenu" class="navmenu" aria-label="Navigation principale">
+      <button class="menu-close d-xl-none" id="menuCloseBtn" type="button" aria-label="Fermer le menu">
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+          <path d="M6 6l10 10M16 6L6 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+      </button>
+      <ul>
+        {
+          links.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class={item.active ? 'active' : undefined}
+                aria-current={item.active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="menu-foot d-xl-none">
+        <a href={`mailto:${SITE.email}`} class="menu-foot-email">{SITE.email}</a>
+        <div class="menu-foot-socials">
+          {
+            drawerExtras.map((extra) => (
+              <a
+                href={extra.href}
+                aria-label={extra.label}
+                title={extra.title}
+                target={extra.external ? '_blank' : undefined}
+                rel={extra.external ? 'noopener noreferrer' : undefined}
+              >
+                <i class={`bi ${extra.icon}`} aria-hidden="true"></i>
+              </a>
+            ))
+          }
+          <a href={SITE.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub">
+            <i class="bi bi-github" aria-hidden="true"></i>
+          </a>
+          <a href={SITE.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn">
+            <i class="bi bi-linkedin" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right Actions: Hub menu, Social links, Theme switcher & Mobile Hamburger -->
+    <div class="d-flex align-items-center gap-1 header-actions">
+      <div class="d-flex align-items-center gap-1 header-social-links">
+        <VersionsHubMenu currentPage={currentPage} />
+        <a href={SITE.githubUrl} target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil Github">
+          <i class="bi bi-github" aria-hidden="true"></i>
+        </a>
+        <a href={SITE.linkedinUrl} target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil Linkedin">
+          <i class="bi bi-linkedin" aria-hidden="true"></i>
+        </a>
+        <ThemeToggle />
+      </div>
+      <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu">
+        <i aria-hidden="true"></i>
+        <i aria-hidden="true"></i>
+        <i aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,381 @@
+---
+import { withBase } from '../../utils/paths';
+import LogoInspector from './LogoInspector.astro';
+---
+<!-- CHAPTER 03: LOGO 1 — OB HEXAGONAL -->
+<section id="logo-ob-tech" class="identite-chapter" aria-labelledby="obTechHeading">
+  <div class="chapter-header">
+    <div class="d-flex">
+      <span class="identite-section-pill">
+        <i class="bi bi-hexagon" aria-hidden="true"></i>
+        03 &middot; Le monogramme fondateur
+      </span>
+    </div>
+    <h2 id="obTechHeading" class="chapter-title">OB Hexagonal Tech — Identité principale</h2>
+    <p class="chapter-lead">
+      Le sceau officiel d’Olivier Bourgault depuis la V4 : mes initiales assemblées en bouclier d’infrastructure et de circuit imprimé.
+    </p>
+  </div>
+
+  <div class="logo-chapter-card">
+    <LogoInspector
+      idPrefix="ob"
+      tablistLabel="Modes d'inspection OB Hexagonal"
+      viewboxTag="logo-ob-tech.svg • 100×100"
+      surfaceLabel="Fond d'aperçu OB Tech"
+      svgLabel="Plan technique du logo OB Hexagonal Tech"
+      svgFile="assets/img/logo/logo-ob-tech.svg"
+      svgFilename="logo-ob-tech.svg"
+      captionLogoHtml="<strong>Le symbole officiel :</strong> tel qu’il apparaît dans la barre de navigation, le favicon SVG, le Boot Loader Fusion et le pied de page."
+      captionConstructionHtml="<strong>La construction :</strong> hexagone inscrit dans <code>R 46</code> à faces de <code>60°</code>, colonne du B calée sur <code>x 38</code> et deux boucles symétriques entre <code>y 30</code>, <code>y 50</code> et <code>y 70</code>."
+      captionLectureHtml="<strong>La lecture :</strong> trois sens en un seul signe — le bouclier <strong>O</strong>, la piste numérique <strong>B</strong> et le nœud de jonction central <code>(50;50)</code>."
+    >
+      <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round" />
+      <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" />
+      <circle cx="50" cy="50" r="4" fill="#FF6600" />
+
+      <g class="svg-layer-construction">
+        <circle cx="50" cy="52" r="46" class="bp-guide-dash" />
+        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide" />
+        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide" />
+        <line x1="38" y1="-4" x2="38" y2="104" class="bp-guide-dash" />
+        <line x1="22" y1="30" x2="94" y2="30" class="bp-guide-dash" />
+        <line x1="22" y1="70" x2="94" y2="70" class="bp-guide-dash" />
+        <circle cx="50" cy="52" r="1.8" fill="#38BDF8" />
+        <text x="-30" y="-12" class="bp-text-orange">R 46 · hex 60°</text>
+        <text x="97" y="32" class="bp-text">y 30</text>
+        <text x="97" y="52" class="bp-text">y 50</text>
+        <text x="97" y="72" class="bp-text">y 70</text>
+        <text x="-30" y="116" class="bp-text">épine x 38</text>
+        <text x="128" y="116" text-anchor="end" class="bp-text-muted">centre 50;52</text>
+      </g>
+
+      <g class="svg-layer-lecture">
+        <line x1="24" y1="-2" x2="34" y2="16" stroke="#FF6600" stroke-width="1" />
+        <rect x="-31" y="-18" width="60" height="16" rx="4" class="bp-pill-bg" />
+        <text x="-1" y="-8" text-anchor="middle" class="bp-pill-text">O · Hexagone</text>
+
+        <line x1="94" y1="-2" x2="66" y2="36" stroke="#38BDF8" stroke-width="1" />
+        <rect x="74" y="-18" width="56" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="102" y="-8" text-anchor="middle" class="bp-pill-text">B · Circuit</text>
+
+        <line x1="20" y1="106" x2="48" y2="53" stroke="#FF6600" stroke-width="1" />
+        <rect x="-31" y="106" width="78" height="16" rx="4" class="bp-pill-bg" />
+        <text x="8" y="116" text-anchor="middle" class="bp-pill-text">Nœud pivot (50;50)</text>
+
+        <rect x="74" y="106" width="56" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="102" y="116" text-anchor="middle" class="bp-pill-text">Sceau V4→V6</text>
+      </g>
+    </LogoInspector>
+
+    <div class="logo-story-col">
+      <div class="story-meta-row">
+        <span class="family-official-tag">Logo Officiel · Navbar &amp; Favicon</span>
+        <span class="identite-story-badge">Adopté en V4 · Actif en V6</span>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’on voit</h3>
+        <p>
+          Un contour hexagonal franc <strong>orange #FF6600</strong> aux sommets adoucis, abritant un <strong>B géométrique bleu ciel #38BDF8</strong> rythmé par une pastille centrale orange à l’intersection des deux boucles.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Comment il est né</h3>
+        <p>
+          Pour passer d’un portfolio générique à une vraie signature d’ingénieur en TI et en développement, il me fallait un monogramme qui évoque à la fois une puce matérielle, la sécurité réseau et mes deux initiales <strong>OB</strong> sans texte superflu.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’il cache</h3>
+        <ul class="story-hidden-list">
+          <li>
+            <span class="decode-key">L’hexagone</span>
+            <span>Forme à la fois le <strong>O d’Olivier</strong>, un boulon d’ingénierie et un bouclier d’infrastructure résiliente.</span>
+          </li>
+          <li>
+            <span class="decode-key">Le B double-flux</span>
+            <span>L’initiale <strong>B de Bourgault</strong> dessinée comme deux bus de données parallèles (entrée haute <code>y 30→50</code>, sortie basse <code>y 50→70</code>).</span>
+          </li>
+          <li>
+            <span class="decode-key">Le point pivot</span>
+            <span>Un point unique en <code>(50;50)</code> soude l’ensemble comme une broche centrale de circuit imprimé.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="story-quote-callout">
+        <p>
+          <strong>Mon parcours :</strong> Forgé par mes mandats en infrastructure TI à la <em>Chambre des communes</em> et chez <em>Élections Canada</em>, où automatisation PowerShell, Active Directory et rigueur système ne font qu’un.
+        </p>
+      </div>
+
+      <div class="story-footer-row">
+        <div class="story-keywords">
+          <span class="story-keyword-pill">Systèmes TI</span>
+          <span class="story-keyword-pill">Monogramme OB</span>
+          <span class="story-keyword-pill">DevOps &amp; Git</span>
+        </div>
+        <a href={`${withBase('')}#expertise`} class="identite-btn-outline identite-btn-compact">
+          <span>Voir pilier TI</span>
+          <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 04: LOGO 2 — TERMINAL CODE </> -->
+<section id="logo-terminal" class="identite-chapter" aria-labelledby="terminalHeading">
+  <div class="chapter-header">
+    <div class="d-flex">
+      <span class="identite-section-pill">
+        <i class="bi bi-code-slash" aria-hidden="true"></i>
+        04 &middot; La syntaxe du bâtisseur
+      </span>
+    </div>
+    <h2 id="terminalHeading" class="chapter-title">Terminal Code &lt;/&gt; — Développement Full-Stack</h2>
+    <p class="chapter-lead">
+      La balise universelle du développeur logiciel, épurée et recentrée dans le disque signature de la famille.
+    </p>
+  </div>
+
+  <div class="logo-chapter-card">
+    <LogoInspector
+      idPrefix="term"
+      tablistLabel="Modes d'inspection Terminal Code"
+      viewboxTag="logo-terminal-tech.svg • 100×100"
+      surfaceLabel="Fond d'aperçu Terminal Code"
+      svgLabel="Plan technique du logo Terminal Code"
+      svgFile="assets/img/logo/logo-terminal-tech.svg"
+      svgFilename="logo-terminal-tech.svg"
+      captionLogoHtml="<strong>Le symbole :</strong> cercle orange à cœur semi-translucide encadrant des chevrons bleu circuit et un slash central dynamique."
+      captionConstructionHtml="<strong>La construction :</strong> chevrons parfaitement symétriques entre <code>x 24</code> et <code>x 76</code> sur l’intervalle vertical <code>y 36 → y 64</code>, traversés par un slash incliné à <code>74°</code>."
+      captionLectureHtml="<strong>La lecture :</strong> Front-End et Back-End en miroir (<code>&lt;</code> et <code>&gt;</code>) reliés par l’énergie d’exécution <code>/</code>."
+    >
+      <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6" />
+      <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+      <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round" />
+      <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+
+      <g class="svg-layer-construction">
+        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide" />
+        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide" />
+        <line x1="16" y1="36" x2="86" y2="36" class="bp-guide-dash" />
+        <line x1="16" y1="64" x2="86" y2="64" class="bp-guide-dash" />
+        <line x1="24" y1="26" x2="24" y2="100" class="bp-guide-dash" />
+        <line x1="76" y1="26" x2="76" y2="100" class="bp-guide-dash" />
+        <line x1="42" y1="78" x2="58" y2="22" class="bp-guide-orange" />
+        <text x="-30" y="-12" class="bp-text-orange">R 44 · Ø 88</text>
+        <text x="128" y="-12" text-anchor="end" class="bp-text-orange">slash 74°</text>
+        <text x="-30" y="38" class="bp-text">y 36</text>
+        <text x="-30" y="66" class="bp-text">y 64</text>
+        <text x="24" y="114" text-anchor="middle" class="bp-text">x 24</text>
+        <text x="50" y="114" text-anchor="middle" class="bp-text-muted">50;50</text>
+        <text x="76" y="114" text-anchor="middle" class="bp-text">x 76</text>
+      </g>
+
+      <g class="svg-layer-lecture">
+        <line x1="18" y1="-2" x2="29" y2="41" stroke="#38BDF8" stroke-width="1" />
+        <rect x="-31" y="-18" width="60" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="-1" y="-8" text-anchor="middle" class="bp-pill-text">Chevrons &lt; &gt;</text>
+
+        <line x1="92" y1="-2" x2="54" y2="36" stroke="#FF6600" stroke-width="1" />
+        <rect x="74" y="-18" width="56" height="16" rx="4" class="bp-pill-bg" />
+        <text x="102" y="-8" text-anchor="middle" class="bp-pill-text">Slash actif /</text>
+
+        <line x1="14" y1="106" x2="24" y2="86" stroke="#FF6600" stroke-width="1" />
+        <rect x="-31" y="106" width="68" height="16" rx="4" class="bp-pill-bg" />
+        <text x="3" y="116" text-anchor="middle" class="bp-pill-text">Enceinte O · App</text>
+
+        <rect x="74" y="106" width="56" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="102" y="116" text-anchor="middle" class="bp-pill-text">Full-Stack</text>
+      </g>
+    </LogoInspector>
+
+    <div class="logo-story-col">
+      <div class="story-meta-row">
+        <span class="family-role-tag">Pilier 01 · Développement Full-Stack</span>
+        <span class="identite-story-badge">Code First</span>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’on voit</h3>
+        <p>
+          Une pastille circulaire lumineuse bordée d’<strong>orange #FF6600</strong> qui encadre l’expression <code>&lt;/&gt;</code> : deux chevrons <strong>bleu #38BDF8</strong> aux pointes douces et un slash incliné orange au centre exact.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Comment il est né</h3>
+        <p>
+          Mon premier logo utilisait déjà l’écran et la syntaxe du code. Pour l’architecture OB Tech, j’ai retiré le cadre d’ordinateur figé afin de ne garder que l’essence géométrique pure du code dans l’anneau <strong>O</strong>.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’il cache</h3>
+        <ul class="story-hidden-list">
+          <li>
+            <span class="decode-key">Miroir &lt; et &gt;</span>
+            <span>Le dialogue constant entre interface utilisateur (Angular, Vue, React, WCAG) et serveur ou logiciel natif (C#, .NET MAUI, Symfony).</span>
+          </li>
+          <li>
+            <span class="decode-key">Le slash / à 74°</span>
+            <span>Marque la pente de progression et d’impulsion entre conception et déploiement en production.</span>
+          </li>
+          <li>
+            <span class="decode-key">L’halo subtil</span>
+            <span>Un léger remplissage <code>rgba(255,102,0,0.12)</code> illumine le disque comme un terminal actif prêt à compiler.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="story-quote-callout">
+        <p>
+          <strong>Mon parcours :</strong> Plus de cinq ans à bâtir des projets concrets comme <em>Electrolib</em>, <em>Kaomia</em>, <em>EVOMEAL</em> et <em>CompareTools</em>, du prototype à l’architecture maintenable.
+        </p>
+      </div>
+
+      <div class="story-footer-row">
+        <div class="story-keywords">
+          <span class="story-keyword-pill">Full-Stack</span>
+          <span class="story-keyword-pill">Terminal &lt;/&gt;</span>
+          <span class="story-keyword-pill">Accessibilité WCAG</span>
+        </div>
+        <a href={`${withBase('')}#portfolio`} class="identite-btn-outline identite-btn-compact">
+          <span>Voir mes projets</span>
+          <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 05: LOGO 3 — NŒUD NEURONAL IA -->
+<section id="logo-neural" class="identite-chapter" aria-labelledby="neuralHeading">
+  <div class="chapter-header">
+    <div class="d-flex">
+      <span class="identite-section-pill">
+        <i class="bi bi-share" aria-hidden="true"></i>
+        05 &middot; La constellation synaptique
+      </span>
+    </div>
+    <h2 id="neuralHeading" class="chapter-title">Nœud Neuronal — Intelligence Artificielle</h2>
+    <p class="chapter-lead">
+      Une orbite de données en pointillés qui entoure un graphe triangulaire de neurones et son point focal d’inférence.
+    </p>
+  </div>
+
+  <div class="logo-chapter-card">
+    <LogoInspector
+      idPrefix="neural"
+      tablistLabel="Modes d'inspection Nœud Neuronal"
+      viewboxTag="logo-neural-tech.svg • 100×100"
+      surfaceLabel="Fond d'aperçu Nœud Neuronal"
+      svgLabel="Plan technique du logo Nœud Neuronal IA"
+      svgFile="assets/img/logo/logo-neural-tech.svg"
+      svgFilename="logo-neural-tech.svg"
+      captionLogoHtml="<strong>Le symbole :</strong> anneau orbital pointillé <code>dash 8/4</code>, graphe synaptique à 3 sommets bleu circuit et barycentre blanc d’activation."
+      captionConstructionHtml="<strong>La construction :</strong> triangle isocèle équilibré aux coordonnées <code>(50;30)</code>, <code>(32;65)</code> et <code>(68;65)</code> avec nœuds de rayon <code>8</code> et noyau centré en <code>(50;53)</code>."
+      captionLectureHtml="<strong>La lecture :</strong> flux de données discontinu en périphérie, convergeant vers un modèle équilibré entre <em>Données</em>, <em>Apprentissage</em> et <em>Décision</em>."
+    >
+      <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4" />
+      <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4" />
+      <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4" />
+      <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4" />
+      <circle cx="50" cy="30" r="8" fill="#38BDF8" />
+      <circle cx="32" cy="65" r="8" fill="#38BDF8" />
+      <circle cx="68" cy="65" r="8" fill="#38BDF8" />
+      <circle cx="50" cy="53" r="5" fill="#ffffff" class="neural-core-dot" />
+
+      <g class="svg-layer-construction">
+        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide" />
+        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide" />
+        <line x1="20" y1="65" x2="86" y2="65" class="bp-guide-dash" />
+        <line x1="50" y1="30" x2="50" y2="88" class="bp-guide-dash" />
+        <circle cx="50" cy="53" r="19" class="bp-guide-orange" />
+        <text x="-30" y="-12" class="bp-text-orange">R 42 · dash 8/4</text>
+        <text x="128" y="-12" text-anchor="end" class="bp-text">sommet (50;30)</text>
+        <text x="-30" y="114" class="bp-text">(32;65) · r 8</text>
+        <text x="128" y="114" text-anchor="end" class="bp-text-muted">(68;65) · noyau 50;53</text>
+      </g>
+
+      <g class="svg-layer-lecture">
+        <line x1="12" y1="-2" x2="21" y2="21" stroke="#FF6600" stroke-width="1" />
+        <rect x="-31" y="-18" width="58" height="16" rx="4" class="bp-pill-bg" />
+        <text x="-2" y="-8" text-anchor="middle" class="bp-pill-text">Orbite · Paquets</text>
+
+        <line x1="88" y1="-2" x2="57" y2="27" stroke="#38BDF8" stroke-width="1" />
+        <rect x="70" y="-18" width="60" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="100" y="-8" text-anchor="middle" class="bp-pill-text">3 Nœuds IA</text>
+
+        <line x1="18" y1="106" x2="48" y2="56" stroke="#FF6600" stroke-width="1" />
+        <rect x="-31" y="106" width="76" height="16" rx="4" class="bp-pill-bg" />
+        <text x="7" y="116" text-anchor="middle" class="bp-pill-text">Noyau inférence</text>
+
+        <rect x="78" y="106" width="52" height="16" rx="4" class="bp-pill-bg-sky" />
+        <text x="104" y="116" text-anchor="middle" class="bp-pill-text">AEC IA</text>
+      </g>
+    </LogoInspector>
+
+    <div class="logo-story-col">
+      <div class="story-meta-row">
+        <span class="family-role-tag">Pilier 02 · Intelligence Artificielle</span>
+        <span class="identite-story-badge">AEC IA · HubAI</span>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’on voit</h3>
+        <p>
+          Une couronne pointillée <strong>orange #FF6600</strong> qui tourne autour d’un triangle orange reliant trois disques <strong>bleu circuit #38BDF8</strong>, avec une étincelle blanche au centre de gravité du réseau.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Comment il est né</h3>
+        <p>
+          Lorsque j’ai intégré mon <strong>AEC en Intelligence Artificielle</strong> au Collège O’Sullivan et conçu <em>HubAI</em>, l’identité devait traduire visuellement la mise en réseau de modèles LLM, de pipelines Python et d’agents autonomes.
+        </p>
+      </div>
+
+      <div class="story-block">
+        <h3 class="story-label">Ce qu’il cache</h3>
+        <ul class="story-hidden-list">
+          <li>
+            <span class="decode-key">L’orbite 8/4</span>
+            <span>Évoque le transfert continu de paquets et de jetons (tokens) autour du système.</span>
+          </li>
+          <li>
+            <span class="decode-key">Les 3 sommets</span>
+            <span>Un triangle complet : <strong>Données (Pandas)</strong>, <strong>Modèles (ML / Deep Learning)</strong> et <strong>Agents intelligents</strong>.</span>
+          </li>
+          <li>
+            <span class="decode-key">Le noyau (50;53)</span>
+            <span>Le point de synthèse où les poids du réseau produisent une décision claire — c’est aussi l’emblème animé du <em>Boot Loader Fusion</em> de la page d’accueil.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="story-quote-callout">
+        <p>
+          <strong>Mon parcours :</strong> Spécialisation en apprentissage automatique, API Gemini/LLM et déploiement d’assistants intelligents — réunis au sommet de ma vitrine GitHub.
+        </p>
+      </div>
+
+      <div class="story-footer-row">
+        <div class="story-keywords">
+          <span class="story-keyword-pill">Python &amp; ML</span>
+          <span class="story-keyword-pill">HubAI · Gemini</span>
+          <span class="story-keyword-pill">Agents IA</span>
+        </div>
+        <a href={`${withBase('')}#resume`} class="identite-btn-outline identite-btn-compact">
+          <span>Parcours IA</span>
+          <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

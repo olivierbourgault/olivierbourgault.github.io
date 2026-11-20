@@ -1,0 +1,118 @@
+---
+import LogoOB from '../components/LogoOB.astro';
+import ScrollTop from '../components/ScrollTop.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { type NavLinkItem } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Accueil', href: withBase('') },
+  { label: 'Versions', href: withBase('versions.html') },
+  { label: 'Identité', href: withBase('identite.html') },
+  { label: 'CV - Aperçu', href: withBase('cv-apercu.html') }
+];
+---
+<BaseLayout
+  title="Page introuvable (404) | Olivier Bourgault"
+  description="Cette ressource est introuvable sur le portfolio d'Olivier Bourgault."
+  canonicalPath="404.html"
+  bodyClass="error-page dark"
+>
+  <SiteHeader links={navLinks} currentPage="404" />
+
+  <main id="main-content" class="main" tabindex="-1">
+    <section class="error-stage d-flex align-items-center justify-content-center py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="neo-brutal-card error-card text-center position-relative">
+              <div class="tape-strip tape-center" aria-hidden="true"></div>
+              <div class="error-logo-wrap">
+                <LogoOB size={72} ariaHidden={true} />
+              </div>
+              <p class="error-code-pill">HTTP 404 // ROUTE_NOT_FOUND</p>
+              <h1 class="error-title">Page introuvable</h1>
+              <p class="error-copy mx-auto">
+                L’adresse demandée n’existe pas ou a été déplacée vers la nouvelle architecture Astro V6. Utilisez les raccourcis ci-dessous pour reprendre votre visite.
+              </p>
+              <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                <a href={withBase('')} class="versions-btn-primary">
+                  <i class="bi bi-house-door-fill" aria-hidden="true"></i>
+                  <span>Accueil V6</span>
+                </a>
+                <a href={withBase('versions.html')} class="versions-btn-secondary">
+                  <i class="bi bi-clock-history" aria-hidden="true"></i>
+                  <span>Navigateur de versions</span>
+                </a>
+                <a href={withBase('identite.html')} class="versions-btn-outline">
+                  <i class="bi bi-palette2" aria-hidden="true"></i>
+                  <span>Identité visuelle</span>
+                </a>
+                <a href={withBase('cv-apercu.html')} class="versions-btn-outline">
+                  <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+                  <span>CV - Aperçu</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter brandText="OB TECH • 404" creditsMode="subpage" />
+  <ScrollTop href="#main-content" label="Retour en haut" />
+</BaseLayout>
+
+<style>
+  .error-stage {
+    min-height: calc(100vh - 220px);
+    padding-top: 120px;
+  }
+
+  .error-card {
+    padding: clamp(2.25rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+    border-radius: 22px;
+  }
+
+  .error-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    filter: drop-shadow(0 0 18px rgba(255, 102, 0, 0.35));
+  }
+
+  .error-code-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: var(--coding-font);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    background: rgba(255, 102, 0, 0.14);
+    color: #FF6600;
+    border: 1.5px solid rgba(255, 102, 0, 0.45);
+    margin-bottom: 1rem;
+  }
+
+  .error-title {
+    font-family: var(--heading-font);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--heading-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .error-copy {
+    max-width: 560px;
+    color: var(--default-color);
+    opacity: 0.85;
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+</style>

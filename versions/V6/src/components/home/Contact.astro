@@ -1,0 +1,32 @@
+---
+import SectionTitle from '../SectionTitle.astro';
+---
+<section id="contact" class="contact section">
+  <SectionTitle title="Contact">
+    <p class="lead mb-4">Un simple courriel et je pourrai contribuer au succès de vos projets.</p>
+  </SectionTitle>
+
+  <div class="contact-form card mx-5">
+    <div class="card-body p-4 p-lg-5">
+      <form id="contactForm" class="email-form">
+        <div class="row gy-4">
+          <div class="col-md-6">
+            <input type="text" name="name" class="form-control" placeholder="Votre nom" autocomplete="name" required />
+          </div>
+          <div class="col-md-6">
+            <input type="email" name="email" class="form-control" placeholder="Votre courriel" autocomplete="email" required />
+          </div>
+          <div class="col-12">
+            <input type="text" name="subject" class="form-control" placeholder="Sujet" required />
+          </div>
+          <div class="col-12">
+            <textarea name="message" class="form-control" rows="6" placeholder="Votre message" required></textarea>
+          </div>
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-submit w-100">Envoyer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

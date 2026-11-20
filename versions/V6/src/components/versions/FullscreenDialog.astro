@@ -1,0 +1,49 @@
+---
+import { withBase } from '../../utils/paths';
+---
+<dialog id="fullscreenPreviewDialog" class="ob-dialog is-fullscreen-dialog" closedby="any" aria-labelledby="fullscreenPreviewTitle">
+  <div class="ob-dialog-header">
+    <div class="ob-dialog-title-wrap">
+      <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>
+      <div>
+        <h2 id="fullscreenPreviewTitle" class="ob-dialog-title">Aperçu plein écran</h2>
+        <span id="fullscreenPreviewSub" class="ob-dialog-sub">olivierbourgault.github.io/versions/V6/</span>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center flex-wrap gap-2">
+      <div class="viewport-switcher" role="group" aria-label="Format plein écran">
+        <button type="button" class="viewport-btn" data-fs-device="desktop" aria-pressed="true" title="Desktop">
+          <i class="bi bi-display" aria-hidden="true"></i>
+          <span>Desktop</span>
+        </button>
+        <button type="button" class="viewport-btn" data-fs-device="tablet" aria-pressed="false" title="Tablette">
+          <i class="bi bi-tablet" aria-hidden="true"></i>
+          <span>Tablette</span>
+        </button>
+        <button type="button" class="viewport-btn" data-fs-device="mobile" aria-pressed="false" title="Mobile">
+          <i class="bi bi-phone" aria-hidden="true"></i>
+          <span>Mobile</span>
+        </button>
+      </div>
+
+      <button type="button" id="fullscreenReloadBtn" class="studio-icon-btn" title="Recharger" aria-label="Recharger l'aperçu plein écran">
+        <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+      </button>
+
+      <a id="fullscreenOpenExternal" href={withBase('')} target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet" aria-label="Ouvrir dans un nouvel onglet">
+        <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+      </a>
+
+      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Quitter le mode plein écran" autofocus>
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="fullscreen-stage-body">
+    <div class="fullscreen-iframe-wrap">
+      <iframe id="fullscreenIframe" class="fullscreen-iframe" data-device="desktop" src="about:blank" title="Aperçu plein écran de la version sélectionnée"></iframe>
+    </div>
+  </div>
+</dialog>

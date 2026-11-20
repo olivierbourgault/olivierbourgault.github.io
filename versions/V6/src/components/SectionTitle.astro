@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  headingId?: string;
+  pillText?: string;
+  pillIcon?: string;
+  badgeText?: string;
+  class?: string;
+}
+
+const {
+  title,
+  headingId,
+  pillText,
+  pillIcon,
+  badgeText,
+  class: className = ''
+} = Astro.props;
+---
+<div class={`section-title ${className}`.trim()}>
+  {
+    pillText && (
+      <div class="d-flex justify-content-center">
+        <span class="versions-section-pill">
+          {pillIcon && <i class={`bi ${pillIcon}`} aria-hidden="true"></i>}
+          {pillText}
+        </span>
+      </div>
+    )
+  }
+  {
+    badgeText && <span class="tech-identity-badge mb-2">{badgeText}</span>
+  }
+  <h2 id={headingId}>{title}</h2>
+  <div class="title-shape" aria-hidden="true">
+    <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+    </svg>
+  </div>
+  <slot />
+</div>

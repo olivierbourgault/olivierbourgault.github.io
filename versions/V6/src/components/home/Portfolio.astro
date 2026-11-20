@@ -1,0 +1,102 @@
+---
+import { FALLBACK_PROJECTS } from '../../data/projects';
+import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
+import SectionTitle from '../SectionTitle.astro';
+import VerticalNav, { type VerticalNavItem } from '../VerticalNav.astro';
+
+const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p, idx) => ({
+  targetId: `portfolio-item-${idx}`,
+  title: p.name,
+  sub: p.categoryLabel
+}));
+---
+<section id="portfolio" class="portfolio section" data-aos="fade-up" data-aos-delay="100">
+  <SectionTitle title="Portfolio">
+    <p class="portfolio-text">
+      Découvrez une sélection de mes réalisations scolaires, professionnelles et personnelles.<br />
+      Pour explorer l'ensemble de mon code source, visitez mon dépôt{' '}
+      <a href={SITE.githubProjectsUrl} target="_blank" rel="noopener noreferrer">GitHub</a>.
+    </p>
+  </SectionTitle>
+
+  <div class="isotope-layout">
+    <VerticalNav
+      id="vnav-portfolio-list"
+      heading="Projets (Accès rapide)"
+      ariaLabel="Projets (Accès rapide)"
+      items={initialNavItems}
+    >
+      <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
+        <ul class="portfolio-filters isotope-filters" id="filters">
+          <li data-filter="*" class="filter-active">Tout</li>
+          <li data-filter=".filter-school">Scolaires</li>
+          <li data-filter=".filter-professional">Professionnels</li>
+          <li data-filter=".filter-personal">Personnels</li>
+        </ul>
+      </div>
+
+      <p id="portfolioSyncStatus" class="visually-hidden" aria-live="polite"></p>
+
+      <div id="portfolioGrid" class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
+        {
+          FALLBACK_PROJECTS.map((project, idx) => (
+            <div
+              id={`portfolio-item-${idx}`}
+              class={`col-lg-6 col-md-6 portfolio-item ${project.filterClass}${idx >= 5 ? ' d-none' : ''}`}
+              data-project-path={project.path}
+            >
+              <div class="portfolio-card">
+                <div class="portfolio-image">
+                  <img
+                    src={withBase(project.image)}
+                    class="img-fluid"
+                    alt={project.alt}
+                    loading="lazy"
+                  />
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                      <a
+                        href={withBase(project.image)}
+                        class="glightbox preview-link"
+                        data-gallery={project.gallery}
+                        aria-label={`Agrandir l'aperçu de ${project.name}`}
+                      >
+                        <i class="bi bi-eye" aria-hidden="true"></i>
+                      </a>
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="details-link"
+                        aria-label={`Voir le code source de ${project.name} sur GitHub`}
+                      >
+                        <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="portfolio-content">
+                  <span class="category">{project.categoryLabel}</span>
+                  <h3>{project.name}</h3>
+                  <p class="text-break" set:html={project.descriptionHtml} />
+                  <div class="d-flex flex-wrap gap-1 mt-2">
+                    {project.badges.map((badge) => (
+                      <span class="badge badge-tech">{badge}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div id="portfolioShowMoreWrap" class="text-center mt-4">
+        <button id="portfolioShowMoreBtn" type="button" class="btn btn-submit">
+          <i class="bi bi-grid-3x3-gap-fill me-2" aria-hidden="true"></i>Voir plus (+1)
+        </button>
+      </div>
+    </VerticalNav>
+  </div>
+</section>

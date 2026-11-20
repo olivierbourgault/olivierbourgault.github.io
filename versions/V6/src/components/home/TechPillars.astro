@@ -1,0 +1,45 @@
+---
+import { TECH_PILLARS } from '../../data/pillars';
+import Badge from '../Badge.astro';
+import LogoNeural from '../LogoNeural.astro';
+import LogoOB from '../LogoOB.astro';
+import LogoTerminal from '../LogoTerminal.astro';
+import NeoCard from '../NeoCard.astro';
+import SectionTitle from '../SectionTitle.astro';
+---
+<section id="expertise" class="section">
+  <div class="container" data-aos="fade-up">
+    <SectionTitle
+      badgeText="Architectures & Expertises"
+      title="Piliers Technologiques & Logos Tech"
+      class="text-center mb-3"
+    >
+      <p class="text-muted mx-auto" style="max-width: 650px;">
+        Une identité visuelle unifiée où chaque symbole incarne une facette de mes compétences en ingénierie logicielle, intelligence artificielle et systèmes TI.
+      </p>
+    </SectionTitle>
+
+    <div class="row g-4 justify-content-center">
+      {
+        TECH_PILLARS.map((pillar) => (
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={pillar.delay}>
+            <NeoCard>
+              <div class="tech-pillar-icon">
+                {pillar.logoType === 'terminal' && <LogoTerminal size={38} ariaLabel={pillar.logoAriaLabel} />}
+                {pillar.logoType === 'neural' && <LogoNeural size={38} ariaLabel={pillar.logoAriaLabel} />}
+                {pillar.logoType === 'ob' && <LogoOB size={38} ariaLabel={pillar.logoAriaLabel} />}
+              </div>
+              <h3 class="fs-5 fw-bold mb-2 tech-pillar-title">{pillar.title}</h3>
+              <p class="text-muted small mb-3 flex-grow-1">{pillar.description}</p>
+              <div class="d-flex flex-wrap gap-1 mt-auto">
+                {pillar.badges.map((badge) => (
+                  <Badge variant={badge.variant}>{badge.label}</Badge>
+                ))}
+              </div>
+            </NeoCard>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

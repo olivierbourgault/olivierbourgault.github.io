@@ -1,0 +1,34 @@
+/* ==========================================================================
+   OB TECH CANVAS — DESIGN TOKENS (Pack Ingénierie & IA)
+   Référence stricte : versions/V5 Tech Canvas
+   ========================================================================== */
+:root {
+  --ob-orange: #FF6600;
+  --ob-sky: #38BDF8;
+  --ob-carbon: #121316;
+  --ob-graphite: #1A1C20;
+  --ob-ivory: #F4F1EA;
+  --ob-drawer: #302F2C;
+  --ob-hard-shadow: 5px 5px 0 var(--ob-orange);
+
+  /* Pack Ingénierie & IA */
+  --default-font: "DM Sans", system-ui, -apple-system, sans-serif;
+  --heading-font: "Chakra Petch", sans-serif;
+  --coding-font: "IBM Plex Mono", monospace;
+  --nav-font: "Oswald", "Chakra Petch", sans-serif;
+
+  /* Modern Web Guidance: color-scheme adaptatif piloté par <meta name="color-scheme"> */
+  color-scheme: light dark;
+  accent-color: #FF6600;
+  scroll-behavior: smooth;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="dark"]),
+:root.dark {
+  color-scheme: dark;
+}
+
+:root:has(> head > meta[name="color-scheme"][content="light"]),
+:root.theme-light {
+  color-scheme: light;
+}

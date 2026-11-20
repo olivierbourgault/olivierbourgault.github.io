@@ -1,0 +1,35 @@
+{
+  "name": "olivierbourgault-portfolio-v6",
+  "version": "6.0.0",
+  "private": true,
+  "description": "Portfolio d'Olivier Bourgault — Version 6 (Astro · Tech Canvas)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "site:assemble": "node tools/assemble-site.mjs",
+    "site:links": "node tools/check-links.mjs",
+    "site:serve": "node tools/serve-site.mjs --port 8080",
+    "verify": "npm run check && npm run build && npm run site:assemble && npm run site:links"
+  },
+  "dependencies": {
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/oswald": "^5.3.0",
+    "aos": "^2.3.4",
+    "astro": "^6.4.8",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "glightbox": "^3.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^5.9.3"
+  }
+}

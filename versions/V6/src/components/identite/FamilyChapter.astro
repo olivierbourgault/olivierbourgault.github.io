@@ -1,0 +1,95 @@
+---
+import Badge from '../Badge.astro';
+import LogoNeural from '../LogoNeural.astro';
+import LogoOB from '../LogoOB.astro';
+import LogoTerminal from '../LogoTerminal.astro';
+import NeoCard from '../NeoCard.astro';
+---
+<section id="famille" class="identite-chapter" aria-labelledby="familleHeading">
+  <div class="chapter-header">
+    <div class="d-flex">
+      <span class="identite-section-pill">
+        <i class="bi bi-grid-1x2" aria-hidden="true"></i>
+        02 &middot; La famille des 3 logos
+      </span>
+    </div>
+    <h2 id="familleHeading" class="chapter-title">Trois emblèmes choisis, un même ADN</h2>
+    <p class="chapter-lead">
+      Chaque logo porte directement l’un des trois piliers de mon portfolio sur la page d’accueil. Cliquez sur une carte pour ouvrir immédiatement son plan de construction et sa lecture complète.
+    </p>
+  </div>
+
+  <div class="family-cards-grid">
+    <a href="#logo-terminal" class="family-pillar-link">
+      <NeoCard>
+        <div class="family-card-top">
+          <div class="tech-pillar-icon">
+            <LogoTerminal size={38} ariaHidden={true} />
+          </div>
+          <span class="family-role-tag">Pilier 01 · Code</span>
+        </div>
+        <h3 class="fs-5 fw-bold mb-2 tech-pillar-title">Développement Full-Stack</h3>
+        <p class="small mb-3 flex-grow-1 identite-muted-copy">
+          Le Terminal Code <code>&lt;/&gt;</code> encapsule l’art de bâtir des applications Web, mobiles et logicielles robustes (C# / .NET MAUI, Angular, Vue, React, Symfony).
+        </p>
+        <div class="d-flex flex-wrap gap-1 mt-auto">
+          <Badge variant="sky" class="fw-semibold">C# .NET</Badge>
+          <Badge variant="sky" class="fw-semibold">Angular / Vue</Badge>
+          <Badge variant="orange" class="fw-semibold">Terminal &lt;/&gt;</Badge>
+        </div>
+        <span class="family-jump-hint">
+          <span>Voir construction 04</span>
+          <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+        </span>
+      </NeoCard>
+    </a>
+
+    <a href="#logo-neural" class="family-pillar-link">
+      <NeoCard>
+        <div class="family-card-top">
+          <div class="tech-pillar-icon">
+            <LogoNeural size={38} ariaHidden={true} />
+          </div>
+          <span class="family-role-tag">Pilier 02 · IA</span>
+        </div>
+        <h3 class="fs-5 fw-bold mb-2 tech-pillar-title">Intelligence Artificielle</h3>
+        <p class="small mb-3 flex-grow-1 identite-muted-copy">
+          La Constellation Neuronale relie 3 synapses autour d’un noyau d’inférence au cœur d’une orbite rythmée — écho direct de ma spécialisation (AEC IA).
+        </p>
+        <div class="d-flex flex-wrap gap-1 mt-auto">
+          <Badge variant="orange" class="fw-semibold">Python &amp; ML</Badge>
+          <Badge variant="sky" class="fw-semibold">Réseaux Neuronaux</Badge>
+          <Badge variant="orange" class="fw-semibold">Agents IA</Badge>
+        </div>
+        <span class="family-jump-hint">
+          <span>Voir construction 05</span>
+          <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+        </span>
+      </NeoCard>
+    </a>
+
+    <a href="#logo-ob-tech" class="family-pillar-link">
+      <NeoCard>
+        <div class="family-card-top">
+          <div class="tech-pillar-icon">
+            <LogoOB size={38} ariaHidden={true} />
+          </div>
+          <span class="family-official-tag">Logo Officiel</span>
+        </div>
+        <h3 class="fs-5 fw-bold mb-2 tech-pillar-title">Systèmes TI &amp; Monogramme OB</h3>
+        <p class="small mb-3 flex-grow-1 identite-muted-copy">
+          Emblème principal du site, du favicon et du boot loader depuis la V4 : un bouclier hexagonal formant le <strong>O</strong>, animé d’un <strong>B</strong> en piste de circuit.
+        </p>
+        <div class="d-flex flex-wrap gap-1 mt-auto">
+          <Badge variant="sky" class="fw-semibold">PowerShell</Badge>
+          <Badge variant="sky" class="fw-semibold">Active Directory</Badge>
+          <Badge variant="orange" class="fw-semibold">Monogramme OB</Badge>
+        </div>
+        <span class="family-jump-hint">
+          <span>Voir construction 03</span>
+          <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+        </span>
+      </NeoCard>
+    </a>
+  </div>
+</section>

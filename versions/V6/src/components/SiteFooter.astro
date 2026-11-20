@@ -1,0 +1,68 @@
+---
+import LogoOB from './LogoOB.astro';
+import { SITE } from '../data/site';
+import { withBase } from '../utils/paths';
+
+interface Props {
+  brandText?: string;
+  showNavIcons?: boolean;
+  creditsMode?: 'home' | 'subpage';
+}
+
+const {
+  brandText = 'OB TECH • PORTFOLIO',
+  showNavIcons = true,
+  creditsMode = 'home'
+} = Astro.props;
+---
+<footer id="footer" class="footer">
+  <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+    <LogoOB size={28} ariaHidden={true} />
+    <span class="fw-bold ob-footer-brand">{brandText}</span>
+  </div>
+
+  <div class="copyright text-center">
+    <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">{SITE.author}</strong></p>
+    <span>Tous droits réservés</span>
+  </div>
+
+  <div class="social-links d-flex justify-content-center">
+    {
+      showNavIcons && (
+        <>
+          <a href={withBase('')} aria-label="Accueil du portfolio" title="Accueil (V6)">
+            <i class="bi bi-house-door" aria-hidden="true"></i>
+          </a>
+          <a href={withBase('versions.html')} aria-label="Navigateur de versions" title="Navigateur de versions">
+            <i class="bi bi-clock-history" aria-hidden="true"></i>
+          </a>
+          <a href={withBase('identite.html')} aria-label="Identité visuelle" title="Identité visuelle">
+            <i class="bi bi-palette2" aria-hidden="true"></i>
+          </a>
+          <a href={withBase('cv-apercu.html')} aria-label="CV - Aperçu" title="CV - Aperçu">
+            <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+          </a>
+        </>
+      )
+    }
+    <a href={SITE.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="Profil Github">
+      <i class="bi bi-github" aria-hidden="true"></i>
+    </a>
+    <a href={SITE.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="Profil Linkedin">
+      <i class="bi bi-linkedin" aria-hidden="true"></i>
+    </a>
+  </div>
+
+  <div class="credits">
+    {
+      creditsMode === 'home' ? (
+        <>
+          Designed by{' '}
+          <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
+        </>
+      ) : (
+        <a href={withBase('')}>Retour à l’accueil (V6)</a>
+      )
+    }
+  </div>
+</footer>

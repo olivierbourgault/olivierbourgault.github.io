@@ -1,0 +1,65 @@
+---
+import { PORTFOLIO_VERSIONS } from '../../data/versions';
+import { withBase } from '../../utils/paths';
+
+const maxNum = PORTFOLIO_VERSIONS.length;
+---
+<div class="container versions-hero-wrap">
+  <section id="versions-hero" class="hero versions-hero section" aria-labelledby="versionsHeroTitle">
+    <div class="row align-items-center g-4 content">
+      <div class="col-lg-7">
+        <h1 id="versionsHeroTitle" class="versions-hero-title">
+          <span class="hero-layer-tag">
+            <i class="bi bi-layers-half" aria-hidden="true"></i>
+            OB TECH &bull; ARCHIVE STUDIO
+          </span>
+          Navigateur de <span class="hero-title-highlight">versions</span>
+        </h1>
+
+        <p class="versions-hero-lead">
+          Explorez en direct l’évolution complète de <strong>olivierbourgault.github.io</strong>, de la première édition V1 jusqu’à la nouvelle architecture <strong>V6 Astro · Tech Canvas</strong>. Testez chaque génération et ses palettes historiques sur Desktop, Tablette et Mobile sans quitter la page.
+        </p>
+
+        <div class="versions-hero-actions">
+          <a href="#studio" class="versions-btn-primary">
+            <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+            <span>Explorer le Studio live</span>
+          </a>
+          <a href={withBase('')} class="versions-btn-secondary">
+            <i class="bi bi-house-door" aria-hidden="true"></i>
+            <span>Portfolio actuel (V6)</span>
+          </a>
+          <button type="button" class="versions-btn-outline" data-open-dialog="cvDownloadDialog">
+            <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+            <span>CV (PDF)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="versions-kpi-grid" aria-label="Indicateurs clés de l'archive">
+          <div class="versions-kpi-card">
+            <span id="kpiVersionsCount" class="versions-kpi-value">{maxNum}</span>
+            <span class="versions-kpi-label">Générations live</span>
+            <span id="kpiVersionsRange" class="versions-kpi-sub">V1 &rarr; V{maxNum}</span>
+          </div>
+          <div class="versions-kpi-card">
+            <span class="versions-kpi-value">14+</span>
+            <span class="versions-kpi-label">Palettes &amp; Styles</span>
+            <span class="versions-kpi-sub">V3 à V6</span>
+          </div>
+          <div class="versions-kpi-card">
+            <span class="versions-kpi-value">3</span>
+            <span class="versions-kpi-label">Formats d’écran</span>
+            <span class="versions-kpi-sub">Desktop · Tab · Mobile</span>
+          </div>
+          <div class="versions-kpi-card">
+            <span class="versions-kpi-value">59+</span>
+            <span class="versions-kpi-label">Projets GitHub</span>
+            <span class="versions-kpi-sub">Synchronisés en V6</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,113 @@
+---
+import { RESUME_BLOCKS } from '../../data/resume';
+import { withBase } from '../../utils/paths';
+import SectionTitle from '../SectionTitle.astro';
+import VerticalNav, { type VerticalNavItem } from '../VerticalNav.astro';
+
+function computeYearsRange(blockIndex: number): string {
+  const block = RESUME_BLOCKS[blockIndex];
+  const years = block.items
+    .flatMap((it) => [it.period, ...it.roles.map((r) => r.period || '')])
+    .join(' ')
+    .match(/20\d{2}/g);
+  if (!years || years.length === 0) return '';
+  const nums = years.map(Number);
+  const min = Math.min(...nums);
+  const max = Math.max(...nums);
+  return min === max ? `${min}` : `${min} – ${max}`;
+}
+
+const resumeNavItems: VerticalNavItem[] = RESUME_BLOCKS.map((block, index) => ({
+  targetId: `resume-block-${block.id}`,
+  title: block.title,
+  sub: computeYearsRange(index)
+}));
+---
+<section id="resume" class="resume section" data-aos="fade-up" data-aos-delay="100">
+  <SectionTitle title="CV">
+    <p>
+      Voici un aperçu complet de mon parcours académique et professionnel. Vous pouvez également télécharger la
+      version complète de mon{' '}
+      <button
+        type="button"
+        data-open-dialog="cvDownloadDialog"
+        class="btn btn-link p-0 border-0 align-baseline resume-pdf-inline-link"
+        title="Télécharger mon CV (Français ou Anglais)"
+      >
+        curriculum vitae en PDF
+      </button>.
+    </p>
+
+    <div class="cta-buttons d-flex flex-wrap justify-content-center gap-3 mt-4">
+      <a href={withBase('cv-apercu.html')} class="btn btn-submit">
+        <i class="bi bi-layout-text-window-reverse me-2" aria-hidden="true"></i>CV - Aperçu
+      </a>
+    </div>
+  </SectionTitle>
+
+  <div class="row align-items-center">
+    <div class="resume-wrapper">
+      <VerticalNav
+        id="vnav-resume-list"
+        heading="Parcours CV"
+        ariaLabel="Parcours CV"
+        items={resumeNavItems}
+      >
+        {
+          RESUME_BLOCKS.map((block, index) => {
+            const collapseId = `resume-block-collapse-${index}`;
+            return (
+              <div
+                id={`resume-block-${block.id}`}
+                class="resume-block"
+                data-aos="fade-up"
+                data-aos-delay={block.delay}
+              >
+                <div class="resume-block-header">
+                  <h2>{block.title}</h2>
+                  <button
+                    type="button"
+                    class="resume-block-toggle"
+                    aria-expanded={block.startCollapsed ? 'false' : 'true'}
+                    aria-controls={collapseId}
+                  >
+                    <span class="toggle-label">{block.startCollapsed ? 'Afficher' : 'Réduire'}</span>
+                    <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+                <div
+                  id={collapseId}
+                  class={`section-collapsible-wrap${block.startCollapsed ? ' is-collapsed' : ''}`}
+                >
+                  <div class="section-collapsible-inner">
+                    <div class="timeline">
+                      {block.items.map((item) => (
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay={item.delay}>
+                          <div class="timeline-left">
+                            <h4 class="company">{item.company}</h4>
+                            <span class="period">{item.period}</span>
+                          </div>
+                          <div class="timeline-dot" aria-hidden="true"></div>
+                          <div class="timeline-right">
+                            {item.roles.map((role) => (
+                              <>
+                                {role.period && <span class="period">{role.period}</span>}
+                                <h3 class="position">{role.position}</h3>
+                                <p class="description" set:html={role.descriptionHtml} />
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </VerticalNav>
+    </div>
+  </div>
+</section>

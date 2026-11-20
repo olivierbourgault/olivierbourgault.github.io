@@ -1,0 +1,175 @@
+---
+import { FAMILY_COMPARISON_ROWS, PALETTE_COLOR_TOKENS, TYPO_SPECIMENS } from '../../data/logos';
+import { withBase } from '../../utils/paths';
+import LogoNeural from '../LogoNeural.astro';
+import LogoOB from '../LogoOB.astro';
+import LogoTerminal from '../LogoTerminal.astro';
+
+const benchSlots = [
+  {
+    type: 'ob' as const,
+    title: 'OB Hexagonal Tech',
+    file: 'assets/img/logo/logo-ob-tech.svg',
+    filename: 'logo-ob-tech.svg',
+    ariaLabel: 'Logo OB Hexagonal Tech'
+  },
+  {
+    type: 'terminal' as const,
+    title: 'Terminal Code </>',
+    file: 'assets/img/logo/logo-terminal-tech.svg',
+    filename: 'logo-terminal-tech.svg',
+    ariaLabel: 'Logo Terminal Code Tech'
+  },
+  {
+    type: 'neural' as const,
+    title: 'Nœud Neuronal IA',
+    file: 'assets/img/logo/logo-neural-tech.svg',
+    filename: 'logo-neural-tech.svg',
+    ariaLabel: 'Logo Nœud Neuronal IA'
+  }
+];
+---
+<section id="code-famille" class="identite-chapter" aria-labelledby="codeFamilleHeading">
+  <div class="chapter-header">
+    <div class="d-flex">
+      <span class="identite-section-pill">
+        <i class="bi bi-table" aria-hidden="true"></i>
+        06 &middot; Le code de la famille &amp; Charte Tech Canvas
+      </span>
+    </div>
+    <h2 id="codeFamilleHeading" class="chapter-title">Un cadre qui tient, une polarité qui parle</h2>
+    <p class="chapter-lead">
+      Tout le système graphique tient en deux règles : garder l’<strong>orange #FF6600</strong> comme armature d’architecture, et laisser le <strong>bleu circuit #38BDF8</strong> raconter le métier au cœur de chaque emblème.
+    </p>
+  </div>
+
+  <!-- Responsive Summary Table -->
+  <div tabindex="0" role="region" aria-labelledby="familyTableCaption" class="table-wrapper">
+    <table class="family-code-table">
+      <caption id="familyTableCaption" class="visually-hidden">
+        Tableau comparatif des trois logos OB Tech : lecture visuelle, sens et symbolique cachée
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Logo</th>
+          <th scope="col">Ce qu’on voit</th>
+          <th scope="col">Ce que ça dit</th>
+          <th scope="col">Ce que ça cache</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          FAMILY_COMPARISON_ROWS.map((row) => (
+            <tr>
+              <th scope="row">
+                <span class="table-logo-cell">
+                  <img src={withBase(row.logoFile)} alt="" width="28" height="28" />
+                  <span>{row.name}</span>
+                </span>
+              </th>
+              <td>{row.seen}</td>
+              <td>{row.meaning}</td>
+              <td>{row.hidden}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Palette Color Tokens + Copy Buttons -->
+  <h3 class="invariants-subhead">
+    <i class="bi bi-palette-fill" aria-hidden="true"></i>
+    <span>Palette officielle Tech Canvas (cliquer pour copier le code HEX)</span>
+  </h3>
+  <div class="palette-tokens-grid">
+    {
+      PALETTE_COLOR_TOKENS.map((token) => (
+        <article class="palette-token-card">
+          <div class="palette-swatch-bar" style={`background: ${token.hex};`}></div>
+          <div class="palette-token-body">
+            <h4 class="palette-token-name">{token.name}</h4>
+            <p class="palette-token-role">{token.role}</p>
+            <div class="palette-hex-row">
+              <code id={token.id} class="palette-hex-code">{token.hex}</code>
+              <span class="copy-wrap">
+                <button
+                  type="button"
+                  class="copy-button"
+                  {...({ command: '--copy', commandfor: token.id } as Record<string, string>)}
+                  aria-label={token.ariaLabel}
+                >
+                  <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                  <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                </button>
+                <span class="copy-tip" role="status"></span>
+              </span>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <!-- Official Typography Specimens -->
+  <h3 class="invariants-subhead">
+    <i class="bi bi-fonts" aria-hidden="true"></i>
+    <span>Système typographique</span>
+  </h3>
+  <div class="typo-grid">
+    {
+      TYPO_SPECIMENS.map((spec) => (
+        <article class="typo-card">
+          <span class="typo-role">{spec.role}</span>
+          <p class="typo-sample" style={`font-family: ${spec.fontCss}; ${spec.extraStyle || ''}`}>
+            {spec.sample}
+          </p>
+          <span class="typo-meta">{spec.meta}</span>
+        </article>
+      ))
+    }
+  </div>
+
+  <!-- Multi-Surface Test Bench & SVG Downloads -->
+  <div class="bench-card">
+    <div class="bench-toolbar">
+      <div>
+        <span class="story-label mb-0 d-block">Banc d’essai multi-surfaces</span>
+        <span class="bench-sub-desc">Comparez les 3 logos choisis simultanément sur vos fonds réels ou en taille favicon</span>
+      </div>
+      <div id="benchControls" class="bench-controls" role="group" aria-label="Choisir la surface du banc d'essai">
+        <button type="button" class="bench-btn" data-bench-mode="dark" aria-pressed="true">Carbone #121316</button>
+        <button type="button" class="bench-btn" data-bench-mode="light" aria-pressed="false">Ivoire #F4F1EA</button>
+        <button type="button" class="bench-btn" data-bench-mode="orange" aria-pressed="false">Orange #FF6600</button>
+        <button type="button" class="bench-btn" data-bench-mode="favicon" aria-pressed="false">Favicons 16/32/48</button>
+      </div>
+    </div>
+
+    <div id="benchStage" class="bench-stage" data-bench-surface="dark">
+      {
+        benchSlots.map((slot) => {
+          const url = withBase(slot.file);
+          return (
+            <div class="bench-slot">
+              {slot.type === 'ob' && <LogoOB size={68} class="bench-main-icon" ariaLabel={slot.ariaLabel} />}
+              {slot.type === 'terminal' && <LogoTerminal size={68} class="bench-main-icon" ariaLabel={slot.ariaLabel} />}
+              {slot.type === 'neural' && <LogoNeural size={68} class="bench-main-icon" ariaLabel={slot.ariaLabel} />}
+
+              <div class="bench-favicon-row" aria-hidden="true">
+                <img src={url} alt="" width="16" height="16" />
+                <img src={url} alt="" width="32" height="32" />
+                <img src={url} alt="" width="48" height="48" />
+              </div>
+              <span class="bench-slot-title">{slot.title}</span>
+              <span class="bench-slot-file">{slot.file}</span>
+              <a href={url} download={slot.filename} class="svg-dl-btn mt-1">
+                <i class="bi bi-download" aria-hidden="true"></i>
+                <span>Télécharger SVG</span>
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

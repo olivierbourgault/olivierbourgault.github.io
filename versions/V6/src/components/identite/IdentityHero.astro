@@ -1,0 +1,112 @@
+---
+import { withBase } from '../../utils/paths';
+---
+<div class="container identite-hero-wrap">
+  <section id="identite-hero" class="hero identite-hero section" aria-labelledby="identiteHeroTitle">
+    <div class="row align-items-center g-4 content">
+      <div class="col-lg-7">
+        <h1 id="identiteHeroTitle" class="identite-hero-title">
+          <span class="hero-layer-tag">
+            <i class="bi bi-vector-pen" aria-hidden="true"></i>
+            IDENTITÉ OB TECH &bull; 3 LOGOS &bull; 2026
+          </span>
+          Trois logos, une seule <span class="hero-title-highlight">architecture.</span>
+        </h1>
+
+        <p class="identite-hero-lead">
+          Tout part de mes initiales <strong>O</strong> et <strong>B</strong>, d’un hexagone de protection et d’un dialogue constant entre <strong>l’orange #FF6600</strong> (le signal d’action) et <strong>le bleu #38BDF8</strong> (le circuit logique). D’un pilier à l’autre, la même géométrie trace ma marque personnelle, le code Full-Stack et l’intelligence artificielle.
+        </p>
+
+        <div class="hero-anchor-pills" aria-label="Axes de lecture de l'identité">
+          <a href="#origine" class="hero-anchor-pill">
+            <i class="bi bi-eye" aria-hidden="true"></i>
+            <span>Ce qu’on y voit</span>
+          </a>
+          <a href="#famille" class="hero-anchor-pill">
+            <i class="bi bi-rulers" aria-hidden="true"></i>
+            <span>Comment ils sont nés</span>
+          </a>
+          <a href="#logo-ob-tech" class="hero-anchor-pill">
+            <i class="bi bi-layers-half" aria-hidden="true"></i>
+            <span>Ce qu’ils cachent</span>
+          </a>
+        </div>
+
+        <div class="identite-hero-actions">
+          <a href="#logo-ob-tech" class="identite-btn-primary">
+            <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+            <span>Décoder les 3 logos</span>
+          </a>
+          <a href="#code-famille" class="identite-btn-secondary">
+            <i class="bi bi-palette2" aria-hidden="true"></i>
+            <span>Charte Tech Canvas</span>
+          </a>
+          <a href={`${withBase('')}#expertise`} class="identite-btn-outline">
+            <i class="bi bi-house-door" aria-hidden="true"></i>
+            <span>Voir sur l’accueil</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="hero-blueprint-card">
+          <div class="hero-blueprint-top">
+            <span class="hero-blueprint-tag">Planche vectorielle</span>
+            <div id="heroEmblemSwitcher" class="hero-emblem-switcher" role="group" aria-label="Choisir l'emblème sur la planche">
+              <button type="button" class="hero-emblem-btn" data-hero-emblem="ob-tech" aria-pressed="true">OB Tech</button>
+              <button type="button" class="hero-emblem-btn" data-hero-emblem="terminal" aria-pressed="false">Terminal &lt;/&gt;</button>
+              <button type="button" class="hero-emblem-btn" data-hero-emblem="neural" aria-pressed="false">Neuronal IA</button>
+            </div>
+          </div>
+
+          <div class="hero-blueprint-canvas">
+            <svg id="heroBlueprintSvg" class="hero-blueprint-svg" viewBox="-26 -20 152 140" role="img" aria-label="Aperçu blueprint des logos OB Tech">
+              <line x1="-20" y1="50" x2="120" y2="50" class="bp-guide" />
+              <line x1="50" y1="-14" x2="50" y2="114" class="bp-guide" />
+              <circle cx="50" cy="50" r="46" class="bp-guide-dash" />
+              <circle cx="50" cy="50" r="24" class="bp-guide" />
+
+              <!-- Emblem 1: OB Hexagonal Tech -->
+              <g class="hero-emblem-group is-active" data-hero-svg="ob-tech">
+                <text x="-22" y="-8" class="bp-text">R 46 / 60°</text>
+                <text x="122" y="-8" text-anchor="end" class="bp-text-orange">HEX O + B</text>
+                <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round" />
+                <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" />
+                <circle cx="50" cy="50" r="4" fill="#FF6600" />
+              </g>
+
+              <!-- Emblem 2: Terminal Code </> -->
+              <g class="hero-emblem-group" data-hero-svg="terminal">
+                <text x="-22" y="-8" class="bp-text">R 44 / 74°</text>
+                <text x="122" y="-8" text-anchor="end" class="bp-text-orange">&lt; / &gt;</text>
+                <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6" />
+                <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+                <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round" />
+                <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+
+              <!-- Emblem 3: Noeud Neuronal IA -->
+              <g class="hero-emblem-group" data-hero-svg="neural">
+                <text x="-22" y="-8" class="bp-text">R 42 / dash</text>
+                <text x="122" y="-8" text-anchor="end" class="bp-text-orange">3 SYNAPSES</text>
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4" />
+                <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4" />
+                <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4" />
+                <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4" />
+                <circle cx="50" cy="30" r="8" fill="#38BDF8" />
+                <circle cx="32" cy="65" r="8" fill="#38BDF8" />
+                <circle cx="68" cy="65" r="8" fill="#38BDF8" />
+                <circle cx="50" cy="53" r="5" fill="#ffffff" class="neural-core-dot" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="hero-blueprint-meta">
+            <span>viewBox 0 0 100 100 · centre 50;50</span>
+            <span id="heroBlueprintReadout" class="hero-blueprint-readout">OB Hexagonal · R 46 · 60°</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

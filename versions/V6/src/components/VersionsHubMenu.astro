@@ -1,0 +1,54 @@
+---
+import { withBase } from '../utils/paths';
+
+interface Props {
+  currentPage?: 'home' | 'versions' | 'identite' | 'cv' | '404';
+}
+
+const { currentPage = 'home' } = Astro.props;
+---
+<div class="header-hub-dropdown d-inline-flex">
+  <button
+    type="button"
+    id="headerHubBtn"
+    class="header-hub-toggle"
+    aria-expanded="false"
+    aria-controls="headerHubMenu"
+    aria-label="Versions et identité visuelle"
+    title="Versions & Identité visuelle"
+  >
+    <i class="bi bi-layers" aria-hidden="true"></i>
+  </button>
+  <ul id="headerHubMenu" class="dropdown-menu dropdown-menu-end header-hub-menu">
+    <li>
+      <a
+        class={`dropdown-item${currentPage === 'versions' ? ' is-current' : ''}`}
+        href={withBase('versions.html')}
+        aria-current={currentPage === 'versions' ? 'page' : undefined}
+      >
+        <i class="bi bi-clock-history" aria-hidden="true"></i>
+        <span>Navigateur de versions</span>
+      </a>
+    </li>
+    <li>
+      <a
+        class={`dropdown-item${currentPage === 'identite' ? ' is-current' : ''}`}
+        href={withBase('identite.html')}
+        aria-current={currentPage === 'identite' ? 'page' : undefined}
+      >
+        <i class="bi bi-palette2" aria-hidden="true"></i>
+        <span>Identité visuelle &amp; Logos</span>
+      </a>
+    </li>
+    <li>
+      <a
+        class={`dropdown-item${currentPage === 'cv' ? ' is-current' : ''}`}
+        href={withBase('cv-apercu.html')}
+        aria-current={currentPage === 'cv' ? 'page' : undefined}
+      >
+        <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+        <span>CV - Aperçu</span>
+      </a>
+    </li>
+  </ul>
+</div>

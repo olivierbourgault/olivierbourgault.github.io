@@ -1,0 +1,76 @@
+---
+import '../styles/pages/identite.css';
+
+import ScrollTop from '../components/ScrollTop.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import VerticalNav from '../components/VerticalNav.astro';
+import CodeFamilyChapter from '../components/identite/CodeFamilyChapter.astro';
+import FamilyChapter from '../components/identite/FamilyChapter.astro';
+import IdentityHero from '../components/identite/IdentityHero.astro';
+import LogoChapters from '../components/identite/LogoChapters.astro';
+import OriginChapter from '../components/identite/OriginChapter.astro';
+import { IDENTITY_CHAPTERS } from '../data/logos';
+import { type NavLinkItem } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Accueil', href: withBase('') },
+  { label: 'Origine', href: '#origine' },
+  { label: 'Famille', href: '#famille' },
+  { label: 'Logos', href: '#logo-ob-tech', active: true },
+  { label: 'Charte', href: '#code-famille' }
+];
+---
+<BaseLayout
+  title="Identité visuelle & Logos — Charte OB Tech | Olivier Bourgault"
+  description="Histoire, construction géométrique, lecture symbolique et charte graphique officielle des trois logos OB Tech du portfolio d'Olivier Bourgault : Monogramme OB Hexagonal, Terminal Code et Nœud Neuronal IA."
+  keywords="Identité visuelle, Charte graphique, Logo OB Tech, Olivier Bourgault, Tech Canvas, SVG Vectoriel, Full-Stack, Intelligence Artificielle, TI"
+  canonicalPath="identite.html"
+  ogTitle="Identité visuelle & Logos — OB Tech | Olivier Bourgault"
+  ogDescription="Trois logos, une seule architecture : découvrez la genèse, la construction SVG et le système graphique Tech Canvas d'Olivier Bourgault."
+  bodyClass="identite-page dark"
+>
+  <SiteHeader
+    links={navLinks}
+    currentPage="identite"
+    drawerExtras={[
+      { href: withBase(''), icon: 'bi-house-door', label: 'Portfolio actuel', title: 'Portfolio actuel' },
+      { href: withBase('versions.html'), icon: 'bi-clock-history', label: 'Navigateur de versions', title: 'Navigateur de versions' }
+    ]}
+  />
+
+  <main id="main-content" class="main" tabindex="-1">
+    <IdentityHero />
+
+    <div class="container identite-story-wrap">
+      <VerticalNav
+        id="vnavIdentiteList"
+        heading="Histoire & Sens"
+        ariaLabel="Chapitres de l'identité visuelle"
+        items={IDENTITY_CHAPTERS}
+        layoutClass="identite-vnav-layout"
+        contentClass="identite-main-col"
+      >
+        <OriginChapter />
+        <FamilyChapter />
+        <LogoChapters />
+        <CodeFamilyChapter />
+      </VerticalNav>
+    </div>
+  </main>
+
+  <SiteFooter brandText="OB TECH • IDENTITÉ VISUELLE" creditsMode="subpage" />
+  <ScrollTop href="#identite-hero" label="Retour en haut de page" />
+
+  <script>
+    import { initIdentitePage } from '../scripts/identite';
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initIdentitePage);
+    } else {
+      initIdentitePage();
+    }
+  </script>
+</BaseLayout>

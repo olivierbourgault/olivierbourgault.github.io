@@ -1,0 +1,179 @@
+---
+import { PORTFOLIO_VERSIONS } from '../../data/versions';
+import SectionTitle from '../SectionTitle.astro';
+import VerticalNav, { type VerticalNavItem } from '../VerticalNav.astro';
+
+const maxNum = PORTFOLIO_VERSIONS.length;
+const nextNum = maxNum + 1;
+
+const sidebarItems: VerticalNavItem[] = [
+  ...PORTFOLIO_VERSIONS.map((v) => ({
+    targetId: `version-${v.id}`,
+    title: `${v.id} · ${v.shortLabel}`,
+    sub: `${v.status} · ${v.date}`
+  })),
+  {
+    targetId: `version-V${nextNum}`,
+    title: `V${nextNum}+ · À venir`,
+    sub: 'Feuille de route'
+  }
+];
+---
+<section id="timeline" class="section timeline-section" aria-labelledby="timelineHeading">
+  <div class="container">
+    <SectionTitle
+      pillText="Historique complet"
+      pillIcon="bi-git"
+      title={`Frise d’évolution (V${maxNum} → V1)`}
+      headingId="timelineHeading"
+    >
+      <p>
+        Chaque génération documente les choix architecturaux, la progression de l’identité visuelle et les technologies adoptées au fil du temps.
+      </p>
+    </SectionTitle>
+
+    <div class="timeline-toolbar-row">
+      <span id="timelineCountBadge" class="timeline-count-badge">
+        {maxNum} générations archivées · V{maxNum} active
+      </span>
+      <button
+        type="button"
+        id="toggleAllDetailsBtn"
+        class="timeline-toggle-all-btn"
+        aria-expanded="false"
+      >
+        <i class="bi bi-arrows-expand" aria-hidden="true"></i>
+        <span class="label-expand">Tout déplier les notes</span>
+        <span class="label-collapse">Tout replier les notes</span>
+      </button>
+    </div>
+
+    <VerticalNav
+      id="vnavVersionsList"
+      heading="Chronologie"
+      ariaLabel="Navigation rapide entre les versions"
+      items={sidebarItems}
+      contentId="versionsTimeline"
+      contentClass="timeline-track"
+    >
+      {
+        PORTFOLIO_VERSIONS.map((v, index) => {
+          const statusClass =
+            v.statusType === 'live'
+              ? 'version-status-pill is-live'
+              : v.statusType === 'archive'
+                ? 'version-status-pill is-archive'
+                : 'version-status-pill';
+
+          return (
+            <article
+              id={`version-${v.id}`}
+              class={`timeline-version-card${v.featured ? ' is-featured' : ''}`}
+              data-timeline-id={v.id}
+            >
+              <span class="timeline-node-dot" aria-hidden="true"></span>
+
+              <div class="version-card-top">
+                <div class="version-card-badges">
+                  <span class="version-code-badge">{v.id}.0</span>
+                  <span class={statusClass}>{v.status} &bull; {v.date}</span>
+                </div>
+                <div class="version-swatches" aria-label={`Palette chromatique de la ${v.id}`}>
+                  {v.swatches.map((hex) => (
+                    <span class="version-swatch" style={`background: ${hex};`} title={hex}></span>
+                  ))}
+                </div>
+              </div>
+
+              <h3 class="version-card-title">{v.title}</h3>
+              <p class="version-card-desc">{v.description}</p>
+
+              <div class="version-stack-list">
+                {v.stack.map((tag) => (
+                  <span class="version-stack-pill">{tag}</span>
+                ))}
+              </div>
+
+              <details class="version-details" open={index === 0}>
+                <summary class="version-details-summary">
+                  Notes de version &amp; nouveautés ({v.highlights.length})
+                </summary>
+                <div class="version-details-body">
+                  <ul class="version-highlights-list">
+                    {v.highlights.map((item) => (
+                      <li>
+                        <i class="bi bi-check2-circle" aria-hidden="true"></i>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {v.palettes.length > 1 && (
+                    <div class="version-card-palettes">
+                      <span class="version-card-palettes-label">
+                        <i class="bi bi-palette2 me-1" aria-hidden="true"></i>Tester un style historique dans le Studio :
+                      </span>
+                      <div class="version-card-palettes-list">
+                        {v.palettes.map((p) => (
+                          <button
+                            type="button"
+                            class="timeline-palette-btn"
+                            data-preview-version={v.id}
+                            data-preview-palette={p.key}
+                            title={`Charger ${v.id} (${p.name}) dans le Studio`}
+                          >
+                            <span class="studio-palette-dot" style={`background: ${p.color};`}></span>
+                            <span>{p.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </details>
+
+              <div class="version-card-footer">
+                <button
+                  type="button"
+                  class="versions-btn-primary"
+                  data-preview-version={v.id}
+                >
+                  <i class="bi bi-display" aria-hidden="true"></i>
+                  <span>Prévisualiser dans le Studio</span>
+                </button>
+                <a href={v.path} class="versions-btn-outline">
+                  <span>Ouvrir la {v.id}</span>
+                  <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
+
+      <article id={`version-V${nextNum}`} class="timeline-version-card is-upcoming" data-timeline-id={`V${nextNum}+`}>
+        <span class="timeline-node-dot" aria-hidden="true"></span>
+        <div class="version-card-top">
+          <div class="version-card-badges">
+            <span class="version-code-badge">V{nextNum}+</span>
+            <span class="version-status-pill is-archive">Feuille de route &bull; À venir</span>
+          </div>
+        </div>
+        <h3 class="version-card-title">Prochaines générations (V{nextNum}, V{nextNum + 1}…)</h3>
+        <p class="version-card-desc">
+          Cet espace est prêt pour accueillir les futures itérations du portfolio : nouvelles expériences IA, démos interactives et évolutions de design.
+        </p>
+        <ul class="version-highlights-list mb-0">
+          <li>
+            <i class="bi bi-lightning-charge" aria-hidden="true"></i>
+            <span>Architecture modulaire prête dans <code>src/data/versions.ts</code></span>
+          </li>
+          <li>
+            <i class="bi bi-archive" aria-hidden="true"></i>
+            <span>Conservation intégrale de l’historique V1 &rarr; V{maxNum} sur <code>olivierbourgault.github.io</code></span>
+          </li>
+        </ul>
+      </article>
+    </VerticalNav>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+import { SITE } from '../../data/site';
+---
+<section id="hero" class="hero section" data-aos="fade-up" data-aos-delay="100">
+  <div class="row align-items-center content">
+    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+      <h2 aria-label="Je suis un développeur">
+        <span class="hero-layer-tag">
+          <i class="bi bi-terminal me-1" aria-hidden="true"></i>
+          <span class="typewriter nocaret">Développeur</span>
+        </span>
+        {SITE.author}
+      </h2>
+
+      <p class="lead" id="bio">
+        Diplômé en technique de l'informatique et actuellement en spécialisation en
+        <strong>intelligence artificielle</strong>, je conçois de nouvelles applications et optimise les systèmes
+        existants. Passionné par l'automatisation, la résolution de problématiques techniques et l'accessibilité
+        Web (WCAG), je mets ma rigueur et mon autonomie au service de projets innovants.
+      </p>
+
+      <div class="row cta-buttons" data-aos="fade-up" data-aos-delay="300">
+        <div class="mx-auto w-auto">
+          <button
+            type="button"
+            data-open-dialog="cvDownloadDialog"
+            class="btn btn-outline"
+            title="Télécharger mon CV (PDF — Français ou Anglais)"
+            aria-label="Télécharger mon CV (Français ou Anglais)"
+          >
+            <i class="bi bi-cloud-download" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="d-flex justify-content-around gap-3">
+          <a href="#portfolio" class="btn btn-primary">Réalisations</a>
+          <a href="#contact" class="btn btn-secondary-accent">Me contacter</a>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-item">
+            <span class="stat-number"><span id="experience">5</span>+</span>
+            <span class="stat-label">Années d'expérience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number"><span id="projectsCount">6</span>+</span>
+            <span class="stat-label">Projets complétés</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="hero-image">
+        <img
+          id="avatar"
+          src={SITE.githubAvatarUrl}
+          alt="Portrait d'Olivier Bourgault"
+          class="img-fluid d-block mx-auto"
+          data-aos="zoom-out"
+          data-aos-delay="300"
+        />
+        <div class="shape-1" aria-hidden="true"></div>
+        <div class="shape-2" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>

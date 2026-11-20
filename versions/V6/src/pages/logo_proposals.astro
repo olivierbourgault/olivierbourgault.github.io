@@ -1,0 +1,49 @@
+---
+import { withBase } from '../utils/paths';
+
+const target = withBase('identite.html');
+const canonical = 'https://olivierbourgault.github.io/versions/V6/identite.html';
+---
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Identité visuelle &amp; Logos — Redirection vers identite.html</title>
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link href={withBase('assets/img/logo/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target + window.location.search + window.location.hash);
+    </script>
+    <style is:inline>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #121316;
+        color: #f5f5f7;
+        font-family: system-ui, -apple-system, sans-serif;
+        text-align: center;
+        padding: 24px;
+      }
+      a {
+        color: #ff6600;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p>
+        Cette page a été renommée. Redirection vers{' '}
+        <a href={target}>Identité visuelle &amp; Logos (identite.html)</a>…
+      </p>
+    </main>
+  </body>
+</html>
