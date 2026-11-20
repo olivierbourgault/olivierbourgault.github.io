@@ -53,9 +53,10 @@ function aosInit() {
 }
 
 /**
- * Main Initialization on Page Load
+ * Main Initialization: start Fusion Boot Loader immediately on DOM ready,
+ * then finalize to 100% when window load completes.
  */
-window.addEventListener('load', function (e) {
+(function initBootSequence() {
   const pctEl = document.getElementById('obBootPct');
   const barEl = document.getElementById('obBootBar');
   const line1 = document.getElementById('obBootLine1');
@@ -63,45 +64,83 @@ window.addEventListener('load', function (e) {
   const line3 = document.getElementById('obBootLine3');
 
   let pct = 0;
+  let isLoaded = document.readyState === 'complete';
+  let minElapsed = false;
+  let finalized = false;
+
   const pctTimer = setInterval(() => {
-    pct = Math.min(100, pct + 5);
-    if (pctEl) pctEl.textContent = String(pct).padStart(2, '0') + '%';
-    if (pct >= 100) clearInterval(pctTimer);
-  }, 45);
+    const cap = isLoaded ? 100 : 90;
+    if (pct < cap) {
+      pct = Math.min(cap, pct + (isLoaded ? 5 : 3));
+      if (pctEl) pctEl.textContent = String(pct).padStart(2, '0') + '%';
+      if (barEl && !isLoaded) barEl.style.width = `${pct}%`;
+    }
+    if (isLoaded && minElapsed && pct >= 100) {
+      finishBoot();
+    }
+  }, 40);
 
   setTimeout(() => {
     if (line1) line1.classList.add('is-visible');
-    if (barEl) barEl.style.width = '35%';
-  }, 100);
+  }, 80);
 
   setTimeout(() => {
     if (line2) line2.classList.add('is-visible');
-    if (barEl) barEl.style.width = '75%';
-  }, 460);
+  }, 380);
 
   setTimeout(() => {
+    minElapsed = true;
+    if (isLoaded) triggerReadyPhase();
+  }, 900);
+
+  function triggerReadyPhase() {
     if (line3) line3.classList.add('is-visible');
     if (barEl) barEl.style.width = '100%';
-  }, 850);
+    if (minElapsed && pct >= 100) {
+      finishBoot();
+    }
+  }
 
-  setTimeout(() => {
+  function finishBoot() {
+    if (finalized) return;
+    finalized = true;
     clearInterval(pctTimer);
     if (pctEl) pctEl.textContent = '100%';
-
-    document.getElementById("spinner").classList.add("d-none");
-    document.getElementById("page").classList.remove("d-none");
-
-    const expEl = document.getElementById('experience');
-    if (expEl) expEl.innerHTML = diffDate(START, TODAY);
-
-    main();
+    if (barEl) barEl.style.width = '100%';
+    if (line1) line1.classList.add('is-visible');
+    if (line2) line2.classList.add('is-visible');
+    if (line3) line3.classList.add('is-visible');
 
     setTimeout(() => {
-      const activeFilter = document.querySelector(".filter-active");
-      if (activeFilter) activeFilter.click();
-    }, 350);
-  }, 1350);
-});
+      const spinner = document.getElementById("spinner");
+      const page = document.getElementById("page");
+      if (spinner) spinner.classList.add("d-none");
+      if (page) page.classList.remove("d-none");
+
+      const expEl = document.getElementById('experience');
+      if (expEl) expEl.innerHTML = diffDate(START, TODAY);
+
+      main();
+
+      setTimeout(() => {
+        const activeFilter = document.querySelector(".filter-active");
+        if (activeFilter) activeFilter.click();
+      }, 350);
+    }, 220);
+  }
+
+  window.addEventListener('load', () => {
+    isLoaded = true;
+    triggerReadyPhase();
+  });
+
+  // Safety fallback if a third-party script stalls window.load
+  setTimeout(() => {
+    isLoaded = true;
+    minElapsed = true;
+    finishBoot();
+  }, 4500);
+})();
 
 /* -------------------------------------------------------------------------- */
 /* EVENT LISTENERS                                */
