@@ -16,22 +16,7 @@
   }
 
   function getVersionFromUrl() {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const raw = (params.get('version') || params.get('style') || '').toLowerCase();
-      const hash = (window.location.hash || '').replace(/^#/, '').toLowerCase();
-      if (
-        raw === 'portfolio' ||
-        raw === 'tech' ||
-        raw === 'tech-canvas' ||
-        (!raw && (hash === 'portfolio' || hash === 'tech' || hash === 'tech-canvas'))
-      ) {
-        return 'portfolio';
-      }
-    } catch (e) {
-      // Fallback to reference
-    }
-    return 'reference';
+    return 'portfolio';
   }
 
   /* ------------------------------------------------------------------------
@@ -180,7 +165,7 @@
 
   function applyVersion(version, options) {
     const opts = options || {};
-    const next = version === 'portfolio' ? 'portfolio' : 'reference';
+    const next = 'portfolio';
 
     document.documentElement.setAttribute('data-cv-version', next);
     document.body.setAttribute('data-cv-version', next);

@@ -99,6 +99,11 @@ document.addEventListener('scroll', function (e) {
  */
 window.addEventListener('resize', function (e) {
   positionSkills();
+  const isoContainer = document.querySelector('.isotope-container');
+  if (isoContainer && typeof Isotope !== 'undefined') {
+    const iso = Isotope.data(isoContainer);
+    if (iso) iso.layout();
+  }
 });
 
 /**
@@ -123,6 +128,9 @@ if (scrollTopBtn) {
  * Main Logic Driver
  */
 function main() {
+  // Effet Typewriter dynamique en JS Vanilla
+  initTypewriter();
+
   // Chargement dynamique des projets depuis GitHub (Git Trees API + cache sessionStorage)
   loadGitHubPortfolio();
 
@@ -302,6 +310,66 @@ skillsAnimation.forEach((item) => {
     }
   });
 });
+
+/**
+ * Effet Typewriter dynamique en JavaScript Vanilla
+ * Remplace les ~500 lignes de keyframes CSS par un moteur léger, naturel et accessible.
+ */
+function initTypewriter() {
+  const el = document.querySelector('.typewriter');
+  if (!el || el.dataset.twInit === '1') return;
+  el.dataset.twInit = '1';
+
+  const words = [
+    "Développeur",
+    "Programmeur",
+    "Technicien",
+    "Intégrateur",
+    "Concepteur",
+    "Créateur",
+    "Codeur",
+    "Informaticien",
+    "Professionnel"
+  ];
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = words[0];
+    return;
+  }
+
+  let wordIndex = 0;
+  let charIndex = words[0].length;
+  let isDeleting = true;
+
+  el.textContent = words[0];
+
+  function tick() {
+    const currentWord = words[wordIndex];
+
+    if (isDeleting) {
+      charIndex--;
+      el.textContent = currentWord.slice(0, charIndex);
+      if (charIndex <= 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(tick, 220);
+        return;
+      }
+      setTimeout(tick, 45);
+    } else {
+      charIndex++;
+      el.textContent = currentWord.slice(0, charIndex);
+      if (charIndex >= currentWord.length) {
+        isDeleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+      setTimeout(tick, 65 + Math.floor(Math.random() * 40));
+    }
+  }
+
+  setTimeout(tick, 1500);
+}
 
 /**
  * Scroll Position helper
@@ -685,6 +753,9 @@ function renderPortfolioProjects(projects) {
       iso.arrange({ filter: currentFilter });
       imagesLoaded(container, () => {
         iso.layout();
+        if (typeof AOS !== 'undefined') {
+          AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
+        }
       });
     }
     GLightbox({ selector: '.glightbox' });

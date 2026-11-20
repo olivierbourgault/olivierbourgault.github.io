@@ -22,22 +22,7 @@
   <!-- Synchronous Pre-Paint Version Resolution (Zero FOUC) -->
   <script>
     (function () {
-      try {
-        var params = new URLSearchParams(window.location.search);
-        var raw = (params.get('version') || params.get('style') || '').toLowerCase();
-        var hash = (window.location.hash || '').replace(/^#/, '').toLowerCase();
-        var version = (
-          raw === 'portfolio' ||
-          raw === 'tech' ||
-          raw === 'tech-canvas' ||
-          (!raw && (hash === 'portfolio' || hash === 'tech' || hash === 'tech-canvas'))
-        )
-          ? 'portfolio'
-          : 'reference';
-        document.documentElement.setAttribute('data-cv-version', version);
-      } catch (e) {
-        document.documentElement.setAttribute('data-cv-version', 'reference');
-      }
+      document.documentElement.setAttribute('data-cv-version', 'portfolio');
     })();
   </script>
   <!-- Vendor CSS Files -->
@@ -133,21 +118,13 @@
   <main id="main-content" class="main" tabindex="-1">
     <div class="page-card">
       <div class="resume">
-        <!-- #region Version Switcher Bar -->
-        <div class="cv-version-bar" role="region" aria-label="Sélecteur de style visuel du CV">
+        <!-- #region Version Bar -->
+        <div class="cv-version-bar" role="region" aria-label="Navigation du CV">
           <div class="cv-version-meta">
             <a href="index.html#resume" class="cv-back-link">
               <i class="bi bi-arrow-left" aria-hidden="true"></i> Retour au portfolio
             </a>
-            <span class="cv-version-status" id="cvVersionStatus" aria-live="polite">Style Référence</span>
-          </div>
-          <div class="cv-version-btns" role="group" aria-label="Version visuelle">
-            <button type="button" class="cv-version-btn" data-cv-version-btn data-version="reference" aria-pressed="true">
-              Style Référence
-            </button>
-            <button type="button" class="cv-version-btn" data-cv-version-btn data-version="portfolio" aria-pressed="false">
-              Thème Portfolio
-            </button>
+            <span class="cv-version-status" id="cvVersionStatus" aria-live="polite">Thème Portfolio</span>
           </div>
         </div>
         <!-- #endregion -->
@@ -180,8 +157,6 @@
               </p>
               <p class="cv-contact-line">
                 <span>J8L 1Y3 | Gatineau</span>
-                <span class="sep" aria-hidden="true">&middot;</span>
-                <a href="tel:+18199620709">(819) 962-0709</a>
                 <span class="sep" aria-hidden="true">|</span>
                 <a href="mailto:bourgault.olivier8501@gmail.com">bourgault.olivier8501@gmail.com</a>
               </p>
