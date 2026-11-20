@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="color-scheme" content="dark light">
+  <title>Navigateur de versions — Studio Interactif | Olivier Bourgault</title>
+  <meta name="description"
+    content="Studio interactif et frise d'évolution du portfolio d'Olivier Bourgault (olivierbourgault.github.io) — Prévisualisez en direct les versions V1, V2, V3, V4 et V5 Tech Canvas sur Desktop, Tablette et Mobile.">
+  <meta name="keywords"
+    content="Navigateur de versions, Studio interactif, Portfolio, Olivier Bourgault, olivierbourgault.github.io, V1, V2, V3, V4, V5, Tech Canvas, Développeur, TI, IA">
+  <link rel="canonical" href="https://olivierbourgault.github.io/versions/V5/versions.html">
+  <meta property="og:title" content="Navigateur de versions — Studio Interactif | Olivier Bourgault">
+  <meta property="og:description" content="Prévisualisez en direct toutes les générations (V1 → V5) du portfolio d'Olivier Bourgault sur Desktop, Tablette et Mobile.">
+  <meta property="og:url" content="https://olivierbourgault.github.io/versions/V5/versions.html">
+  <meta property="og:type" content="website">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
+  <link href="assets/img/favicon.png" rel="alternate icon">
+
+  <!-- Synchronous Pre-Paint Theme Resolution (Zero FOUC) -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('ob_versions_theme') === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts (100% alignées sur index.html Tech Canvas) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Staatliches&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Main Tech Canvas CSS + Dedicated Versions Studio CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/versions.css" rel="stylesheet">
+</head>
+
+<body class="versions-page dark" data-bs-theme="dark" data-palette="tech-canvas">
+  <a href="#main-content" class="visually-hidden-focusable">Aller au contenu principal</a>
+
+  <!-- Pointeur Interactif Aahil Khan + Halo Radial Orange (Touche L) -->
+  <div id="laser-dot" aria-hidden="true"></div>
+
+  <!-- Ambient Background Blobs -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- #region Site Navbar (100% alignée sur index.html Shabnam + Tech Canvas) -->
+  <header id="header" class="header d-flex align-items-center">
+    <div
+      class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
+      <!-- Logo / Wordmark -->
+      <a href="index.html" class="logo d-flex align-items-center text-reset gap-2" aria-label="Olivier Bourgault Accueil">
+        <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
+          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+        </svg>
+        <span class="logo-name">Olivier Bourgault</span>
+      </a>
+
+      <!-- Mobile Drawer Scrim -->
+      <div class="menu-scrim d-xl-none" id="menuScrim" aria-hidden="true"></div>
+
+      <!-- Primary Navigation & Mobile Slide-Out Drawer -->
+      <nav id="navmenu" class="navmenu" aria-label="Navigation principale">
+        <button class="menu-close d-xl-none" id="menuCloseBtn" type="button" aria-label="Fermer le menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <path d="M6 6l10 10M16 6L6 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+        </button>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#studio" class="active" aria-current="page">Studio</a></li>
+          <li><a href="#timeline">Évolution</a></li>
+          <li><a href="cv-apercu.html">CV</a></li>
+          <li><a href="logo_proposals.html">Identité</a></li>
+        </ul>
+        <div class="menu-foot d-xl-none">
+          <a href="mailto:bourgault.olivier8501@gmail.com" class="menu-foot-email">bourgault.olivier8501@gmail.com</a>
+          <div class="menu-foot-socials">
+            <a href="index.html" aria-label="Portfolio actuel" title="Portfolio actuel"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+            <a href="logo_proposals.html" aria-label="Identité visuelle et logos" title="Identité visuelle"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+            <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="d-flex align-items-center gap-1 header-actions">
+        <div class="d-flex align-items-center gap-1 header-social-links">
+          <div class="dropdown d-inline-flex">
+            <button type="button" class="header-hub-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Versions et identité visuelle" title="Versions &amp; Identité visuelle">
+              <i class="bi bi-layers" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end header-hub-menu">
+              <li>
+                <a class="dropdown-item is-current" href="versions.html" aria-current="page">
+                  <i class="bi bi-clock-history" aria-hidden="true"></i>
+                  <span>Navigateur de versions</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="logo_proposals.html">
+                  <i class="bi bi-palette2" aria-hidden="true"></i>
+                  <span>Identité visuelle &amp; Logos</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="cv-apercu.html">
+                  <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+                  <span>CV - Aperçu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          <button type="button" id="themeSwitcherBtn" class="theme-switcher-btn" aria-label="Passer au mode clair" title="Passer au mode clair" aria-pressed="true">
+            <i id="themeSwitcher" class="bi bi-sun-fill" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu">
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- #endregion -->
+
+  <main id="main-content" class="main" tabindex="-1">
+    <!-- #region Hero Canvas Section -->
+    <div class="container versions-hero-wrap">
+      <section id="versions-hero" class="hero versions-hero section" aria-labelledby="versionsHeroTitle">
+        <div class="row align-items-center g-4 content">
+          <div class="col-lg-7">
+            <h1 id="versionsHeroTitle" class="versions-hero-title">
+              <span class="hero-layer-tag">
+                <i class="bi bi-layers-half" aria-hidden="true"></i>
+                OB TECH &bull; ARCHIVE STUDIO
+              </span>
+              Navigateur de <span class="hero-title-highlight">versions</span>
+            </h1>
+
+            <p class="versions-hero-lead">
+              Explorez en direct l’évolution complète de <strong>olivierbourgault.github.io</strong>, de la première édition V1 jusqu’au studio <strong>V5 Tech Canvas</strong>. Testez chaque génération et ses palettes historiques sur Desktop, Tablette et Mobile sans quitter la page.
+            </p>
+
+            <div class="versions-hero-actions">
+              <a href="#studio" class="versions-btn-primary">
+                <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                <span>Explorer le Studio live</span>
+              </a>
+              <a href="index.html" class="versions-btn-secondary">
+                <i class="bi bi-house-door" aria-hidden="true"></i>
+                <span>Portfolio actuel (V5)</span>
+              </a>
+              <button type="button" class="versions-btn-outline" data-open-dialog="cvDownloadDialog">
+                <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+                <span>CV (PDF)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="versions-kpi-grid" aria-label="Indicateurs clés de l'archive">
+              <div class="versions-kpi-card">
+                <span id="kpiVersionsCount" class="versions-kpi-value">5</span>
+                <span class="versions-kpi-label">Générations live</span>
+                <span id="kpiVersionsRange" class="versions-kpi-sub">V1 &rarr; V5</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">13+</span>
+                <span class="versions-kpi-label">Palettes &amp; Styles</span>
+                <span class="versions-kpi-sub">V3, V4 &amp; V5</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">3</span>
+                <span class="versions-kpi-label">Formats d’écran</span>
+                <span class="versions-kpi-sub">Desktop · Tab · Mobile</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">59+</span>
+                <span class="versions-kpi-label">Projets GitHub</span>
+                <span class="versions-kpi-sub">Synchronisés en V5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Interactive Live Preview Studio -->
+    <section id="studio" class="section studio-section" aria-labelledby="studioHeading">
+      <div class="container">
+        <div class="section-title">
+          <div class="d-flex justify-content-center">
+            <span class="versions-section-pill">
+              <i class="bi bi-display" aria-hidden="true"></i>
+              Prévisualisation en direct
+            </span>
+          </div>
+          <div class="section-title-header">
+            <h2 id="studioHeading">Studio Interactif</h2>
+          </div>
+          <div class="title-shape" aria-hidden="true">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </div>
+          <p>
+            Sélectionnez une génération ci-dessous pour la manipuler en temps réel, changer de format d’appareil ou basculer instantanément entre les palettes historiques des versions V3 et V4.
+          </p>
+        </div>
+
+        <!-- Single-Row Scrollable Accessible Tablist (Modern Web Guidance: tabs) -->
+        <div class="studio-tablist-wrap">
+          <div
+            id="studioTablist"
+            class="studio-tablist"
+            role="tablist"
+            focusgroup="tablist nomemory"
+            aria-label="Sélection de la version à prévisualiser"
+          >
+            <!-- Initial SSR/pre-JS fallback tab -->
+            <button type="button" role="tab" id="studio-tab-V5" class="studio-tab" data-version-tab="V5" aria-selected="true" focusgroupstart>
+              <span class="studio-tab-id">V5</span>
+              <span>Tech Canvas</span>
+              <span class="studio-tab-badge">Actuelle</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Studio OS Window Panel -->
+        <div
+          id="studioTabpanel"
+          class="studio-window"
+          role="tabpanel"
+          aria-labelledby="studio-tab-V5"
+        >
+          <!-- Top Browser Toolbar -->
+          <div class="studio-toolbar">
+            <div class="studio-chrome-left">
+              <div class="studio-dots" aria-hidden="true">
+                <span class="studio-dot is-orange"></span>
+                <span class="studio-dot is-sky"></span>
+                <span class="studio-dot is-slate"></span>
+              </div>
+              <div class="studio-address-bar" title="URL active dans l'aperçu">
+                <i class="bi bi-lock-fill" aria-hidden="true"></i>
+                <span id="studioAddressText" class="studio-address-text">olivierbourgault.github.io/index.html</span>
+              </div>
+            </div>
+
+            <div class="studio-chrome-right">
+              <div class="viewport-switcher" role="group" aria-label="Format d'affichage de l'aperçu">
+                <button type="button" class="viewport-btn" data-device="desktop" aria-pressed="true" title="Aperçu Desktop (1366 px)">
+                  <i class="bi bi-display" aria-hidden="true"></i>
+                  <span>Desktop</span>
+                </button>
+                <button type="button" class="viewport-btn" data-device="tablet" aria-pressed="false" title="Aperçu Tablette (768 px)">
+                  <i class="bi bi-tablet" aria-hidden="true"></i>
+                  <span>Tablette</span>
+                </button>
+                <button type="button" class="viewport-btn" data-device="mobile" aria-pressed="false" title="Aperçu Mobile (390 px)">
+                  <i class="bi bi-phone" aria-hidden="true"></i>
+                  <span>Mobile</span>
+                </button>
+              </div>
+
+              <div class="studio-action-group">
+                <button type="button" id="studioReloadBtn" class="studio-icon-btn" title="Recharger l'aperçu" aria-label="Recharger l'aperçu">
+                  <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="studio-icon-btn" data-open-dialog="fullscreenPreviewDialog" title="Ouvrir l'aperçu en plein écran" aria-label="Ouvrir l'aperçu en plein écran">
+                  <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+                  <span>Plein écran</span>
+                </button>
+                <a id="studioOpenExternal" href="index.html" target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet">
+                  <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                  <span>Ouvrir</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contextual Palette & Viewport Dimensions Strip -->
+          <div id="studioPaletteBar" class="studio-palette-bar">
+            <span id="studioPaletteLabel" class="studio-palette-label">
+              <i class="bi bi-palette2" aria-hidden="true"></i> Direction V5
+            </span>
+            <div id="studioPaletteChips" class="studio-palette-chips" role="group" aria-label="Palettes disponibles pour cette version"></div>
+            <span id="studioDimensionsPill" class="studio-dimensions-pill" aria-live="polite">1366 &times; 820 px</span>
+          </div>
+
+          <!-- Blueprint Viewport Stage -->
+          <div id="studioStage" class="studio-stage">
+            <div id="studioDeviceBezel" class="device-bezel" data-device="desktop">
+              <div id="studioScaleWrap" class="device-scale-wrap">
+                <div id="studioLoader" class="studio-loader is-loading" role="status" aria-live="polite">
+                  <svg class="studio-loader-hex" viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="6" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                  </svg>
+                  <span id="studioLoaderText">Initialisation du Studio…</span>
+                </div>
+                <iframe
+                  id="studioIframe"
+                  class="studio-iframe"
+                  src="about:blank"
+                  title="Aperçu en direct du portfolio"
+                  loading="eager"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Bottom Meta Strip -->
+          <div class="studio-meta-bar">
+            <div class="studio-meta-info">
+              <h3 id="studioMetaTitle" class="studio-meta-title">Version 5.0 — Édition Tech Canvas &amp; Studio Interactif</h3>
+              <p id="studioMetaDesc" class="studio-meta-desc">Chargement des métadonnées de la version sélectionnée…</p>
+            </div>
+            <div class="studio-meta-actions">
+              <a id="studioJumpTimeline" href="#version-V5" class="versions-btn-outline" style="padding: 0.5rem 1rem; font-size: 0.84rem;">
+                <span>Fiche détaillée</span>
+                <i class="bi bi-arrow-down" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- #endregion -->
+
+    <!-- #region Evolution Timeline Section (V5 -> V1 + Sticky Vertical Nav) -->
+    <section id="timeline" class="section timeline-section" aria-labelledby="timelineHeading">
+      <div class="container">
+        <div class="section-title">
+          <div class="d-flex justify-content-center">
+            <span class="versions-section-pill">
+              <i class="bi bi-git" aria-hidden="true"></i>
+              Historique complet
+            </span>
+          </div>
+          <div class="section-title-header">
+            <h2 id="timelineHeading">Frise d’évolution (V5 &rarr; V1)</h2>
+          </div>
+          <div class="title-shape" aria-hidden="true">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </div>
+          <p>
+            Chaque génération documente les choix architecturaux, la progression de l’identité visuelle et les technologies adoptées au fil du temps.
+          </p>
+        </div>
+
+        <div class="timeline-toolbar-row">
+          <span id="timelineCountBadge" class="timeline-count-badge">5 générations archivées · V5 active</span>
+          <button
+            type="button"
+            id="toggleAllDetailsBtn"
+            class="timeline-toggle-all-btn"
+            aria-expanded="false"
+          >
+            <i class="bi bi-arrows-expand" aria-hidden="true"></i>
+            <span class="label-expand">Tout déplier les notes</span>
+            <span class="label-collapse">Tout replier les notes</span>
+          </button>
+        </div>
+
+        <div class="vnav-layout">
+          <!-- Sticky Vertical Sidebar Navigation -->
+          <aside class="vnav-sidebar" aria-label="Navigation rapide entre les versions">
+            <div class="vnav-heading">Chronologie</div>
+            <ul id="vnavVersionsList" class="vnav-list">
+              <!-- Populated dynamically by versions.js -->
+            </ul>
+          </aside>
+
+          <!-- Vertical Evolution Cards -->
+          <div id="versionsTimeline" class="vnav-content timeline-track">
+            <!-- Populated dynamically by versions.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- #endregion -->
+  </main>
+
+  <!-- #region Global Footer (Aligné sur index.html) -->
+  <footer id="footer" class="footer">
+    <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+      <svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">
+        <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+      </svg>
+      <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; ARCHIVE STUDIO</span>
+    </div>
+
+    <div class="copyright text-center">
+      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong> — <span>Tous droits réservés</span></p>
+    </div>
+
+    <div class="social-links d-flex justify-content-center">
+      <a href="index.html" aria-label="Accueil du portfolio" title="Accueil (V5)"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+      <a href="cv-apercu.html" aria-label="CV - Aperçu" title="CV - Aperçu"><i class="bi bi-file-earmark-person" aria-hidden="true"></i></a>
+      <a href="logo_proposals.html" aria-label="Identité visuelle" title="Identité visuelle"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+      <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+    </div>
+
+    <div class="credits">
+      Raccourci clavier : touche <kbd>L</kbd> pour activer/désactiver le curseur interactif &bull; <a href="index.html">Retour à l’accueil (V5)</a>
+    </div>
+  </footer>
+  <!-- #endregion -->
+
+  <!-- Scroll Top -->
+  <a id="scroll-top" href="#versions-hero" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Retour en haut de page">
+    <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+  </a>
+
+  <!-- #region Native Dialog 1: Téléchargement CV (FR / EN) (Modern Web Guidance: dialog) -->
+  <dialog id="cvDownloadDialog" class="ob-dialog" closedby="any" aria-labelledby="cvDialogTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+        <div>
+          <h2 id="cvDialogTitle" class="ob-dialog-title">Télécharger mon CV / Resume</h2>
+          <span class="ob-dialog-sub">Format PDF &bull; Français ou Anglais</span>
+        </div>
+      </div>
+      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer la fenêtre CV" autofocus>
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="ob-dialog-body">
+      <div class="versions-cv-grid">
+        <div class="versions-cv-card is-fr">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="version-code-badge" style="font-size: 0.74rem;">FRANÇAIS</span>
+              <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 Mo</span>
+            </div>
+            <h3 class="h5 fw-bold mb-2">Curriculum Vitae</h3>
+            <p class="small mb-3" style="color: var(--studio-muted);">
+              Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
+            </p>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <a href="assets/CV_CL-FR.pdf" class="versions-btn-primary w-100" download="CV_Olivier_Bourgault_FR.pdf">
+              <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+              <span>Télécharger (FR)</span>
+            </a>
+            <a href="assets/CV_CL-FR.pdf" target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100" style="padding: 0.48rem 1rem; font-size: 0.82rem;">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+              <span>Aperçu PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="versions-cv-card is-en">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="version-status-pill" style="font-size: 0.74rem;">ENGLISH</span>
+              <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 MB</span>
+            </div>
+            <h3 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h3>
+            <p class="small mb-3" style="color: var(--studio-muted);">
+              Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
+            </p>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <a href="assets/CV_CL-EN.pdf" class="versions-btn-secondary w-100" download="Resume_Olivier_Bourgault_EN.pdf">
+              <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+              <span>Download (EN)</span>
+            </a>
+            <a href="assets/CV_CL-EN.pdf" target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100" style="padding: 0.48rem 1rem; font-size: 0.82rem;">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+              <span>Open PDF preview</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ob-dialog-footer">
+      <a href="cv-apercu.html" class="versions-btn-outline" style="padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+        <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+        <span>Consulter le CV Web interactif</span>
+      </a>
+      <button type="button" class="versions-btn-outline" data-close-dialog style="padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+        Fermer
+      </button>
+    </div>
+  </dialog>
+  <!-- #endregion -->
+
+  <!-- #region Native Dialog 2: Aperçu Plein Écran (Theater Mode) -->
+  <dialog id="fullscreenPreviewDialog" class="ob-dialog is-fullscreen-dialog" closedby="any" aria-labelledby="fullscreenPreviewTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>
+        <div>
+          <h2 id="fullscreenPreviewTitle" class="ob-dialog-title">Aperçu plein écran</h2>
+          <span id="fullscreenPreviewSub" class="ob-dialog-sub">olivierbourgault.github.io/index.html</span>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <div class="viewport-switcher" role="group" aria-label="Format plein écran">
+          <button type="button" class="viewport-btn" data-fs-device="desktop" aria-pressed="true" title="Desktop">
+            <i class="bi bi-display" aria-hidden="true"></i>
+            <span>Desktop</span>
+          </button>
+          <button type="button" class="viewport-btn" data-fs-device="tablet" aria-pressed="false" title="Tablette">
+            <i class="bi bi-tablet" aria-hidden="true"></i>
+            <span>Tablette</span>
+          </button>
+          <button type="button" class="viewport-btn" data-fs-device="mobile" aria-pressed="false" title="Mobile">
+            <i class="bi bi-phone" aria-hidden="true"></i>
+            <span>Mobile</span>
+          </button>
+        </div>
+
+        <button type="button" id="fullscreenReloadBtn" class="studio-icon-btn" title="Recharger" aria-label="Recharger l'aperçu plein écran">
+          <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+        </button>
+
+        <a id="fullscreenOpenExternal" href="index.html" target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet" aria-label="Ouvrir dans un nouvel onglet">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+        </a>
+
+        <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Quitter le mode plein écran" autofocus>
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="fullscreen-stage-body">
+      <div class="fullscreen-iframe-wrap">
+        <iframe id="fullscreenIframe" class="fullscreen-iframe" data-device="desktop" src="about:blank" title="Aperçu plein écran de la version sélectionnée"></iframe>
+      </div>
+    </div>
+  </dialog>
+  <!-- #endregion -->
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/versions.js"></script>
+</body>
+
+</html>
