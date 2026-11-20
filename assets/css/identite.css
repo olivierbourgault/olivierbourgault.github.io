@@ -245,7 +245,7 @@ body.identite-page:not(.dark) .identite-section-pill {
   gap: 8px;
   padding: 0.7rem 1.3rem;
   border-radius: 12px;
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   font-size: 0.92rem;
   text-decoration: none;
@@ -894,20 +894,20 @@ body.identite-page:not(.dark) .logo-chapter-card {
 }
 
 .bp-text {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--coding-font);
   font-size: 6.2px;
   font-weight: 600;
   fill: #38BDF8;
 }
 
 .bp-text-muted {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--coding-font);
   font-size: 5.8px;
   fill: #9CA3AF;
 }
 
 .bp-text-orange {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--coding-font);
   font-size: 6.2px;
   font-weight: 700;
   fill: #FF8533;
@@ -926,7 +926,7 @@ body.identite-page:not(.dark) .logo-chapter-card {
 }
 
 .bp-pill-text {
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--coding-font);
   font-size: 5.8px;
   font-weight: 700;
   fill: #F5F5F7;
@@ -1230,7 +1230,7 @@ table.family-code-table tbody th {
   inset-inline-start: 0;
   z-index: 1;
   background: var(--surface-color);
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   color: var(--heading-color);
   white-space: nowrap;
@@ -1349,7 +1349,7 @@ table.family-code-table tbody th {
 }
 
 .palette-token-name {
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 0.92rem;
   font-weight: 700;
   color: var(--heading-color);
@@ -1620,7 +1620,7 @@ table.family-code-table tbody th {
 }
 
 .bench-slot-title {
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 0.96rem;
   font-weight: 700;
 }

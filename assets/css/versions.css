@@ -194,7 +194,7 @@ body.versions-page .main {
   gap: 8px;
   padding: 0.72rem 1.35rem;
   border-radius: 12px;
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   font-size: 0.94rem;
   text-decoration: none;
@@ -288,7 +288,7 @@ body[data-palette="tech-canvas"]:not(.dark) .versions-kpi-card:hover {
 
 .versions-kpi-value {
   display: block;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--heading-font);
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.1;
@@ -412,7 +412,7 @@ body.versions-page:not(.dark) .versions-section-pill {
   border: 2px solid var(--card-border);
   background: var(--surface-color);
   color: color-mix(in srgb, var(--default-color), transparent 22%);
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
@@ -859,7 +859,7 @@ body[data-palette="tech-canvas"]:not(.dark) .studio-window {
 }
 
 .studio-meta-title {
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 1rem;
   font-weight: 700;
   color: var(--heading-color);
@@ -1092,7 +1092,7 @@ body[data-palette="tech-canvas"]:not(.dark) .studio-window {
 }
 
 .version-card-title {
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 1.38rem;
   font-weight: 700;
   color: var(--heading-color);
@@ -1351,7 +1351,7 @@ dialog.ob-dialog.is-fullscreen-dialog {
 }
 
 .ob-dialog-title {
-  font-family: "Space Grotesk", var(--heading-font), sans-serif;
+  font-family: var(--heading-font);
   font-size: 1.12rem;
   font-weight: 700;
   color: var(--heading-color);

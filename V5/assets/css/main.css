@@ -1174,9 +1174,9 @@ body.scrolled .header .header-container::before {
 }
 
 .header .logo .logo-name {
-  font-family: "Staatliches", var(--heading-font), sans-serif;
+  font-family: "Oswald", var(--nav-font), sans-serif;
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--heading-color);
@@ -1371,9 +1371,9 @@ body.scrolled .header .header-container::before {
     color: var(--nav-color);
     padding: 8px 0;
     font-size: 0.95rem;
-    font-family: "Staatliches", var(--nav-font), sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.14em;
+    font-family: "Oswald", var(--nav-font), sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
@@ -1552,9 +1552,9 @@ body.scrolled .header .header-container::before {
     display: block;
     width: 100%;
     padding: 14px 0;
-    font-family: "Staatliches", var(--heading-font), sans-serif;
+    font-family: "Oswald", var(--heading-font), sans-serif;
     font-size: clamp(1.9rem, 8vw, 2.4rem);
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.03em;
     line-height: 1.05;
     text-transform: uppercase;
@@ -1587,7 +1587,7 @@ body.scrolled .header .header-container::before {
   }
 
   .menu-foot-email {
-    font-family: "Manrope", var(--default-font), sans-serif;
+    font-family: "DM Sans", var(--default-font), sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -3067,10 +3067,10 @@ section,
    6. PALETTE HYBRIDE : TECH CANVAS (Tech Orange + Shabnam + Aahil Khan)
    ========================================================================== */
 body[data-palette="tech-canvas"] {
-  --default-font: "Manrope", "Space Grotesk", system-ui, sans-serif;
-  --heading-font: "Space Grotesk", "Staatliches", sans-serif;
-  --coding-font: "JetBrains Mono", "Fira Code", monospace;
-  --nav-font: "Space Grotesk", sans-serif;
+  --default-font: "DM Sans", "Manrope", system-ui, sans-serif;
+  --heading-font: "Chakra Petch", "Space Grotesk", sans-serif;
+  --coding-font: "IBM Plex Mono", "JetBrains Mono", monospace;
+  --nav-font: "Oswald", "Chakra Petch", sans-serif;
 
   /* Mode Clair (Ivory Brutalism + Orange Tech) */
   --background-color: #F4F1EA;
@@ -3210,7 +3210,7 @@ body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag {
   left: -1.5px;
   background: #FF6600;
   color: #121316;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--coding-font);
   font-weight: 700;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -3276,7 +3276,7 @@ body[data-palette="tech-canvas"] .hero .cta-buttons .btn.btn-outline {
   border-radius: 12px;
   border: 2px solid #000000;
   box-shadow: 4px 4px 0px #000000;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -3399,7 +3399,7 @@ body[data-palette="tech-canvas"] .hero .hero-stats .stat-item:hover {
 }
 
 body[data-palette="tech-canvas"] .hero .hero-stats .stat-item .stat-number {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--heading-font);
   color: #FF6600;
   font-weight: 700;
 }
@@ -3633,7 +3633,7 @@ body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-primary,
 body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-secondary-accent,
 body[data-palette="obsidian-blaze"] .hero .cta-buttons .btn.btn-outline {
   border-radius: 8px;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--heading-font);
   font-weight: 700;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
