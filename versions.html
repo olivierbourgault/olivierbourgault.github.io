@@ -4,924 +4,573 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Navigateur de versions | Portfolio d'Olivier Bourgault (olivierbourgault.github.io)</title>
+  <meta name="color-scheme" content="dark light">
+  <title>Navigateur de versions — Studio Interactif | Olivier Bourgault</title>
   <meta name="description"
-    content="Navigateur d'historique et des versions officielles du portfolio d'Olivier Bourgault — Accès direct aux versions V1, V2, V3 (5 styles) et V4 (OB Tech).">
+    content="Studio interactif et frise d'évolution du portfolio d'Olivier Bourgault (olivierbourgault.github.io) — Prévisualisez en direct les versions V1, V2, V3, V4 et V5 Tech Canvas sur Desktop, Tablette et Mobile.">
   <meta name="keywords"
-    content="Navigateur de versions, Portfolio, Olivier Bourgault, olivierbourgault.github.io, Versions, V1, V2, V3, V4, Développeur, TI, IA">
+    content="Navigateur de versions, Studio interactif, Portfolio, Olivier Bourgault, olivierbourgault.github.io, V1, V2, V3, V4, V5, Tech Canvas, Développeur, TI, IA">
   <link rel="canonical" href="https://olivierbourgault.github.io/versions.html">
-  <meta property="og:title" content="Navigateur de versions | Portfolio d'Olivier Bourgault">
+  <meta property="og:title" content="Navigateur de versions — Studio Interactif | Olivier Bourgault">
+  <meta property="og:description" content="Prévisualisez en direct toutes les générations (V1 → V5) du portfolio d'Olivier Bourgault sur Desktop, Tablette et Mobile.">
   <meta property="og:url" content="https://olivierbourgault.github.io/versions.html">
   <meta property="og:type" content="website">
+
   <!-- Favicons -->
-  <link href="V4/assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
-  <link href="V3/assets/img/favicon.png" rel="alternate icon">
-  <!-- Fonts -->
+  <link href="assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
+  <link href="assets/img/favicon.png" rel="alternate icon">
+
+  <!-- Synchronous Pre-Paint Theme Resolution (Zero FOUC) -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('ob_versions_theme') === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts (100% alignées sur index.html Tech Canvas) -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Staatliches&display=swap"
     rel="stylesheet">
+
   <!-- Vendor CSS Files -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-  <style>
-    :root {
-      --default-font: "Inter", "Roboto", system-ui, sans-serif;
-      --heading-font: "Inter", "Questrial", sans-serif;
-      --coding-font: "JetBrains Mono", "Fira Code", monospace;
-      /* Mode Clair (Tech Presentation Light) */
-      --background-color: #F8F9FA;
-      --surface-color: #FFFFFF;
-      --default-color: #121316;
-      --muted-color: #4B5563;
-      --heading-color: #121316;
-      --accent-color: #FF6600;
-      --accent-alt-color: #FF8533;
-      --secondary-accent: #0284C7;
-      --contrast-color: #FFFFFF;
-      --border-color: #E2E8F0;
-      --card-shadow: 0 12px 30px rgba(18, 19, 22, 0.07);
-      --header-shadow: rgba(255, 102, 0, 0.14);
-      --blob-primary: rgba(255, 102, 0, 0.08);
-      --blob-secondary: rgba(56, 189, 248, 0.08);
-    }
-
-    body.dark {
-      /* Mode Sombre (Tech Presentation Dark) */
-      --background-color: #121316;
-      --surface-color: rgba(28, 30, 36, 0.85);
-      --default-color: #F3F4F6;
-      --muted-color: #9CA3AF;
-      --heading-color: #FFFFFF;
-      --accent-color: #FF6600;
-      --accent-alt-color: #FF8533;
-      --secondary-accent: #38BDF8;
-      --contrast-color: #121316;
-      --border-color: #343844;
-      --card-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.65);
-      --header-shadow: rgba(255, 102, 0, 0.22);
-      --blob-primary: rgba(255, 102, 0, 0.13);
-      --blob-secondary: rgba(56, 189, 248, 0.09);
-    }
-
-    body {
-      background-color: var(--background-color);
-      color: var(--default-color);
-      font-family: var(--default-font);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    body.dark::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    body:not(.dark)::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(18, 19, 22, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(18, 19, 22, 0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: -2;
-    }
-
-    .ambient-blobs {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      overflow: hidden;
-    }
-
-    .ambient-blobs .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(45px);
-    }
-
-    .ambient-blobs .blob-1 {
-      width: 34rem;
-      height: 34rem;
-      top: -8rem;
-      left: -8rem;
-      background: radial-gradient(circle, var(--blob-primary) 0%, transparent 70%);
-    }
-
-    .ambient-blobs .blob-2 {
-      width: 38rem;
-      height: 38rem;
-      top: 15%;
-      right: -8rem;
-      background: radial-gradient(circle, var(--blob-secondary) 0%, transparent 70%);
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--heading-color);
-      font-family: var(--heading-font);
-    }
-
-    /* Header */
-    .portal-header {
-      padding: 20px 0;
-    }
-
-    .header-container {
-      background: var(--surface-color);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 50px;
-      box-shadow: 0 4px 20px var(--header-shadow);
-      padding: 10px 25px;
-      border: 1px solid var(--border-color);
-    }
-
-    .logo img {
-      max-height: 36px;
-      margin-right: 10px;
-    }
-
-    .header-social-links a {
-      color: var(--default-color);
-      font-size: 1.2rem;
-      padding: 6px 10px;
-      border-radius: 50%;
-      transition: 0.25s;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .header-social-links a:hover {
-      color: var(--accent-color);
-    }
-
-    /* Hero */
-    .portal-hero {
-      padding: 2.5rem 0 2rem;
-      text-align: center;
-    }
-
-    .avatar-ring {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent-color);
-      padding: 3px;
-      background: var(--surface-color);
-      box-shadow: 0 0 25px color-mix(in srgb, var(--secondary-accent), transparent 65%);
-    }
-
-    .code-pill {
-      font-family: var(--coding-font);
-      font-size: 0.85rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 50px;
-      background: color-mix(in srgb, var(--secondary-accent), transparent 86%);
-      color: var(--secondary-accent);
-      border: 1px solid color-mix(in srgb, var(--secondary-accent), transparent 68%);
-      display: inline-block;
-    }
-
-    /* Buttons */
-    .btn-accent {
-      background-color: var(--accent-color);
-      border-color: var(--accent-color);
-      color: #ffffff;
-      border-radius: 50px;
-      padding: 0.7rem 1.75rem;
-      font-weight: 600;
-      box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color), transparent 65%);
-      transition: all 0.25s ease;
-    }
-
-    .btn-accent:hover {
-      background-color: var(--accent-alt-color);
-      border-color: var(--accent-alt-color);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-color), transparent 50%);
-    }
-
-    .btn-secondary-accent {
-      background-color: var(--secondary-accent);
-      border-color: var(--secondary-accent);
-      color: var(--contrast-color);
-      border-radius: 50px;
-      padding: 0.7rem 1.75rem;
-      font-weight: 600;
-      box-shadow: 0 6px 20px color-mix(in srgb, var(--secondary-accent), transparent 65%);
-      transition: all 0.25s ease;
-    }
-
-    .btn-secondary-accent:hover {
-      background-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
-      color: var(--contrast-color);
-      transform: translateY(-2px);
-    }
-
-    .btn-outline-accent {
-      border: 2px solid color-mix(in srgb, var(--secondary-accent), transparent 55%);
-      color: var(--secondary-accent);
-      background: transparent;
-      border-radius: 50px;
-      padding: 0.65rem 1.5rem;
-      font-weight: 600;
-      transition: all 0.25s ease;
-    }
-
-    .btn-outline-accent:hover {
-      background-color: var(--secondary-accent);
-      border-color: var(--secondary-accent);
-      color: var(--contrast-color);
-      transform: translateY(-2px);
-    }
-
-    /* Tech Identity Badge */
-    .tech-identity-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: var(--coding-font);
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #FF6600;
-      background: rgba(255, 102, 0, 0.12);
-      border: 1px solid rgba(255, 102, 0, 0.3);
-      border-radius: 50px;
-      padding: 0.35rem 1rem;
-    }
-
-    /* Modal CV */
-    #cvDownloadModal .modal-content {
-      background-color: var(--surface-color);
-      border: 2px solid var(--accent-color);
-      border-radius: 14px;
-      box-shadow: 6px 6px 0px var(--accent-color), 0 20px 40px rgba(0,0,0,0.4);
-      color: var(--default-color);
-    }
-    .cv-option-card {
-      background: color-mix(in srgb, var(--surface-color), #000 6%);
-      border: 2px solid var(--border-color);
-      border-radius: 12px;
-      padding: 1.5rem;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.25s ease;
-    }
-    .cv-option-card:hover {
-      transform: translateY(-4px);
-    }
-    .cv-option-card.card-fr:hover {
-      border-color: #FF6600;
-      box-shadow: 4px 4px 0px #FF6600;
-    }
-    .cv-option-card.card-en:hover {
-      border-color: #0284C7;
-      box-shadow: 4px 4px 0px #0284C7;
-    }
-    .cv-lang-badge {
-      font-family: var(--coding-font);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 0.35rem 0.7rem;
-      border-radius: 6px;
-    }
-
-    /* Version Cards */
-    .version-card {
-      background: var(--surface-color);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--border-color);
-      border-radius: 1.25rem;
-      padding: 1.75rem;
-      height: 100%;
-      box-shadow: var(--card-shadow);
-      transition: transform 0.25s ease, border-color 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .version-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-color);
-    }
-
-    .version-card.featured {
-      border: 2px solid var(--accent-color);
-    }
-
-    .version-card.upcoming {
-      border-style: dashed;
-      opacity: 0.85;
-    }
-
-    .version-tag {
-      font-family: var(--coding-font);
-      font-weight: 600;
-      font-size: 1.35rem;
-      color: var(--accent-color);
-    }
-
-    .badge-featured {
-      background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
-      color: #ffffff;
-    }
-
-    .version-desc {
-      color: var(--muted-color);
-      font-size: 0.96rem;
-    }
-
-    .feature-list {
-      list-style: none;
-      padding-left: 0;
-      margin-bottom: 1.25rem;
-      font-size: 0.92rem;
-    }
-
-    .feature-list li {
-      margin-bottom: 0.45rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .feature-list li i {
-      color: var(--accent-color);
-      margin-top: 2px;
-    }
-
-    .palette-quick-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.1rem;
-    }
-
-    .palette-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.38rem;
-      padding: 0.28rem 0.68rem;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-decoration: none;
-      color: var(--default-color);
-      border: 1px solid var(--border-color);
-      background: color-mix(in srgb, var(--surface-color), var(--default-color) 4%);
-      transition: all 0.2s ease;
-    }
-
-    .palette-chip:hover {
-      border-color: var(--accent-color);
-      color: var(--accent-color);
-      transform: translateY(-1px);
-    }
-
-    .palette-chip .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    /* Laser Pointer */
-    #laser-dot {
-      position: fixed;
-      width: 18px;
-      height: 18px;
-      background: radial-gradient(circle, var(--accent-color) 20%, color-mix(in srgb, var(--accent-color), transparent 20%) 50%, transparent 80%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      box-shadow: 0 0 20px 6px color-mix(in srgb, var(--accent-color), transparent 25%);
-      display: none;
-      transform: translate(-50%, -50%);
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 2rem 0;
-      color: var(--muted-color);
-      font-size: 0.9rem;
-    }
-  </style>
+  <!-- Main Tech Canvas CSS + Dedicated Versions Studio CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/versions.css" rel="stylesheet">
 </head>
 
-<body class="dark">
-  <!-- Pointeur Laser Virtuel -->
+<body class="versions-page dark" data-bs-theme="dark" data-palette="tech-canvas">
+  <a href="#main-content" class="visually-hidden-focusable">Aller au contenu principal</a>
+
+  <!-- Pointeur Interactif Aahil Khan + Halo Radial Orange (Touche L) -->
   <div id="laser-dot" aria-hidden="true"></div>
+
   <!-- Ambient Background Blobs -->
   <div class="ambient-blobs" aria-hidden="true">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
 
-  <!-- Header -->
-  <header class="portal-header">
-    <div class="container">
-      <div class="header-container d-flex align-items-center justify-content-between mx-auto">
-        <a href="index.html" class="logo d-flex align-items-center text-decoration-none text-reset gap-2">
-          <svg viewBox="0 0 100 100" width="36" height="36" aria-label="Logo OB Tech" style="filter: drop-shadow(0 0 8px rgba(255,102,0,0.4));">
-            <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
-            <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="50" cy="50" r="4" fill="#FF6600"/>
-          </svg>
-          <div class="d-flex flex-column">
-            <span class="fs-5 fw-semibold lh-1">Olivier Bourgault</span>
-            <span style="font-size: 0.68rem; font-family: var(--coding-font); color: var(--accent-color); letter-spacing: 0.05em; text-transform: uppercase;">Navigateur de versions</span>
-          </div>
-        </a>
+  <!-- #region Site Navbar (100% alignée sur index.html Shabnam + Tech Canvas) -->
+  <header id="header" class="header d-flex align-items-center">
+    <div
+      class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
+      <!-- Logo / Wordmark -->
+      <a href="index.html" class="logo d-flex align-items-center text-reset gap-2" aria-label="Olivier Bourgault Accueil">
+        <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
+          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+        </svg>
+        <span class="logo-name">Olivier Bourgault</span>
+      </a>
 
-        <div class="d-flex align-items-center gap-1 header-social-links">
-          <a href="index.html" class="btn btn-sm btn-outline-accent d-none d-sm-inline-flex align-items-center gap-1 py-1 px-3 me-2" style="font-size: 0.85rem;" title="Retour à l'accueil du portfolio">
-            <i class="bi bi-house-door"></i> Accueil
-          </a>
-          <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Voir les propositions de Logo">
-            <i class="bi bi-palette2"></i>
-          </a>
-          <a href="https://github.com/RinoShip77" target="_blank" aria-label="Profil GitHub" title="GitHub">
-            <i class="bi bi-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" aria-label="Profil LinkedIn"
-            title="LinkedIn">
-            <i class="bi bi-linkedin"></i>
-          </a>
-          <a role="button" onclick="toggleTheme()" aria-label="Changer le thème" title="Thème clair / sombre">
-            <i id="themeSwitcher" class="bi bi-sun-fill"></i>
-          </a>
+      <!-- Mobile Drawer Scrim -->
+      <div class="menu-scrim d-xl-none" id="menuScrim" aria-hidden="true"></div>
+
+      <!-- Primary Navigation & Mobile Slide-Out Drawer -->
+      <nav id="navmenu" class="navmenu" aria-label="Navigation principale">
+        <button class="menu-close d-xl-none" id="menuCloseBtn" type="button" aria-label="Fermer le menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <path d="M6 6l10 10M16 6L6 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+        </button>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#studio" class="active" aria-current="page">Studio</a></li>
+          <li><a href="#timeline">Évolution</a></li>
+          <li><a href="cv-apercu.html">CV</a></li>
+          <li><a href="logo_proposals.html">Identité</a></li>
+        </ul>
+        <div class="menu-foot d-xl-none">
+          <a href="mailto:bourgault.olivier8501@gmail.com" class="menu-foot-email">bourgault.olivier8501@gmail.com</a>
+          <div class="menu-foot-socials">
+            <a href="index.html" aria-label="Portfolio actuel" title="Portfolio actuel"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+            <a href="logo_proposals.html" aria-label="Identité visuelle et logos" title="Identité visuelle"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+            <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          </div>
         </div>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="d-flex align-items-center gap-1 header-actions">
+        <div class="d-flex align-items-center gap-1 header-social-links">
+          <div class="dropdown d-inline-flex">
+            <button type="button" class="header-hub-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Versions et identité visuelle" title="Versions &amp; Identité visuelle">
+              <i class="bi bi-layers" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end header-hub-menu">
+              <li>
+                <a class="dropdown-item is-current" href="versions.html" aria-current="page">
+                  <i class="bi bi-clock-history" aria-hidden="true"></i>
+                  <span>Navigateur de versions</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="logo_proposals.html">
+                  <i class="bi bi-palette2" aria-hidden="true"></i>
+                  <span>Identité visuelle &amp; Logos</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="cv-apercu.html">
+                  <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+                  <span>CV - Aperçu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          <button type="button" id="themeSwitcherBtn" class="theme-switcher-btn" aria-label="Passer au mode clair" title="Passer au mode clair" aria-pressed="true">
+            <i id="themeSwitcher" class="bi bi-sun-fill" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu">
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   </header>
+  <!-- #endregion -->
 
-  <!-- Main Content -->
-  <main class="container pb-5">
-    <!-- Hero -->
-    <section class="portal-hero">
-      <div class="mb-3">
-        <span class="tech-identity-badge">
-          <svg viewBox="0 0 100 100" width="16" height="16" style="vertical-align: middle;">
-            <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="9" stroke-linejoin="round"/>
-            <circle cx="50" cy="50" r="10" fill="#38BDF8"/>
-          </svg>
-          OB Tech &bull; Navigateur d'archives
-        </span>
-      </div>
-      <img src="https://github.com/RinoShip77.png" alt="Olivier Bourgault" class="avatar-ring mb-3">
-      <div class="mb-2">
-        <span class="code-pill"><i class="bi bi-globe2 me-1"></i>olivierbourgault.github.io</span>
-      </div>
-      <h1 class="display-5 fw-bold mb-3">Navigateur de versions</h1>
-      <p class="lead mx-auto mb-4" style="max-width: 680px; color: var(--muted-color);">
-        Explorez l'historique complet des versions de mon portfolio Web ou testez les différents styles visuels.
-      </p>
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="index.html" class="btn btn-accent">
-          <i class="bi bi-house-door me-2"></i>Aller au portfolio actuel (Accueil)
-        </a>
-        <a href="logo_proposals.html" class="btn btn-outline-accent">
-          <i class="bi bi-palette2 me-2"></i>Propositions de Logo &amp; Identité
-        </a>
-        <a href="#cvDownloadModal" data-bs-toggle="modal" data-bs-target="#cvDownloadModal" class="btn btn-secondary-accent" role="button">
-          <i class="bi bi-file-earmark-person me-2"></i>Télécharger mon CV (PDF)
-        </a>
-      </div>
-    </section>
+  <main id="main-content" class="main" tabindex="-1">
+    <!-- #region Hero Canvas Section -->
+    <div class="container versions-hero-wrap">
+      <section id="versions-hero" class="hero versions-hero section" aria-labelledby="versionsHeroTitle">
+        <div class="row align-items-center g-4 content">
+          <div class="col-lg-7">
+            <h1 id="versionsHeroTitle" class="versions-hero-title">
+              <span class="hero-layer-tag">
+                <i class="bi bi-layers-half" aria-hidden="true"></i>
+                OB TECH &bull; ARCHIVE STUDIO
+              </span>
+              Navigateur de <span class="hero-title-highlight">versions</span>
+            </h1>
 
-    <!-- Versions Grid -->
-    <section class="mt-4">
-      <div id="versionsGrid" class="row g-4 justify-content-center">
-        <!-- Populated dynamically from the VERSIONS configuration below -->
-      </div>
-    </section>
-  </main>
+            <p class="versions-hero-lead">
+              Explorez en direct l’évolution complète de <strong>olivierbourgault.github.io</strong>, de la première édition V1 jusqu’au studio <strong>V5 Tech Canvas</strong>. Testez chaque génération et ses palettes historiques sur Desktop, Tablette et Mobile sans quitter la page.
+            </p>
 
-  <!-- Footer -->
-  <footer class="text-center border-top" style="border-color: var(--border-color) !important;">
-    <div class="container">
-      <p class="mb-1">© Copyright <strong>Olivier Bourgault</strong> (<a href="https://olivierbourgault.github.io"
-          style="color: var(--secondary-accent); text-decoration: none;">olivierbourgault.github.io</a>) — Tous droits
-        réservés</p>
-      <small>Astuce : consultez les versions archivées (V1, V2, V3, V4) ou revenez à tout moment à l'<a href="index.html" style="color: var(--secondary-accent);">accueil principal (V5)</a>.</small>
-    </div>
-  </footer>
-
-  <!-- Modal Téléchargement CV (FR / EN) -->
-  <div class="modal fade" id="cvDownloadModal" tabindex="-1" aria-labelledby="cvDownloadModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header d-flex align-items-center">
-          <div class="d-flex align-items-center gap-3">
-            <div class="p-2 rounded-3" style="background: rgba(255, 102, 0, 0.15); border: 1px solid #FF6600;">
-              <i class="bi bi-file-earmark-pdf-fill fs-4" style="color: #FF6600;"></i>
-            </div>
-            <div>
-              <h5 class="modal-title fw-bold mb-0" id="cvDownloadModalLabel">Télécharger mon CV / Resume</h5>
-              <small class="text-muted" style="font-family: var(--coding-font);">Format PDF &bull; Choisissez votre langue de consultation</small>
-            </div>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4">
-          <div class="row g-4">
-            <!-- Option Français -->
-            <div class="col-md-6">
-              <div class="cv-option-card card-fr">
-                <div>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="cv-lang-badge" style="background: rgba(255, 102, 0, 0.15); color: #FF6600; border: 1px solid #FF6600;">FRANÇAIS</span>
-                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 Mo</span>
-                  </div>
-                  <h4 class="h5 fw-bold mb-2">Curriculum Vitae</h4>
-                  <p class="text-muted small mb-3">
-                    Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
-                  </p>
-                </div>
-                <div class="mt-3">
-                  <a href="assets/CV_CL-FR.pdf" class="btn btn-accent w-100 fw-bold py-2 mb-2" download="CV_Olivier_Bourgault_FR.pdf">
-                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Télécharger en français
-                  </a>
-                  <a href="assets/CV_CL-FR.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-accent w-100 btn-sm">
-                    <i class="bi bi-eye me-1"></i>Ouvrir l'aperçu PDF
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Option Anglais -->
-            <div class="col-md-6">
-              <div class="cv-option-card card-en">
-                <div>
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="cv-lang-badge" style="background: rgba(2, 132, 199, 0.15); color: #0284C7; border: 1px solid #0284C7;">ENGLISH</span>
-                    <span class="text-muted small" style="font-family: var(--coding-font);"><i class="bi bi-file-pdf me-1"></i>1.1 MB</span>
-                  </div>
-                  <h4 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h4>
-                  <p class="text-muted small mb-3">
-                    Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
-                  </p>
-                </div>
-                <div class="mt-3">
-                  <a href="assets/CV_CL-EN.pdf" class="btn btn-secondary-accent w-100 fw-bold py-2 mb-2" download="Resume_Olivier_Bourgault_EN.pdf">
-                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download in English
-                  </a>
-                  <a href="assets/CV_CL-EN.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-accent w-100 btn-sm">
-                    <i class="bi bi-eye me-1"></i>Open PDF preview
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-between align-items-center">
-          <small class="text-muted" style="font-family: var(--coding-font); font-size: 0.78rem;">
-            <i class="bi bi-shield-check text-success me-1"></i>Document officiel certifié &bull; Olivier Bourgault
-          </small>
-          <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">Fermer</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    /**
-     * CONFIGURATION DES VERSIONS DU PORTFOLIO
-     * Pour ajouter manuellement une nouvelle version (V4, V5, etc.), ajoutez simplement
-     * un objet dans ce tableau, ou créez un dossier "V4/index.html" (il sera aussi détecté automatiquement).
-     */
-    const VERSIONS = [
-      {
-        id: "V5",
-        title: "Version 5.0 — Édition Tech Canvas & Néo-Brutalisme (Actuelle)",
-        path: "index.html",
-        date: "2026",
-        status: "Accueil Actuel (Recommandée)",
-        featured: true,
-        description: "Direction artistique exclusive « Tech Canvas », fusionnant la rigueur technique Orange #FF6600 et Carbone #121316, le studio Figma & papier de Shabnam Raghavan, et le néo-brutalisme interactif d'Aahil Khan.",
-        highlights: [
-          "Direction artistique exclusive Tech Canvas (Fond Carbone #121316, traits néo-brutalistes et ombres dures orange #FF6600)",
-          "Section Hero style Canvas de découpe avec cadre de sélection Figma vectoriel « TECH · CANVAS · OS » et poignées d'angle",
-          "Surlignage dactylo dynamique au marqueur contrasté sur les compétences clés",
-          "Cartes projets et piliers technologiques ornées d'un ruban adhésif d'atelier translucide ambre/orange",
-          "Typographies Space Grotesk, Manrope et JetBrains Mono intégrées",
-          "Interface épurée et dédiée sans barre flottante de sélecteur de style"
-        ],
-        palettes: [
-          { name: "Tech Canvas (Style exclusif V5)", url: "index.html", color: "linear-gradient(135deg,#FF6600,#121316)" }
-        ]
-      },
-      {
-        id: "V4",
-        title: "Version 4.0 — Édition Tech & Identité Vectorielle",
-        path: "V4/index.html",
-        date: "2026",
-        status: "Stable",
-        featured: false,
-        description: "Adoption officielle du nouveau logo principal « OB Tech » (hexagone orange et circuits bleu ciel), déploiement des logos thématiques Terminal et Nœud Neuronal, et palette Tech activée par défaut.",
-        highlights: [
-          "Nouveau logo principal officiel OB Tech vectoriel (Hexagone orange #FF6600 & circuits #38BDF8)",
-          "Écosystème des logos Tech thématiques : Terminal Code </> pour le Full-Stack & Nœud Neuronal pour l'IA",
-          "Thème Tech Présentation activé par défaut (fond carbone #121316, grille technique et pointeur laser interactif)",
-          "Section Piliers Technologiques & bannière d'identité visuelle avec lien vers les propositions",
-          "Favicon vectoriel SVG et loader dynamique intégrant le nouveau monogramme OB"
-        ],
-        palettes: [
-          { name: "Tech Présentation (Défaut V4)", url: "V4/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
-          { name: "Tech Canvas", url: "V4/index.html?palette=tech-canvas", color: "linear-gradient(135deg,#FF6600,#121316)" },
-          { name: "Obsidian Blaze", url: "V4/index.html?palette=obsidian-blaze", color: "linear-gradient(135deg,#FF5A1F,#FFBC42)" },
-          { name: "Original Améthyste", url: "V4/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
-          { name: "Active Theory", url: "V4/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
-          { name: "Ethiack", url: "V4/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
-          { name: "Shabnam", url: "V4/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
-        ]
-      },
-      {
-        id: "V3",
-        title: "Version 3.0 — Édition Multi-Styles (5 Thèmes)",
-        path: "V3/index.html",
-        date: "2026",
-        status: "Stable",
-        featured: false,
-        description: "Refonte visuelle complète intégrant 4 styles visuels commutables en temps réel (en mode sombre ou clair) ainsi qu'un pointeur laser interactif.",
-        highlights: [
-          "1. Original (Améthyste & Fuchsia néon #E11484 / #A855F7)",
-          "2. Active Theory (Cyberpunk Synthwave cyan #00F0FF & magenta #C026D3)",
-          "3. Ethiack (Terminal Matrix Hacker émeraude #10B981 & trame binaire)",
-          "4. Tech Présentation (Keynote orange #FF6600, bleu #38BDF8 & pointeur Laser touche L)",
-          "5. Shabnam (Atelier Papier #CDC9B6, Vermillon #C02D0C, surligneur #F2D987 & cadre Figma)"
-        ],
-        palettes: [
-          { name: "Original", url: "V3/index.html?palette=amethyst", color: "linear-gradient(135deg,#E11484,#A855F7)" },
-          { name: "Active Theory", url: "V3/index.html?palette=synthwave", color: "linear-gradient(135deg,#00F0FF,#C026D3)" },
-          { name: "Ethiack", url: "V3/index.html?palette=ethiack", color: "linear-gradient(135deg,#10B981,#059669)" },
-          { name: "Tech Présentation", url: "V3/index.html?palette=tech", color: "linear-gradient(135deg,#FF6600,#38BDF8)" },
-          { name: "Shabnam", url: "V3/index.html?palette=shabnam", color: "linear-gradient(135deg,#C02D0C,#F2D987)" }
-        ]
-      },
-      {
-        id: "V2",
-        title: "Version 2.0 — Édition IA & Enrichie",
-        path: "V2/index.html",
-        date: "2026",
-        status: "Stable",
-        featured: false,
-        description: "Mise à jour complète alignée avec mon parcours actuel en intelligence artificielle et mes dernières expériences.",
-        highlights: [
-          "Ajout de l'AEC en Intelligence Artificielle (Collège O'Sullivan)",
-          "Ajout des expériences récentes (Élections Canada 2025, perfectionnement Microsoft Learn)",
-          "Refonte des jauges de compétences techniques (C#, .NET MAUI, Python/IA, Angular/Vue, Symfony)",
-          "Fiches projets détaillées avec badges technologiques et formulaire de contact corrigé"
-        ]
-      },
-      {
-        id: "V1",
-        title: "Version 1.0 — Édition Initiale",
-        path: "V1/index.html",
-        date: "2025",
-        status: "Archive",
-        featured: false,
-        description: "Première version complète de mon portfolio Web présentant mon DEC en informatique et mes premières réalisations.",
-        highlights: [
-          "Présentation générale, compétences et intégration dynamique GitHub",
-          "Parcours au Cégep de Saint-Jérôme, Chambre des Communes et VIWEB",
-          "Galerie de projets filtrable (Scolaires, Professionnels, Personnels)"
-        ]
-      }
-    ];
-
-    /**
-     * Génère le HTML d'une carte de version active
-     */
-    function createVersionCard(v) {
-      const badgeClass = v.featured ? "badge-featured" : "bg-secondary";
-      const cardClass = v.featured ? "version-card featured" : "version-card";
-      const btnClass = v.featured ? "btn btn-accent w-100" : "btn btn-outline-accent w-100";
-      const highlightsHtml = (v.highlights || [])
-        .map(item => `<li><i class="bi bi-check2-circle"></i><span>${item}</span></li>`)
-        .join("");
-
-      const palettesHtml = v.palettes
-        ? `<div class="palette-quick-links">
-            ${v.palettes.map(p => `
-              <a href="${p.url}" class="palette-chip" title="Ouvrir avec le style ${p.name}">
-                <span class="dot" style="background: ${p.color};"></span>
-                <span>${p.name}</span>
+            <div class="versions-hero-actions">
+              <a href="#studio" class="versions-btn-primary">
+                <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                <span>Explorer le Studio live</span>
               </a>
-            `).join("")}
-           </div>`
-        : "";
-
-      return `
-        <div class="col-md-6 col-lg-4">
-          <div class="${cardClass}">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="version-tag">${v.id}</span>
-                <span class="badge rounded-pill ${badgeClass}">${v.status} • ${v.date}</span>
-              </div>
-              <h3 class="h4 mb-2">${v.title}</h3>
-              <p class="version-desc mb-3">${v.description}</p>
-              <ul class="feature-list">
-                ${highlightsHtml}
-              </ul>
-              ${palettesHtml}
-            </div>
-            <div>
-              <a href="${v.path}" class="${btnClass}">
-                Consulter la ${v.id} <i class="bi bi-arrow-right ms-1"></i>
+              <a href="index.html" class="versions-btn-secondary">
+                <i class="bi bi-house-door" aria-hidden="true"></i>
+                <span>Portfolio actuel (V5)</span>
               </a>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    /**
-     * Carte indicative pour les futures versions (V4, V5, etc.)
-     */
-    function createUpcomingCard(nextVersionNum) {
-      return `
-        <div class="col-md-6 col-lg-4">
-          <div class="version-card upcoming">
-            <div>
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="version-tag text-muted">V${nextVersionNum}+</span>
-                <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis">À venir</span>
-              </div>
-              <h3 class="h4 mb-2">Futures évolutions (V${nextVersionNum}, V${nextVersionNum + 1}…)</h3>
-              <p class="version-desc mb-3">
-                Emplacement prévu pour les prochaines itérations de mon portfolio (nouveaux projets en IA, refontes graphiques et démonstrations interactives).
-              </p>
-              <ul class="feature-list text-muted">
-                <li><i class="bi bi-plus-circle"></i><span>Détection automatique dès qu'un dossier <code>V${nextVersionNum}/index.html</code> est publié</span></li>
-                <li><i class="bi bi-plus-circle"></i><span>Historique complet des versions conservé sur <code>olivierbourgault.github.io</code></span></li>
-              </ul>
-            </div>
-            <div>
-              <button class="btn btn-outline-secondary rounded-pill w-100" disabled>
-                Prochainement disponible
+              <button type="button" class="versions-btn-outline" data-open-dialog="cvDownloadDialog">
+                <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+                <span>CV (PDF)</span>
               </button>
             </div>
           </div>
+
+          <div class="col-lg-5">
+            <div class="versions-kpi-grid" aria-label="Indicateurs clés de l'archive">
+              <div class="versions-kpi-card">
+                <span id="kpiVersionsCount" class="versions-kpi-value">5</span>
+                <span class="versions-kpi-label">Générations live</span>
+                <span id="kpiVersionsRange" class="versions-kpi-sub">V1 &rarr; V5</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">13+</span>
+                <span class="versions-kpi-label">Palettes &amp; Styles</span>
+                <span class="versions-kpi-sub">V3, V4 &amp; V5</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">3</span>
+                <span class="versions-kpi-label">Formats d’écran</span>
+                <span class="versions-kpi-sub">Desktop · Tab · Mobile</span>
+              </div>
+              <div class="versions-kpi-card">
+                <span class="versions-kpi-value">59+</span>
+                <span class="versions-kpi-label">Projets GitHub</span>
+                <span class="versions-kpi-sub">Synchronisés en V5</span>
+              </div>
+            </div>
+          </div>
         </div>
-      `;
-    }
+      </section>
+    </div>
+    <!-- #endregion -->
 
-    /**
-     * Détecte automatiquement si des dossiers V4, V5... existent sur le serveur
-     * même s'ils n'ont pas encore été inscrits manuellement dans le tableau VERSIONS.
-     */
-    async function discoverAdditionalVersions() {
-      const knownIds = new Set(VERSIONS.map(v => v.id.toUpperCase()));
-      const discovered = [];
+    <!-- #region Interactive Live Preview Studio -->
+    <section id="studio" class="section studio-section" aria-labelledby="studioHeading">
+      <div class="container">
+        <div class="section-title">
+          <div class="d-flex justify-content-center">
+            <span class="versions-section-pill">
+              <i class="bi bi-display" aria-hidden="true"></i>
+              Prévisualisation en direct
+            </span>
+          </div>
+          <div class="section-title-header">
+            <h2 id="studioHeading">Studio Interactif</h2>
+          </div>
+          <div class="title-shape" aria-hidden="true">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </div>
+          <p>
+            Sélectionnez une génération ci-dessous pour la manipuler en temps réel, changer de format d’appareil ou basculer instantanément entre les palettes historiques des versions V3 et V4.
+          </p>
+        </div>
 
-      for (let num = 6; num <= 10; num++) {
-        const id = `V${num}`;
-        if (knownIds.has(id)) continue;
+        <!-- Single-Row Scrollable Accessible Tablist (Modern Web Guidance: tabs) -->
+        <div class="studio-tablist-wrap">
+          <div
+            id="studioTablist"
+            class="studio-tablist"
+            role="tablist"
+            focusgroup="tablist nomemory"
+            aria-label="Sélection de la version à prévisualiser"
+          >
+            <!-- Initial SSR/pre-JS fallback tab -->
+            <button type="button" role="tab" id="studio-tab-V5" class="studio-tab" data-version-tab="V5" aria-selected="true" focusgroupstart>
+              <span class="studio-tab-id">V5</span>
+              <span>Tech Canvas</span>
+              <span class="studio-tab-badge">Actuelle</span>
+            </button>
+          </div>
+        </div>
 
-        try {
-          const response = await fetch(`${id}/index.html`, { method: "HEAD" });
-          if (response.ok) {
-            discovered.push({
-              id: id,
-              title: `Version ${num}.0`,
-              path: `${id}/index.html`,
-              date: "Nouveau",
-              status: "Disponible",
-              featured: true,
-              description: `Nouvelle version (${id}) détectée automatiquement dans le dépôt.`,
-              highlights: [
-                `Accès direct au dossier ${id}/index.html`
-              ]
-            });
-          } else {
-            break;
-          }
-        } catch (e) {
-          break;
-        }
-      }
+        <!-- Studio OS Window Panel -->
+        <div
+          id="studioTabpanel"
+          class="studio-window"
+          role="tabpanel"
+          aria-labelledby="studio-tab-V5"
+        >
+          <!-- Top Browser Toolbar -->
+          <div class="studio-toolbar">
+            <div class="studio-chrome-left">
+              <div class="studio-dots" aria-hidden="true">
+                <span class="studio-dot is-orange"></span>
+                <span class="studio-dot is-sky"></span>
+                <span class="studio-dot is-slate"></span>
+              </div>
+              <div class="studio-address-bar" title="URL active dans l'aperçu">
+                <i class="bi bi-lock-fill" aria-hidden="true"></i>
+                <span id="studioAddressText" class="studio-address-text">olivierbourgault.github.io/index.html</span>
+              </div>
+            </div>
 
-      if (discovered.length > 0) {
-        VERSIONS.forEach(v => v.featured = false);
-        discovered[discovered.length - 1].featured = true;
-        return [...discovered.reverse(), ...VERSIONS];
-      }
-      return VERSIONS;
-    }
+            <div class="studio-chrome-right">
+              <div class="viewport-switcher" role="group" aria-label="Format d'affichage de l'aperçu">
+                <button type="button" class="viewport-btn" data-device="desktop" aria-pressed="true" title="Aperçu Desktop (1366 px)">
+                  <i class="bi bi-display" aria-hidden="true"></i>
+                  <span>Desktop</span>
+                </button>
+                <button type="button" class="viewport-btn" data-device="tablet" aria-pressed="false" title="Aperçu Tablette (768 px)">
+                  <i class="bi bi-tablet" aria-hidden="true"></i>
+                  <span>Tablette</span>
+                </button>
+                <button type="button" class="viewport-btn" data-device="mobile" aria-pressed="false" title="Aperçu Mobile (390 px)">
+                  <i class="bi bi-phone" aria-hidden="true"></i>
+                  <span>Mobile</span>
+                </button>
+              </div>
 
-    async function renderPortal() {
-      const grid = document.getElementById("versionsGrid");
-      const allVersions = await discoverAdditionalVersions();
+              <div class="studio-action-group">
+                <button type="button" id="studioReloadBtn" class="studio-icon-btn" title="Recharger l'aperçu" aria-label="Recharger l'aperçu">
+                  <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="studio-icon-btn" data-open-dialog="fullscreenPreviewDialog" title="Ouvrir l'aperçu en plein écran" aria-label="Ouvrir l'aperçu en plein écran">
+                  <i class="bi bi-arrows-fullscreen" aria-hidden="true"></i>
+                  <span>Plein écran</span>
+                </button>
+                <a id="studioOpenExternal" href="index.html" target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet">
+                  <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                  <span>Ouvrir</span>
+                </a>
+              </div>
+            </div>
+          </div>
 
-      const maxNum = Math.max(...allVersions.map(v => parseInt(v.id.replace(/\D/g, "")) || 1));
-      grid.innerHTML = allVersions.map(createVersionCard).join("") + createUpcomingCard(maxNum + 1);
-    }
+          <!-- Contextual Palette & Viewport Dimensions Strip -->
+          <div id="studioPaletteBar" class="studio-palette-bar">
+            <span id="studioPaletteLabel" class="studio-palette-label">
+              <i class="bi bi-palette2" aria-hidden="true"></i> Direction V5
+            </span>
+            <div id="studioPaletteChips" class="studio-palette-chips" role="group" aria-label="Palettes disponibles pour cette version"></div>
+            <span id="studioDimensionsPill" class="studio-dimensions-pill" aria-live="polite">1366 &times; 820 px</span>
+          </div>
 
-    /**
-     * Bascule du thème Clair / Sombre
-     */
-    function toggleTheme() {
-      const isDark = document.body.classList.toggle("dark");
-      const icon = document.getElementById("themeSwitcher");
+          <!-- Blueprint Viewport Stage -->
+          <div id="studioStage" class="studio-stage">
+            <div id="studioDeviceBezel" class="device-bezel" data-device="desktop">
+              <div id="studioScaleWrap" class="device-scale-wrap">
+                <div id="studioLoader" class="studio-loader is-loading" role="status" aria-live="polite">
+                  <svg class="studio-loader-hex" viewBox="0 0 100 100" width="48" height="48" aria-hidden="true">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="6" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                  </svg>
+                  <span id="studioLoaderText">Initialisation du Studio…</span>
+                </div>
+                <iframe
+                  id="studioIframe"
+                  class="studio-iframe"
+                  src="about:blank"
+                  title="Aperçu en direct du portfolio"
+                  loading="eager"
+                ></iframe>
+              </div>
+            </div>
+          </div>
 
-      if (isDark) {
-        icon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
-      } else {
-        icon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
-      }
-    }
+          <!-- Studio Bottom Meta Strip -->
+          <div class="studio-meta-bar">
+            <div class="studio-meta-info">
+              <h3 id="studioMetaTitle" class="studio-meta-title">Version 5.0 — Édition Tech Canvas &amp; Studio Interactif</h3>
+              <p id="studioMetaDesc" class="studio-meta-desc">Chargement des métadonnées de la version sélectionnée…</p>
+            </div>
+            <div class="studio-meta-actions">
+              <a id="studioJumpTimeline" href="#version-V5" class="versions-btn-outline" style="padding: 0.5rem 1rem; font-size: 0.84rem;">
+                <span>Fiche détaillée</span>
+                <i class="bi bi-arrow-down" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- #endregion -->
 
-    /**
-     * POINTEUR LASER VIRTUEL
-     * Raccourci clavier : Touche 'L'
-     */
-    let isLaserActive = true;
+    <!-- #region Evolution Timeline Section (V5 -> V1 + Sticky Vertical Nav) -->
+    <section id="timeline" class="section timeline-section" aria-labelledby="timelineHeading">
+      <div class="container">
+        <div class="section-title">
+          <div class="d-flex justify-content-center">
+            <span class="versions-section-pill">
+              <i class="bi bi-git" aria-hidden="true"></i>
+              Historique complet
+            </span>
+          </div>
+          <div class="section-title-header">
+            <h2 id="timelineHeading">Frise d’évolution (V5 &rarr; V1)</h2>
+          </div>
+          <div class="title-shape" aria-hidden="true">
+            <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </div>
+          <p>
+            Chaque génération documente les choix architecturaux, la progression de l’identité visuelle et les technologies adoptées au fil du temps.
+          </p>
+        </div>
 
-    function toggleLaser(forceState) {
-      const laserDot = document.getElementById('laser-dot');
-      if (!laserDot) return;
+        <div class="timeline-toolbar-row">
+          <span id="timelineCountBadge" class="timeline-count-badge">5 générations archivées · V5 active</span>
+          <button
+            type="button"
+            id="toggleAllDetailsBtn"
+            class="timeline-toggle-all-btn"
+            aria-expanded="false"
+          >
+            <i class="bi bi-arrows-expand" aria-hidden="true"></i>
+            <span class="label-expand">Tout déplier les notes</span>
+            <span class="label-collapse">Tout replier les notes</span>
+          </button>
+        </div>
 
-      if (typeof forceState === 'boolean') {
-        isLaserActive = forceState;
-      } else {
-        isLaserActive = !isLaserActive;
-      }
+        <div class="vnav-layout">
+          <!-- Sticky Vertical Sidebar Navigation -->
+          <aside class="vnav-sidebar" aria-label="Navigation rapide entre les versions">
+            <div class="vnav-heading">Chronologie</div>
+            <ul id="vnavVersionsList" class="vnav-list">
+              <!-- Populated dynamically by versions.js -->
+            </ul>
+          </aside>
 
-      try {
-        localStorage.setItem('laser_active', isLaserActive ? '1' : '0');
-      } catch (e) {}
+          <!-- Vertical Evolution Cards -->
+          <div id="versionsTimeline" class="vnav-content timeline-track">
+            <!-- Populated dynamically by versions.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- #endregion -->
+  </main>
 
-      if (isLaserActive) {
-        laserDot.style.display = 'block';
-        document.body.style.cursor = 'none';
-      } else {
-        laserDot.style.display = 'none';
-        document.body.style.cursor = 'default';
-      }
-    }
+  <!-- #region Global Footer (Aligné sur index.html) -->
+  <footer id="footer" class="footer">
+    <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+      <svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">
+        <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+      </svg>
+      <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; ARCHIVE STUDIO</span>
+    </div>
 
-    document.addEventListener('mousemove', (e) => {
-      if (!isLaserActive) return;
-      const laserDot = document.getElementById('laser-dot');
-      if (laserDot) {
-        laserDot.style.left = `${e.clientX}px`;
-        laserDot.style.top = `${e.clientY}px`;
-      }
-    });
+    <div class="copyright text-center">
+      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong> — <span>Tous droits réservés</span></p>
+    </div>
 
-    document.addEventListener('keydown', (e) => {
-      const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (e.target && e.target.isContentEditable)) {
-        return;
-      }
-      if (e.key === 'l' || e.key === 'L') {
-        toggleLaser();
-      }
-    });
+    <div class="social-links d-flex justify-content-center">
+      <a href="index.html" aria-label="Accueil du portfolio" title="Accueil (V5)"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+      <a href="cv-apercu.html" aria-label="CV - Aperçu" title="CV - Aperçu"><i class="bi bi-file-earmark-person" aria-hidden="true"></i></a>
+      <a href="logo_proposals.html" aria-label="Identité visuelle" title="Identité visuelle"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+      <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+    </div>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      renderPortal();
+    <div class="credits">
+      Raccourci clavier : touche <kbd>L</kbd> pour activer/désactiver le curseur interactif &bull; <a href="index.html">Retour à l’accueil (V5)</a>
+    </div>
+  </footer>
+  <!-- #endregion -->
 
-      let savedLaser = '1';
-      try {
-        const item = localStorage.getItem('laser_active');
-        if (item !== null) savedLaser = item;
-      } catch (e) {}
-      if (savedLaser !== '0') {
-        toggleLaser(true);
-      }
-    });
-  </script>
+  <!-- Scroll Top -->
+  <a id="scroll-top" href="#versions-hero" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Retour en haut de page">
+    <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+  </a>
+
+  <!-- #region Native Dialog 1: Téléchargement CV (FR / EN) (Modern Web Guidance: dialog) -->
+  <dialog id="cvDownloadDialog" class="ob-dialog" closedby="any" aria-labelledby="cvDialogTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-file-earmark-pdf-fill"></i></span>
+        <div>
+          <h2 id="cvDialogTitle" class="ob-dialog-title">Télécharger mon CV / Resume</h2>
+          <span class="ob-dialog-sub">Format PDF &bull; Français ou Anglais</span>
+        </div>
+      </div>
+      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer la fenêtre CV" autofocus>
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="ob-dialog-body">
+      <div class="versions-cv-grid">
+        <div class="versions-cv-card is-fr">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="version-code-badge" style="font-size: 0.74rem;">FRANÇAIS</span>
+              <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 Mo</span>
+            </div>
+            <h3 class="h5 fw-bold mb-2">Curriculum Vitae</h3>
+            <p class="small mb-3" style="color: var(--studio-muted);">
+              Version française complète incluant le résumé de compétences, les réalisations en TI &amp; IA et la lettre de présentation.
+            </p>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <a href="assets/CV_CL-FR.pdf" class="versions-btn-primary w-100" download="CV_Olivier_Bourgault_FR.pdf">
+              <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+              <span>Télécharger (FR)</span>
+            </a>
+            <a href="assets/CV_CL-FR.pdf" target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100" style="padding: 0.48rem 1rem; font-size: 0.82rem;">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+              <span>Aperçu PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="versions-cv-card is-en">
+          <div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="version-status-pill" style="font-size: 0.74rem;">ENGLISH</span>
+              <span class="ob-dialog-sub"><i class="bi bi-file-pdf me-1" aria-hidden="true"></i>1.1 MB</span>
+            </div>
+            <h3 class="h5 fw-bold mb-2">Resume &amp; Cover Letter</h3>
+            <p class="small mb-3" style="color: var(--studio-muted);">
+              Complete English version outlining technical skills, AI &amp; Full-Stack achievements and formal cover letter.
+            </p>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <a href="assets/CV_CL-EN.pdf" class="versions-btn-secondary w-100" download="Resume_Olivier_Bourgault_EN.pdf">
+              <i class="bi bi-cloud-arrow-down-fill" aria-hidden="true"></i>
+              <span>Download (EN)</span>
+            </a>
+            <a href="assets/CV_CL-EN.pdf" target="_blank" rel="noopener noreferrer" class="versions-btn-outline w-100" style="padding: 0.48rem 1rem; font-size: 0.82rem;">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+              <span>Open PDF preview</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ob-dialog-footer">
+      <a href="cv-apercu.html" class="versions-btn-outline" style="padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+        <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+        <span>Consulter le CV Web interactif</span>
+      </a>
+      <button type="button" class="versions-btn-outline" data-close-dialog style="padding: 0.45rem 0.95rem; font-size: 0.82rem;">
+        Fermer
+      </button>
+    </div>
+  </dialog>
+  <!-- #endregion -->
+
+  <!-- #region Native Dialog 2: Aperçu Plein Écran (Theater Mode) -->
+  <dialog id="fullscreenPreviewDialog" class="ob-dialog is-fullscreen-dialog" closedby="any" aria-labelledby="fullscreenPreviewTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>
+        <div>
+          <h2 id="fullscreenPreviewTitle" class="ob-dialog-title">Aperçu plein écran</h2>
+          <span id="fullscreenPreviewSub" class="ob-dialog-sub">olivierbourgault.github.io/index.html</span>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <div class="viewport-switcher" role="group" aria-label="Format plein écran">
+          <button type="button" class="viewport-btn" data-fs-device="desktop" aria-pressed="true" title="Desktop">
+            <i class="bi bi-display" aria-hidden="true"></i>
+            <span>Desktop</span>
+          </button>
+          <button type="button" class="viewport-btn" data-fs-device="tablet" aria-pressed="false" title="Tablette">
+            <i class="bi bi-tablet" aria-hidden="true"></i>
+            <span>Tablette</span>
+          </button>
+          <button type="button" class="viewport-btn" data-fs-device="mobile" aria-pressed="false" title="Mobile">
+            <i class="bi bi-phone" aria-hidden="true"></i>
+            <span>Mobile</span>
+          </button>
+        </div>
+
+        <button type="button" id="fullscreenReloadBtn" class="studio-icon-btn" title="Recharger" aria-label="Recharger l'aperçu plein écran">
+          <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+        </button>
+
+        <a id="fullscreenOpenExternal" href="index.html" target="_blank" rel="noopener noreferrer" class="studio-icon-btn" title="Ouvrir dans un nouvel onglet" aria-label="Ouvrir dans un nouvel onglet">
+          <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+        </a>
+
+        <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Quitter le mode plein écran" autofocus>
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="fullscreen-stage-body">
+      <div class="fullscreen-iframe-wrap">
+        <iframe id="fullscreenIframe" class="fullscreen-iframe" data-device="desktop" src="about:blank" title="Aperçu plein écran de la version sélectionnée"></iframe>
+      </div>
+    </div>
+  </dialog>
+  <!-- #endregion -->
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/versions.js"></script>
 </body>
 
 </html>

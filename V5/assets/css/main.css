@@ -291,224 +291,124 @@ body.dark[data-palette="shabnam"] {
   --nav-dropdown-hover-color: #F2D987;
 }
 
-/* Loader - From Jon Kantner (https://codepen.io/jkantner/pen/wvXbboe) */
-.pl,
-.pl__ball,
-.pl__ball-inner-shadow,
-.pl__ball-side-shadows,
-.pl__ball-texture,
-.pl__inner-ring,
-.pl__outer-ring,
-.pl__track-cover {
+/* Fusion Boot Loader (Tracé OB Tech + Nœuds IA + Terminal CLI) */
+.ob-boot-loader {
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.ob-boot-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface-color, #181A1F);
+  border: 2px solid #FF6600;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 #000000;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.ob-boot-emblem {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ob-boot-halo {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 102, 0, 0.25), transparent 70%);
 }
-
-.pl {
-  position: relative;
-  width: 16em;
-  height: 16em;
+.ob-draw-hex {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: obDrawHex 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-
-.pl__ball,
-.pl__ball-inner-shadow,
-.pl__ball-outer-shadow,
-.pl__ball-side-shadows,
-.pl__ball-texture,
-.pl__ball-texture:before,
-.pl__inner-ring,
-.pl__outer-ring,
-.pl__track-cover {
-  position: absolute;
+.ob-draw-b {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: obDrawB 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-
-.pl__ball,
-.pl__ball-inner-shadow,
-.pl__ball-outer-shadow,
-.pl__ball-texture:before,
-.pl__track-cover {
-  animation: ball 3s linear infinite;
+.ob-sat-1 { animation: obSatPulse 1.3s 0s ease-in-out infinite; }
+.ob-sat-2 { animation: obSatPulse 1.3s 0.4s ease-in-out infinite; }
+.ob-sat-3 { animation: obSatPulse 1.3s 0.8s ease-in-out infinite; }
+.ob-edge-1 { animation: obEdgeFlow 1.3s 0.15s ease-in-out infinite; }
+.ob-edge-2 { animation: obEdgeFlow 1.3s 0.5s ease-in-out infinite; }
+.ob-edge-3 { animation: obEdgeFlow 1.3s 0.85s ease-in-out infinite; }
+.ob-boot-terminal {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--coding-font, "JetBrains Mono", monospace);
+  font-size: 0.78rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
-
-.pl__ball {
-  top: calc(50% - 1.25em);
-  left: calc(50% - 1.25em);
-  transform: rotate(0) translateY(-6.5em);
-  width: 2.5em;
-  height: 2.5em;
+.ob-boot-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.pl__ball-inner-shadow {
-  animation-name: ballInnerShadow;
-  box-shadow:
-    0 0.1em 0.2em hsla(0, 0%, 0%, 0.3),
-    0 0 0.2em hsla(0, 0%, 0%, 0.1) inset,
-    0 -1em 0.5em hsla(0, 0%, 0%, 0.15) inset;
-  width: 100%;
-  height: 100%;
+.ob-boot-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
 }
-
-.pl__ball-outer-shadow {
-  animation-name: ballOuterShadow;
-  background-image: linear-gradient(hsla(0, 0%, 0%, 0.15), hsla(0, 0%, 0%, 0));
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
-  filter: blur(2px);
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 250%;
-  transform: rotate(20deg);
-  transform-origin: 50% 0;
-  z-index: -2;
+.ob-boot-pct {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FF6600;
 }
-
-.pl__ball-side-shadows {
-  background-color: hsla(0, 0%, 0%, 0.1);
-  filter: blur(2px);
-  width: 100%;
-  height: 100%;
-  transform: scale(0.75, 1.1);
-  z-index: -1;
-}
-
-.pl__ball-texture {
+.ob-boot-line {
+  color: var(--default-color, #F5F5F7);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ob-boot-line span { color: #38BDF8; }
+.ob-boot-line.is-accent { color: #FF6600; }
+.ob-boot-line.is-visible { opacity: 1; transform: translateY(0); }
+.ob-boot-bar-track {
   width: 100%;
-  height: 100%;
-  transform: translate3d(0, 0, 0);
-}
-
-.pl__ball-texture:before {
-  animation-name: ballTexture;
-  animation-duration: 0.25s;
-  background: url(https://assets.codepen.io/416221/snow.jpg) 0 0 / 50% 100%;
-  content: "";
-  display: block;
-  filter: brightness(1.05);
-  top: 0;
-  right: 0;
-  width: 200%;
-  height: 100%;
-}
-
-.pl__inner-ring {
-  box-shadow:
-    0 -0.25em 0.5em hsla(0, 0%, 100%, 0.4),
-    0 0.5em 0.75em hsla(0, 0%, 100%, 0.4) inset,
-    0 0.5em 0.375em hsla(0, 0%, 0%, 0.15),
-    0 -0.5em 0.75em hsla(0, 0%, 0%, 0.15) inset;
-  top: 2.375em;
-  left: 2.375em;
-  width: calc(100% - 4.75em);
-  height: calc(100% - 4.75em);
-}
-
-.pl__outer-ring {
-  box-shadow:
-    0 -0.45em 0.375em hsla(0, 0%, 0%, 0.15),
-    0 0.5em 0.75em hsla(0, 0%, 0%, 0.15) inset,
-    0 0.25em 0.5em hsla(0, 0%, 100%, 0.4),
-    0 -0.5em 0.75em hsla(0, 0%, 100%, 0.4) inset;
-  top: 0.75em;
-  left: 0.75em;
-  width: calc(100% - 1.5em);
-  height: calc(100% - 1.5em);
-}
-
-.pl__track-cover {
-  animation-name: trackCover;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Loader Animations */
-@keyframes ball {
-  from {
-    transform: rotate(0) translateY(-6.5em);
-  }
-
-  50% {
-    transform: rotate(180deg) translateY(-6em);
-  }
-
-  to {
-    transform: rotate(360deg) translateY(-6.5em);
-  }
-}
-
-@keyframes ballInnerShadow {
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes ballOuterShadow {
-  from {
-    transform: rotate(20deg);
-  }
-
-  to {
-    transform: rotate(-340deg);
-  }
-}
-
-@keyframes ballTexture {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(50%);
-  }
-}
-
-@keyframes trackCover {
-  from {
-    transform: rotate(0);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Loading Bar - From Timothy Batt (https://codepen.io/JamminCoder/pen/LYBmbKX) */
-.loading__bar {
-  position: relative;
-  height: 1.5rem;
-  width: 25rem;
-  margin-top: 1em;
-  background-color: rgb(236, 235, 235);
-  border-radius: 1em;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
   overflow: hidden;
+  margin-top: 4px;
 }
-
-.loading__bar::after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  width: 50%;
+.ob-boot-bar-fill {
+  width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent-color), var(--secondary-accent));
-  animation: 2s loading-animation infinite;
-  border-radius: 1em;
+  background: linear-gradient(90deg, #FF6600, #38BDF8);
+  transition: width 0.4s ease;
+}
+@keyframes obDrawHex { 0% { stroke-dashoffset: 280; } 70%, 100% { stroke-dashoffset: 0; } }
+@keyframes obDrawB { 0%, 15% { stroke-dashoffset: 240; } 85%, 100% { stroke-dashoffset: 0; } }
+@keyframes obSatPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes obEdgeFlow { 0%, 100% { stroke-opacity: 0.25; } 50% { stroke-opacity: 0.95; } }
+@media (max-width: 480px) {
+  .ob-boot-card { flex-direction: column; text-align: center; padding: 18px 16px; }
+  .ob-boot-terminal { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ob-draw-hex, .ob-draw-b { stroke-dashoffset: 0; animation: none; }
+  .ob-sat-1, .ob-sat-2, .ob-sat-3, .ob-edge-1, .ob-edge-2, .ob-edge-3 { animation: none; }
 }
 
-@keyframes loading-animation {
-  0% {
-    left: -50%;
-  }
-
-  100% {
-    left: 150%;
-  }
-}
 
 /*--------------------------------------------------------------
 # 3. Typewriter effect (JS Vanilla engine + CSS caret)

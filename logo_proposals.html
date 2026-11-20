@@ -1,306 +1,1411 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="utf-8">
-<title>Propositions d'Identité Visuelle & Logo Universel — Olivier Bourgault</title>
-<style>
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background: #0b0c10;
-    color: #e2e8f0;
-    margin: 0;
-    padding: 2rem;
-  }
-  h1 { text-align: center; margin-bottom: 0.5rem; color: #fff; }
-  p.subtitle { text-align: center; color: #94a3b8; max-width: 700px; margin: 0 auto 2rem; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-  .card {
-    background: #161822;
-    border: 1px solid #2d3248;
-    border-radius: 16px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-  .card h2 {
-    font-size: 1.25rem;
-    margin-top: 0;
-    color: #38bdf8;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .badge {
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 12px;
-    background: #334155;
-    color: #cbd5e1;
-  }
-  .preview-strip {
-    display: flex;
-    gap: 8px;
-    background: #0f111a;
-    padding: 12px;
-    border-radius: 12px;
-    margin: 1rem 0;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .theme-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    border-radius: 8px;
-    width: 60px;
-  }
-  .theme-box span { font-size: 0.65rem; margin-top: 6px; }
-  .t-amethyst-dark { background: #0A0812; color: #E11484; }
-  .t-amethyst-light { background: #FAF7FD; color: #9333EA; }
-  .t-synthwave { background: #070814; color: #00F0FF; }
-  .t-ethiack { background: #060D0A; color: #10B981; }
-  .t-tech { background: #121316; color: #FF6600; }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="color-scheme" content="dark light">
+  <title>Identité visuelle &amp; Logos — Charte OB Tech | Olivier Bourgault</title>
+  <meta name="description"
+    content="Histoire, construction géométrique, lecture symbolique et charte graphique officielle des trois logos OB Tech du portfolio d'Olivier Bourgault : Monogramme OB Hexagonal, Terminal Code et Nœud Neuronal IA.">
+  <meta name="keywords"
+    content="Identité visuelle, Charte graphique, Logo OB Tech, Olivier Bourgault, Tech Canvas, SVG Vectoriel, Full-Stack, Intelligence Artificielle, TI">
+  <link rel="canonical" href="https://olivierbourgault.github.io/logo_proposals.html">
+  <meta property="og:title" content="Identité visuelle &amp; Logos — OB Tech | Olivier Bourgault">
+  <meta property="og:description" content="Trois logos, une seule architecture : découvrez la genèse, la construction SVG et le système graphique Tech Canvas d'Olivier Bourgault.">
+  <meta property="og:url" content="https://olivierbourgault.github.io/logo_proposals.html">
+  <meta property="og:type" content="website">
 
-  svg { width: 44px; height: 44px; }
-  .desc { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
-  .points { font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem; padding-left: 1.2rem; }
-  .points li { margin-bottom: 4px; }
-</style>
+  <!-- Favicons -->
+  <link href="assets/img/logo/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
+  <link href="assets/img/favicon.png" rel="alternate icon">
+
+  <!-- Synchronous Pre-Paint Theme Resolution (Zero FOUC) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('ob_identite_theme') || localStorage.getItem('ob_versions_theme');
+        if (saved === 'light') {
+          document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts (100% alignées sur index.html Tech Canvas) -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Staatliches&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Main Tech Canvas CSS + Dedicated Identity Studio CSS -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/identite.css" rel="stylesheet">
 </head>
-<body>
 
-<div style="max-width: 1300px; margin: 0 auto 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-  <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; text-decoration: none; font-size: 0.95rem; background: #161822; padding: 8px 16px; border-radius: 50px; border: 1px solid #2d3248;">
-    ← Retour à l'Accueil (Portfolio)
-  </a>
-  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-    <a href="versions.html" style="display: inline-flex; align-items: center; gap: 8px; color: #38bdf8; text-decoration: none; font-size: 0.95rem; background: #161822; padding: 8px 16px; border-radius: 50px; border: 1px solid #2d3248;">
-      Navigateur de versions →
-    </a>
-    <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #FF6600; text-decoration: none; font-size: 0.95rem; background: #161822; padding: 8px 16px; border-radius: 50px; border: 1.5px solid #FF6600; font-weight: 600;">
-      Portfolio Actuel (OB Tech) →
-    </a>
-    <a href="V3/index.html" style="display: inline-flex; align-items: center; gap: 8px; color: #94a3b8; text-decoration: none; font-size: 0.95rem; background: #161822; padding: 8px 16px; border-radius: 50px; border: 1px solid #2d3248;">
-      Portfolio V3 →
-    </a>
+<body class="identite-page dark" data-bs-theme="dark" data-palette="tech-canvas">
+  <a href="#main-content" class="visually-hidden-focusable">Aller au contenu principal</a>
+
+  <!-- Pointeur Interactif Aahil Khan + Halo Radial Orange (Touche L) -->
+  <div id="laser-dot" aria-hidden="true"></div>
+
+  <!-- Ambient Background Blobs -->
+  <div class="ambient-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
   </div>
-</div>
 
-<h1>Propositions de Nouveau Logo & Identité Visuelle</h1>
-<p class="subtitle">
-  Olivier Bourgault — Développeur Full-Stack, IA & TI.<br>
-  Chaque concept est conçu en <strong>SVG vectoriel adaptatif</strong> pour rester percutant, net et parfaitement contrasté sur l'ensemble de vos 4 palettes de couleurs et dans les deux modes (sombre et clair).
-</p>
-
-<div class="grid">
-
-  <!-- Concept 1 -->
-  <div class="card">
-    <h2>1. Le Monogramme "OB" Hexagonal Tech <span class="badge" style="background: #FF6600; color: #121316; font-weight: 700;">Logo Officiel V4</span> <span class="badge">Recommandé</span></h2>
-    <div class="desc">
-      Fusion des initiales <strong>O</strong> (hexagone moderne / noeud de réseau) et <strong>B</strong> (lignes de circuit et flux de données).
-      Évoque à la fois le code rigoureux, l'IA et l'infrastructure informatique.
-    </div>
-    <div class="preview-strip">
-      <div class="theme-box t-amethyst-dark">
-        <svg viewBox="0 0 100 100">
-          <defs>
-            <linearGradient id="g1-ad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#E11484"/>
-              <stop offset="100%" stop-color="#A855F7"/>
-            </linearGradient>
-          </defs>
-          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="url(#g1-ad)" stroke-width="7" stroke-linejoin="round"/>
-          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="4" fill="#E11484"/>
-        </svg>
-        <span>Améthyste D</span>
-      </div>
-      <div class="theme-box t-amethyst-light">
-        <svg viewBox="0 0 100 100">
-          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#9333EA" stroke-width="7" stroke-linejoin="round"/>
-          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#181124" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="4" fill="#D946EF"/>
-        </svg>
-        <span>Améthyste L</span>
-      </div>
-      <div class="theme-box t-synthwave">
-        <svg viewBox="0 0 100 100">
-          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#00F0FF" stroke-width="7" stroke-linejoin="round"/>
-          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#C026D3" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="4" fill="#00F0FF"/>
-        </svg>
-        <span>Synthwave</span>
-      </div>
-      <div class="theme-box t-ethiack">
-        <svg viewBox="0 0 100 100">
-          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#10B981" stroke-width="7" stroke-linejoin="round"/>
-          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#34D399" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="50" cy="50" r="4" fill="#10B981"/>
-        </svg>
-        <span>Ethiack</span>
-      </div>
-      <div class="theme-box t-tech">
-        <svg viewBox="0 0 100 100">
+  <!-- #region Site Navbar (100% alignée sur index.html Shabnam + Tech Canvas) -->
+  <header id="header" class="header d-flex align-items-center">
+    <div
+      class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
+      <!-- Logo / Wordmark -->
+      <a href="index.html" class="logo d-flex align-items-center text-reset gap-2" aria-label="Olivier Bourgault Accueil">
+        <svg id="logo" class="site-main-logo" viewBox="0 0 100 100" width="32" height="32" aria-hidden="true">
           <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
           <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
           <circle cx="50" cy="50" r="4" fill="#FF6600"/>
         </svg>
-        <span>Tech</span>
-      </div>
-    </div>
-    <ul class="points">
-      <li><strong>Forces</strong> : Ultra distinctif, mémorable, fonctionne en favicon 16x16 comme en grand format.</li>
-      <li><strong>Symbolique</strong> : Le contour forme le "O" et l'intérieur forme le "B".</li>
-    </ul>
-  </div>
+        <span class="logo-name">Olivier Bourgault</span>
+      </a>
 
-  <!-- Concept 2 -->
-  <div class="card">
-    <h2>2. Le Terminal Code & IA (Chevron & Slash) <span class="badge">Code First</span></h2>
-    <div class="desc">
-      Inspiré des chevrons de terminal développeur <code>&lt;/&gt;</code>, avec le chevron gauche formant le "O" stylisé et le slash central évoquant l'invite de commande et l'intelligence artificielle.
-    </div>
-    <div class="preview-strip">
-      <div class="theme-box t-amethyst-dark">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="rgba(225,20,132,0.12)" stroke="#E11484" stroke-width="6"/>
-          <path d="M36,36 L24,50 L36,64" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="46" y1="64" x2="54" y2="36" stroke="#A855F7" stroke-width="7" stroke-linecap="round"/>
-          <path d="M64,36 L76,50 L64,64" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Améthyste D</span>
-      </div>
-      <div class="theme-box t-amethyst-light">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="rgba(147,51,234,0.08)" stroke="#9333EA" stroke-width="6"/>
-          <path d="M36,36 L24,50 L36,64" fill="none" stroke="#181124" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="46" y1="64" x2="54" y2="36" stroke="#D946EF" stroke-width="7" stroke-linecap="round"/>
-          <path d="M64,36 L76,50 L64,64" fill="none" stroke="#181124" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Améthyste L</span>
-      </div>
-      <div class="theme-box t-synthwave">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="rgba(0,240,255,0.12)" stroke="#00F0FF" stroke-width="6"/>
-          <path d="M36,36 L24,50 L36,64" fill="none" stroke="#00F0FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="46" y1="64" x2="54" y2="36" stroke="#C026D3" stroke-width="7" stroke-linecap="round"/>
-          <path d="M64,36 L76,50 L64,64" fill="none" stroke="#00F0FF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Synthwave</span>
-      </div>
-      <div class="theme-box t-ethiack">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="rgba(16,185,129,0.12)" stroke="#10B981" stroke-width="6"/>
-          <path d="M36,36 L24,50 L36,64" fill="none" stroke="#34D399" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="46" y1="64" x2="54" y2="36" stroke="#10B981" stroke-width="7" stroke-linecap="round"/>
-          <path d="M64,36 L76,50 L64,64" fill="none" stroke="#34D399" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Ethiack</span>
-      </div>
-      <div class="theme-box t-tech">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
-          <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
-          <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Tech</span>
-      </div>
-    </div>
-    <ul class="points">
-      <li><strong>Forces</strong> : Immédiatement identifiable comme le symbole universel du développeur logiciel.</li>
-      <li><strong>Harmonie</strong> : Reprend l'esprit du logo écran actuel mais avec une géométrie beaucoup plus épurée et moderne.</li>
-    </ul>
-  </div>
+      <!-- Mobile Drawer Scrim -->
+      <div class="menu-scrim d-xl-none" id="menuScrim" aria-hidden="true"></div>
 
-  <!-- Concept 3 -->
-  <div class="card">
-    <h2>3. Le Noeud Neuronal & Anneau O (IA & Systèmes) <span class="badge">Futuriste</span></h2>
-    <div class="desc">
-      Un anneau orbital épuré (représentant le <strong>O</strong>) croisé de 3 connexions synaptiques (représentant l'<strong>IA</strong>, le Web et les réseaux TI).
-    </div>
-    <div class="preview-strip">
-      <div class="theme-box t-amethyst-dark">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#A855F7" stroke-width="5" stroke-dasharray="8 4"/>
-          <circle cx="50" cy="30" r="8" fill="#E11484"/>
-          <circle cx="32" cy="65" r="8" fill="#E11484"/>
-          <circle cx="68" cy="65" r="8" fill="#E11484"/>
-          <line x1="50" y1="30" x2="32" y2="65" stroke="#fff" stroke-width="4"/>
-          <line x1="50" y1="30" x2="68" y2="65" stroke="#fff" stroke-width="4"/>
-          <line x1="32" y1="65" x2="68" y2="65" stroke="#fff" stroke-width="4"/>
-          <circle cx="50" cy="53" r="5" fill="#fff"/>
-        </svg>
-        <span>Améthyste D</span>
-      </div>
-      <div class="theme-box t-amethyst-light">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#D946EF" stroke-width="5" stroke-dasharray="8 4"/>
-          <circle cx="50" cy="30" r="8" fill="#9333EA"/>
-          <circle cx="32" cy="65" r="8" fill="#9333EA"/>
-          <circle cx="68" cy="65" r="8" fill="#9333EA"/>
-          <line x1="50" y1="30" x2="32" y2="65" stroke="#181124" stroke-width="4"/>
-          <line x1="50" y1="30" x2="68" y2="65" stroke="#181124" stroke-width="4"/>
-          <line x1="32" y1="65" x2="68" y2="65" stroke="#181124" stroke-width="4"/>
-          <circle cx="50" cy="53" r="5" fill="#9333EA"/>
-        </svg>
-        <span>Améthyste L</span>
-      </div>
-      <div class="theme-box t-synthwave">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#00F0FF" stroke-width="5" stroke-dasharray="8 4"/>
-          <circle cx="50" cy="30" r="8" fill="#C026D3"/>
-          <circle cx="32" cy="65" r="8" fill="#C026D3"/>
-          <circle cx="68" cy="65" r="8" fill="#C026D3"/>
-          <line x1="50" y1="30" x2="32" y2="65" stroke="#00F0FF" stroke-width="4"/>
-          <line x1="50" y1="30" x2="68" y2="65" stroke="#00F0FF" stroke-width="4"/>
-          <line x1="32" y1="65" x2="68" y2="65" stroke="#00F0FF" stroke-width="4"/>
-          <circle cx="50" cy="53" r="5" fill="#fff"/>
-        </svg>
-        <span>Synthwave</span>
-      </div>
-      <div class="theme-box t-ethiack">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#059669" stroke-width="5" stroke-dasharray="8 4"/>
-          <circle cx="50" cy="30" r="8" fill="#10B981"/>
-          <circle cx="32" cy="65" r="8" fill="#10B981"/>
-          <circle cx="68" cy="65" r="8" fill="#10B981"/>
-          <line x1="50" y1="30" x2="32" y2="65" stroke="#34D399" stroke-width="4"/>
-          <line x1="50" y1="30" x2="68" y2="65" stroke="#34D399" stroke-width="4"/>
-          <line x1="32" y1="65" x2="68" y2="65" stroke="#34D399" stroke-width="4"/>
-          <circle cx="50" cy="53" r="5" fill="#10B981"/>
-        </svg>
-        <span>Ethiack</span>
-      </div>
-      <div class="theme-box t-tech">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
-          <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
-          <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
-          <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
-          <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
-          <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
-          <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
-          <circle cx="50" cy="53" r="5" fill="#fff"/>
-        </svg>
-        <span>Tech</span>
+      <!-- Primary Navigation & Mobile Slide-Out Drawer -->
+      <nav id="navmenu" class="navmenu" aria-label="Navigation principale">
+        <button class="menu-close d-xl-none" id="menuCloseBtn" type="button" aria-label="Fermer le menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <path d="M6 6l10 10M16 6L6 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+        </button>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="#origine">Origine</a></li>
+          <li><a href="#famille">Famille</a></li>
+          <li><a href="#logo-ob-tech" class="active" aria-current="page">Logos</a></li>
+          <li><a href="#code-famille">Charte</a></li>
+        </ul>
+        <div class="menu-foot d-xl-none">
+          <a href="mailto:bourgault.olivier8501@gmail.com" class="menu-foot-email">bourgault.olivier8501@gmail.com</a>
+          <div class="menu-foot-socials">
+            <a href="index.html" aria-label="Portfolio actuel" title="Portfolio actuel"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+            <a href="versions.html" aria-label="Navigateur de versions" title="Navigateur de versions"><i class="bi bi-clock-history" aria-hidden="true"></i></a>
+            <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="d-flex align-items-center gap-1 header-actions">
+        <div class="d-flex align-items-center gap-1 header-social-links">
+          <div class="dropdown d-inline-flex">
+            <button type="button" class="header-hub-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Versions et identité visuelle" title="Versions &amp; Identité visuelle">
+              <i class="bi bi-layers" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end header-hub-menu">
+              <li>
+                <a class="dropdown-item" href="versions.html">
+                  <i class="bi bi-clock-history" aria-hidden="true"></i>
+                  <span>Navigateur de versions</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item is-current" href="logo_proposals.html" aria-current="page">
+                  <i class="bi bi-palette2" aria-hidden="true"></i>
+                  <span>Identité visuelle &amp; Logos</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="cv-apercu.html">
+                  <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
+                  <span>CV - Aperçu</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+          <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+          <button type="button" id="themeSwitcherBtn" class="theme-switcher-btn" aria-label="Passer au mode clair" title="Passer au mode clair" aria-pressed="true">
+            <i id="themeSwitcher" class="bi bi-sun-fill" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu">
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+          <i aria-hidden="true"></i>
+        </button>
       </div>
     </div>
-    <ul class="points">
-      <li><strong>Forces</strong> : Très orienté science, intelligence artificielle et architecture cloud.</li>
-      <li><strong>Style</strong> : Moderne et technologique.</li>
-    </ul>
-  </div>
+  </header>
+  <!-- #endregion -->
 
-</div>
+  <main id="main-content" class="main" tabindex="-1">
+    <!-- #region Hero Canvas Section -->
+    <div class="container identite-hero-wrap">
+      <section id="identite-hero" class="hero identite-hero section" aria-labelledby="identiteHeroTitle">
+        <div class="row align-items-center g-4 content">
+          <div class="col-lg-7">
+            <h1 id="identiteHeroTitle" class="identite-hero-title">
+              <span class="hero-layer-tag">
+                <i class="bi bi-vector-pen" aria-hidden="true"></i>
+                IDENTITÉ OB TECH &bull; 3 LOGOS &bull; 2026
+              </span>
+              Trois logos, une seule <span class="hero-title-highlight">architecture.</span>
+            </h1>
 
+            <p class="identite-hero-lead">
+              Tout part de mes initiales <strong>O</strong> et <strong>B</strong>, d’un hexagone de protection et d’un dialogue constant entre <strong>l’orange #FF6600</strong> (le signal d’action) et <strong>le bleu #38BDF8</strong> (le circuit logique). D’un pilier à l’autre, la même géométrie trace ma marque personnelle, le code Full-Stack et l’intelligence artificielle.
+            </p>
+
+            <div class="hero-anchor-pills" aria-label="Axes de lecture de l'identité">
+              <a href="#origine" class="hero-anchor-pill">
+                <i class="bi bi-eye" aria-hidden="true"></i>
+                <span>Ce qu’on y voit</span>
+              </a>
+              <a href="#famille" class="hero-anchor-pill">
+                <i class="bi bi-rulers" aria-hidden="true"></i>
+                <span>Comment ils sont nés</span>
+              </a>
+              <a href="#logo-ob-tech" class="hero-anchor-pill">
+                <i class="bi bi-layers-half" aria-hidden="true"></i>
+                <span>Ce qu’ils cachent</span>
+              </a>
+            </div>
+
+            <div class="identite-hero-actions">
+              <a href="#logo-ob-tech" class="identite-btn-primary">
+                <i class="bi bi-diagram-3-fill" aria-hidden="true"></i>
+                <span>Décoder les 3 logos</span>
+              </a>
+              <a href="#code-famille" class="identite-btn-secondary">
+                <i class="bi bi-palette2" aria-hidden="true"></i>
+                <span>Charte Tech Canvas</span>
+              </a>
+              <a href="index.html#expertise" class="identite-btn-outline">
+                <i class="bi bi-house-door" aria-hidden="true"></i>
+                <span>Voir sur l’accueil</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="hero-blueprint-card">
+              <div class="hero-blueprint-top">
+                <span class="hero-blueprint-tag">Planche vectorielle</span>
+                <div id="heroEmblemSwitcher" class="hero-emblem-switcher" role="group" aria-label="Choisir l'emblème sur la planche">
+                  <button type="button" class="hero-emblem-btn" data-hero-emblem="ob-tech" aria-pressed="true">OB Tech</button>
+                  <button type="button" class="hero-emblem-btn" data-hero-emblem="terminal" aria-pressed="false">Terminal &lt;/&gt;</button>
+                  <button type="button" class="hero-emblem-btn" data-hero-emblem="neural" aria-pressed="false">Neuronal IA</button>
+                </div>
+              </div>
+
+              <div class="hero-blueprint-canvas">
+                <svg id="heroBlueprintSvg" class="hero-blueprint-svg" viewBox="-26 -20 152 140" role="img" aria-label="Aperçu blueprint des logos OB Tech">
+                  <!-- Shared technical blueprint reticle -->
+                  <line x1="-20" y1="50" x2="120" y2="50" class="bp-guide"/>
+                  <line x1="50" y1="-14" x2="50" y2="114" class="bp-guide"/>
+                  <circle cx="50" cy="50" r="46" class="bp-guide-dash"/>
+                  <circle cx="50" cy="50" r="24" class="bp-guide"/>
+
+                  <!-- Emblem 1: OB Hexagonal Tech -->
+                  <g class="hero-emblem-group is-active" data-hero-svg="ob-tech">
+                    <text x="-22" y="-8" class="bp-text">R 46 / 60°</text>
+                    <text x="122" y="-8" text-anchor="end" class="bp-text-orange">HEX O + B</text>
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </g>
+
+                  <!-- Emblem 2: Terminal Code </> -->
+                  <g class="hero-emblem-group" data-hero-svg="terminal">
+                    <text x="-22" y="-8" class="bp-text">R 44 / 74°</text>
+                    <text x="122" y="-8" text-anchor="end" class="bp-text-orange">&lt; / &gt;</text>
+                    <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                    <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+
+                  <!-- Emblem 3: Noeud Neuronal IA -->
+                  <g class="hero-emblem-group" data-hero-svg="neural">
+                    <text x="-22" y="-8" class="bp-text">R 42 / dash</text>
+                    <text x="122" y="-8" text-anchor="end" class="bp-text-orange">3 SYNAPSES</text>
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                    <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+                    <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+                    <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+                    <circle cx="50" cy="53" r="5" fill="#ffffff" class="neural-core-dot"/>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="hero-blueprint-meta">
+                <span>viewBox 0 0 100 100 · centre 50;50</span>
+                <span id="heroBlueprintReadout" class="hero-blueprint-readout">OB Hexagonal · R 46 · 60°</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Main Narrative + Sticky Vertical Navigation Layout -->
+    <div class="container identite-story-wrap">
+      <div class="vnav-layout identite-vnav-layout">
+        <!-- Sticky Vertical Chapter Navigation -->
+        <aside class="vnav-sidebar" aria-label="Chapitres de l'identité visuelle">
+          <div class="vnav-heading">Histoire &amp; Sens</div>
+          <ul id="vnavIdentiteList" class="vnav-list">
+            <li>
+              <button type="button" class="vnav-item-btn is-active" data-vnav-target="origine">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">01 · L’origine</span>
+                  <span class="vnav-sub">Le système &amp; 6 invariants</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="vnav-item-btn" data-vnav-target="famille">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">02 · La famille</span>
+                  <span class="vnav-sub">3 piliers, 1 signature</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="vnav-item-btn" data-vnav-target="logo-ob-tech">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">03 · OB Hexagonal</span>
+                  <span class="vnav-sub">Logo officiel V4 → V5</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="vnav-item-btn" data-vnav-target="logo-terminal">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">04 · Terminal &lt;/&gt;</span>
+                  <span class="vnav-sub">Développement Full-Stack</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="vnav-item-btn" data-vnav-target="logo-neural">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">05 · Nœud Neuronal</span>
+                  <span class="vnav-sub">Intelligence Artificielle</span>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="vnav-item-btn" data-vnav-target="code-famille">
+                <span class="vnav-dot" aria-hidden="true"></span>
+                <span class="vnav-text">
+                  <span class="vnav-title">06 · Code &amp; Charte</span>
+                  <span class="vnav-sub">Couleurs, typos &amp; banc SVG</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Narrative Chapters Column -->
+        <div class="vnav-content identite-main-col">
+
+          <!-- ==================== CHAPTER 01: L'ORIGINE ==================== -->
+          <section id="origine" class="identite-chapter" aria-labelledby="origineHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-compass" aria-hidden="true"></i>
+                  01 &middot; L’origine du système
+                </span>
+              </div>
+              <h2 id="origineHeading" class="chapter-title">Tout part du O d’Olivier et d’un double trait de circuit</h2>
+              <p class="chapter-lead">
+                Au lieu de dessiner trois logos isolés, j’ai conçu un vocabulaire géométrique unique sur une grille <strong>100 × 100</strong> : une enceinte fermée ou rythmée <strong>orange #FF6600</strong> qui cadre le système, et un signal interne <strong>bleu circuit #38BDF8</strong> qui exprime la spécialité technique.
+              </p>
+            </div>
+
+            <!-- 3 Step Architectural Evolution Cards -->
+            <div class="origin-steps-grid">
+              <article class="origin-step-card">
+                <div class="origin-step-visual" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="6" stroke-linejoin="round"/>
+                  </svg>
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                  </svg>
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                  </svg>
+                </div>
+                <span class="origin-step-num">Étape 01 · L’enceinte « O »</span>
+                <h3>Un contour orange protecteur</h3>
+                <p>
+                  Hexagone d’architecture, anneau de terminal ou orbite pointillée : l’initiale <strong>O</strong> pose le cadre de rigueur, d’automatisation et de fiabilité TI.
+                </p>
+              </article>
+
+              <article class="origin-step-card">
+                <div class="origin-step-visual" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round"/>
+                  </svg>
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <svg viewBox="0 0 100 100" width="52" height="52">
+                    <circle cx="50" cy="30" r="10" fill="#38BDF8"/>
+                    <circle cx="32" cy="65" r="10" fill="#38BDF8"/>
+                    <circle cx="68" cy="65" r="10" fill="#38BDF8"/>
+                  </svg>
+                </div>
+                <span class="origin-step-num">Étape 02 · Le cœur bleu #38BDF8</span>
+                <h3>La logique au centre du cadre</h3>
+                <p>
+                  À l’intérieur du cadre orange vit la matière active : le <strong>B de Bourgault</strong> en pistes imprimées, les chevrons du code ou les 3 nœuds neuronaux.
+                </p>
+              </article>
+
+              <article class="origin-step-card">
+                <div class="origin-step-visual" aria-hidden="true">
+                  <svg viewBox="0 0 100 100" width="56" height="56">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                </div>
+                <span class="origin-step-num">Étape 03 · Synthèse OB Tech</span>
+                <h3>Une identité modulaire par pilier</h3>
+                <p>
+                  Chaque signe garde exactement le même couple chromatique et les mêmes extrémités arrondies pour rester reconnaissable instantanément d’un pilier à l’autre.
+                </p>
+              </article>
+            </div>
+
+            <!-- 6 Invariants Grid (Ce qui ne change jamais) -->
+            <h3 class="invariants-subhead">
+              <i class="bi bi-shield-check" aria-hidden="true"></i>
+              <span>Ce qui ne change jamais — Les 6 invariants OB Tech</span>
+            </h3>
+            <div class="invariants-grid">
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-grid-3x3" aria-hidden="true"></i> 01 · Grille fixe</span>
+                <h4>Canevas 100 × 100 centré</h4>
+                <p>Chaque tracé est centré en <code>50;50</code> dans un carré strict pour assurer l’alignement parfait entre la barre de navigation, le favicon et les cartes.</p>
+              </div>
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-lightning-charge" aria-hidden="true"></i> 02 · Signal orange</span>
+                <h4>Le #FF6600 comme signature</h4>
+                <p>L’orange vif incarne le déclenchement, l’automatisation et la sélection active dans toute l’interface Tech Canvas.</p>
+              </div>
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-cpu" aria-hidden="true"></i> 03 · Polarité bleue</span>
+                <h4>Le #38BDF8 pour la logique</h4>
+                <p>Le bleu circuit représente le flux logiciel, les chevrons du terminal et l’intelligence des nœuds neuronaux.</p>
+              </div>
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-bezier2" aria-hidden="true"></i> 04 · Même arrondi</span>
+                <h4>Terminaisons <code>round</code> unifiées</h4>
+                <p>Toutes les extrémités de tracés et sommets partagent des jonctions et embouts arrondis (5–7 px) qui signent la même famille visuelle.</p>
+              </div>
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-brightness-high" aria-hidden="true"></i> 05 · Bivalent</span>
+                <h4>Lisible sur Carbone &amp; Ivoire</h4>
+                <p>Conçus pour rester nets aussi bien sur fond carbone sombre <code>#121316</code> que sur papier atelier clair <code>#F4F1EA</code>.</p>
+              </div>
+              <div class="invariant-card">
+                <span class="invariant-badge"><i class="bi bi-app-indicator" aria-hidden="true"></i> 06 · Multi-échelles</span>
+                <h4>Net dès 16 × 16 px</h4>
+                <p>Aucun dégradé complexe ni micro-détail fragile : chaque logo tient en favicon 16 px comme en illustration pleine largeur.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== CHAPTER 02: LA FAMILLE ==================== -->
+          <section id="famille" class="identite-chapter" aria-labelledby="familleHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-grid-1x2" aria-hidden="true"></i>
+                  02 &middot; La famille des 3 logos
+                </span>
+              </div>
+              <h2 id="familleHeading" class="chapter-title">Trois emblèmes choisis, un même ADN</h2>
+              <p class="chapter-lead">
+                Chaque logo porte directement l’un des trois piliers de mon portfolio sur la page d’accueil. Cliquez sur une carte pour ouvrir immédiatement son plan de construction et sa lecture complète.
+              </p>
+            </div>
+
+            <div class="family-cards-grid">
+              <!-- Carte 1: Full-Stack (Terminal Code </>) -->
+              <a href="#logo-terminal" class="family-pillar-link">
+                <div class="tech-pillar-card">
+                  <div class="family-card-top">
+                    <div class="tech-pillar-icon">
+                      <svg viewBox="0 0 100 100" width="38" height="38" aria-hidden="true">
+                        <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                        <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                        <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <span class="family-role-tag">Pilier 01 · Code</span>
+                  </div>
+                  <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Développement Full-Stack</h3>
+                  <p class="small mb-3 flex-grow-1" style="color: var(--id-muted);">
+                    Le Terminal Code <code>&lt;/&gt;</code> encapsule l’art de bâtir des applications Web, mobiles et logicielles robustes (C# / .NET MAUI, Angular, Vue, React, Symfony).
+                  </p>
+                  <div class="d-flex flex-wrap gap-1 mt-auto">
+                    <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 600;">C# .NET</span>
+                    <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 600;">Angular / Vue</span>
+                    <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 600;">Terminal &lt;/&gt;</span>
+                  </div>
+                  <span class="family-jump-hint">
+                    <span>Voir construction 04</span>
+                    <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </a>
+
+              <!-- Carte 2: Intelligence Artificielle (Nœud Neuronal) -->
+              <a href="#logo-neural" class="family-pillar-link">
+                <div class="tech-pillar-card">
+                  <div class="family-card-top">
+                    <div class="tech-pillar-icon">
+                      <svg viewBox="0 0 100 100" width="38" height="38" aria-hidden="true">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                        <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+                        <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+                        <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+                        <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+                        <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                        <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                        <circle cx="50" cy="53" r="5" fill="#fff"/>
+                      </svg>
+                    </div>
+                    <span class="family-role-tag">Pilier 02 · IA</span>
+                  </div>
+                  <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Intelligence Artificielle</h3>
+                  <p class="small mb-3 flex-grow-1" style="color: var(--id-muted);">
+                    La Constellation Neuronale relie 3 synapses autour d’un noyau d’inférence au cœur d’une orbite rythmée — écho direct de ma spécialisation (AEC IA).
+                  </p>
+                  <div class="d-flex flex-wrap gap-1 mt-auto">
+                    <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 600;">Python &amp; ML</span>
+                    <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 600;">Réseaux Neuronaux</span>
+                    <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 600;">Agents IA</span>
+                  </div>
+                  <span class="family-jump-hint">
+                    <span>Voir construction 05</span>
+                    <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </a>
+
+              <!-- Carte 3: Systèmes TI & Automatisation (OB Hexagonal — Logo Officiel) -->
+              <a href="#logo-ob-tech" class="family-pillar-link">
+                <div class="tech-pillar-card">
+                  <div class="family-card-top">
+                    <div class="tech-pillar-icon">
+                      <svg viewBox="0 0 100 100" width="38" height="38" aria-hidden="true">
+                        <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                        <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                        <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                      </svg>
+                    </div>
+                    <span class="family-official-tag">Logo Officiel</span>
+                  </div>
+                  <h3 class="fs-5 fw-bold mb-2" style="color: var(--heading-color);">Systèmes TI &amp; Monogramme OB</h3>
+                  <p class="small mb-3 flex-grow-1" style="color: var(--id-muted);">
+                    Emblème principal du site, du favicon et du boot loader depuis la V4 : un bouclier hexagonal formant le <strong>O</strong>, animé d’un <strong>B</strong> en piste de circuit.
+                  </p>
+                  <div class="d-flex flex-wrap gap-1 mt-auto">
+                    <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 600;">PowerShell</span>
+                    <span class="badge" style="background: rgba(56,189,248,0.15); color: #38BDF8; font-weight: 600;">Active Directory</span>
+                    <span class="badge" style="background: rgba(255,102,0,0.15); color: #FF6600; font-weight: 600;">Monogramme OB</span>
+                  </div>
+                  <span class="family-jump-hint">
+                    <span>Voir construction 03</span>
+                    <i class="bi bi-arrow-down-right" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <!-- ==================== CHAPTER 03: LOGO 1 — OB HEXAGONAL ==================== -->
+          <section id="logo-ob-tech" class="identite-chapter" aria-labelledby="obTechHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-hexagon" aria-hidden="true"></i>
+                  03 &middot; Le monogramme fondateur
+                </span>
+              </div>
+              <h2 id="obTechHeading" class="chapter-title">OB Hexagonal Tech — Identité principale</h2>
+              <p class="chapter-lead">
+                Le sceau officiel d’Olivier Bourgault depuis la V4 : mes initiales assemblées en bouclier d’infrastructure et de circuit imprimé.
+              </p>
+            </div>
+
+            <div class="logo-chapter-card">
+              <!-- Left Interactive 3-Mode SVG Inspector -->
+              <div class="logo-inspector" data-inspector-id="ob">
+                <div class="inspector-tablist" role="tablist" focusgroup="tablist nomemory" aria-label="Modes d'inspection OB Hexagonal">
+                  <button type="button" role="tab" id="ob-tab-logo" class="inspector-tab" data-inspector-mode="logo" aria-selected="true" focusgroupstart tabindex="0">Le logo</button>
+                  <button type="button" role="tab" id="ob-tab-construction" class="inspector-tab" data-inspector-mode="construction" aria-selected="false" tabindex="-1">La construction</button>
+                  <button type="button" role="tab" id="ob-tab-lecture" class="inspector-tab" data-inspector-mode="lecture" aria-selected="false" tabindex="-1">La lecture</button>
+                </div>
+
+                <div class="inspector-stage" data-mode="logo" data-surface="dark">
+                  <div class="inspector-stage-top">
+                    <span class="inspector-viewbox-tag">logo-ob-tech.svg &bull; 100×100</span>
+                    <div class="surface-switcher" role="group" aria-label="Fond d'aperçu OB Tech">
+                      <button type="button" class="surface-btn" data-stage-surface="dark" aria-pressed="true">Carbone</button>
+                      <button type="button" class="surface-btn" data-stage-surface="light" aria-pressed="false">Ivoire</button>
+                      <button type="button" class="surface-btn" data-stage-surface="grid" aria-pressed="false">Grille</button>
+                    </div>
+                  </div>
+
+                  <div class="inspector-svg-wrap">
+                    <svg class="blueprint-svg" viewBox="-34 -24 168 148" role="img" aria-label="Plan technique du logo OB Hexagonal Tech">
+                      <!-- Base Official SVG -->
+                      <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                      <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                      <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+
+                      <!-- Layer: Construction Blueprint -->
+                      <g class="svg-layer-construction">
+                        <circle cx="50" cy="52" r="46" class="bp-guide-dash"/>
+                        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide"/>
+                        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide"/>
+                        <line x1="38" y1="-4" x2="38" y2="104" class="bp-guide-dash"/>
+                        <line x1="22" y1="30" x2="94" y2="30" class="bp-guide-dash"/>
+                        <line x1="22" y1="70" x2="94" y2="70" class="bp-guide-dash"/>
+                        <circle cx="50" cy="52" r="1.8" fill="#38BDF8"/>
+                        <text x="-30" y="-12" class="bp-text-orange">R 46 · hex 60°</text>
+                        <text x="97" y="32" class="bp-text">y 30</text>
+                        <text x="97" y="52" class="bp-text">y 50</text>
+                        <text x="97" y="72" class="bp-text">y 70</text>
+                        <text x="-30" y="116" class="bp-text">épine x 38</text>
+                        <text x="128" y="116" text-anchor="end" class="bp-text-muted">centre 50;52</text>
+                      </g>
+
+                      <!-- Layer: Semantic Lecture Callouts -->
+                      <g class="svg-layer-lecture">
+                        <line x1="24" y1="-2" x2="34" y2="16" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="-31" y="-18" width="60" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="-1" y="-8" text-anchor="middle" class="bp-pill-text">O · Hexagone</text>
+
+                        <line x1="94" y1="-2" x2="66" y2="36" stroke="#38BDF8" stroke-width="1"/>
+                        <rect x="74" y="-18" width="56" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="102" y="-8" text-anchor="middle" class="bp-pill-text">B · Circuit</text>
+
+                        <line x1="20" y1="106" x2="48" y2="53" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="-31" y="106" width="78" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="8" y="116" text-anchor="middle" class="bp-pill-text">Nœud pivot (50;50)</text>
+
+                        <rect x="74" y="106" width="56" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="102" y="116" text-anchor="middle" class="bp-pill-text">Sceau V4→V5</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <div class="inspector-stage-footer">
+                    <div class="favicon-scale-strip" aria-label="Test de lisibilité en petite taille">
+                      <span class="favicon-scale-label">Échelles :</span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="16" height="16">16px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="24" height="24">24px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="34" height="34">34px
+                      </span>
+                    </div>
+                    <a href="assets/img/logo/logo-ob-tech.svg" download="logo-ob-tech.svg" class="svg-dl-btn">
+                      <i class="bi bi-download" aria-hidden="true"></i>
+                      <span>SVG</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Accessible Caption Panels synced with 3 tabs -->
+                <div class="inspector-captions">
+                  <div id="ob-panel-logo" class="inspector-caption-panel" role="tabpanel" aria-labelledby="ob-tab-logo" tabindex="0">
+                    <div class="inspector-caption-inner">
+                      <strong>Le symbole officiel :</strong> tel qu’il apparaît dans la barre de navigation, le favicon SVG, le Boot Loader Fusion et le pied de page.
+                    </div>
+                  </div>
+                  <div id="ob-panel-construction" class="inspector-caption-panel" role="tabpanel" aria-labelledby="ob-tab-construction" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La construction :</strong> hexagone inscrit dans <code>R 46</code> à faces de <code>60°</code>, colonne du B calée sur <code>x 38</code> et deux boucles symétriques entre <code>y 30</code>, <code>y 50</code> et <code>y 70</code>.
+                    </div>
+                  </div>
+                  <div id="ob-panel-lecture" class="inspector-caption-panel" role="tabpanel" aria-labelledby="ob-tab-lecture" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La lecture :</strong> trois sens en un seul signe — le bouclier <strong>O</strong>, la piste numérique <strong>B</strong> et le nœud de jonction central <code>(50;50)</code>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Editorial Breakdown -->
+              <div class="logo-story-col">
+                <div class="story-meta-row">
+                  <span class="family-official-tag">Logo Officiel · Navbar &amp; Favicon</span>
+                  <span class="version-code-badge" style="font-size: 0.72rem; padding: 3px 9px;">Adopté en V4 · Actif en V5</span>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’on voit</h3>
+                  <p>
+                    Un contour hexagonal franc <strong>orange #FF6600</strong> aux sommets adoucis, abritant un <strong>B géométrique bleu ciel #38BDF8</strong> rythmé par une pastille centrale orange à l’intersection des deux boucles.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Comment il est né</h3>
+                  <p>
+                    Pour passer d’un portfolio générique à une vraie signature d’ingénieur en TI et en développement, il me fallait un monogramme qui évoque à la fois une puce matérielle, la sécurité réseau et mes deux initiales <strong>OB</strong> sans texte superflu.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’il cache</h3>
+                  <ul class="story-hidden-list">
+                    <li>
+                      <span class="decode-key">L’hexagone</span>
+                      <span>Forme à la fois le <strong>O d’Olivier</strong>, un boulon d’ingénierie et un bouclier d’infrastructure résiliente.</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">Le B double-flux</span>
+                      <span>L’initiale <strong>B de Bourgault</strong> dessinée comme deux bus de données parallèles (entrée haute <code>y 30→50</code>, sortie basse <code>y 50→70</code>).</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">Le point pivot</span>
+                      <span>Un point unique en <code>(50;50)</code> soude l’ensemble comme une broche centrale de circuit imprimé.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="story-quote-callout">
+                  <p>
+                    <strong>Mon parcours :</strong> Forgé par mes mandats en infrastructure TI à la <em>Chambre des communes</em> et chez <em>Élections Canada</em>, où automatisation PowerShell, Active Directory et rigueur système ne font qu’un.
+                  </p>
+                </div>
+
+                <div class="story-footer-row">
+                  <div class="story-keywords">
+                    <span class="story-keyword-pill">Systèmes TI</span>
+                    <span class="story-keyword-pill">Monogramme OB</span>
+                    <span class="story-keyword-pill">DevOps &amp; Git</span>
+                  </div>
+                  <a href="index.html#expertise" class="identite-btn-outline" style="padding: 0.45rem 0.95rem; font-size: 0.8rem;">
+                    <span>Voir pilier TI</span>
+                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== CHAPTER 04: LOGO 2 — TERMINAL CODE </> ==================== -->
+          <section id="logo-terminal" class="identite-chapter" aria-labelledby="terminalHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-code-slash" aria-hidden="true"></i>
+                  04 &middot; La syntaxe du bâtisseur
+                </span>
+              </div>
+              <h2 id="terminalHeading" class="chapter-title">Terminal Code &lt;/&gt; — Développement Full-Stack</h2>
+              <p class="chapter-lead">
+                La balise universelle du développeur logiciel, épurée et recentrée dans le disque signature de la famille.
+              </p>
+            </div>
+
+            <div class="logo-chapter-card">
+              <!-- Left Interactive 3-Mode SVG Inspector -->
+              <div class="logo-inspector" data-inspector-id="term">
+                <div class="inspector-tablist" role="tablist" focusgroup="tablist nomemory" aria-label="Modes d'inspection Terminal Code">
+                  <button type="button" role="tab" id="term-tab-logo" class="inspector-tab" data-inspector-mode="logo" aria-selected="true" focusgroupstart tabindex="0">Le logo</button>
+                  <button type="button" role="tab" id="term-tab-construction" class="inspector-tab" data-inspector-mode="construction" aria-selected="false" tabindex="-1">La construction</button>
+                  <button type="button" role="tab" id="term-tab-lecture" class="inspector-tab" data-inspector-mode="lecture" aria-selected="false" tabindex="-1">La lecture</button>
+                </div>
+
+                <div class="inspector-stage" data-mode="logo" data-surface="dark">
+                  <div class="inspector-stage-top">
+                    <span class="inspector-viewbox-tag">logo-terminal-tech.svg &bull; 100×100</span>
+                    <div class="surface-switcher" role="group" aria-label="Fond d'aperçu Terminal Code">
+                      <button type="button" class="surface-btn" data-stage-surface="dark" aria-pressed="true">Carbone</button>
+                      <button type="button" class="surface-btn" data-stage-surface="light" aria-pressed="false">Ivoire</button>
+                      <button type="button" class="surface-btn" data-stage-surface="grid" aria-pressed="false">Grille</button>
+                    </div>
+                  </div>
+
+                  <div class="inspector-svg-wrap">
+                    <svg class="blueprint-svg" viewBox="-34 -24 168 148" role="img" aria-label="Plan technique du logo Terminal Code">
+                      <!-- Base Official SVG -->
+                      <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                      <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                      <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+                      <!-- Layer: Construction Blueprint -->
+                      <g class="svg-layer-construction">
+                        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide"/>
+                        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide"/>
+                        <line x1="16" y1="36" x2="86" y2="36" class="bp-guide-dash"/>
+                        <line x1="16" y1="64" x2="86" y2="64" class="bp-guide-dash"/>
+                        <line x1="24" y1="26" x2="24" y2="100" class="bp-guide-dash"/>
+                        <line x1="76" y1="26" x2="76" y2="100" class="bp-guide-dash"/>
+                        <line x1="42" y1="78" x2="58" y2="22" class="bp-guide-orange"/>
+                        <text x="-30" y="-12" class="bp-text-orange">R 44 · Ø 88</text>
+                        <text x="128" y="-12" text-anchor="end" class="bp-text-orange">slash 74°</text>
+                        <text x="-30" y="38" class="bp-text">y 36</text>
+                        <text x="-30" y="66" class="bp-text">y 64</text>
+                        <text x="24" y="114" text-anchor="middle" class="bp-text">x 24</text>
+                        <text x="50" y="114" text-anchor="middle" class="bp-text-muted">50;50</text>
+                        <text x="76" y="114" text-anchor="middle" class="bp-text">x 76</text>
+                      </g>
+
+                      <!-- Layer: Semantic Lecture Callouts -->
+                      <g class="svg-layer-lecture">
+                        <line x1="18" y1="-2" x2="29" y2="41" stroke="#38BDF8" stroke-width="1"/>
+                        <rect x="-31" y="-18" width="60" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="-1" y="-8" text-anchor="middle" class="bp-pill-text">Chevrons &lt; &gt;</text>
+
+                        <line x1="92" y1="-2" x2="54" y2="36" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="74" y="-18" width="56" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="102" y="-8" text-anchor="middle" class="bp-pill-text">Slash actif /</text>
+
+                        <line x1="14" y1="106" x2="24" y2="86" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="-31" y="106" width="68" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="3" y="116" text-anchor="middle" class="bp-pill-text">Enceinte O · App</text>
+
+                        <rect x="74" y="106" width="56" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="102" y="116" text-anchor="middle" class="bp-pill-text">Full-Stack</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <div class="inspector-stage-footer">
+                    <div class="favicon-scale-strip" aria-label="Test de lisibilité en petite taille">
+                      <span class="favicon-scale-label">Échelles :</span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="16" height="16">16px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="24" height="24">24px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="34" height="34">34px
+                      </span>
+                    </div>
+                    <a href="assets/img/logo/logo-terminal-tech.svg" download="logo-terminal-tech.svg" class="svg-dl-btn">
+                      <i class="bi bi-download" aria-hidden="true"></i>
+                      <span>SVG</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="inspector-captions">
+                  <div id="term-panel-logo" class="inspector-caption-panel" role="tabpanel" aria-labelledby="term-tab-logo" tabindex="0">
+                    <div class="inspector-caption-inner">
+                      <strong>Le symbole :</strong> cercle orange à cœur semi-translucide encadrant des chevrons bleu circuit et un slash central dynamique.
+                    </div>
+                  </div>
+                  <div id="term-panel-construction" class="inspector-caption-panel" role="tabpanel" aria-labelledby="term-tab-construction" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La construction :</strong> chevrons parfaitement symétriques entre <code>x 24</code> et <code>x 76</code> sur l’intervalle vertical <code>y 36 → y 64</code>, traversés par un slash incliné à <code>74°</code>.
+                    </div>
+                  </div>
+                  <div id="term-panel-lecture" class="inspector-caption-panel" role="tabpanel" aria-labelledby="term-tab-lecture" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La lecture :</strong> Front-End et Back-End en miroir (<code>&lt;</code> et <code>&gt;</code>) reliés par l’énergie d’exécution <code>/</code>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Editorial Breakdown -->
+              <div class="logo-story-col">
+                <div class="story-meta-row">
+                  <span class="family-role-tag">Pilier 01 · Développement Full-Stack</span>
+                  <span class="version-code-badge" style="font-size: 0.72rem; padding: 3px 9px;">Code First</span>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’on voit</h3>
+                  <p>
+                    Une pastille circulaire lumineuse bordée d’<strong>orange #FF6600</strong> qui encadre l’expression <code>&lt;/&gt;</code> : deux chevrons <strong>bleu #38BDF8</strong> aux pointes douces et un slash incliné orange au centre exact.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Comment il est né</h3>
+                  <p>
+                    Mon premier logo utilisait déjà l’écran et la syntaxe du code. Pour l’architecture OB Tech, j’ai retiré le cadre d’ordinateur figé afin de ne garder que l’essence géométrique pure du code dans l’anneau <strong>O</strong>.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’il cache</h3>
+                  <ul class="story-hidden-list">
+                    <li>
+                      <span class="decode-key">Miroir &lt; et &gt;</span>
+                      <span>Le dialogue constant entre interface utilisateur (Angular, Vue, React, WCAG) et serveur ou logiciel natif (C#, .NET MAUI, Symfony).</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">Le slash / à 74°</span>
+                      <span>Marque la pente de progression et d’impulsion entre conception et déploiement en production.</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">L’halo subtil</span>
+                      <span>Un léger remplissage <code>rgba(255,102,0,0.12)</code> illumine le disque comme un terminal actif prêt à compiler.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="story-quote-callout">
+                  <p>
+                    <strong>Mon parcours :</strong> Plus de cinq ans à bâtir des projets concrets comme <em>Electrolib</em>, <em>Kaomia</em>, <em>EVOMEAL</em> et <em>CompareTools</em>, du prototype à l’architecture maintenable.
+                  </p>
+                </div>
+
+                <div class="story-footer-row">
+                  <div class="story-keywords">
+                    <span class="story-keyword-pill">Full-Stack</span>
+                    <span class="story-keyword-pill">Terminal &lt;/&gt;</span>
+                    <span class="story-keyword-pill">Accessibilité WCAG</span>
+                  </div>
+                  <a href="index.html#portfolio" class="identite-btn-outline" style="padding: 0.45rem 0.95rem; font-size: 0.8rem;">
+                    <span>Voir mes projets</span>
+                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== CHAPTER 05: LOGO 3 — NŒUD NEURONAL IA ==================== -->
+          <section id="logo-neural" class="identite-chapter" aria-labelledby="neuralHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-share" aria-hidden="true"></i>
+                  05 &middot; La constellation synaptique
+                </span>
+              </div>
+              <h2 id="neuralHeading" class="chapter-title">Nœud Neuronal — Intelligence Artificielle</h2>
+              <p class="chapter-lead">
+                Une orbite de données en pointillés qui entoure un graphe triangulaire de neurones et son point focal d’inférence.
+              </p>
+            </div>
+
+            <div class="logo-chapter-card">
+              <!-- Left Interactive 3-Mode SVG Inspector -->
+              <div class="logo-inspector" data-inspector-id="neural">
+                <div class="inspector-tablist" role="tablist" focusgroup="tablist nomemory" aria-label="Modes d'inspection Nœud Neuronal">
+                  <button type="button" role="tab" id="neural-tab-logo" class="inspector-tab" data-inspector-mode="logo" aria-selected="true" focusgroupstart tabindex="0">Le logo</button>
+                  <button type="button" role="tab" id="neural-tab-construction" class="inspector-tab" data-inspector-mode="construction" aria-selected="false" tabindex="-1">La construction</button>
+                  <button type="button" role="tab" id="neural-tab-lecture" class="inspector-tab" data-inspector-mode="lecture" aria-selected="false" tabindex="-1">La lecture</button>
+                </div>
+
+                <div class="inspector-stage" data-mode="logo" data-surface="dark">
+                  <div class="inspector-stage-top">
+                    <span class="inspector-viewbox-tag">logo-neural-tech.svg &bull; 100×100</span>
+                    <div class="surface-switcher" role="group" aria-label="Fond d'aperçu Nœud Neuronal">
+                      <button type="button" class="surface-btn" data-stage-surface="dark" aria-pressed="true">Carbone</button>
+                      <button type="button" class="surface-btn" data-stage-surface="light" aria-pressed="false">Ivoire</button>
+                      <button type="button" class="surface-btn" data-stage-surface="grid" aria-pressed="false">Grille</button>
+                    </div>
+                  </div>
+
+                  <div class="inspector-svg-wrap">
+                    <svg class="blueprint-svg" viewBox="-34 -24 168 148" role="img" aria-label="Plan technique du logo Nœud Neuronal IA">
+                      <!-- Base Official SVG -->
+                      <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                      <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+                      <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                      <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                      <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+                      <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+                      <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+                      <circle cx="50" cy="53" r="5" fill="#ffffff" class="neural-core-dot"/>
+
+                      <!-- Layer: Construction Blueprint -->
+                      <g class="svg-layer-construction">
+                        <line x1="-22" y1="50" x2="122" y2="50" class="bp-guide"/>
+                        <line x1="50" y1="-12" x2="50" y2="112" class="bp-guide"/>
+                        <line x1="20" y1="65" x2="86" y2="65" class="bp-guide-dash"/>
+                        <line x1="50" y1="30" x2="50" y2="88" class="bp-guide-dash"/>
+                        <circle cx="50" cy="53" r="19" class="bp-guide-orange"/>
+                        <text x="-30" y="-12" class="bp-text-orange">R 42 · dash 8/4</text>
+                        <text x="128" y="-12" text-anchor="end" class="bp-text">sommet (50;30)</text>
+                        <text x="-30" y="114" class="bp-text">(32;65) · r 8</text>
+                        <text x="128" y="114" text-anchor="end" class="bp-text-muted">(68;65) · noyau 50;53</text>
+                      </g>
+
+                      <!-- Layer: Semantic Lecture Callouts -->
+                      <g class="svg-layer-lecture">
+                        <line x1="12" y1="-2" x2="21" y2="21" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="-31" y="-18" width="58" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="-2" y="-8" text-anchor="middle" class="bp-pill-text">Orbite · Paquets</text>
+
+                        <line x1="88" y1="-2" x2="57" y2="27" stroke="#38BDF8" stroke-width="1"/>
+                        <rect x="70" y="-18" width="60" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="100" y="-8" text-anchor="middle" class="bp-pill-text">3 Nœuds IA</text>
+
+                        <line x1="18" y1="106" x2="48" y2="56" stroke="#FF6600" stroke-width="1"/>
+                        <rect x="-31" y="106" width="76" height="16" rx="4" class="bp-pill-bg"/>
+                        <text x="7" y="116" text-anchor="middle" class="bp-pill-text">Noyau inférence</text>
+
+                        <rect x="78" y="106" width="52" height="16" rx="4" class="bp-pill-bg-sky"/>
+                        <text x="104" y="116" text-anchor="middle" class="bp-pill-text">AEC IA</text>
+                      </g>
+                    </svg>
+                  </div>
+
+                  <div class="inspector-stage-footer">
+                    <div class="favicon-scale-strip" aria-label="Test de lisibilité en petite taille">
+                      <span class="favicon-scale-label">Échelles :</span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="16" height="16">16px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="24" height="24">24px
+                      </span>
+                      <span class="favicon-scale-item">
+                        <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="34" height="34">34px
+                      </span>
+                    </div>
+                    <a href="assets/img/logo/logo-neural-tech.svg" download="logo-neural-tech.svg" class="svg-dl-btn">
+                      <i class="bi bi-download" aria-hidden="true"></i>
+                      <span>SVG</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="inspector-captions">
+                  <div id="neural-panel-logo" class="inspector-caption-panel" role="tabpanel" aria-labelledby="neural-tab-logo" tabindex="0">
+                    <div class="inspector-caption-inner">
+                      <strong>Le symbole :</strong> anneau orbital pointillé <code>dash 8/4</code>, graphe synaptique à 3 sommets bleu circuit et barycentre blanc d’activation.
+                    </div>
+                  </div>
+                  <div id="neural-panel-construction" class="inspector-caption-panel" role="tabpanel" aria-labelledby="neural-tab-construction" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La construction :</strong> triangle isocèle équilibré aux coordonnées <code>(50;30)</code>, <code>(32;65)</code> et <code>(68;65)</code> avec nœuds de rayon <code>8</code> et noyau centré en <code>(50;53)</code>.
+                    </div>
+                  </div>
+                  <div id="neural-panel-lecture" class="inspector-caption-panel" role="tabpanel" aria-labelledby="neural-tab-lecture" hidden="until-found">
+                    <div class="inspector-caption-inner">
+                      <strong>La lecture :</strong> flux de données discontinu en périphérie, convergeant vers un modèle équilibré entre <em>Données</em>, <em>Apprentissage</em> et <em>Décision</em>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Editorial Breakdown -->
+              <div class="logo-story-col">
+                <div class="story-meta-row">
+                  <span class="family-role-tag">Pilier 02 · Intelligence Artificielle</span>
+                  <span class="version-code-badge" style="font-size: 0.72rem; padding: 3px 9px;">AEC IA · HubAI</span>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’on voit</h3>
+                  <p>
+                    Une couronne pointillée <strong>orange #FF6600</strong> qui tourne autour d’un triangle orange reliant trois disques <strong>bleu circuit #38BDF8</strong>, avec une étincelle blanche au centre de gravité du réseau.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Comment il est né</h3>
+                  <p>
+                    Lorsque j’ai intégré mon <strong>AEC en Intelligence Artificielle</strong> au Collège O’Sullivan et conçu <em>HubAI</em>, l’identité devait traduire visuellement la mise en réseau de modèles LLM, de pipelines Python et d’agents autonomes.
+                  </p>
+                </div>
+
+                <div class="story-block">
+                  <h3 class="story-label">Ce qu’il cache</h3>
+                  <ul class="story-hidden-list">
+                    <li>
+                      <span class="decode-key">L’orbite 8/4</span>
+                      <span>Évoque le transfert continu de paquets et de jetons (tokens) autour du système.</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">Les 3 sommets</span>
+                      <span>Un triangle complet : <strong>Données (Pandas)</strong>, <strong>Modèles (ML / Deep Learning)</strong> et <strong>Agents intelligents</strong>.</span>
+                    </li>
+                    <li>
+                      <span class="decode-key">Le noyau (50;53)</span>
+                      <span>Le point de synthèse où les poids du réseau produisent une décision claire — c’est aussi l’emblème animé du <em>Boot Loader Fusion</em> de la page d’accueil.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="story-quote-callout">
+                  <p>
+                    <strong>Mon parcours :</strong> Spécialisation en apprentissage automatique, API Gemini/LLM et déploiement d’assistants intelligents — réunis au sommet de ma vitrine GitHub.
+                  </p>
+                </div>
+
+                <div class="story-footer-row">
+                  <div class="story-keywords">
+                    <span class="story-keyword-pill">Python &amp; ML</span>
+                    <span class="story-keyword-pill">HubAI · Gemini</span>
+                    <span class="story-keyword-pill">Agents IA</span>
+                  </div>
+                  <a href="index.html#resume" class="identite-btn-outline" style="padding: 0.45rem 0.95rem; font-size: 0.8rem;">
+                    <span>Parcours IA</span>
+                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== CHAPTER 06: CODE DE LA FAMILLE & CHARTE ==================== -->
+          <section id="code-famille" class="identite-chapter" aria-labelledby="codeFamilleHeading">
+            <div class="chapter-header">
+              <div class="d-flex">
+                <span class="identite-section-pill">
+                  <i class="bi bi-table" aria-hidden="true"></i>
+                  06 &middot; Le code de la famille &amp; Charte Tech Canvas
+                </span>
+              </div>
+              <h2 id="codeFamilleHeading" class="chapter-title">Un cadre qui tient, une polarité qui parle</h2>
+              <p class="chapter-lead">
+                Tout le système graphique tient en deux règles : garder l’<strong>orange #FF6600</strong> comme armature d’architecture, et laisser le <strong>bleu circuit #38BDF8</strong> raconter le métier au cœur de chaque emblème.
+              </p>
+            </div>
+
+            <!-- Responsive Summary Table (Modern Web Guidance: responsive-table) -->
+            <div tabindex="0" role="region" aria-labelledby="familyTableCaption" class="table-wrapper">
+              <table class="family-code-table">
+                <caption id="familyTableCaption" class="visually-hidden">Tableau comparatif des trois logos OB Tech : lecture visuelle, sens et symbolique cachée</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Logo</th>
+                    <th scope="col">Ce qu’on voit</th>
+                    <th scope="col">Ce que ça dit</th>
+                    <th scope="col">Ce que ça cache</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      <span class="table-logo-cell">
+                        <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="28" height="28">
+                        <span>OB Hexagonal Tech</span>
+                      </span>
+                    </th>
+                    <td>Hexagone orange + monogramme B bleu + pivot central</td>
+                    <td>Mon identité officielle &amp; mes systèmes TI</td>
+                    <td>Initiales O·B réunies en bouclier matériel et bus de données</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <span class="table-logo-cell">
+                        <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="28" height="28">
+                        <span>Terminal Code &lt;/&gt;</span>
+                      </span>
+                    </th>
+                    <td>Disque orange + chevrons bleus + slash orange à 74°</td>
+                    <td>Le langage du développement Full-Stack</td>
+                    <td>Dialogue Front / Back symétrique autour de l’impulsion /</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      <span class="table-logo-cell">
+                        <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="28" height="28">
+                        <span>Nœud Neuronal IA</span>
+                      </span>
+                    </th>
+                    <td>Orbite pointillée orange + triangle de 3 disques bleus</td>
+                    <td>Intelligence Artificielle &amp; Agents</td>
+                    <td>Flux de paquets vers un modèle à 3 synapses et noyau d’inférence</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Palette Color Tokens + Copy Buttons (Modern Web Guidance: copy-button) -->
+            <h3 class="invariants-subhead">
+              <i class="bi bi-palette-fill" aria-hidden="true"></i>
+              <span>Palette officielle Tech Canvas (cliquer pour copier le code HEX)</span>
+            </h3>
+            <div class="palette-tokens-grid">
+              <article class="palette-token-card">
+                <div class="palette-swatch-bar" style="background: #FF6600;"></div>
+                <div class="palette-token-body">
+                  <h4 class="palette-token-name">Orange Signal</h4>
+                  <p class="palette-token-role">Signature, sélection Figma, ombres dures et cadre OB.</p>
+                  <div class="palette-hex-row">
+                    <code id="hex-orange" class="palette-hex-code">#FF6600</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-button" command="--copy" commandfor="hex-orange" aria-label="Copier le code couleur Orange Signal #FF6600">
+                        <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                        <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="palette-token-card">
+                <div class="palette-swatch-bar" style="background: #38BDF8;"></div>
+                <div class="palette-token-body">
+                  <h4 class="palette-token-name">Bleu Circuit</h4>
+                  <p class="palette-token-role">Logique logicielle, flux binaires et synapses IA.</p>
+                  <div class="palette-hex-row">
+                    <code id="hex-sky" class="palette-hex-code">#38BDF8</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-button" command="--copy" commandfor="hex-sky" aria-label="Copier le code couleur Bleu Circuit #38BDF8">
+                        <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                        <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="palette-token-card">
+                <div class="palette-swatch-bar" style="background: #121316;"></div>
+                <div class="palette-token-body">
+                  <h4 class="palette-token-name">Carbone Studio</h4>
+                  <p class="palette-token-role">Planche sombre principale pour contraste maximal.</p>
+                  <div class="palette-hex-row">
+                    <code id="hex-carbon" class="palette-hex-code">#121316</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-button" command="--copy" commandfor="hex-carbon" aria-label="Copier le code couleur Carbone Studio #121316">
+                        <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                        <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="palette-token-card">
+                <div class="palette-swatch-bar" style="background: #1A1C20;"></div>
+                <div class="palette-token-body">
+                  <h4 class="palette-token-name">Graphite Surface</h4>
+                  <p class="palette-token-role">Cartes néo-brutalistes, panneaux et fenêtres OS.</p>
+                  <div class="palette-hex-row">
+                    <code id="hex-graphite" class="palette-hex-code">#1A1C20</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-button" command="--copy" commandfor="hex-graphite" aria-label="Copier le code couleur Graphite Surface #1A1C20">
+                        <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                        <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="palette-token-card">
+                <div class="palette-swatch-bar" style="background: #F4F1EA;"></div>
+                <div class="palette-token-body">
+                  <h4 class="palette-token-name">Ivoire Papier</h4>
+                  <p class="palette-token-role">Planche d’atelier claire avec traits d’encre #161616.</p>
+                  <div class="palette-hex-row">
+                    <code id="hex-ivory" class="palette-hex-code">#F4F1EA</code>
+                    <span class="copy-wrap">
+                      <button type="button" class="copy-button" command="--copy" commandfor="hex-ivory" aria-label="Copier le code couleur Ivoire Papier #F4F1EA">
+                        <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
+                        <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>
+                      </button>
+                      <span class="copy-tip" role="status"></span>
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Official Typography Specimens -->
+            <h3 class="invariants-subhead">
+              <i class="bi bi-fonts" aria-hidden="true"></i>
+              <span>Système typographique</span>
+            </h3>
+            <div class="typo-grid">
+              <article class="typo-card">
+                <span class="typo-role">Titres &amp; UI</span>
+                <p class="typo-sample" style="font-family: 'Space Grotesk', sans-serif; font-weight: 700;">Space Grotesk</p>
+                <span class="typo-meta">Poids 700 · Caractère technique affirmé</span>
+              </article>
+              <article class="typo-card">
+                <span class="typo-role">Signature Navbar</span>
+                <p class="typo-sample" style="font-family: 'Staatliches', sans-serif; letter-spacing: 0.05em;">OLIVIER BOURGAULT</p>
+                <span class="typo-meta">Staatliches · Capitales condensées</span>
+              </article>
+              <article class="typo-card">
+                <span class="typo-role">Corps éditorial</span>
+                <p class="typo-sample" style="font-family: 'Manrope', sans-serif; font-weight: 500; font-size: 1.15rem;">Clarté de lecture sur grilles et cartes.</p>
+                <span class="typo-meta">Manrope · 400 / 500 / 700</span>
+              </article>
+              <article class="typo-card">
+                <span class="typo-role">Code &amp; Cotation</span>
+                <p class="typo-sample" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.12rem; color: #38BDF8;">R 46 · 60° · #FF6600</p>
+                <span class="typo-meta">JetBrains Mono · Métadonnées</span>
+              </article>
+            </div>
+
+            <!-- Multi-Surface Test Bench & SVG Downloads -->
+            <div class="bench-card">
+              <div class="bench-toolbar">
+                <div>
+                  <span class="story-label mb-0 d-block">Banc d’essai multi-surfaces</span>
+                  <span style="font-size: 0.85rem; color: var(--id-muted);">Comparez les 3 logos choisis simultanément sur vos fonds réels ou en taille favicon</span>
+                </div>
+                <div id="benchControls" class="bench-controls" role="group" aria-label="Choisir la surface du banc d'essai">
+                  <button type="button" class="bench-btn" data-bench-mode="dark" aria-pressed="true">Carbone #121316</button>
+                  <button type="button" class="bench-btn" data-bench-mode="light" aria-pressed="false">Ivoire #F4F1EA</button>
+                  <button type="button" class="bench-btn" data-bench-mode="orange" aria-pressed="false">Orange #FF6600</button>
+                  <button type="button" class="bench-btn" data-bench-mode="favicon" aria-pressed="false">Favicons 16/32/48</button>
+                </div>
+              </div>
+
+              <div id="benchStage" class="bench-stage" data-bench-surface="dark">
+                <!-- Slot 1: OB Hexagonal -->
+                <div class="bench-slot">
+                  <svg class="bench-main-icon" viewBox="0 0 100 100" width="68" height="68" aria-label="Logo OB Hexagonal Tech">
+                    <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+                  </svg>
+                  <div class="bench-favicon-row" aria-hidden="true">
+                    <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="16" height="16">
+                    <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="32" height="32">
+                    <img src="assets/img/logo/logo-ob-tech.svg" alt="" width="48" height="48">
+                  </div>
+                  <span class="bench-slot-title">OB Hexagonal Tech</span>
+                  <span class="bench-slot-file">assets/img/logo/logo-ob-tech.svg</span>
+                  <a href="assets/img/logo/logo-ob-tech.svg" download="logo-ob-tech.svg" class="svg-dl-btn mt-1">
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    <span>Télécharger SVG</span>
+                  </a>
+                </div>
+
+                <!-- Slot 2: Terminal Code -->
+                <div class="bench-slot">
+                  <svg class="bench-main-icon" viewBox="0 0 100 100" width="68" height="68" aria-label="Logo Terminal Code Tech">
+                    <circle cx="50" cy="50" r="44" fill="rgba(255,102,0,0.12)" stroke="#FF6600" stroke-width="6"/>
+                    <path d="M36,36 L24,50 L36,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="46" y1="64" x2="54" y2="36" stroke="#FF6600" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M64,36 L76,50 L64,64" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="bench-favicon-row" aria-hidden="true">
+                    <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="16" height="16">
+                    <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="32" height="32">
+                    <img src="assets/img/logo/logo-terminal-tech.svg" alt="" width="48" height="48">
+                  </div>
+                  <span class="bench-slot-title">Terminal Code &lt;/&gt;</span>
+                  <span class="bench-slot-file">assets/img/logo/logo-terminal-tech.svg</span>
+                  <a href="assets/img/logo/logo-terminal-tech.svg" download="logo-terminal-tech.svg" class="svg-dl-btn mt-1">
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    <span>Télécharger SVG</span>
+                  </a>
+                </div>
+
+                <!-- Slot 3: Nœud Neuronal -->
+                <div class="bench-slot">
+                  <svg class="bench-main-icon" viewBox="0 0 100 100" width="68" height="68" aria-label="Logo Nœud Neuronal IA">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#FF6600" stroke-width="5" stroke-dasharray="8 4"/>
+                    <line x1="50" y1="30" x2="32" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="50" y1="30" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <line x1="32" y1="65" x2="68" y2="65" stroke="#FF6600" stroke-width="4"/>
+                    <circle cx="50" cy="30" r="8" fill="#38BDF8"/>
+                    <circle cx="32" cy="65" r="8" fill="#38BDF8"/>
+                    <circle cx="68" cy="65" r="8" fill="#38BDF8"/>
+                    <circle cx="50" cy="53" r="5" fill="#ffffff" class="neural-core-dot"/>
+                  </svg>
+                  <div class="bench-favicon-row" aria-hidden="true">
+                    <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="16" height="16">
+                    <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="32" height="32">
+                    <img src="assets/img/logo/logo-neural-tech.svg" alt="" width="48" height="48">
+                  </div>
+                  <span class="bench-slot-title">Nœud Neuronal IA</span>
+                  <span class="bench-slot-file">assets/img/logo/logo-neural-tech.svg</span>
+                  <a href="assets/img/logo/logo-neural-tech.svg" download="logo-neural-tech.svg" class="svg-dl-btn mt-1">
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    <span>Télécharger SVG</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+    <!-- #endregion -->
+  </main>
+
+  <!-- #region Global Footer (Aligné sur index.html) -->
+  <footer id="footer" class="footer">
+    <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+      <svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">
+        <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round"/>
+        <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="4" fill="#FF6600"/>
+      </svg>
+      <span class="fw-bold" style="font-family: var(--coding-font); font-size: 0.88rem; color: #FF6600; letter-spacing: 0.05em;">OB TECH &bull; IDENTITÉ VISUELLE</span>
+    </div>
+
+    <div class="copyright text-center">
+      <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">Olivier Bourgault</strong> — <span>Tous droits réservés</span></p>
+    </div>
+
+    <div class="social-links d-flex justify-content-center">
+      <a href="index.html" aria-label="Accueil du portfolio" title="Accueil (V5)"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+      <a href="versions.html" aria-label="Navigateur de versions" title="Navigateur de versions"><i class="bi bi-clock-history" aria-hidden="true"></i></a>
+      <a href="cv-apercu.html" aria-label="CV - Aperçu" title="CV - Aperçu"><i class="bi bi-file-earmark-person" aria-hidden="true"></i></a>
+      <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+      <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+    </div>
+
+    <div class="credits">
+      Raccourci clavier : touche <kbd>L</kbd> pour activer/désactiver le curseur interactif &bull; <a href="index.html">Retour à l’accueil (V5)</a>
+    </div>
+  </footer>
+  <!-- #endregion -->
+
+  <!-- Scroll Top -->
+  <a id="scroll-top" href="#identite-hero" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Retour en haut de page">
+    <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/identite.js"></script>
 </body>
+
 </html>

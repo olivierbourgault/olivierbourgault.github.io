@@ -56,29 +56,51 @@ function aosInit() {
  * Main Initialization on Page Load
  */
 window.addEventListener('load', function (e) {
-  // Show loading bar on mobile immediately
-  if (window.innerWidth <= 540) {
-    document.querySelector(".loading__bar").classList.remove("d-none");
-  }
+  const pctEl = document.getElementById('obBootPct');
+  const barEl = document.getElementById('obBootBar');
+  const line1 = document.getElementById('obBootLine1');
+  const line2 = document.getElementById('obBootLine2');
+  const line3 = document.getElementById('obBootLine3');
 
-  // Simulate loading delay
+  let pct = 0;
+  const pctTimer = setInterval(() => {
+    pct = Math.min(100, pct + 5);
+    if (pctEl) pctEl.textContent = String(pct).padStart(2, '0') + '%';
+    if (pct >= 100) clearInterval(pctTimer);
+  }, 45);
+
   setTimeout(() => {
-    // Hide spinner, show page
+    if (line1) line1.classList.add('is-visible');
+    if (barEl) barEl.style.width = '35%';
+  }, 100);
+
+  setTimeout(() => {
+    if (line2) line2.classList.add('is-visible');
+    if (barEl) barEl.style.width = '75%';
+  }, 460);
+
+  setTimeout(() => {
+    if (line3) line3.classList.add('is-visible');
+    if (barEl) barEl.style.width = '100%';
+  }, 850);
+
+  setTimeout(() => {
+    clearInterval(pctTimer);
+    if (pctEl) pctEl.textContent = '100%';
+
     document.getElementById("spinner").classList.add("d-none");
     document.getElementById("page").classList.remove("d-none");
 
-    // Display years of experience
-    document.getElementById('experience').innerHTML = diffDate(START, TODAY);
+    const expEl = document.getElementById('experience');
+    if (expEl) expEl.innerHTML = diffDate(START, TODAY);
 
-    // Initialize main logic
     main();
 
-    // Trigger default portfolio filter (All)
     setTimeout(() => {
       const activeFilter = document.querySelector(".filter-active");
       if (activeFilter) activeFilter.click();
-    }, 750);
-  }, 3000);
+    }, 350);
+  }, 1350);
 });
 
 /* -------------------------------------------------------------------------- */
@@ -152,6 +174,76 @@ function main() {
 }
 
 /**
+ * Limite d'affichage des projets par défaut (5) + bouton "Voir tous les projets"
+ */
+const DEFAULT_VISIBLE_PROJECTS = 5;
+let portfolioShowAll = false;
+
+function getFilteredPortfolioItems(container, filterSelector) {
+  const all = Array.from(container.querySelectorAll('.portfolio-item'));
+  if (!filterSelector || filterSelector === '*') return all;
+  return all.filter(item => item.matches(filterSelector));
+}
+
+function updatePortfolioShowMoreButton(container, totalMatching) {
+  let btnWrap = document.getElementById('portfolioShowMoreWrap');
+  if (!btnWrap) {
+    btnWrap = document.createElement('div');
+    btnWrap.id = 'portfolioShowMoreWrap';
+    btnWrap.className = 'text-center mt-4';
+    const btn = document.createElement('button');
+    btn.id = 'portfolioShowMoreBtn';
+    btn.type = 'button';
+    btn.className = 'btn btn-submit';
+    btn.addEventListener('click', () => {
+      portfolioShowAll = !portfolioShowAll;
+      const activeBtn = document.querySelector('#filters .filter-active');
+      const currentFilter = activeBtn ? activeBtn.getAttribute('data-filter') : '*';
+      applyPortfolioFilterWithLimit(container, currentFilter);
+      if (typeof AOS !== 'undefined') {
+        AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
+      }
+    });
+    btnWrap.appendChild(btn);
+    container.parentNode.appendChild(btnWrap);
+  }
+
+  const btn = document.getElementById('portfolioShowMoreBtn');
+  if (!btn) return;
+
+  if (totalMatching <= DEFAULT_VISIBLE_PROJECTS) {
+    btnWrap.classList.add('d-none');
+  } else {
+    btnWrap.classList.remove('d-none');
+    const remaining = totalMatching - DEFAULT_VISIBLE_PROJECTS;
+    btn.innerHTML = portfolioShowAll
+      ? '<i class="bi bi-chevron-up me-2" aria-hidden="true"></i>Réduire à 5 projets'
+      : `<i class="bi bi-grid-3x3-gap-fill me-2" aria-hidden="true"></i>Voir plus (+${remaining})`;
+  }
+}
+
+function applyPortfolioFilterWithLimit(container, filterSelector) {
+  if (!container) return;
+  const iso = Isotope.data(container);
+  const matching = getFilteredPortfolioItems(container, filterSelector);
+  const visibleSet = new Set(portfolioShowAll ? matching : matching.slice(0, DEFAULT_VISIBLE_PROJECTS));
+
+  if (iso) {
+    iso.arrange({
+      filter: function (itemElem) {
+        return visibleSet.has(itemElem);
+      }
+    });
+    iso.layout();
+  }
+
+  updatePortfolioShowMoreButton(container, matching.length);
+  if (typeof window.refreshPortfolioVerticalNav === 'function') {
+    window.refreshPortfolioVerticalNav();
+  }
+}
+
+/**
  * Initialize Isotope Layout and Filters
  */
 document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
@@ -168,6 +260,9 @@ document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
       filter: filter,
       sortBy: sort
     });
+    const activeEl = isotopeItem.querySelector('.isotope-filters .filter-active');
+    const currentFilter = activeEl ? activeEl.getAttribute('data-filter') : filter;
+    applyPortfolioFilterWithLimit(container, currentFilter);
   });
 
   isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filters) {
@@ -175,13 +270,8 @@ document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
       const activeEl = isotopeItem.querySelector('.isotope-filters .filter-active');
       if (activeEl) activeEl.classList.remove('filter-active');
       this.classList.add('filter-active');
-      const isoInstance = initIsotope || Isotope.data(container);
-      if (isoInstance) {
-        isoInstance.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        isoInstance.layout();
-      }
+      portfolioShowAll = false;
+      applyPortfolioFilterWithLimit(container, this.getAttribute('data-filter'));
       if (typeof aosInit === 'function') {
         aosInit();
       }
@@ -664,9 +754,10 @@ function initVerticalSectionNav() {
         const activeFilterBtn = document.querySelector('#filters .filter-active');
         const filterSelector = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : '*';
         const cards = Array.from(isotopeLayout.querySelectorAll('.portfolio-item'));
-        const visibleCards = (!filterSelector || filterSelector === '*')
+        const matching = (!filterSelector || filterSelector === '*')
           ? cards
           : cards.filter(c => c.matches(filterSelector));
+        const visibleCards = portfolioShowAll ? matching : matching.slice(0, DEFAULT_VISIBLE_PROJECTS);
 
         return visibleCards.map(card => {
           const h3 = card.querySelector('h3');
@@ -1135,14 +1226,11 @@ function renderPortfolioProjects(projects) {
       iso.appended(newElements);
       const activeFilterBtn = document.querySelector('#filters .filter-active');
       const currentFilter = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : '*';
-      iso.arrange({ filter: currentFilter });
+      applyPortfolioFilterWithLimit(container, currentFilter);
       imagesLoaded(container, () => {
-        iso.layout();
+        applyPortfolioFilterWithLimit(container, currentFilter);
         if (typeof AOS !== 'undefined') {
           AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
-        }
-        if (typeof window.refreshPortfolioVerticalNav === 'function') {
-          window.refreshPortfolioVerticalNav();
         }
       });
     }
