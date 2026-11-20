@@ -75,7 +75,7 @@
 
   <!-- #region Content -->
   <div id="page" class="d-none">
-    <header id="header" class="header d-flex align-items-center sticky-top">
+    <header id="header" class="header d-flex align-items-center">
       <div
         class="header-container container-fluid position-relative d-flex align-items-center justify-content-between mx-auto">
         <!-- #region Logo / Wordmark -->
@@ -110,8 +110,7 @@
           <div class="menu-foot d-xl-none">
             <a href="mailto:bourgault.olivier8501@gmail.com" class="menu-foot-email">bourgault.olivier8501@gmail.com</a>
             <div class="menu-foot-socials">
-              <a href="versions.html" aria-label="Navigateur de versions" title="Navigateur de versions"><i class="bi bi-clock-history" aria-hidden="true"></i></a>
-              <a href="logo_proposals.html" aria-label="Propositions de Logo" title="Propositions de Logo"><i class="bi bi-palette2" aria-hidden="true"></i></a>
+              <a href="versions.html" aria-label="Versions et identité visuelle" title="Versions & Identité visuelle"><i class="bi bi-layers" aria-hidden="true"></i></a>
               <a href="https://github.com/RinoShip77" target="_blank" rel="noopener noreferrer" aria-label="Profil Github"><i class="bi bi-github" aria-hidden="true"></i></a>
               <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" target="_blank" rel="noopener noreferrer" aria-label="Profil Linkedin"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
             </div>
@@ -122,10 +121,25 @@
         <!-- #region Right Actions: Social links, Theme switcher & Mobile 3-line Hamburger -->
         <div class="d-flex align-items-center gap-1 header-actions">
           <div class="d-flex align-items-center gap-1 header-social-links">
-            <a href="versions.html" aria-label="Navigateur de versions" title="Accéder au navigateur de versions du portfolio"><i
-                class="bi bi-clock-history" aria-hidden="true"></i></a>
-            <a href="logo_proposals.html" class="d-none d-sm-inline-block" aria-label="Propositions de Logo" title="Voir les propositions de Logo"><i
-                class="bi bi-palette2" aria-hidden="true"></i></a>
+            <div class="dropdown d-inline-flex">
+              <button type="button" class="header-hub-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Versions et identité visuelle" title="Versions &amp; Identité visuelle">
+                <i class="bi bi-layers" aria-hidden="true"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end header-hub-menu">
+                <li>
+                  <a class="dropdown-item" href="versions.html">
+                    <i class="bi bi-clock-history" aria-hidden="true"></i>
+                    <span>Navigateur de versions</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="logo_proposals.html">
+                    <i class="bi bi-palette2" aria-hidden="true"></i>
+                    <span>Identité visuelle &amp; Logos</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
             <a href="https://github.com/RinoShip77" class="d-none d-sm-inline-block" aria-label="Profil Github"><i class="bi bi-github" aria-hidden="true"></i></a>
             <a href="https://www.linkedin.com/in/olivier-bourgault-5b950428a" class="d-none d-sm-inline-block" aria-label="Profil Linkedin"><i
                 class="bi bi-linkedin" aria-hidden="true"></i></a>

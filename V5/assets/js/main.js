@@ -321,12 +321,14 @@ function scrollPosition() {
 
 function toggleScrolled() {
   const header = document.querySelector('#header');
-  if (!header.classList.contains('scroll-up-sticky') && 
-      !header.classList.contains('sticky-top') && 
-      !header.classList.contains('fixed-top')) return;
-  const isScrolled = window.scrollY > 100;
-  document.body.classList.toggle('scrolled', isScrolled);
-  header.classList.toggle('solid', isScrolled);
+  if (!header) return;
+  const y = window.scrollY;
+  const currentlyScrolled = document.body.classList.contains('scrolled');
+  const shouldBeScrolled = currentlyScrolled ? y > 50 : y > 110;
+  if (shouldBeScrolled !== currentlyScrolled) {
+    document.body.classList.toggle('scrolled', shouldBeScrolled);
+    header.classList.toggle('solid', shouldBeScrolled);
+  }
 }
 
 function toggleScrollTop() {
