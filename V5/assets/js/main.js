@@ -128,6 +128,12 @@ if (scrollTopBtn) {
  * Main Logic Driver
  */
 function main() {
+  // Initialisation des sections repliables pour alléger le défilement
+  initCollapsibleSections();
+
+  // Initialisation de la barre de navigation verticale sticky (CV & Portfolio)
+  initVerticalSectionNav();
+
   // Effet Typewriter dynamique en JS Vanilla
   initTypewriter();
 
@@ -310,6 +316,385 @@ skillsAnimation.forEach((item) => {
     }
   });
 });
+
+/**
+ * Sections et blocs CV repliables / collapsibles pour fluidifier le scroll
+ */
+function initCollapsibleSections() {
+  const sectionIds = ['expertise', 'about', 'skills', 'resume', 'portfolio', 'contact'];
+  const sectionControllers = new Map();
+
+  function setWrapState(wrap, btn, isExpanded, onDone) {
+    wrap.classList.add('is-animating');
+    wrap.classList.toggle('is-collapsed', !isExpanded);
+    if (btn) {
+      btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      const label = btn.querySelector('.toggle-label');
+      if (label) label.textContent = isExpanded ? 'Réduire' : 'Afficher';
+    }
+
+    const sectionEl = wrap.closest('section.section');
+    if (sectionEl && wrap.parentElement === sectionEl || (sectionEl && wrap.dataset.isMainSection === '1')) {
+      sectionEl.classList.toggle('is-section-collapsed', !isExpanded);
+    }
+
+    setTimeout(() => {
+      wrap.classList.remove('is-animating');
+      if (isExpanded && typeof onDone === 'function') {
+        onDone();
+      }
+    }, 400);
+  }
+
+  sectionIds.forEach(id => {
+    const section = document.getElementById(id);
+    if (!section || section.dataset.collapsibleInit === '1') return;
+
+    const titleBlock = section.querySelector('.section-title');
+    const heading = titleBlock ? titleBlock.querySelector('h2') : null;
+    if (!titleBlock || !heading) return;
+
+    const parent = titleBlock.parentElement;
+    const siblingsToWrap = [];
+    let next = titleBlock.nextElementSibling;
+    while (next) {
+      siblingsToWrap.push(next);
+      next = next.nextElementSibling;
+    }
+    if (siblingsToWrap.length === 0) return;
+
+    section.dataset.collapsibleInit = '1';
+
+    const headerWrap = document.createElement('div');
+    headerWrap.className = 'section-title-header';
+    heading.parentNode.insertBefore(headerWrap, heading);
+    headerWrap.appendChild(heading);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'section-collapsible-wrap';
+    wrap.id = `collapsible-${id}`;
+    wrap.dataset.isMainSection = '1';
+
+    const inner = document.createElement('div');
+    inner.className = 'section-collapsible-inner';
+    siblingsToWrap.forEach(el => inner.appendChild(el));
+    wrap.appendChild(inner);
+    parent.appendChild(wrap);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'section-collapse-btn';
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-controls', wrap.id);
+    btn.setAttribute('aria-label', `Réduire ou développer la section ${heading.textContent.trim()}`);
+    btn.title = 'Réduire / Développer la section';
+    btn.innerHTML = '<i class="bi bi-chevron-down" aria-hidden="true"></i>';
+    headerWrap.appendChild(btn);
+
+    const expand = () => {
+      if (!wrap.classList.contains('is-collapsed')) return;
+      setWrapState(wrap, btn, true, () => {
+        if (id === 'portfolio') {
+          const isoEl = document.querySelector('.isotope-container');
+          if (isoEl && typeof Isotope !== 'undefined') {
+            const iso = Isotope.data(isoEl);
+            if (iso) iso.layout();
+          }
+        }
+        if (typeof AOS !== 'undefined') {
+          AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
+        }
+      });
+    };
+
+    sectionControllers.set(`#${id}`, expand);
+
+    btn.addEventListener('click', () => {
+      const willExpand = wrap.classList.contains('is-collapsed');
+      setWrapState(wrap, btn, willExpand, () => {
+        if (id === 'portfolio') {
+          const isoEl = document.querySelector('.isotope-container');
+          if (isoEl && typeof Isotope !== 'undefined') {
+            const iso = Isotope.data(isoEl);
+            if (iso) iso.layout();
+          }
+        }
+        if (typeof AOS !== 'undefined') {
+          AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
+        }
+      });
+    });
+  });
+
+  // Blocs internes de la section CV (.resume-block)
+  const defaultCollapsedBlocks = [
+    'Autres expériences professionnelles',
+    'Certifications'
+  ];
+
+  document.querySelectorAll('#resume .resume-block').forEach((block, index) => {
+    if (block.dataset.collapsibleInit === '1') return;
+    const h2 = block.querySelector(':scope > h2');
+    const timeline = block.querySelector(':scope > .timeline');
+    if (!h2 || !timeline) return;
+
+    block.dataset.collapsibleInit = '1';
+
+    const header = document.createElement('div');
+    header.className = 'resume-block-header';
+    block.insertBefore(header, h2);
+    header.appendChild(h2);
+
+    const wrap = document.createElement('div');
+    wrap.className = 'section-collapsible-wrap';
+    wrap.id = `resume-block-collapse-${index}`;
+
+    const inner = document.createElement('div');
+    inner.className = 'section-collapsible-inner';
+    block.insertBefore(wrap, timeline);
+    inner.appendChild(timeline);
+    wrap.appendChild(inner);
+
+    const startCollapsed = defaultCollapsedBlocks.some(t =>
+      h2.textContent.trim().toLowerCase().includes(t.toLowerCase())
+    );
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'resume-block-toggle';
+    btn.setAttribute('aria-expanded', startCollapsed ? 'false' : 'true');
+    btn.setAttribute('aria-controls', wrap.id);
+    btn.innerHTML = `<span class="toggle-label">${startCollapsed ? 'Afficher' : 'Réduire'}</span><i class="bi bi-chevron-down" aria-hidden="true"></i>`;
+    header.appendChild(btn);
+
+    if (startCollapsed) {
+      wrap.classList.add('is-collapsed');
+    }
+
+    const toggleBlock = (e) => {
+      if (e) e.stopPropagation();
+      const willExpand = wrap.classList.contains('is-collapsed');
+      setWrapState(wrap, btn, willExpand);
+    };
+
+    btn.addEventListener('click', toggleBlock);
+    header.addEventListener('click', (e) => {
+      if (e.target !== btn && !btn.contains(e.target)) {
+        toggleBlock();
+      }
+    });
+  });
+
+  // Développer automatiquement une section si l'utilisateur clique un lien d'ancre (#about, #resume, etc.)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const hash = link.getAttribute('href');
+    if (sectionControllers.has(hash)) {
+      link.addEventListener('click', () => {
+        sectionControllers.get(hash)();
+      });
+    }
+  });
+}
+
+/**
+ * Barre de navigation verticale sticky (inspirée d'Aahil Khan)
+ * Ajoutée sur les sections longues (#resume et #portfolio) pour un accès rapide.
+ */
+function initVerticalSectionNav() {
+  function scrollToElement(el) {
+    if (!el) return;
+    const headerOffset = 94;
+    const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+
+  function setupSidebar({ hostContainer, headingText, getItems, onSelect, navId }) {
+    if (!hostContainer || hostContainer.dataset.vnavInit === '1') return null;
+    hostContainer.dataset.vnavInit = '1';
+
+    const layout = document.createElement('div');
+    layout.className = 'vnav-layout';
+
+    const aside = document.createElement('aside');
+    aside.className = 'vnav-sidebar';
+    aside.setAttribute('aria-label', headingText);
+    if (navId) aside.id = navId;
+
+    const heading = document.createElement('div');
+    heading.className = 'vnav-heading';
+    heading.textContent = headingText;
+
+    const list = document.createElement('ul');
+    list.className = 'vnav-list';
+
+    aside.appendChild(heading);
+    aside.appendChild(list);
+
+    const content = document.createElement('div');
+    content.className = 'vnav-content';
+
+    while (hostContainer.firstChild) {
+      content.appendChild(hostContainer.firstChild);
+    }
+
+    layout.appendChild(aside);
+    layout.appendChild(content);
+    hostContainer.appendChild(layout);
+
+    let entries = [];
+
+    function setActive(index) {
+      entries.forEach((entry, idx) => {
+        entry.btn.classList.toggle('is-active', idx === index);
+      });
+    }
+
+    function render() {
+      list.innerHTML = '';
+      entries = [];
+      const items = getItems();
+
+      items.forEach((item, index) => {
+        const li = document.createElement('li');
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'vnav-item-btn';
+        if (index === 0) btn.classList.add('is-active');
+
+        const dot = document.createElement('span');
+        dot.className = 'vnav-dot';
+        dot.setAttribute('aria-hidden', 'true');
+
+        const textWrap = document.createElement('span');
+        textWrap.className = 'vnav-text';
+
+        const title = document.createElement('span');
+        title.className = 'vnav-title';
+        title.textContent = item.title;
+        textWrap.appendChild(title);
+
+        if (item.sub) {
+          const sub = document.createElement('span');
+          sub.className = 'vnav-sub';
+          sub.textContent = item.sub;
+          textWrap.appendChild(sub);
+        }
+
+        btn.appendChild(dot);
+        btn.appendChild(textWrap);
+        btn.addEventListener('click', () => {
+          setActive(index);
+          onSelect(item, index);
+        });
+
+        li.appendChild(btn);
+        list.appendChild(li);
+        entries.push({ btn, target: item.target });
+      });
+    }
+
+    function updateActiveOnScroll() {
+      if (entries.length === 0) return;
+      const probeY = 160;
+      let activeIdx = 0;
+      for (let i = 0; i < entries.length; i++) {
+        const el = entries[i].target;
+        if (!el || el.offsetParent === null) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= probeY) {
+          activeIdx = i;
+        }
+      }
+      setActive(activeIdx);
+    }
+
+    render();
+    window.addEventListener('scroll', updateActiveOnScroll, { passive: true });
+    return { render, updateActiveOnScroll };
+  }
+
+  // 1. Barre verticale sur la section CV (#resume)
+  const resumeWrapper = document.querySelector('#resume .resume-wrapper');
+  if (resumeWrapper) {
+    setupSidebar({
+      hostContainer: resumeWrapper,
+      headingText: 'Parcours CV',
+      navId: 'vnav-resume',
+      getItems: () => {
+        return Array.from(resumeWrapper.querySelectorAll('.resume-block')).map(block => {
+          const h2 = block.querySelector('h2');
+          const periods = Array.from(block.querySelectorAll('.period')).map(p => p.textContent.trim());
+          let sub = '';
+          if (periods.length > 0) {
+            const years = periods.join(' ').match(/20\d{2}/g);
+            if (years && years.length > 0) {
+              const min = Math.min(...years.map(Number));
+              const max = Math.max(...years.map(Number));
+              sub = min === max ? `${min}` : `${min} – ${max}`;
+            }
+          }
+          return {
+            title: h2 ? h2.textContent.trim() : 'Section',
+            sub,
+            target: block
+          };
+        });
+      },
+      onSelect: (item) => {
+        const wrap = item.target.querySelector('.section-collapsible-wrap');
+        const toggleBtn = item.target.querySelector('.resume-block-toggle');
+        if (wrap && wrap.classList.contains('is-collapsed') && toggleBtn) {
+          toggleBtn.click();
+          setTimeout(() => scrollToElement(item.target), 120);
+        } else {
+          scrollToElement(item.target);
+        }
+      }
+    });
+  }
+
+  // 2. Barre verticale sur la section Portfolio (#portfolio)
+  const isotopeLayout = document.querySelector('#portfolio .isotope-layout');
+  if (isotopeLayout) {
+    const portfolioNav = setupSidebar({
+      hostContainer: isotopeLayout,
+      headingText: 'Projets (Accès rapide)',
+      navId: 'vnav-portfolio',
+      getItems: () => {
+        const activeFilterBtn = document.querySelector('#filters .filter-active');
+        const filterSelector = activeFilterBtn ? activeFilterBtn.getAttribute('data-filter') : '*';
+        const cards = Array.from(isotopeLayout.querySelectorAll('.portfolio-item'));
+        const visibleCards = (!filterSelector || filterSelector === '*')
+          ? cards
+          : cards.filter(c => c.matches(filterSelector));
+
+        return visibleCards.map(card => {
+          const h3 = card.querySelector('h3');
+          const cat = card.querySelector('.category');
+          return {
+            title: h3 ? h3.textContent.trim() : 'Projet',
+            sub: cat ? cat.textContent.trim() : '',
+            target: card
+          };
+        });
+      },
+      onSelect: (item) => {
+        scrollToElement(item.target);
+      }
+    });
+
+    if (portfolioNav) {
+      window.refreshPortfolioVerticalNav = () => {
+        portfolioNav.render();
+      };
+      document.querySelectorAll('#filters li').forEach(filterBtn => {
+        filterBtn.addEventListener('click', () => {
+          setTimeout(() => portfolioNav.render(), 60);
+        });
+      });
+    }
+  }
+}
 
 /**
  * Effet Typewriter dynamique en JavaScript Vanilla
@@ -755,6 +1140,9 @@ function renderPortfolioProjects(projects) {
         iso.layout();
         if (typeof AOS !== 'undefined') {
           AOS.refreshHard ? AOS.refreshHard() : AOS.refresh();
+        }
+        if (typeof window.refreshPortfolioVerticalNav === 'function') {
+          window.refreshPortfolioVerticalNav();
         }
       });
     }

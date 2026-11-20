@@ -1951,6 +1951,291 @@ section,
   position: relative;
 }
 
+/*--------------------------------------------------------------
+# Collapsible Sections & Resume Blocks
+--------------------------------------------------------------*/
+.section-title-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.section-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--card-border);
+  background: var(--surface-color);
+  color: var(--default-color);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.section-collapse-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+}
+
+.section-collapse-btn i {
+  font-size: 0.95rem;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.section-collapse-btn[aria-expanded="false"] i {
+  transform: rotate(-90deg);
+}
+
+.section-collapsible-wrap {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+}
+
+.section-collapsible-wrap > .section-collapsible-inner {
+  min-height: 0;
+  overflow: visible;
+}
+
+.section-collapsible-wrap.is-animating > .section-collapsible-inner,
+.section-collapsible-wrap.is-collapsed > .section-collapsible-inner {
+  overflow: hidden;
+}
+
+.section-collapsible-wrap.is-collapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.section.is-section-collapsed {
+  padding-bottom: 18px;
+}
+
+.section.is-section-collapsed .section-title {
+  padding-bottom: 8px;
+}
+
+.resume-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+}
+
+.resume-block-header h2 {
+  margin-bottom: 0 !important;
+}
+
+.resume-block-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--card-border);
+  background: var(--surface-color);
+  color: var(--default-color);
+  font-family: var(--coding-font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.resume-block-toggle:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.resume-block-toggle i {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.resume-block-toggle[aria-expanded="false"] i {
+  transform: rotate(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-collapsible-wrap,
+  .section-collapse-btn i,
+  .resume-block-toggle i {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Vertical Sticky Section Navigation (Aahil Khan Inspired)
+--------------------------------------------------------------*/
+.vnav-layout {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.vnav-sidebar {
+  position: sticky;
+  top: 98px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 102, 0, 0.35) transparent;
+}
+
+.vnav-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.vnav-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 102, 0, 0.35);
+  border-radius: 999px;
+}
+
+.vnav-heading {
+  font-family: var(--coding-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin: 0 0 12px 10px;
+}
+
+.vnav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vnav-item-btn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  color: color-mix(in srgb, var(--default-color), transparent 32%);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.vnav-item-btn:hover {
+  background: color-mix(in srgb, var(--surface-color), transparent 35%);
+  color: var(--heading-color);
+}
+
+.vnav-item-btn.is-active {
+  background: color-mix(in srgb, var(--accent-color), transparent 88%);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 65%);
+  color: var(--heading-color);
+}
+
+.vnav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--default-color), transparent 45%);
+  background: transparent;
+  flex-shrink: 0;
+  margin-top: 5px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vnav-item-btn:hover .vnav-dot {
+  border-color: var(--accent-color);
+}
+
+.vnav-item-btn.is-active .vnav-dot {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 76%);
+}
+
+.vnav-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.vnav-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vnav-sub {
+  font-size: 0.76rem;
+  font-family: var(--coding-font);
+  color: color-mix(in srgb, var(--default-color), transparent 48%);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vnav-content {
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .vnav-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .vnav-sidebar {
+    position: static;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 0 6px 0;
+  }
+
+  .vnav-heading {
+    margin-left: 2px;
+  }
+
+  .vnav-list {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .vnav-item-btn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border-color: var(--card-border);
+    background: var(--surface-color);
+  }
+
+  .vnav-sub {
+    display: none;
+  }
+}
+
 .section-title h2 {
   font-size: 42px;
   font-weight: 700;
