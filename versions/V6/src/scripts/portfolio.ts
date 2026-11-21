@@ -1,9 +1,23 @@
+import { FALLBACK_PROJECTS, type FallbackProject } from '../data/projects';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
 import { promoteCursorToTopLayer } from './cursor';
 import { applyDomTranslations, getSiteLang } from './i18n';
 import { refreshScrollReveal } from './reveal';
 import { renderPortfolioVerticalNav } from './vnav';
+
+const DEFAULT_VISIBLE_PROJECTS = 5;
+const IMAGE_GENERIQUE = withBase('assets/images/projects/phoneword.webp');
+const STATIC_CATALOG_URL = withBase('assets/data/github-projects.json');
+const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v2';
+const PORTFOLIO_CACHE_TTL_MS = 1000 * 60 * 60 * 12; // 12 heures
+
+let portfolioShowAll = false;
+let currentFilter = '*';
+let currentTechTag = '*';
+let currentSearchQuery = '';
+let activeCaseStudyProject: FallbackProject | null = null;
+let lastCountedProjects: Array<{ filterClass: string }> = [];
 
 interface GitTreeEntry {
   path?: string;
@@ -20,6 +34,7 @@ interface RawProjectMeta {
   imageUrl: string;
   hasReadme: boolean;
   hasParentReadme: boolean;
+  tags?: string[];
   description?: string;
 }
 
@@ -28,131 +43,101 @@ interface CachedPortfolioPayload {
   projects: RawProjectMeta[];
 }
 
-const DEFAULT_VISIBLE_PROJECTS = 5;
-const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v2';
-const PORTFOLIO_CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 heures
-const IMAGE_GENERIQUE = withBase('assets/images/logos/logo-ob-tech.svg');
+interface StaticCatalogPayload {
+  generatedAt?: string;
+  totalCount?: number;
+  projects?: RawProjectMeta[];
+}
 
-const LOCAL_PROJECT_IMAGES: Record<string, string> = {
-  electrolib: withBase('assets/images/projects/electrolib.webp'),
-  comparetools: withBase('assets/images/projects/compare-tools.webp'),
-  hubai: withBase('assets/images/projects/hub-ai.webp'),
-  kaomia: withBase('assets/images/projects/kaomia.webp'),
-  evomeal: withBase('assets/images/projects/evomeal.webp'),
-  shopro: withBase('assets/images/projects/shopro.webp'),
-  phoneword: withBase('assets/images/projects/phoneword.webp')
-};
-
-let portfolioShowAll = false;
-let currentFilter = '*';
 let extraProjects: RawProjectMeta[] = [];
 const renderedPaths = new Set<string>();
 const parentReadmeCache = new Map<string, string>();
-let lastCountedProjects: Array<{ filterClass: string }> = [];
+
+const IGNORED_IMAGE_PATTERNS = [
+  /(?:^|\/)favicon[^/]*$/i,
+  /(?:^|\/)dotnet_bot[^/]*$/i,
+  /(?:^|\/)ic_launcher[^/]*$/i,
+  /(?:^|\/)adaptive-icon[^/]*$/i,
+  /(?:^|\/)appicon[^/]*$/i,
+  /(?:^|\/)splash[^/]*$/i,
+  /(?:^|\/)logo-?react[^/]*$/i,
+  /(?:^|\/)vite\.svg$/i
+];
 
 function isEmbeddedPreview(): boolean {
   try {
-    if (new URLSearchParams(window.location.search).get('embed') === '1') return true;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('embed') === '1') return true;
     return window.self !== window.top;
   } catch {
     return true;
   }
 }
 
-function encodeGitHubPath(repoPath: string): string {
-  return repoPath
-    .split('/')
-    .map((segment) => encodeURIComponent(segment))
-    .join('/');
+function encodeGitHubPath(pathStr: string): string {
+  return pathStr.split('/').map(encodeURIComponent).join('/');
 }
 
-function cleanReadmeDescription(rawMarkdown: string): string {
-  if (!rawMarkdown || typeof rawMarkdown !== 'string') return '';
-  const withoutCodeBlocks = rawMarkdown.replace(/```[\s\S]*?```/g, '');
-  const lines = withoutCodeBlocks.split(/\r?\n/);
+function stripMarkdown(mdText: string): string {
+  if (!mdText) return '';
+  let text = mdText
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s+/gm, '')
+    .replace(/[*_~]/g, '')
+    .replace(/\|/g, ' ')
+    .replace(/\r?\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  const paragraphLines: string[] = [];
-  let collecting = false;
-
-  for (const rawLine of lines) {
-    const trimmed = rawLine.trim();
-    if (!trimmed) {
-      if (collecting) break;
-      continue;
-    }
-
-    if (
-      /^\s*#+/.test(trimmed) ||
-      /^\s*[-*_]{3,}\s*$/.test(trimmed) ||
-      /^\s*\|/.test(trimmed) ||
-      /^!\[[^\]]*\]\([^)]*\)$/.test(trimmed) ||
-      /^(Prénom|Nom|Matricule|Équipier|Name|Author|Last edit)\s*:/i.test(trimmed) ||
-      /^(SHORT DESCRIPTION|LONG DESCRIPTION|NOTES)\s*:/i.test(trimmed)
-    ) {
-      if (collecting) break;
-      continue;
-    }
-
-    collecting = true;
-    paragraphLines.push(trimmed);
+  if (text.length > 260) {
+    text = `${text.substring(0, 257).trim()}...`;
   }
-
-  if (paragraphLines.length === 0) return '';
-
-  let cleaned = paragraphLines.join(' ');
-  cleaned = cleaned.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
-  cleaned = cleaned.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-  cleaned = cleaned.replace(/<[^>]+>/g, ' ');
-  cleaned = cleaned.replace(/(\*{1,3}|`+)/g, '');
-  cleaned = cleaned.replace(/(^|[^\w/])_{1,3}|_{1,3}([^\w/]|$)/g, '$1$2');
-  cleaned = cleaned.replace(/^>?\s*(?:\d+(?:\.\d+)*[.)]\s*|[-*•]\s*)/, '');
-  return cleaned.replace(/\s+/g, ' ').trim();
+  return text;
 }
 
-function extractProjectFromParentReadme(parentMarkdown: string, projectName: string): string {
-  if (!parentMarkdown || !projectName) return '';
-  const escapedName = projectName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function cleanReadmeDescription(rawReadme: string): string {
+  if (!rawReadme) return '';
+  const lines = rawReadme
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith('#') && !line.startsWith('![') && !line.startsWith('---'));
 
-  const linkLineRegex = new RegExp(`^.*\\]\\(${escapedName}\\/?\\).*$`, 'im');
-  const linkMatch = parentMarkdown.match(linkLineRegex);
-  if (linkMatch) {
-    const cleaned = cleanReadmeDescription(linkMatch[0]);
-    if (cleaned) return cleaned;
-  }
+  if (lines.length === 0) return '';
+  return stripMarkdown(lines.slice(0, 3).join(' '));
+}
 
-  const lines = parentMarkdown.split(/\r?\n/);
-  const headingRegex = new RegExp(
-    `^\\s*(?:>\\s*)?(?:\\d+(?:\\.\\d+)*[.)]|#+)\\s*(?:\\[?[*_]*${escapedName}[*_]*\\]?)\\s*$`,
-    'i'
-  );
+function extractProjectFromParentReadme(parentReadme: string, projectName: string): string {
+  if (!parentReadme || !projectName) return '';
+  const lines = parentReadme.split(/\r?\n/);
+  const escaped = projectName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+
   for (let i = 0; i < lines.length; i++) {
-    if (headingRegex.test(lines[i].trim())) {
-      const rest = lines.slice(i + 1).join('\n');
-      const cleaned = cleanReadmeDescription(rest);
-      if (cleaned) return cleaned;
+    if (regex.test(lines[i])) {
+      let snippet = lines[i].replace(regex, '').replace(/^[\s\-:*•|]+/, '');
+      if (snippet.length < 25 && i + 1 < lines.length) {
+        snippet += ` ${lines[i + 1]}`;
+      }
+      const cleaned = stripMarkdown(snippet);
+      if (cleaned.length > 15) return cleaned;
     }
   }
   return '';
 }
 
-function findProjectImageInTree(tree: GitTreeEntry[], projectPath: string, projectName: string): string {
-  const local = LOCAL_PROJECT_IMAGES[projectName.toLowerCase()];
-  if (local) return local;
-
+function findProjectImageInTree(tree: GitTreeEntry[], projectPath: string): string {
   const prefix = `${projectPath}/`;
-  const imageRegex = /\.(png|jpe?g|webp)$/i;
-  const ignoredDirRegex =
-    /\/(node_modules|vendor|obj|bin|\.gradle|build|dist|packages|Assets\.xcassets|res\/mipmap|res\/drawable|flutter_assets)\//i;
-  const ignoredFileRegex =
-    /(favicon|dotnet_bot|ic_launcher|adaptive[-_]?icon|app[-_]?icon|icon[-_]\d+|launch_background|splash)/i;
-
+  const imageRegex = /\.(png|jpe?g|gif|webp)$/i;
   const candidates = tree.filter((item) => {
-    if (item.type !== 'blob' || !item.path || !item.path.startsWith(prefix)) return false;
-    if (!imageRegex.test(item.path)) return false;
-    const relativePath = item.path.slice(prefix.length);
-    if (ignoredDirRegex.test(`/${relativePath}`)) return false;
-    if (ignoredFileRegex.test(relativePath)) return false;
-    return true;
+    if (item.type !== 'blob' || !item.path) return false;
+    if (!item.path.startsWith(prefix) || !imageRegex.test(item.path)) return false;
+    const rel = item.path.slice(prefix.length);
+    return !IGNORED_IMAGE_PATTERNS.some((rx) => rx.test(rel));
   });
 
   if (candidates.length > 0) {
@@ -229,7 +214,7 @@ function extractProjectsFromTree(tree: GitTreeEntry[], blobSet: Set<string>): Ra
       filterClass,
       categoryLabel,
       repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-      imageUrl: findProjectImageInTree(tree, entry.path, name),
+      imageUrl: findProjectImageInTree(tree, entry.path),
       hasReadme: blobSet.has(`${entry.path}/README.md`),
       hasParentReadme: blobSet.has(`${parentPath}/README.md`)
     });
@@ -365,6 +350,26 @@ function syncPortfolioCardsLocale(): void {
       }
     }
   });
+
+  const searchInput = document.getElementById('portfolioSearchInput') as HTMLInputElement | null;
+  if (searchInput) {
+    searchInput.placeholder = isEn
+      ? 'Search a project or tech stack (e.g. Python, PowerShell, C#, Angular…)'
+      : 'Rechercher un projet ou une techno (ex. Python, PowerShell, C#, Angular…)';
+    searchInput.setAttribute(
+      'aria-label',
+      isEn
+        ? 'Search a project by name, description, or technology'
+        : 'Rechercher un projet par nom, description ou technologie'
+    );
+  }
+
+  const emptyText = document.getElementById('portfolioEmptyText');
+  if (emptyText) {
+    emptyText.textContent = isEn
+      ? 'No project matches these search criteria.'
+      : 'Aucun projet ne correspond à ces critères de recherche.';
+  }
 }
 
 function createPortfolioCardElement(project: RawProjectMeta, index: number): HTMLElement {
@@ -374,6 +379,7 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   itemCol.id = `portfolio-item-${index}`;
   itemCol.className = `col-lg-6 col-md-6 portfolio-item ${project.filterClass}`;
   itemCol.dataset.projectPath = project.path;
+  itemCol.dataset.projectTags = (project.tags || []).join('|');
 
   const card = document.createElement('div');
   card.className = 'portfolio-card';
@@ -382,10 +388,11 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   imageWrapper.className = 'portfolio-image';
 
   const img = document.createElement('img');
-  img.src = project.imageUrl || IMAGE_GENERIQUE;
+  const resolvedImgUrl = project.imageUrl || IMAGE_GENERIQUE;
+  img.src = resolvedImgUrl;
   img.alt = isEn ? `${project.name} project preview` : `Aperçu du projet ${project.name}`;
   img.className = 'img-fluid';
-  if (img.src.endsWith(IMAGE_GENERIQUE) || img.src === IMAGE_GENERIQUE) {
+  if (resolvedImgUrl.endsWith(IMAGE_GENERIQUE) || resolvedImgUrl === IMAGE_GENERIQUE) {
     img.classList.add('portfolio-img-generic');
   }
   img.loading = 'lazy';
@@ -452,12 +459,24 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   descriptionP.textContent =
     project.description ||
     (isEn
-      ? `Project (${project.categoryLabel}) by Olivier Bourgault.`
+      ? `Project (${displayCategory}) by Olivier Bourgault.`
       : `Projet ${project.categoryLabel.toLowerCase()} réalisé par Olivier Bourgault.`);
 
   content.appendChild(categorySpan);
   content.appendChild(title);
   content.appendChild(descriptionP);
+
+  if (project.tags && project.tags.length > 0) {
+    const badgesWrap = document.createElement('div');
+    badgesWrap.className = 'd-flex flex-wrap gap-1 mt-2';
+    for (const tag of project.tags) {
+      const badge = document.createElement('span');
+      badge.className = 'badge badge-tech';
+      badge.textContent = tag;
+      badgesWrap.appendChild(badge);
+    }
+    content.appendChild(badgesWrap);
+  }
 
   card.appendChild(imageWrapper);
   card.appendChild(content);
@@ -468,19 +487,57 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   return itemCol;
 }
 
-function projectMatchesFilter(filterClass: string): boolean {
+function projectMatchesCategory(filterClass: string): boolean {
   if (!currentFilter || currentFilter === '*') return true;
   return `.${filterClass}` === currentFilter;
 }
 
+function tagsMatchSelectedTech(tagsList: string[], textHint = ''): boolean {
+  if (!currentTechTag || currentTechTag === '*') return true;
+  const needle = currentTechTag.toLowerCase();
+  for (const t of tagsList) {
+    const lower = t.toLowerCase();
+    if (lower.includes(needle) || needle.includes(lower)) return true;
+  }
+  return textHint.toLowerCase().includes(needle);
+}
+
+function rawProjectMatchesCriteria(project: RawProjectMeta): boolean {
+  if (!projectMatchesCategory(project.filterClass)) return false;
+  const tags = project.tags || [];
+  const combinedText = `${project.name} ${project.categoryLabel} ${project.path} ${tags.join(' ')} ${project.description || ''}`;
+  if (!tagsMatchSelectedTech(tags, combinedText)) return false;
+  if (currentSearchQuery) {
+    if (!combinedText.toLowerCase().includes(currentSearchQuery)) return false;
+  }
+  return true;
+}
+
+function domCardMatchesCriteria(item: HTMLElement): boolean {
+  if (currentFilter && currentFilter !== '*' && !item.matches(currentFilter)) {
+    return false;
+  }
+  const tags = (item.dataset.projectTags || '').split('|').filter(Boolean);
+  const text = (item.textContent || '').replace(/\s+/g, ' ');
+  if (!tagsMatchSelectedTech(tags, text)) return false;
+  if (currentSearchQuery) {
+    if (!text.toLowerCase().includes(currentSearchQuery) && !(item.dataset.projectPath || '').toLowerCase().includes(currentSearchQuery)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function materializeNeededCards(container: HTMLElement): void {
+  const hasDiscoveryFilter = currentTechTag !== '*' || currentSearchQuery.length > 0;
   const existingMatching = Array.from(
     container.querySelectorAll<HTMLElement>('.portfolio-item')
-  ).filter((item) => !currentFilter || currentFilter === '*' || item.matches(currentFilter));
+  ).filter((item) => domCardMatchesCriteria(item));
 
-  const neededCount = portfolioShowAll
-    ? Infinity
-    : Math.max(0, DEFAULT_VISIBLE_PROJECTS - existingMatching.length);
+  const neededCount =
+    portfolioShowAll || hasDiscoveryFilter
+      ? Infinity
+      : Math.max(0, DEFAULT_VISIBLE_PROJECTS - existingMatching.length);
 
   if (neededCount <= 0) return;
 
@@ -491,7 +548,7 @@ function materializeNeededCards(container: HTMLElement): void {
     if (appended >= neededCount) break;
     const key = project.path.toLowerCase();
     if (renderedPaths.has(key)) continue;
-    if (!projectMatchesFilter(project.filterClass)) continue;
+    if (!rawProjectMatchesCriteria(project)) continue;
 
     container.appendChild(createPortfolioCardElement(project, nextIdx++));
     renderedPaths.add(key);
@@ -503,32 +560,36 @@ function applyPortfolioFilterWithLimit(): void {
   const container = document.getElementById('portfolioGrid');
   if (!container) return;
 
+  const hasDiscoveryFilter = currentTechTag !== '*' || currentSearchQuery.length > 0;
   materializeNeededCards(container);
 
   const allItems = Array.from(container.querySelectorAll<HTMLElement>('.portfolio-item'));
-  const matchingDom =
-    !currentFilter || currentFilter === '*'
-      ? allItems
-      : allItems.filter((item) => item.matches(currentFilter));
+  const matchingDom = allItems.filter((item) => domCardMatchesCriteria(item));
 
   const unrenderedMatchingCount = extraProjects.filter(
-    (p) => !renderedPaths.has(p.path.toLowerCase()) && projectMatchesFilter(p.filterClass)
+    (p) => !renderedPaths.has(p.path.toLowerCase()) && rawProjectMatchesCriteria(p)
   ).length;
   const totalMatching = matchingDom.length + unrenderedMatchingCount;
 
-  const visibleItems = portfolioShowAll
-    ? matchingDom
-    : matchingDom.slice(0, DEFAULT_VISIBLE_PROJECTS);
+  const visibleItems =
+    portfolioShowAll || hasDiscoveryFilter
+      ? matchingDom
+      : matchingDom.slice(0, DEFAULT_VISIBLE_PROJECTS);
   const visibleSet = new Set(visibleItems);
 
   allItems.forEach((item) => {
     item.classList.toggle('d-none', !visibleSet.has(item));
   });
 
+  const emptyState = document.getElementById('portfolioEmptyState');
+  if (emptyState) {
+    emptyState.classList.toggle('d-none', totalMatching > 0);
+  }
+
   const btnWrap = document.getElementById('portfolioShowMoreWrap');
   const btn = document.getElementById('portfolioShowMoreBtn');
   if (btnWrap && btn) {
-    if (totalMatching <= DEFAULT_VISIBLE_PROJECTS) {
+    if (totalMatching <= DEFAULT_VISIBLE_PROJECTS || hasDiscoveryFilter) {
       btnWrap.classList.add('d-none');
     } else {
       btnWrap.classList.remove('d-none');
@@ -542,6 +603,95 @@ function applyPortfolioFilterWithLimit(): void {
 
   renderPortfolioVerticalNav(visibleItems);
   refreshScrollReveal();
+}
+
+function renderCaseStudyModalContent(project: FallbackProject): void {
+  const isEn = getSiteLang() === 'en';
+  const cs = isEn ? project.caseStudy?.en : project.caseStudy?.fr;
+  if (!cs) return;
+
+  const titleEl = document.getElementById('caseStudyDialogTitle');
+  const subEl = document.getElementById('caseStudyDialogSub');
+  const bodyEl = document.getElementById('caseStudyDialogBody');
+  const badgesEl = document.getElementById('caseStudyDialogBadges');
+  const repoLink = document.getElementById('caseStudyDialogRepoLink') as HTMLAnchorElement | null;
+
+  if (titleEl) {
+    titleEl.textContent = isEn ? `Case Study — ${project.name}` : `Étude de cas — ${project.name}`;
+  }
+  if (subEl) {
+    subEl.textContent = localizeCategoryLabel(project.categoryLabel, isEn);
+  }
+  if (repoLink) {
+    repoLink.href = project.repoUrl;
+  }
+  if (badgesEl) {
+    badgesEl.innerHTML = project.badges
+      .map((b) => `<span class="badge badge-tech">${b}</span>`)
+      .join('');
+  }
+  if (bodyEl) {
+    const lblChallenge = isEn ? '1. Context & Problem' : '1. Contexte & Problématique';
+    const lblArch = isEn ? '2. Architecture & Stack' : '2. Architecture & Stack technique';
+    const lblHighlights = isEn ? '3. Key Engineering Decisions' : '3. Défis & Solutions d’ingénierie';
+    const lblImpact = isEn ? '4. Measurable Results & Impact' : '4. Résultats & Impact mesurable';
+
+    bodyEl.innerHTML = `
+      <div class="cs-hero-banner">
+        <img src="${withBase(project.image)}" alt="${project.alt}" class="cs-hero-img" loading="lazy" />
+        <p class="cs-tagline">${cs.tagline}</p>
+      </div>
+      <div class="cs-grid">
+        <section class="cs-card">
+          <h3 class="cs-card-title"><i class="bi bi-bullseye" aria-hidden="true"></i> ${lblChallenge}</h3>
+          <p>${cs.challenge}</p>
+        </section>
+        <section class="cs-card">
+          <h3 class="cs-card-title"><i class="bi bi-diagram-3" aria-hidden="true"></i> ${lblArch}</h3>
+          <p>${cs.architecture}</p>
+        </section>
+        <section class="cs-card cs-card-wide">
+          <h3 class="cs-card-title"><i class="bi bi-cpu" aria-hidden="true"></i> ${lblHighlights}</h3>
+          <ul class="cs-list">
+            ${cs.highlights.map((h) => `<li>${h}</li>`).join('')}
+          </ul>
+        </section>
+        <section class="cs-card cs-card-wide cs-card-impact">
+          <h3 class="cs-card-title"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> ${lblImpact}</h3>
+          <p>${cs.impact}</p>
+        </section>
+      </div>
+    `;
+  }
+}
+
+export function openCaseStudyByName(projectName: string): boolean {
+  const project = FALLBACK_PROJECTS.find(
+    (p) => p.name.toLowerCase() === projectName.toLowerCase() && p.caseStudy
+  );
+  const dialog = document.getElementById('caseStudyDialog') as HTMLDialogElement | null;
+  if (!project || !dialog) return false;
+
+  activeCaseStudyProject = project;
+  renderCaseStudyModalContent(project);
+  if (typeof dialog.showModal === 'function') {
+    if (!dialog.open) dialog.showModal();
+    promoteCursorToTopLayer();
+    return true;
+  }
+  return false;
+}
+
+function initCaseStudyDialog(): void {
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as Element | null)?.closest<HTMLElement>('[data-case-study]');
+    if (!btn) return;
+    const name = btn.getAttribute('data-case-study');
+    if (name) {
+      e.preventDefault();
+      openCaseStudyByName(name);
+    }
+  });
 }
 
 function initNativeLightbox(): void {
@@ -584,7 +734,6 @@ function registerGitHubProjects(projects: RawProjectMeta[]): void {
   const container = document.getElementById('portfolioGrid');
   if (!container) return;
 
-  // Fusionner les projets pré-rendus + les projets GitHub pour un comptage exact sans doublons
   const mergedForCount: Array<{ filterClass: string }> = [];
   const countedPaths = new Set<string>();
 
@@ -620,6 +769,30 @@ async function loadGitHubPortfolio(): Promise<void> {
 
   const statusEl = document.getElementById('portfolioSyncStatus');
 
+  // 1. Priorité au catalogue statique pré-généré au build (0 appel API tiers, 0 quota GitHub)
+  try {
+    const staticRes = await fetch(STATIC_CATALOG_URL);
+    if (staticRes.ok) {
+      const data = (await staticRes.json()) as StaticCatalogPayload;
+      if (Array.isArray(data?.projects) && data.projects.length > 0) {
+        try {
+          localStorage.setItem(
+            PORTFOLIO_CACHE_KEY,
+            JSON.stringify({ ts: Date.now(), projects: data.projects })
+          );
+        } catch {
+          // Ignorer
+        }
+        registerGitHubProjects(data.projects);
+        if (statusEl) statusEl.textContent = '';
+        return;
+      }
+    }
+  } catch {
+    // Poursuivre vers le cache localStorage / API GitHub
+  }
+
+  // 2. Cache localStorage
   try {
     const cachedRaw = localStorage.getItem(PORTFOLIO_CACHE_KEY);
     if (cachedRaw) {
@@ -636,9 +809,10 @@ async function loadGitHubPortfolio(): Promise<void> {
       }
     }
   } catch {
-    // Ignorer lecture cache impossible
+    // Ignorer
   }
 
+  // 3. Fallback API GitHub
   const treeApiUrl = `https://api.github.com/repos/${SITE.githubRepoOwner}/${SITE.githubRepoName}/git/trees/${SITE.githubBranch}?recursive=1`;
 
   try {
@@ -665,7 +839,7 @@ async function loadGitHubPortfolio(): Promise<void> {
       const payload: CachedPortfolioPayload = { ts: Date.now(), projects };
       localStorage.setItem(PORTFOLIO_CACHE_KEY, JSON.stringify(payload));
     } catch {
-      // Ignorer quota localStorage
+      // Ignorer
     }
 
     registerGitHubProjects(projects);
@@ -699,6 +873,63 @@ export function initPortfolio(): void {
     applyPortfolioFilterWithLimit();
   });
 
+  const techTagsGroup = document.getElementById('portfolioTechTags');
+  techTagsGroup?.addEventListener('click', (e) => {
+    const chip = (e.target as Element | null)?.closest<HTMLButtonElement>('button[data-tech-tag]');
+    if (!chip) return;
+    techTagsGroup.querySelectorAll<HTMLButtonElement>('button[data-tech-tag]').forEach((el) => {
+      const isCurrent = el === chip;
+      el.classList.toggle('is-active', isCurrent);
+      el.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+    });
+    currentTechTag = chip.getAttribute('data-tech-tag') || '*';
+    applyPortfolioFilterWithLimit();
+  });
+
+  const searchInput = document.getElementById('portfolioSearchInput') as HTMLInputElement | null;
+  const searchClear = document.getElementById('portfolioSearchClear');
+
+  function updateSearch(val: string): void {
+    currentSearchQuery = val.trim().toLowerCase();
+    searchClear?.classList.toggle('d-none', currentSearchQuery.length === 0);
+    applyPortfolioFilterWithLimit();
+  }
+
+  searchInput?.addEventListener('input', () => {
+    updateSearch(searchInput.value);
+  });
+
+  searchClear?.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+    updateSearch('');
+  });
+
+  document.getElementById('portfolioResetFiltersBtn')?.addEventListener('click', () => {
+    currentFilter = '*';
+    currentTechTag = '*';
+    currentSearchQuery = '';
+    portfolioShowAll = false;
+    if (searchInput) searchInput.value = '';
+    searchClear?.classList.add('d-none');
+
+    filtersList?.querySelectorAll<HTMLButtonElement>('button[data-filter]').forEach((el) => {
+      const isAll = el.getAttribute('data-filter') === '*';
+      el.classList.toggle('filter-active', isAll);
+      el.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+    });
+
+    techTagsGroup?.querySelectorAll<HTMLButtonElement>('button[data-tech-tag]').forEach((el) => {
+      const isAll = el.getAttribute('data-tech-tag') === '*';
+      el.classList.toggle('is-active', isAll);
+      el.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+    });
+
+    applyPortfolioFilterWithLimit();
+  });
+
   const showMoreBtn = document.getElementById('portfolioShowMoreBtn');
   showMoreBtn?.addEventListener('click', () => {
     portfolioShowAll = !portfolioShowAll;
@@ -706,6 +937,7 @@ export function initPortfolio(): void {
   });
 
   initNativeLightbox();
+  initCaseStudyDialog();
   syncPortfolioCardsLocale();
   applyPortfolioFilterWithLimit();
   void loadGitHubPortfolio();
@@ -715,6 +947,9 @@ export function initPortfolio(): void {
       updateProjectCounters(lastCountedProjects);
     }
     syncPortfolioCardsLocale();
+    if (activeCaseStudyProject) {
+      renderCaseStudyModalContent(activeCaseStudyProject);
+    }
     applyPortfolioFilterWithLimit();
     applyDomTranslations(document.getElementById('portfolio') || document.body);
   });

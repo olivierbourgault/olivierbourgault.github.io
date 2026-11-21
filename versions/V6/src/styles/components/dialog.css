@@ -322,3 +322,245 @@ dialog.ob-lightbox-dialog {
     transition: none;
   }
 }
+
+/* Case Study Modal (.ob-casestudy-dialog) */
+dialog.ob-casestudy-dialog {
+  max-width: min(860px, calc(100vw - 24px));
+}
+
+.cs-hero-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+}
+
+.cs-hero-img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1.5px solid var(--card-border);
+}
+
+.cs-tagline {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--secondary-accent);
+}
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cs-card {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--card-border);
+  background: var(--background-color);
+}
+
+.cs-card-wide {
+  grid-column: 1 / -1;
+}
+
+.cs-card-impact {
+  border-color: rgba(255, 102, 0, 0.55);
+  background: color-mix(in srgb, #FF6600, var(--background-color) 92%);
+}
+
+.cs-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.5rem;
+  font-family: var(--heading-font);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.cs-card-title i {
+  color: #FF6600;
+}
+
+.cs-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.cs-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.87rem;
+  line-height: 1.55;
+}
+
+.cs-list li + li {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 767.98px) {
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Quick Command Palette (.ob-cmd-dialog — Ctrl+K) */
+dialog.ob-cmd-dialog {
+  max-width: min(620px, calc(100vw - 24px));
+}
+
+.ob-cmd-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--dialog-chrome-bg);
+  border-bottom: 2px solid var(--card-border);
+}
+
+.ob-cmd-prompt-icon {
+  color: #FF6600;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.ob-cmd-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--heading-color);
+  font-size: 0.96rem;
+  padding: 4px 0;
+}
+
+.ob-cmd-input:focus {
+  outline: none;
+}
+
+.ob-cmd-kbd,
+.ob-cmd-hint kbd {
+  font-family: var(--coding-font);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--background-color);
+  color: var(--dialog-muted);
+  border: 1px solid var(--card-border);
+}
+
+.ob-cmd-list {
+  padding: 10px 12px;
+  max-height: min(390px, 58dvh);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ob-cmd-group-label {
+  font-family: var(--coding-font);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #FF6600;
+  padding: 8px 8px 4px;
+}
+
+.ob-cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: var(--default-color);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.14s ease, border-color 0.14s ease;
+}
+
+.ob-cmd-item:hover,
+.ob-cmd-item.is-active {
+  background: color-mix(in srgb, #FF6600, transparent 88%);
+  border-color: rgba(255, 102, 0, 0.55);
+}
+
+.ob-cmd-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  border: 1px solid var(--card-border);
+  color: var(--secondary-accent);
+  flex-shrink: 0;
+}
+
+.ob-cmd-item.is-active .ob-cmd-item-icon {
+  color: #FF6600;
+  border-color: #FF6600;
+}
+
+.ob-cmd-item-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.ob-cmd-item-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--heading-color);
+}
+
+.ob-cmd-item-sub {
+  font-family: var(--coding-font);
+  font-size: 0.74rem;
+  color: var(--dialog-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ob-cmd-item-enter {
+  color: var(--dialog-muted);
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.14s ease;
+}
+
+.ob-cmd-item.is-active .ob-cmd-item-enter,
+.ob-cmd-item:hover .ob-cmd-item-enter {
+  opacity: 1;
+  color: #FF6600;
+}
+
+.ob-cmd-empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--dialog-muted);
+  font-size: 0.9rem;
+}
+
+.ob-cmd-footer {
+  padding: 10px 16px;
+}
+
+.ob-cmd-hint {
+  font-size: 0.76rem;
+  color: var(--dialog-muted);
+}

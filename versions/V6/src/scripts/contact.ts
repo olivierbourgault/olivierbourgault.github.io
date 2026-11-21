@@ -50,8 +50,13 @@ export function initContactForm(): void {
 
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const gotchaInput = form.elements.namedItem('_gotcha') as HTMLInputElement | null;
+    if (gotchaInput && gotchaInput.value.trim().length > 0) {
+      return;
+    }
+
     const nameInput = form.elements.namedItem('name') as HTMLInputElement | null;
     const emailInput = form.elements.namedItem('email') as HTMLInputElement | null;
     const subjectInput = form.elements.namedItem('subject') as HTMLInputElement | null;
@@ -68,10 +73,17 @@ export function initContactForm(): void {
         ? `Contact from ${name} (${email}): ${subject}`
         : `Contact de ${name} (${email}) : ${subject}`;
 
+      const formattedCopy = `${mailSubject}\n\n${message}`;
+      const copied = await copyTextToClipboard(formattedCopy);
+
       showStatus(
         isEn
-          ? 'Opening your email client… Using webmail? Copy my email address above.'
-          : 'Ouverture de votre client courriel… Vous utilisez un webmail ? Copiez mon adresse ci-dessus.',
+          ? copied
+            ? `Opening your email client… Your formatted message was also copied to clipboard (${SITE.email}).`
+            : `Opening your email client… Using webmail? Copy my email address above.`
+          : copied
+            ? `Ouverture de votre client courriel… Votre message formaté a aussi été copié dans le presse-papiers (${SITE.email}).`
+            : `Ouverture de votre client courriel… Vous utilisez un webmail ? Copiez mon adresse ci-dessus.`,
         false
       );
 

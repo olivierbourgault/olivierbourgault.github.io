@@ -194,6 +194,7 @@ for (const required of [
   'assets/docs/cv-fr.pdf',
   'assets/docs/cv-en.pdf',
   'assets/docs/presentation-template.html',
+  'assets/data/github-projects.json',
   'assets/images/favicon.svg',
   'assets/images/avatar.webp',
   'assets/images/hero-avatar.webp',

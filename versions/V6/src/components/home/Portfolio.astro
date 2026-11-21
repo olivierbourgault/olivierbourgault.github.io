@@ -1,5 +1,5 @@
 ---
-import { FALLBACK_PROJECTS } from '../../data/projects';
+import { FALLBACK_PROJECTS, PORTFOLIO_TECH_TAGS } from '../../data/projects';
 import { SITE } from '../../data/site';
 import { withBase } from '../../utils/paths';
 import SectionTitle from '../SectionTitle.astro';
@@ -50,6 +50,50 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
             </button>
           </li>
         </ul>
+
+        <!-- Barre de recherche & Filtres rapides par technologie -->
+        <div class="portfolio-discovery-bar mt-3">
+          <div class="portfolio-search-wrap">
+            <i class="bi bi-search portfolio-search-icon" aria-hidden="true"></i>
+            <input
+              id="portfolioSearchInput"
+              type="search"
+              class="portfolio-search-input"
+              placeholder="Rechercher un projet ou une techno (ex. Python, PowerShell, C#, Angular…)"
+              aria-label="Rechercher un projet par nom, description ou technologie"
+              autocomplete="off"
+            />
+            <button
+              id="portfolioSearchClear"
+              type="button"
+              class="portfolio-search-clear d-none"
+              aria-label="Effacer la recherche"
+              title="Effacer la recherche"
+            >
+              <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div
+            id="portfolioTechTags"
+            class="portfolio-tech-tags"
+            role="group"
+            aria-label="Filtrer par technologie"
+          >
+            {
+              PORTFOLIO_TECH_TAGS.map((tag) => (
+                <button
+                  type="button"
+                  class={`portfolio-tech-chip${tag === '*' ? ' is-active' : ''}`}
+                  data-tech-tag={tag}
+                  aria-pressed={tag === '*' ? 'true' : 'false'}
+                >
+                  {tag === '*' ? <span data-i18n="portfolio.tech.all">Toutes technos</span> : tag}
+                </button>
+              ))
+            }
+          </div>
+        </div>
       </div>
 
       <p id="portfolioSyncStatus" class="visually-hidden" aria-live="polite"></p>
@@ -61,6 +105,7 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
               id={`portfolio-item-${idx}`}
               class={`col-lg-6 col-md-6 portfolio-item ${project.filterClass}${idx >= 5 ? ' d-none' : ''}`}
               data-project-path={project.path}
+              data-project-tags={project.badges.join('|')}
             >
               <div class="portfolio-card">
                 <div class="portfolio-image">
@@ -73,6 +118,11 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
                     loading="lazy"
                     decoding="async"
                   />
+                  {project.caseStudy && (
+                    <span class="portfolio-casestudy-ribbon" data-i18n="portfolio.casestudy.ribbon">
+                      ÉTUDE DE CAS
+                    </span>
+                  )}
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a
@@ -98,7 +148,19 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
                   </div>
                 </div>
                 <div class="portfolio-content">
-                  <span class="category">{project.categoryLabel}</span>
+                  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <span class="category">{project.categoryLabel}</span>
+                    {project.caseStudy && (
+                      <button
+                        type="button"
+                        class="case-study-trigger-btn"
+                        data-case-study={project.name}
+                      >
+                        <i class="bi bi-journal-code" aria-hidden="true"></i>
+                        <span data-i18n="portfolio.casestudy.btn">Étude de cas</span>
+                      </button>
+                    )}
+                  </div>
                   <h3>{project.name}</h3>
                   <p class="text-break" set:html={project.descriptionHtml} />
                   <div class="d-flex flex-wrap gap-1 mt-2">
@@ -113,6 +175,14 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
         }
       </div>
 
+      <div id="portfolioEmptyState" class="portfolio-empty-state d-none text-center mt-4">
+        <p id="portfolioEmptyText" class="mb-2">Aucun projet ne correspond à ces critères de recherche.</p>
+        <button id="portfolioResetFiltersBtn" type="button" class="versions-btn-outline ob-dialog-btn-sm">
+          <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+          <span data-i18n="portfolio.filter.reset">Réinitialiser les filtres</span>
+        </button>
+      </div>
+
       <div id="portfolioShowMoreWrap" class="text-center mt-4">
         <button id="portfolioShowMoreBtn" type="button" class="btn btn-submit">
           <i class="bi bi-grid-3x3-gap-fill me-2" aria-hidden="true"></i>Voir plus (+1)
@@ -121,6 +191,7 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
     </VerticalNav>
   </div>
 
+  <!-- Visionneuse d'aperçu native -->
   <dialog id="portfolioLightboxDialog" class="ob-dialog ob-lightbox-dialog" closedby="any" aria-labelledby="lightboxDialogTitle">
     <div class="ob-dialog-header">
       <div class="ob-dialog-title-wrap">
@@ -136,6 +207,36 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
     </div>
     <div class="ob-lightbox-body">
       <img id="lightboxDialogImg" class="ob-lightbox-img" src="" alt="" />
+    </div>
+  </dialog>
+
+  <!-- Modale Étude de cas (Case Study) pour les projets phares -->
+  <dialog id="caseStudyDialog" class="ob-dialog ob-casestudy-dialog" closedby="any" aria-labelledby="caseStudyDialogTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-journal-code"></i></span>
+        <div>
+          <h2 id="caseStudyDialogTitle" class="ob-dialog-title">Étude de cas</h2>
+          <span id="caseStudyDialogSub" class="ob-dialog-sub">Analyse technique &amp; architecture</span>
+        </div>
+      </div>
+      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer l'étude de cas" title="Fermer l'étude de cas" autofocus>
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="caseStudyDialogBody" class="ob-dialog-body ob-casestudy-body"></div>
+    <div class="ob-dialog-footer">
+      <span id="caseStudyDialogBadges" class="d-flex flex-wrap gap-1"></span>
+      <a
+        id="caseStudyDialogRepoLink"
+        href={SITE.githubProjectsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="versions-btn-primary ob-dialog-btn-sm"
+      >
+        <i class="bi bi-github" aria-hidden="true"></i>
+        <span data-i18n="portfolio.casestudy.repo">Explorer le code sur GitHub</span>
+      </a>
     </div>
   </dialog>
 </section>

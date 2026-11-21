@@ -18,7 +18,14 @@ export const KEY_EN: Record<string, string> = {
   'contact.submit': 'Send',
   'contact.direct.prefix': 'Or email me directly:',
   'contact.copy.email': 'Copy Email',
-  'footer.credits': 'Designed & built with Astro · Tech Canvas Edition'
+  'footer.credits': 'Designed & built with Astro · Tech Canvas Edition',
+  'portfolio.tech.all': 'All Tech',
+  'portfolio.casestudy.ribbon': 'CASE STUDY',
+  'portfolio.casestudy.btn': 'Case Study',
+  'portfolio.casestudy.repo': 'Explore Code on GitHub',
+  'portfolio.filter.reset': 'Reset Filters',
+  'cmd.hint.nav': 'Navigate',
+  'cmd.hint.exec': 'Execute'
 };
 
 /**
@@ -33,6 +40,13 @@ export const EXACT_TEXT_FR_TO_EN: Record<string, string> = {
   Sujet: 'Subject',
   'Votre message': 'Your Message',
   'Filtrer les projets par catégorie': 'Filter projects by category',
+  'Filtrer par technologie': 'Filter by technology',
+  'Effacer la recherche': 'Clear search',
+  "Fermer l'étude de cas": 'Close case study',
+  'Ouvrir la palette de commandes rapides (Ctrl+K)': 'Open quick command palette (Ctrl+K)',
+  'Palette de commandes rapides (Ctrl+K)': 'Quick command palette (Ctrl+K)',
+  'Fermer la palette de commandes': 'Close command palette',
+  'Fermer (Échap)': 'Close (Esc)',
   Accueil: 'Home',
   'À propos': 'About',
   CV: 'Resume',
@@ -581,6 +595,13 @@ export const ATTR_FR_TO_EN: Record<string, string> = {
   Sujet: 'Subject',
   'Votre message': 'Your Message',
   'Filtrer les projets par catégorie': 'Filter projects by category',
+  'Filtrer par technologie': 'Filter by technology',
+  'Effacer la recherche': 'Clear search',
+  "Fermer l'étude de cas": 'Close case study',
+  'Ouvrir la palette de commandes rapides (Ctrl+K)': 'Open quick command palette (Ctrl+K)',
+  'Palette de commandes rapides (Ctrl+K)': 'Quick command palette (Ctrl+K)',
+  'Fermer la palette de commandes': 'Close command palette',
+  'Fermer (Échap)': 'Close (Esc)',
   'Télécharger mon CV (PDF — Français ou Anglais)': 'Download my Resume (PDF — French or English)',
   'Télécharger mon CV (Français ou Anglais)': 'Download my Resume (French or English)',
   'Afficher ou masquer toutes les compétences': 'Show or hide all skills',

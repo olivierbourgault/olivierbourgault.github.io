@@ -816,3 +816,151 @@
 .contact .contact-form .btn-submit:active {
   transform: translateY(0);
 }
+
+/* Portfolio Discovery Bar (Search + Tech Tag Chips) & Case Study Ribbon */
+.portfolio-discovery-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.portfolio-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+.portfolio-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: color-mix(in srgb, var(--default-color), transparent 35%);
+  pointer-events: none;
+  font-size: 0.92rem;
+}
+
+.portfolio-search-input {
+  width: 100%;
+  padding: 0.58rem 2.2rem 0.58rem 2.35rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--card-border);
+  background: var(--surface-color);
+  color: var(--default-color);
+  font-size: 0.88rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.portfolio-search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 82%);
+}
+
+.portfolio-search-clear {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-search-clear:hover {
+  color: var(--accent-color);
+}
+
+.portfolio-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.portfolio-tech-chip {
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--secondary-accent), transparent 62%);
+  background: color-mix(in srgb, var(--secondary-accent), transparent 92%);
+  color: var(--secondary-accent);
+  font-family: var(--coding-font);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.portfolio-tech-chip:hover {
+  border-color: var(--secondary-accent);
+  background: color-mix(in srgb, var(--secondary-accent), transparent 80%);
+  transform: translateY(-1px);
+}
+
+.portfolio-tech-chip.is-active {
+  background: var(--secondary-accent);
+  border-color: var(--secondary-accent);
+  color: #0b0c0e;
+}
+
+.portfolio-tech-chip:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.portfolio-casestudy-ribbon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: #FF6600;
+  color: #121316;
+  border: 1.5px solid #000000;
+  box-shadow: 2px 2px 0 #000000;
+  font-family: var(--coding-font);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.case-study-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  border: 1.5px solid #FF6600;
+  background: rgba(255, 102, 0, 0.14);
+  color: #FF6600;
+  font-family: var(--coding-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+
+.case-study-trigger-btn:hover {
+  background: #FF6600;
+  color: #121316;
+  transform: translateY(-1px);
+}
+
+.case-study-trigger-btn:focus-visible {
+  outline: 2px solid #FF6600;
+  outline-offset: 2px;
+}
+
+.portfolio-empty-state {
+  padding: 1.75rem 1.25rem;
+  border-radius: 14px;
+  border: 1.5px dashed var(--card-border);
+  background: color-mix(in srgb, var(--surface-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+}

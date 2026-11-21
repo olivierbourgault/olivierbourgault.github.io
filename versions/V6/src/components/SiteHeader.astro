@@ -84,9 +84,20 @@ const {
       </div>
     </nav>
 
-    <!-- Right Actions: Hub menu, Social links, Theme switcher & Mobile Hamburger -->
+    <!-- Right Actions: Command Palette, Hub menu, Social links, Theme switcher & Mobile Hamburger -->
     <div class="d-flex align-items-center gap-1 header-actions">
       <div class="d-flex align-items-center gap-1 header-social-links">
+        <button
+          type="button"
+          id="cmdPaletteTriggerBtn"
+          class="theme-switcher-btn cmd-palette-trigger-btn"
+          data-open-cmd-palette
+          aria-label="Ouvrir la palette de commandes rapides (Ctrl+K)"
+          title="Palette de commandes rapides (Ctrl+K)"
+        >
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <kbd class="cmd-palette-kbd d-none d-sm-inline-block">Ctrl K</kbd>
+        </button>
         <VersionsHubMenu currentPage={currentPage} />
         <a href={SITE.githubUrl} target="_blank" rel="noopener noreferrer" class="d-none d-sm-inline-block" aria-label="Profil Github" title="Profil GitHub">
           <i class="bi bi-github" aria-hidden="true"></i>

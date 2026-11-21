@@ -6,6 +6,7 @@ import '../styles/tokens.css';
 import '../styles/main.css';
 import '../styles/components/dialog.css';
 
+import CommandPaletteDialog from '../components/CommandPaletteDialog.astro';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
 
@@ -260,6 +261,7 @@ const structuredData = noindex
     </div>
 
     <slot />
+    <CommandPaletteDialog />
 
     <script>
       import { initTheme } from '../scripts/theme';
@@ -268,6 +270,7 @@ const structuredData = noindex
       import { initAnimatedBackground } from '../scripts/bg-canvas';
       import { initInteractiveCursor } from '../scripts/cursor';
       import { initNativeDialogs } from '../scripts/dialogs';
+      import { initCommandPalette } from '../scripts/cmd-palette';
 
       const runBaseInit = () => {
         initTheme();
@@ -276,6 +279,7 @@ const structuredData = noindex
         initAnimatedBackground();
         initInteractiveCursor();
         initNativeDialogs();
+        initCommandPalette();
       };
 
       if (document.readyState === 'loading') {

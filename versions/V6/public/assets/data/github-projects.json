@@ -1,0 +1,867 @@
+{
+  "generatedAt": "2026-11-21T21:12:02.442Z",
+  "totalCount": 59,
+  "projects": [
+    {
+      "name": "AccessyHelp",
+      "path": "Personnels/AccessyHelp",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/AccessyHelp",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/AccessyHelp/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "PowerShell"
+      ]
+    },
+    {
+      "name": "BenYou",
+      "path": "Personnels/BenYou",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/BenYou",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/BenYou/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "ChatterBox",
+      "path": "Personnels/ChatterBox",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/ChatterBox",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/ChatterBox/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "CineVerse",
+      "path": "Personnels/CineVerse",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/CineVerse",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/CineVerse/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "D&D",
+      "path": "Personnels/D&D",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/D%26D",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/D%26D/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "Discoveria",
+      "path": "Personnels/Discoveria",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Discoveria",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Discoveria/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "GrindWall",
+      "path": "Personnels/GrindWall",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/GrindWall",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/GrindWall/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "Homepage",
+      "path": "Personnels/Homepage",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Homepage",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Homepage/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "HubAI",
+      "path": "Personnels/HubAI",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/HubAI",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/HubAI/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Python",
+        "IA",
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Let'Speech",
+      "path": "Personnels/Let'Speech",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Let'Speech",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Let'Speech/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Python"
+      ]
+    },
+    {
+      "name": "MacroVision",
+      "path": "Personnels/MacroVision",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MacroVision",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MacroVision/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Kotlin",
+        "C++",
+        "Flutter / Dart",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "MultiDev",
+      "path": "Personnels/MultiDev",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MultiDev",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MultiDev/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "MyBuilder",
+      "path": "Personnels/MyBuilder",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MyBuilder",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MyBuilder/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "SQL",
+        "JavaScript",
+        "HTML / CSS",
+        "Vue.js"
+      ]
+    },
+    {
+      "name": "Nexus",
+      "path": "Personnels/Nexus",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Nexus",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Nexus/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Angular",
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "NoteMaker",
+      "path": "Personnels/NoteMaker",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/NoteMaker",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/NoteMaker/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Phoneword",
+      "path": "Personnels/Phoneword",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Phoneword",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Phoneword/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "path": "Personnels/Portfolio",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Portfolio",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Portfolio/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "QuickConnect",
+      "path": "Personnels/QuickConnect",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/QuickConnect",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/QuickConnect/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Python"
+      ]
+    },
+    {
+      "name": "SchoolProjects",
+      "path": "Personnels/SchoolProjects",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/SchoolProjects",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/SchoolProjects/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Shopro",
+      "path": "Personnels/Shopro",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Shopro",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Shopro/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "WordPress",
+        "PHP",
+        "JavaScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "StickerSmash",
+      "path": "Personnels/StickerSmash",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/StickerSmash",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/StickerSmash/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "TypeScript",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Streamly",
+      "path": "Personnels/Streamly",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Streamly",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Streamly/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript",
+        "PowerShell",
+        "TypeScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "Superwiki",
+      "path": "Personnels/Superwiki",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Superwiki",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Superwiki/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "VibeFlow",
+      "path": "Personnels/VibeFlow",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/VibeFlow",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/VibeFlow/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Python"
+      ]
+    },
+    {
+      "name": "WinYou",
+      "path": "Personnels/WinYou",
+      "parentPath": "Personnels",
+      "filterClass": "filter-personal",
+      "categoryLabel": "Personnels",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/WinYou",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/WinYou/preview.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "PowerShell"
+      ]
+    },
+    {
+      "name": "CompareTools",
+      "path": "Professionnels/HoC-CdC_E23/CompareTools",
+      "parentPath": "Professionnels/HoC-CdC_E23",
+      "filterClass": "filter-professional",
+      "categoryLabel": "Professionnels • HoC-CdC_E23",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Professionnels/HoC-CdC_E23/CompareTools",
+      "imageUrl": "",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "PowerShell"
+      ]
+    },
+    {
+      "name": "PowerFitness",
+      "path": "Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness",
+      "parentPath": "Scolaires/CSTJ/A20-InterfaceWeb_1D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A20)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness/images/cell.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "SYNTHESE",
+      "path": "Scolaires/CSTJ/A21-ObjetsConnectés_1C4/SYNTHESE",
+      "parentPath": "Scolaires/CSTJ/A21-ObjetsConnectés_1C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/SYNTHESE",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP_1",
+      "path": "Scolaires/CSTJ/A21-ObjetsConnectés_1C4/TP_1",
+      "parentPath": "Scolaires/CSTJ/A21-ObjetsConnectés_1C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/TP_1",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP1",
+      "path": "Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1",
+      "parentPath": "Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1/TP1_Base_Prof/Assets/Icons/icon_add.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "TPSynthese",
+      "path": "Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese",
+      "parentPath": "Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese/Classes01_Corrige/Assets/Icons/angry.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "Atlas",
+      "path": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4/Atlas",
+      "parentPath": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/Atlas",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/Atlas/img/affinities/air.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Météomania",
+      "path": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4/Météomania",
+      "parentPath": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/M%C3%A9t%C3%A9omania",
+      "imageUrl": "",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "TPSynthese",
+      "path": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4/TPSynthese",
+      "parentPath": "Scolaires/CSTJ/A21-ServiceEchangeDeDonnées_3E4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/TPSynthese",
+      "imageUrl": "",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Synthèse",
+      "path": "Scolaires/CSTJ/A22-InternetDesObjets_5C4/Synthèse",
+      "parentPath": "Scolaires/CSTJ/A22-InternetDesObjets_5C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/Synth%C3%A8se",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP1",
+      "path": "Scolaires/CSTJ/A22-InternetDesObjets_5C4/TP1",
+      "parentPath": "Scolaires/CSTJ/A22-InternetDesObjets_5C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/TP1",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C++"
+      ]
+    },
+    {
+      "name": "CitationMystere",
+      "path": "Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere",
+      "parentPath": "Scolaires/CSTJ/A22-TechnologieWeb_3D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere/assets/saisieFond.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Converto",
+      "path": "Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto",
+      "parentPath": "Scolaires/CSTJ/A22-TechnologieWeb_3D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto/assets/images/dimensions.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "JourVie",
+      "path": "Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie",
+      "parentPath": "Scolaires/CSTJ/A22-TechnologieWeb_3D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie/src/assets/images/changerTache.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "PHP",
+        "SQL",
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Poker",
+      "path": "Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker",
+      "parentPath": "Scolaires/CSTJ/A22-TechnologieWeb_3D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker/assets/TP2-Cartes/carreau_as.gif",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Electrolib",
+      "path": "Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib",
+      "parentPath": "Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib/Electrolib%20(Angular)/src/assets/images/default-book.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "Angular",
+        "Symfony",
+        "JavaScript",
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Poker",
+      "path": "Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker",
+      "parentPath": "Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker/Poker%20(WAMP%20-%20Symfony)/public/images/accueil.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "Angular",
+        "Symfony",
+        "JavaScript",
+        "HTML / CSS",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Kaomia",
+      "path": "Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia",
+      "parentPath": "Scolaires/CSTJ/A23-SystemesMulticlients_5D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (A23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia/Electron/public/affinities/air.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "Vue.js",
+        "Kotlin",
+        "Node.js",
+        "TypeScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "Synthèse",
+      "path": "Scolaires/CSTJ/H21-BaseDeDonnéesRelationnelle_2C4/Synthèse",
+      "parentPath": "Scolaires/CSTJ/H21-BaseDeDonnéesRelationnelle_2C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BaseDeDonn%C3%A9esRelationnelle_2C4/Synth%C3%A8se",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "SQL"
+      ]
+    },
+    {
+      "name": "Synthèse",
+      "path": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/Synthèse",
+      "parentPath": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/Synth%C3%A8se",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP2Excel",
+      "path": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TP2Excel",
+      "parentPath": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TP2Excel",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TPExcel",
+      "path": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TPExcel",
+      "parentPath": "Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TPExcel",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP1",
+      "path": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6/TP1",
+      "parentPath": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP1",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "TP2",
+      "path": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6/TP2",
+      "parentPath": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP2",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "TPSynthese",
+      "path": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6/TPSynthese",
+      "parentPath": "Scolaires/CSTJ/H21-ProgrammationOrientéeObjet_2C6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H21)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TPSynthese",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "Consortium",
+      "path": "Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium",
+      "parentPath": "Scolaires/CSTJ/H22-ApplicationsMobiles_4C6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium/app/src/main/res/drawable/b.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "Kotlin"
+      ]
+    },
+    {
+      "name": "Tenretni",
+      "path": "Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni",
+      "parentPath": "Scolaires/CSTJ/H22-ApplicationsMobiles_4C6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni/app/src/main/res/drawable/cad.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "Kotlin"
+      ]
+    },
+    {
+      "name": "Synthèse",
+      "path": "Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synthèse",
+      "parentPath": "Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synth%C3%A8se",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synth%C3%A8se/ES_VA/1875009_UIL/Assets/Images/HomeScreenBackground.jpg",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET",
+        "SQL"
+      ]
+    },
+    {
+      "name": "TP01",
+      "path": "Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01",
+      "parentPath": "Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H22)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01/Gestionnaire/bin/Debug/net6.0-windows/Images/10%20days%20in%20Africa.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "C# / .NET"
+      ]
+    },
+    {
+      "name": "Synthèse",
+      "path": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synthèse",
+      "parentPath": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synth%C3%A8se",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synth%C3%A8se/PartieB/Screenshots/Accueil.png",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "TP01",
+      "path": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01",
+      "parentPath": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01/ecran-depart.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "HTML / CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "TP02",
+      "path": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP02",
+      "parentPath": "Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP02",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": []
+    },
+    {
+      "name": "EVOMEAL",
+      "path": "Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL",
+      "parentPath": "Scolaires/CSTJ/H23-DeveloppementWeb_4D6",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H23)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL",
+      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL/public/icons/myIcon.png",
+      "hasReadme": true,
+      "hasParentReadme": true,
+      "tags": [
+        "Symfony",
+        "PHP",
+        "SQL",
+        "JavaScript",
+        "HTML / CSS"
+      ]
+    },
+    {
+      "name": "1875009_TP1",
+      "path": "Scolaires/CSTJ/H24-SecuriteDesDonnees_5D3/1875009_TP1",
+      "parentPath": "Scolaires/CSTJ/H24-SecuriteDesDonnees_5D3",
+      "filterClass": "filter-school",
+      "categoryLabel": "Scolaires • CSTJ (H24)",
+      "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H24-SecuriteDesDonnees_5D3/1875009_TP1",
+      "imageUrl": "",
+      "hasReadme": false,
+      "hasParentReadme": true,
+      "tags": [
+        "SQL"
+      ]
+    }
+  ]
+}

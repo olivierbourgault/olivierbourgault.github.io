@@ -12,6 +12,7 @@
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
+    "portfolio:sync": "node tools/sync-portfolio.mjs",
     "site:assemble": "node tools/assemble-site.mjs",
     "site:links": "node tools/check-links.mjs",
     "site:serve": "node tools/serve-site.mjs --port 8080",

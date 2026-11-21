@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 8 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -33,6 +35,10 @@ jobs:
       - name: Install V6 dependencies
         working-directory: versions/V6
         run: npm ci
+
+      - name: Sync GitHub portfolio catalog
+        working-directory: versions/V6
+        run: npm run portfolio:sync
 
       - name: Typecheck Astro (astro check)
         working-directory: versions/V6

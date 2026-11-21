@@ -1,0 +1,44 @@
+<dialog
+  id="cmdPaletteDialog"
+  class="ob-dialog ob-cmd-dialog"
+  closedby="any"
+  aria-labelledby="cmdPaletteTitle"
+>
+  <div class="ob-cmd-search-bar">
+    <i class="bi bi-terminal ob-cmd-prompt-icon" aria-hidden="true"></i>
+    <input
+      id="cmdPaletteInput"
+      type="text"
+      class="ob-cmd-input"
+      placeholder="Rechercher une page, étude de cas, CV PDF ou action…"
+      aria-label="Palette de commandes rapides"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <kbd class="ob-cmd-kbd">ESC</kbd>
+    <button
+      type="button"
+      class="ob-dialog-close"
+      data-close-dialog
+      aria-label="Fermer la palette de commandes"
+      title="Fermer (Échap)"
+    >
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <h2 id="cmdPaletteTitle" class="visually-hidden">Palette de commandes rapides</h2>
+
+  <div id="cmdPaletteList" class="ob-cmd-list" role="listbox" aria-label="Actions disponibles"></div>
+
+  <div class="ob-dialog-footer ob-cmd-footer">
+    <span class="ob-cmd-hint">
+      <kbd>&uarr;</kbd><kbd>&darr;</kbd> <span data-i18n="cmd.hint.nav">Naviguer</span>
+      &middot;
+      <kbd>&crarr;</kbd> <span data-i18n="cmd.hint.exec">Exécuter</span>
+      &middot;
+      <kbd>Ctrl+K</kbd>
+    </span>
+    <span class="ob-dialog-sub">OB_TECH_CMD // V6</span>
+  </div>
+</dialog>
