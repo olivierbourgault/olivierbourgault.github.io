@@ -1,5 +1,5 @@
-import AOS from 'aos';
 import { getSiteLang } from './i18n';
+import { refreshScrollReveal } from './reveal';
 
 export function initCollapsibleSections(): void {
   const sectionIds = ['expertise', 'about', 'skills', 'resume', 'portfolio', 'contact'];
@@ -86,13 +86,13 @@ export function initCollapsibleSections(): void {
 
     const expand = () => {
       if (!wrap.classList.contains('is-collapsed')) return;
-      setWrapState(wrap, btn, true, () => AOS.refreshHard());
+      setWrapState(wrap, btn, true, () => refreshScrollReveal());
     };
     sectionControllers.set(`#${id}`, expand);
 
     btn.addEventListener('click', () => {
       const willExpand = wrap.classList.contains('is-collapsed');
-      setWrapState(wrap, btn, willExpand, () => AOS.refreshHard());
+      setWrapState(wrap, btn, willExpand, () => refreshScrollReveal());
     });
   });
 

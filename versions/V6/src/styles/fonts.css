@@ -1,0 +1,116 @@
+/* ==========================================================================
+   POLICES AUTO-HÉBERGÉES — PACK INGÉNIERIE & IA (WOFF2 latin uniquement)
+   Couvre intégralement FR & EN (U+0000-00FF, Œ/œ U+0152-0153, guillemets, €)
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/oswald/files/oswald-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('@fontsource/oswald/files/oswald-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@fontsource/oswald/files/oswald-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Chakra Petch';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@fontsource/chakra-petch/files/chakra-petch-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/dm-sans/files/dm-sans-latin-400-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@fontsource/dm-sans/files/dm-sans-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-700-normal.woff2') format('woff2');
+}

@@ -24,6 +24,20 @@ export function initInteractiveCursor(): void {
   const cursorDot = document.getElementById('laser-dot');
   if (!cursorDot) return;
 
+  const isEmbedded = (() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('embed') === '1' || window.self !== window.top;
+    } catch {
+      return true;
+    }
+  })();
+
+  if (isEmbedded) {
+    cursorDot.style.display = 'none';
+    return;
+  }
+
   let hasFinePointer = true;
   let prefersReducedMotion = false;
   try {

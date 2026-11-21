@@ -274,3 +274,51 @@ body[data-palette="tech-canvas"]:not(.dark) .versions-btn-secondary {
     grid-template-columns: 1fr;
   }
 }
+
+/* Native Portfolio Image Lightbox Dialog (remplace GLightbox) */
+dialog.ob-lightbox-dialog {
+  max-width: min(1040px, calc(100vw - 24px));
+}
+
+.ob-lightbox-body {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color, #121316);
+  overflow: auto;
+}
+
+.ob-lightbox-img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 180px);
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* Native Scroll Reveal (remplace AOS CSS) */
+[data-aos].aos-init {
+  opacity: 0;
+  transition: opacity 0.55s ease-in-out, transform 0.55s ease-in-out;
+}
+
+[data-aos="fade-up"].aos-init { transform: translate3d(0, 24px, 0); }
+[data-aos="fade-right"].aos-init { transform: translate3d(-24px, 0, 0); }
+[data-aos="fade-left"].aos-init { transform: translate3d(24px, 0, 0); }
+[data-aos="zoom-out"].aos-init { transform: scale(1.06); }
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aos].aos-init {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

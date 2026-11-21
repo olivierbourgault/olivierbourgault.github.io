@@ -1,8 +1,8 @@
-import AOS from 'aos';
 import { initBootSequence } from './boot';
 import { initCollapsibleSections } from './collapsible';
 import { initContactForm } from './contact';
 import { initPortfolio } from './portfolio';
+import { initScrollReveal } from './reveal';
 import { initSkills } from './skills';
 import { initTypewriter } from './typewriter';
 import { initHomeVerticalNavs } from './vnav';
@@ -28,13 +28,7 @@ export function initHomePage(): void {
     initSkills();
     initPortfolio();
     initContactForm();
-
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
+    initScrollReveal();
 
     scrollHashIfPresent();
     window.dispatchEvent(new Event('scroll'));

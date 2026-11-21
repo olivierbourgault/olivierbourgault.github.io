@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../../data/site';
+import { withBase } from '../../utils/paths';
 ---
 <section id="hero" class="hero section" data-aos="fade-up" data-aos-delay="100">
   <div class="row align-items-center content">
@@ -55,7 +56,11 @@ import { SITE } from '../../data/site';
       <div class="hero-image">
         <img
           id="avatar"
-          src={SITE.githubAvatarUrl}
+          src={withBase('assets/images/hero-avatar.webp')}
+          width="400"
+          height="398"
+          fetchpriority="high"
+          decoding="async"
           alt="Portrait d'Olivier Bourgault"
           class="img-fluid d-block mx-auto"
           data-aos="zoom-out"

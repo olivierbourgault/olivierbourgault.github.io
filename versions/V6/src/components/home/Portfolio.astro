@@ -50,9 +50,12 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
                 <div class="portfolio-image">
                   <img
                     src={withBase(project.image)}
+                    width={project.width}
+                    height={project.height}
                     class="img-fluid"
                     alt={project.alt}
                     loading="lazy"
+                    decoding="async"
                   />
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
@@ -101,4 +104,22 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
       </div>
     </VerticalNav>
   </div>
+
+  <dialog id="portfolioLightboxDialog" class="ob-dialog ob-lightbox-dialog" closedby="any" aria-labelledby="lightboxDialogTitle">
+    <div class="ob-dialog-header">
+      <div class="ob-dialog-title-wrap">
+        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-eye"></i></span>
+        <div>
+          <h2 id="lightboxDialogTitle" class="ob-dialog-title">Aperçu du projet</h2>
+          <span id="lightboxDialogSub" class="ob-dialog-sub">Portfolio Olivier Bourgault</span>
+        </div>
+      </div>
+      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer l'aperçu" title="Fermer l'aperçu" autofocus>
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="ob-lightbox-body">
+      <img id="lightboxDialogImg" class="ob-lightbox-img" src="" alt="" />
+    </div>
+  </dialog>
 </section>

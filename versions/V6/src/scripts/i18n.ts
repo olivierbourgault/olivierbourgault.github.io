@@ -1,10 +1,7 @@
-import {
-  ATTR_FR_TO_EN,
-  EXACT_TEXT_FR_TO_EN,
-  SELECTOR_HTML_FR_TO_EN,
-  SITE_LANG_STORAGE_KEY,
-  type SiteLang
-} from '../data/i18n';
+export type SiteLang = 'fr' | 'en';
+export const SITE_LANG_STORAGE_KEY = 'ob_v6_lang';
+
+type I18nDictModule = typeof import('../data/i18n');
 
 interface TextBinding {
   fr: string;
@@ -19,6 +16,19 @@ const attrBindings = new WeakMap<Element, Map<string, { fr: string; en: string }
 
 let currentLang: SiteLang = 'fr';
 let initialized = false;
+let cachedDict: I18nDictModule | null = null;
+let dictPromise: Promise<I18nDictModule> | null = null;
+
+function loadDict(): Promise<I18nDictModule> {
+  if (cachedDict) return Promise.resolve(cachedDict);
+  if (!dictPromise) {
+    dictPromise = import('../data/i18n').then((mod) => {
+      cachedDict = mod;
+      return mod;
+    });
+  }
+  return dictPromise;
+}
 
 export function getSiteLang(): SiteLang {
   return currentLang;
@@ -44,12 +54,11 @@ export function detectInitialSiteLang(): SiteLang {
   return 'fr';
 }
 
-export function applyDomTranslations(root: ParentNode = document.body): void {
-  if (!root) return;
+function applyDomTranslationsWithDict(dict: I18nDictModule, root: ParentNode): void {
   const lang = currentLang;
 
-  // 1. Rich HTML selector bindings (applied first so innerHTML replacements happen before text-node walk)
-  for (const item of SELECTOR_HTML_FR_TO_EN) {
+  // 1. Rich HTML selector bindings
+  for (const item of dict.SELECTOR_HTML_FR_TO_EN) {
     document.querySelectorAll(item.selector).forEach((el) => {
       let binding = htmlBindings.get(el);
       if (!binding) {
@@ -85,7 +94,7 @@ export function applyDomTranslations(root: ParentNode = document.body): void {
     if (!binding) {
       const raw = currentNode.nodeValue || '';
       const trimmed = raw.trim().replace(/\s+/g, ' ');
-      const enMatch = trimmed ? EXACT_TEXT_FR_TO_EN[trimmed] : undefined;
+      const enMatch = trimmed ? dict.EXACT_TEXT_FR_TO_EN[trimmed] : undefined;
       if (enMatch) {
         const leadMatch = raw.match(/^\s*/);
         const trailMatch = raw.match(/\s*$/);
@@ -121,7 +130,7 @@ export function applyDomTranslations(root: ParentNode = document.body): void {
         if (!val) continue;
         let pair = elMap?.get(attr);
         if (!pair) {
-          const enVal = ATTR_FR_TO_EN[val.trim()];
+          const enVal = dict.ATTR_FR_TO_EN[val.trim()];
           if (enVal) {
             if (!elMap) {
               elMap = new Map();
@@ -139,6 +148,19 @@ export function applyDomTranslations(root: ParentNode = document.body): void {
         }
       }
     });
+}
+
+export function applyDomTranslations(root: ParentNode = document.body): void {
+  if (!root) return;
+  // En français avant toute bascule EN : 0 Ko de dictionnaire téléchargé
+  if (currentLang === 'fr' && !cachedDict) return;
+  if (cachedDict) {
+    applyDomTranslationsWithDict(cachedDict, root);
+    return;
+  }
+  void loadDict().then((dict) => {
+    applyDomTranslationsWithDict(dict, root);
+  });
 }
 
 function syncLangToggleButtons(lang: SiteLang): void {

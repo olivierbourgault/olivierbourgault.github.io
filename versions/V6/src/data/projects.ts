@@ -4,6 +4,8 @@ export interface FallbackProject {
   filterClass: 'filter-personal' | 'filter-professional' | 'filter-school';
   categoryLabel: string;
   image: string;
+  width: number;
+  height: number;
   alt: string;
   gallery: string;
   repoUrl: string;
@@ -18,6 +20,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-personal',
     categoryLabel: 'Personnels • IA',
     image: 'assets/images/projects/hub-ai.webp',
+    width: 1280,
+    height: 636,
     alt: 'Aperçu du projet HubAI',
     gallery: 'portfolio-gallery-motion',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Personnels/HubAI',
@@ -31,6 +35,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-professional',
     categoryLabel: 'Professionnels • Chambre des Communes (2023)',
     image: 'assets/images/projects/compare-tools.webp',
+    width: 1280,
+    height: 437,
     alt: 'Aperçu du projet CompareTools',
     gallery: 'portfolio-gallery-graphics',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Professionnels/HoC-CdC_E23/CompareTools',
@@ -44,6 +50,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-school',
     categoryLabel: 'Scolaires • 2023',
     image: 'assets/images/projects/electrolib.webp',
+    width: 1280,
+    height: 827,
     alt: 'Aperçu du projet Electrolib',
     gallery: 'portfolio-gallery-web',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib',
@@ -57,6 +65,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-school',
     categoryLabel: 'Scolaires • 2023',
     image: 'assets/images/projects/kaomia.webp',
+    width: 1280,
+    height: 482,
     alt: 'Aperçu du projet Kaomia',
     gallery: 'portfolio-gallery-web',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia',
@@ -70,6 +80,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-school',
     categoryLabel: 'Scolaires • 2023',
     image: 'assets/images/projects/evomeal.webp',
+    width: 1280,
+    height: 809,
     alt: 'Aperçu du projet EVOMEAL',
     gallery: 'portfolio-gallery-web',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL',
@@ -83,6 +95,8 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     filterClass: 'filter-personal',
     categoryLabel: 'Personnels • E-Commerce',
     image: 'assets/images/projects/shopro.webp',
+    width: 1280,
+    height: 1392,
     alt: 'Aperçu du projet Shopro',
     gallery: 'portfolio-gallery-motion',
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Shopro',

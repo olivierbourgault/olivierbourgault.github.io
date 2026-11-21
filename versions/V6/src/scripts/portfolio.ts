@@ -1,8 +1,8 @@
-import AOS from 'aos';
-import GLightbox from 'glightbox';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
+import { promoteCursorToTopLayer } from './cursor';
 import { applyDomTranslations, getSiteLang } from './i18n';
+import { refreshScrollReveal } from './reveal';
 import { renderPortfolioVerticalNav } from './vnav';
 
 interface GitTreeEntry {
@@ -10,7 +10,7 @@ interface GitTreeEntry {
   type?: string;
 }
 
-interface ResolvedProject {
+interface RawProjectMeta {
   name: string;
   path: string;
   parentPath: string;
@@ -18,11 +18,19 @@ interface ResolvedProject {
   categoryLabel: string;
   repoUrl: string;
   imageUrl: string;
-  description: string;
+  hasReadme: boolean;
+  hasParentReadme: boolean;
+  description?: string;
+}
+
+interface CachedPortfolioPayload {
+  ts: number;
+  projects: RawProjectMeta[];
 }
 
 const DEFAULT_VISIBLE_PROJECTS = 5;
-const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_projects_cache';
+const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v2';
+const PORTFOLIO_CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 heures
 const IMAGE_GENERIQUE = withBase('assets/images/logos/logo-ob-tech.svg');
 
 const LOCAL_PROJECT_IMAGES: Record<string, string> = {
@@ -37,15 +45,18 @@ const LOCAL_PROJECT_IMAGES: Record<string, string> = {
 
 let portfolioShowAll = false;
 let currentFilter = '*';
-let lightboxInstance: ReturnType<typeof GLightbox> | null = null;
+let extraProjects: RawProjectMeta[] = [];
+const renderedPaths = new Set<string>();
+const parentReadmeCache = new Map<string, string>();
+let lastCountedProjects: Array<{ filterClass: string }> = [];
 
-function refreshLightbox(): void {
+function isEmbeddedPreview(): boolean {
   try {
-    lightboxInstance?.destroy();
+    if (new URLSearchParams(window.location.search).get('embed') === '1') return true;
+    return window.self !== window.top;
   } catch {
-    // Ignorer si destroy indisponible
+    return true;
   }
-  lightboxInstance = GLightbox({ selector: '.glightbox' });
 }
 
 function encodeGitHubPath(repoPath: string): string {
@@ -125,11 +136,15 @@ function extractProjectFromParentReadme(parentMarkdown: string, projectName: str
 }
 
 function findProjectImageInTree(tree: GitTreeEntry[], projectPath: string, projectName: string): string {
+  const local = LOCAL_PROJECT_IMAGES[projectName.toLowerCase()];
+  if (local) return local;
+
   const prefix = `${projectPath}/`;
-  const imageRegex = /\.(png|jpe?g|webp|gif|ico)$/i;
+  const imageRegex = /\.(png|jpe?g|webp)$/i;
   const ignoredDirRegex =
     /\/(node_modules|vendor|obj|bin|\.gradle|build|dist|packages|Assets\.xcassets|res\/mipmap|res\/drawable|flutter_assets)\//i;
-  const ignoredFileRegex = /(icon-\d+|app_icon|launch_background)/i;
+  const ignoredFileRegex =
+    /(favicon|dotnet_bot|ic_launcher|adaptive[-_]?icon|app[-_]?icon|icon[-_]\d+|launch_background|splash)/i;
 
   const candidates = tree.filter((item) => {
     if (item.type !== 'blob' || !item.path || !item.path.startsWith(prefix)) return false;
@@ -162,7 +177,7 @@ function findProjectImageInTree(tree: GitTreeEntry[], projectPath: string, proje
     return `https://raw.githubusercontent.com/${SITE.githubRepoOwner}/${SITE.githubRepoName}/${SITE.githubBranch}/${encodeGitHubPath(candidates[0].path!)}`;
   }
 
-  return LOCAL_PROJECT_IMAGES[projectName.toLowerCase()] || IMAGE_GENERIQUE;
+  return IMAGE_GENERIQUE;
 }
 
 function handleImageError(img: HTMLImageElement): void {
@@ -171,52 +186,53 @@ function handleImageError(img: HTMLImageElement): void {
   img.classList.add('portfolio-img-generic');
 }
 
-function extractProjectsFromTree(tree: GitTreeEntry[]): Omit<ResolvedProject, 'description'>[] {
-  const projects: Omit<ResolvedProject, 'description'>[] = [];
+function extractProjectsFromTree(tree: GitTreeEntry[], blobSet: Set<string>): RawProjectMeta[] {
+  const projects: RawProjectMeta[] = [];
   const baseRepo = `https://github.com/${SITE.githubRepoOwner}/${SITE.githubRepoName}/tree/${SITE.githubBranch}`;
 
   for (const entry of tree) {
     if (entry.type !== 'tree' || !entry.path) continue;
     const parts = entry.path.split('/');
 
+    let name = '';
+    let parentPath = '';
+    let filterClass: RawProjectMeta['filterClass'] | null = null;
+    let categoryLabel = '';
+
     if (parts[0] === 'Personnels' && parts.length === 2) {
-      const name = parts[1];
-      projects.push({
-        name,
-        path: entry.path,
-        parentPath: 'Personnels',
-        filterClass: 'filter-personal',
-        categoryLabel: 'Personnels',
-        repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-        imageUrl: findProjectImageInTree(tree, entry.path, name)
-      });
+      name = parts[1];
+      parentPath = 'Personnels';
+      filterClass = 'filter-personal';
+      categoryLabel = 'Personnels';
     } else if (parts[0] === 'Professionnels' && parts.length === 3) {
       const context = parts[1];
-      const name = parts[2];
-      projects.push({
-        name,
-        path: entry.path,
-        parentPath: `Professionnels/${context}`,
-        filterClass: 'filter-professional',
-        categoryLabel: `Professionnels • ${context}`,
-        repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-        imageUrl: findProjectImageInTree(tree, entry.path, name)
-      });
+      name = parts[2];
+      parentPath = `Professionnels/${context}`;
+      filterClass = 'filter-professional';
+      categoryLabel = `Professionnels • ${context}`;
     } else if (parts[0] === 'Scolaires' && parts.length === 4) {
       const school = parts[1];
       const course = parts[2];
-      const name = parts[3];
+      name = parts[3];
       const sessionCode = course.split('-')[0];
-      projects.push({
-        name,
-        path: entry.path,
-        parentPath: `Scolaires/${school}/${course}`,
-        filterClass: 'filter-school',
-        categoryLabel: `Scolaires • ${school} (${sessionCode})`,
-        repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-        imageUrl: findProjectImageInTree(tree, entry.path, name)
-      });
+      parentPath = `Scolaires/${school}/${course}`;
+      filterClass = 'filter-school';
+      categoryLabel = `Scolaires • ${school} (${sessionCode})`;
     }
+
+    if (!filterClass) continue;
+
+    projects.push({
+      name,
+      path: entry.path,
+      parentPath,
+      filterClass,
+      categoryLabel,
+      repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
+      imageUrl: findProjectImageInTree(tree, entry.path, name),
+      hasReadme: blobSet.has(`${entry.path}/README.md`),
+      hasParentReadme: blobSet.has(`${parentPath}/README.md`)
+    });
   }
 
   return projects;
@@ -233,7 +249,38 @@ async function fetchRawGitHubText(repoPath: string): Promise<string> {
   }
 }
 
-let lastCountedProjects: Array<{ filterClass: string }> = [];
+async function hydrateProjectDescription(project: RawProjectMeta, descEl: HTMLElement): Promise<void> {
+  if (project.description) {
+    descEl.textContent = project.description;
+    return;
+  }
+
+  let description = '';
+  if (project.hasReadme) {
+    description = cleanReadmeDescription(await fetchRawGitHubText(`${project.path}/README.md`));
+  }
+  if (!description && project.hasParentReadme) {
+    if (!parentReadmeCache.has(project.parentPath)) {
+      parentReadmeCache.set(
+        project.parentPath,
+        await fetchRawGitHubText(`${project.parentPath}/README.md`)
+      );
+    }
+    description = extractProjectFromParentReadme(
+      parentReadmeCache.get(project.parentPath) || '',
+      project.name
+    );
+  }
+  if (!description) {
+    const isEn = getSiteLang() === 'en';
+    description = isEn
+      ? `Project (${project.categoryLabel}) built by Olivier Bourgault. Visit the GitHub repository to explore the source code.`
+      : `Projet ${project.categoryLabel.toLowerCase()} réalisé par Olivier Bourgault. Consultez le dépôt GitHub pour explorer le code source.`;
+  }
+
+  project.description = description;
+  descEl.textContent = description;
+}
 
 function updateProjectCounters(projects: Array<{ filterClass: string }>): void {
   lastCountedProjects = projects;
@@ -270,7 +317,8 @@ function updateProjectCounters(projects: Array<{ filterClass: string }>): void {
   });
 }
 
-function createPortfolioCardElement(project: ResolvedProject, index: number): HTMLElement {
+function createPortfolioCardElement(project: RawProjectMeta, index: number): HTMLElement {
+  const isEn = getSiteLang() === 'en';
   const itemCol = document.createElement('div');
   itemCol.id = `portfolio-item-${index}`;
   itemCol.className = `col-lg-6 col-md-6 portfolio-item ${project.filterClass}`;
@@ -284,12 +332,13 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
 
   const img = document.createElement('img');
   img.src = project.imageUrl || IMAGE_GENERIQUE;
-  img.alt = `Aperçu du projet ${project.name}`;
+  img.alt = isEn ? `${project.name} project preview` : `Aperçu du projet ${project.name}`;
   img.className = 'img-fluid';
   if (img.src.endsWith(IMAGE_GENERIQUE) || img.src === IMAGE_GENERIQUE) {
     img.classList.add('portfolio-img-generic');
   }
   img.loading = 'lazy';
+  img.decoding = 'async';
   img.addEventListener('error', () => handleImageError(img));
 
   const overlay = document.createElement('div');
@@ -302,9 +351,13 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
     const previewLink = document.createElement('a');
     previewLink.href = project.imageUrl;
     previewLink.className = 'glightbox preview-link';
-    previewLink.setAttribute('data-gallery', `portfolio-gallery-${project.filterClass}`);
-    previewLink.setAttribute('aria-label', `Agrandir l'aperçu de ${project.name}`);
-    previewLink.setAttribute('title', `Agrandir l'aperçu de ${project.name}`);
+    previewLink.setAttribute('data-project-title', project.name);
+    previewLink.setAttribute('data-project-category', project.categoryLabel);
+    const previewLabel = isEn
+      ? `Enlarge preview of ${project.name}`
+      : `Agrandir l'aperçu de ${project.name}`;
+    previewLink.setAttribute('aria-label', previewLabel);
+    previewLink.setAttribute('title', previewLabel);
     const eyeIcon = document.createElement('i');
     eyeIcon.className = 'bi bi-eye';
     eyeIcon.setAttribute('aria-hidden', 'true');
@@ -317,8 +370,11 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
   detailsLink.target = '_blank';
   detailsLink.rel = 'noopener noreferrer';
   detailsLink.className = 'details-link';
-  detailsLink.setAttribute('aria-label', `Voir le code source de ${project.name} sur GitHub`);
-  detailsLink.setAttribute('title', `Voir le code source de ${project.name} sur GitHub`);
+  const detailsLabel = isEn
+    ? `View ${project.name} source code on GitHub`
+    : `Voir le code source de ${project.name} sur GitHub`;
+  detailsLink.setAttribute('aria-label', detailsLabel);
+  detailsLink.setAttribute('title', detailsLabel);
   const arrowIcon = document.createElement('i');
   arrowIcon.className = 'bi bi-arrow-right';
   arrowIcon.setAttribute('aria-hidden', 'true');
@@ -341,7 +397,11 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
 
   const descriptionP = document.createElement('p');
   descriptionP.className = 'text-break';
-  descriptionP.textContent = project.description;
+  descriptionP.textContent =
+    project.description ||
+    (isEn
+      ? `Project (${project.categoryLabel}) by Olivier Bourgault.`
+      : `Projet ${project.categoryLabel.toLowerCase()} réalisé par Olivier Bourgault.`);
 
   content.appendChild(categorySpan);
   content.appendChild(title);
@@ -351,37 +411,76 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
   card.appendChild(content);
   itemCol.appendChild(card);
 
+  void hydrateProjectDescription(project, descriptionP);
+
   return itemCol;
+}
+
+function projectMatchesFilter(filterClass: string): boolean {
+  if (!currentFilter || currentFilter === '*') return true;
+  return `.${filterClass}` === currentFilter;
+}
+
+function materializeNeededCards(container: HTMLElement): void {
+  const existingMatching = Array.from(
+    container.querySelectorAll<HTMLElement>('.portfolio-item')
+  ).filter((item) => !currentFilter || currentFilter === '*' || item.matches(currentFilter));
+
+  const neededCount = portfolioShowAll
+    ? Infinity
+    : Math.max(0, DEFAULT_VISIBLE_PROJECTS - existingMatching.length);
+
+  if (neededCount <= 0) return;
+
+  let nextIdx = container.querySelectorAll('.portfolio-item').length;
+  let appended = 0;
+
+  for (const project of extraProjects) {
+    if (appended >= neededCount) break;
+    const key = project.path.toLowerCase();
+    if (renderedPaths.has(key)) continue;
+    if (!projectMatchesFilter(project.filterClass)) continue;
+
+    container.appendChild(createPortfolioCardElement(project, nextIdx++));
+    renderedPaths.add(key);
+    appended++;
+  }
 }
 
 function applyPortfolioFilterWithLimit(): void {
   const container = document.getElementById('portfolioGrid');
   if (!container) return;
 
+  materializeNeededCards(container);
+
   const allItems = Array.from(container.querySelectorAll<HTMLElement>('.portfolio-item'));
-  const matching =
+  const matchingDom =
     !currentFilter || currentFilter === '*'
       ? allItems
       : allItems.filter((item) => item.matches(currentFilter));
 
+  const unrenderedMatchingCount = extraProjects.filter(
+    (p) => !renderedPaths.has(p.path.toLowerCase()) && projectMatchesFilter(p.filterClass)
+  ).length;
+  const totalMatching = matchingDom.length + unrenderedMatchingCount;
+
   const visibleItems = portfolioShowAll
-    ? matching
-    : matching.slice(0, DEFAULT_VISIBLE_PROJECTS);
+    ? matchingDom
+    : matchingDom.slice(0, DEFAULT_VISIBLE_PROJECTS);
   const visibleSet = new Set(visibleItems);
 
   allItems.forEach((item) => {
     item.classList.toggle('d-none', !visibleSet.has(item));
   });
 
-  // Mettre à jour le bouton Voir plus (+N)
   const btnWrap = document.getElementById('portfolioShowMoreWrap');
   const btn = document.getElementById('portfolioShowMoreBtn');
   if (btnWrap && btn) {
-    if (matching.length <= DEFAULT_VISIBLE_PROJECTS) {
+    if (totalMatching <= DEFAULT_VISIBLE_PROJECTS) {
       btnWrap.classList.add('d-none');
     } else {
       btnWrap.classList.remove('d-none');
-      const remaining = matching.length - DEFAULT_VISIBLE_PROJECTS;
+      const remaining = totalMatching - DEFAULT_VISIBLE_PROJECTS;
       const isEn = getSiteLang() === 'en';
       btn.innerHTML = portfolioShowAll
         ? `<i class="bi bi-chevron-up me-2" aria-hidden="true"></i>${isEn ? 'Show Top 5 Projects' : 'Réduire à 5 projets'}`
@@ -390,44 +489,95 @@ function applyPortfolioFilterWithLimit(): void {
   }
 
   renderPortfolioVerticalNav(visibleItems);
-  AOS.refreshHard();
+  refreshScrollReveal();
 }
 
-function renderPortfolioProjects(projects: ResolvedProject[]): void {
-  updateProjectCounters(projects);
+function initNativeLightbox(): void {
+  const dialog = document.getElementById('portfolioLightboxDialog') as HTMLDialogElement | null;
+  const imgEl = document.getElementById('lightboxDialogImg') as HTMLImageElement | null;
+  const titleEl = document.getElementById('lightboxDialogTitle');
+  const subEl = document.getElementById('lightboxDialogSub');
+  const grid = document.getElementById('portfolioGrid');
+  if (!dialog || !imgEl || !grid) return;
 
+  grid.addEventListener('click', (e) => {
+    const link = (e.target as Element | null)?.closest<HTMLAnchorElement>('a.glightbox.preview-link');
+    if (!link) return;
+    e.preventDefault();
+
+    const card = link.closest('.portfolio-card');
+    const title =
+      link.getAttribute('data-project-title') ||
+      card?.querySelector('h3')?.textContent?.trim() ||
+      'Aperçu du projet';
+    const category =
+      link.getAttribute('data-project-category') ||
+      card?.querySelector('.category')?.textContent?.trim() ||
+      'Portfolio';
+
+    imgEl.src = link.href;
+    imgEl.alt = title;
+    if (titleEl) titleEl.textContent = title;
+    if (subEl) subEl.textContent = category;
+
+    if (typeof dialog.showModal === 'function') {
+      dialog.showModal();
+      promoteCursorToTopLayer();
+    }
+  });
+}
+
+function registerGitHubProjects(projects: RawProjectMeta[]): void {
   const container = document.getElementById('portfolioGrid');
   if (!container) return;
 
-  const existingItems = Array.from(container.querySelectorAll<HTMLElement>('.portfolio-item'));
-  const existingPaths = new Set(
-    existingItems.map((item) => (item.dataset.projectPath || '').toLowerCase()).filter(Boolean)
-  );
+  // Fusionner les projets pré-rendus + les projets GitHub pour un comptage exact sans doublons
+  const mergedForCount: Array<{ filterClass: string }> = [];
+  const countedPaths = new Set<string>();
 
-  let added = 0;
-  let nextIdx = existingItems.length;
-  for (const project of projects) {
-    if (existingPaths.has(project.path.toLowerCase())) continue;
-    container.appendChild(createPortfolioCardElement(project, nextIdx++));
-    existingPaths.add(project.path.toLowerCase());
-    added++;
+  container.querySelectorAll<HTMLElement>('.portfolio-item').forEach((item) => {
+    const key = (item.dataset.projectPath || '').toLowerCase();
+    if (key) {
+      renderedPaths.add(key);
+      countedPaths.add(key);
+    }
+    const cls = item.classList.contains('filter-personal')
+      ? 'filter-personal'
+      : item.classList.contains('filter-professional')
+        ? 'filter-professional'
+        : 'filter-school';
+    mergedForCount.push({ filterClass: cls });
+  });
+
+  extraProjects = [];
+  for (const p of projects) {
+    const key = p.path.toLowerCase();
+    if (countedPaths.has(key)) continue;
+    countedPaths.add(key);
+    mergedForCount.push({ filterClass: p.filterClass });
+    extraProjects.push(p);
   }
 
+  updateProjectCounters(mergedForCount);
   applyPortfolioFilterWithLimit();
-  if (added > 0) {
-    refreshLightbox();
-  }
 }
 
 async function loadGitHubPortfolio(): Promise<void> {
+  if (isEmbeddedPreview()) return;
+
   const statusEl = document.getElementById('portfolioSyncStatus');
 
   try {
-    const cachedRaw = sessionStorage.getItem(PORTFOLIO_CACHE_KEY);
+    const cachedRaw = localStorage.getItem(PORTFOLIO_CACHE_KEY);
     if (cachedRaw) {
-      const cached = JSON.parse(cachedRaw) as ResolvedProject[];
-      if (Array.isArray(cached) && cached.length > 0) {
-        renderPortfolioProjects(cached);
+      const parsed = JSON.parse(cachedRaw) as CachedPortfolioPayload;
+      if (
+        parsed &&
+        Array.isArray(parsed.projects) &&
+        parsed.projects.length > 0 &&
+        Date.now() - parsed.ts < PORTFOLIO_CACHE_TTL_MS
+      ) {
+        registerGitHubProjects(parsed.projects);
         if (statusEl) statusEl.textContent = '';
         return;
       }
@@ -451,48 +601,16 @@ async function loadGitHubPortfolio(): Promise<void> {
       tree.filter((item) => item.type === 'blob' && item.path).map((item) => item.path!)
     );
 
-    const projects = extractProjectsFromTree(tree);
-    updateProjectCounters(projects);
-
-    const parentReadmeCache = new Map<string, string>();
-    const uniqueParentPaths = [...new Set(projects.map((p) => p.parentPath))];
-    await Promise.all(
-      uniqueParentPaths.map(async (parentPath) => {
-        const readmePath = `${parentPath}/README.md`;
-        if (blobSet.has(readmePath)) {
-          parentReadmeCache.set(parentPath, await fetchRawGitHubText(readmePath));
-        }
-      })
-    );
-
-    const resolvedProjects: ResolvedProject[] = await Promise.all(
-      projects.map(async (project) => {
-        let description = '';
-        const projectReadmePath = `${project.path}/README.md`;
-
-        if (blobSet.has(projectReadmePath)) {
-          description = cleanReadmeDescription(await fetchRawGitHubText(projectReadmePath));
-        }
-        if (!description && parentReadmeCache.has(project.parentPath)) {
-          description = extractProjectFromParentReadme(
-            parentReadmeCache.get(project.parentPath) || '',
-            project.name
-          );
-        }
-        if (!description) {
-          description = `Projet ${project.categoryLabel.toLowerCase()} réalisé par Olivier Bourgault. Consultez le dépôt GitHub pour explorer le code source.`;
-        }
-        return { ...project, description };
-      })
-    );
+    const projects = extractProjectsFromTree(tree, blobSet);
 
     try {
-      sessionStorage.setItem(PORTFOLIO_CACHE_KEY, JSON.stringify(resolvedProjects));
+      const payload: CachedPortfolioPayload = { ts: Date.now(), projects };
+      localStorage.setItem(PORTFOLIO_CACHE_KEY, JSON.stringify(payload));
     } catch {
-      // Ignorer quota sessionStorage
+      // Ignorer quota localStorage
     }
 
-    renderPortfolioProjects(resolvedProjects);
+    registerGitHubProjects(projects);
     if (statusEl) statusEl.textContent = '';
   } catch {
     if (statusEl) {
@@ -502,12 +620,10 @@ async function loadGitHubPortfolio(): Promise<void> {
 }
 
 export function initPortfolio(): void {
-  // Fallback erreur image sur les 6 cartes pré-rendues
   document.querySelectorAll<HTMLImageElement>('#portfolioGrid .portfolio-image img').forEach((img) => {
     img.addEventListener('error', () => handleImageError(img));
   });
 
-  // Filtres (Tout / Scolaires / Professionnels / Personnels)
   const filtersList = document.getElementById('filters');
   filtersList?.addEventListener('click', (e) => {
     const li = (e.target as Element | null)?.closest<HTMLElement>('li[data-filter]');
@@ -519,15 +635,14 @@ export function initPortfolio(): void {
     applyPortfolioFilterWithLimit();
   });
 
-  // Bouton Voir plus (+N) / Réduire à 5 projets
   const showMoreBtn = document.getElementById('portfolioShowMoreBtn');
   showMoreBtn?.addEventListener('click', () => {
     portfolioShowAll = !portfolioShowAll;
     applyPortfolioFilterWithLimit();
   });
 
+  initNativeLightbox();
   applyPortfolioFilterWithLimit();
-  refreshLightbox();
   void loadGitHubPortfolio();
 
   window.addEventListener('ob:langchange', () => {

@@ -1,8 +1,23 @@
-import { VERSION_META_EN } from '../data/i18n';
 import { PORTFOLIO_VERSIONS, type PortfolioVersion } from '../data/versions';
 import { registerDialogHandler } from './dialogs';
 import { getSiteLang } from './i18n';
 import { bindVerticalNavSpy } from './vnav';
+
+type VersionMetaEnMap = Record<string, { title: string; description: string }>;
+let cachedVersionMetaEn: VersionMetaEnMap | null = null;
+
+async function getVersionMetaEn(): Promise<VersionMetaEnMap> {
+  if (cachedVersionMetaEn) return cachedVersionMetaEn;
+  const mod = await import('../data/i18n');
+  cachedVersionMetaEn = mod.VERSION_META_EN;
+  return cachedVersionMetaEn;
+}
+
+function toIframePreviewUrl(versionId: string, targetUrl: string): string {
+  if (versionId !== 'V6') return targetUrl;
+  const sep = targetUrl.includes('?') ? '&' : '?';
+  return `${targetUrl}${sep}embed=1`;
+}
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
 
@@ -218,9 +233,25 @@ export function initVersionsStudio(): void {
       openExternal.setAttribute('title', `Ouvrir ${version.id} dans un nouvel onglet`);
     }
     const isEn = getSiteLang() === 'en';
-    const enMeta = isEn ? VERSION_META_EN[version.id] : undefined;
-    if (metaTitle) metaTitle.textContent = enMeta ? enMeta.title : version.title;
-    if (metaDesc) metaDesc.textContent = enMeta ? enMeta.description : version.description;
+    if (isEn) {
+      if (cachedVersionMetaEn?.[version.id]) {
+        const enMeta = cachedVersionMetaEn[version.id];
+        if (metaTitle) metaTitle.textContent = enMeta.title;
+        if (metaDesc) metaDesc.textContent = enMeta.description;
+      } else {
+        if (metaTitle) metaTitle.textContent = version.title;
+        if (metaDesc) metaDesc.textContent = version.description;
+        void getVersionMetaEn().then((map) => {
+          if (getSiteLang() === 'en' && state.activeVersionId === version.id && map[version.id]) {
+            if (metaTitle) metaTitle.textContent = map[version.id].title;
+            if (metaDesc) metaDesc.textContent = map[version.id].description;
+          }
+        });
+      }
+    } else {
+      if (metaTitle) metaTitle.textContent = version.title;
+      if (metaDesc) metaDesc.textContent = version.description;
+    }
     if (jumpTimelineBtn) jumpTimelineBtn.setAttribute('href', `#version-${version.id}`);
   }
 
@@ -315,18 +346,19 @@ export function initVersionsStudio(): void {
         const isReloadSameUrl = forceReload && state.loadedVersionId === version.id;
         state.loadedVersionId = version.id;
         state.iframeReady = false;
+        const iframeTargetUrl = toIframePreviewUrl(version.id, targetUrl);
         if (isReloadSameUrl) {
           try {
             if (iframe.contentWindow?.location) {
               iframe.contentWindow.location.reload();
             } else {
-              iframe.src = targetUrl;
+              iframe.src = iframeTargetUrl;
             }
           } catch {
-            iframe.src = targetUrl;
+            iframe.src = iframeTargetUrl;
           }
         } else {
-          iframe.src = targetUrl;
+          iframe.src = iframeTargetUrl;
         }
       }
     }
@@ -438,7 +470,7 @@ export function initVersionsStudio(): void {
     if (fsOpen) fsOpen.setAttribute('href', state.activeUrl);
 
     syncFullscreenDeviceUI();
-    fsIframe.src = state.activeUrl;
+    fsIframe.src = toIframePreviewUrl(version.id, state.activeUrl);
     dialog.showModal();
     return true;
   }
@@ -447,7 +479,7 @@ export function initVersionsStudio(): void {
 
   document.getElementById('fullscreenReloadBtn')?.addEventListener('click', () => {
     const fsIframe = document.getElementById('fullscreenIframe') as HTMLIFrameElement | null;
-    if (fsIframe) fsIframe.src = state.activeUrl;
+    if (fsIframe) fsIframe.src = toIframePreviewUrl(state.activeVersionId, state.activeUrl);
   });
 
   document.querySelectorAll<HTMLElement>('[data-fs-device]').forEach((btn) => {

@@ -1,5 +1,7 @@
 import { SITE } from '../data/site';
 
+const BOOT_SEEN_KEY = 'ob_v6_boot_seen';
+
 function computeYearsSinceStart(): number {
   const start = new Date(SITE.careerStartDate);
   const today = new Date();
@@ -8,10 +10,68 @@ function computeYearsSinceStart(): number {
   return Math.round(diffDays / 365.25);
 }
 
+function isEmbeddedContext(): boolean {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('embed') === '1') return true;
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+}
+
+function markBootSeen(): void {
+  try {
+    window.sessionStorage.setItem(BOOT_SEEN_KEY, '1');
+  } catch {
+    // sessionStorage indisponible (navigation privée stricte)
+  }
+}
+
+function wasBootSeen(): boolean {
+  try {
+    return window.sessionStorage.getItem(BOOT_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Boot Loader Fusion : Tracé OB Tech + Nœuds IA + Terminal OB_TECH_CORE
+ * - Overlay fixed sans masquer #page (préserve le LCP du Hero).
+ * - Ignoré immédiatement en mode embarqué (?embed=1 / iframe),
+ *   en revisite de session (sessionStorage) ou avec prefers-reduced-motion.
  */
 export function initBootSequence(onReady: () => void): void {
+  const spinner = document.getElementById('spinner');
+  const page = document.getElementById('page');
+
+  const expEl = document.getElementById('experience');
+  if (expEl) expEl.textContent = String(computeYearsSinceStart());
+
+  const prefersReduced = (() => {
+    try {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch {
+      return false;
+    }
+  })();
+
+  const shouldSkipImmediately =
+    !spinner ||
+    spinner.classList.contains('d-none') ||
+    prefersReduced ||
+    isEmbeddedContext() ||
+    wasBootSeen();
+
+  if (shouldSkipImmediately) {
+    spinner?.classList.add('d-none');
+    page?.classList.remove('d-none');
+    markBootSeen();
+    onReady();
+    return;
+  }
+
   const pctEl = document.getElementById('obBootPct');
   const barEl = document.getElementById('obBootBar');
   const line1 = document.getElementById('obBootLine1');
@@ -23,18 +83,11 @@ export function initBootSequence(onReady: () => void): void {
   let minElapsed = false;
   let finalized = false;
 
-  const prefersReduced = (() => {
-    try {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    } catch {
-      return false;
-    }
-  })();
-
   function finishBoot(): void {
     if (finalized) return;
     finalized = true;
     clearInterval(pctTimer);
+    markBootSeen();
 
     if (pctEl) pctEl.textContent = '100%';
     if (barEl) barEl.style.width = '100%';
@@ -42,17 +95,13 @@ export function initBootSequence(onReady: () => void): void {
     line2?.classList.add('is-visible');
     line3?.classList.add('is-visible');
 
+    spinner?.classList.add('is-fading');
+    page?.classList.remove('d-none');
+
     setTimeout(() => {
-      const spinner = document.getElementById('spinner');
-      const page = document.getElementById('page');
       spinner?.classList.add('d-none');
-      page?.classList.remove('d-none');
-
-      const expEl = document.getElementById('experience');
-      if (expEl) expEl.textContent = String(computeYearsSinceStart());
-
       onReady();
-    }, prefersReduced ? 40 : 220);
+    }, 140);
   }
 
   function triggerReadyPhase(): void {
@@ -64,43 +113,39 @@ export function initBootSequence(onReady: () => void): void {
   }
 
   const pctTimer = window.setInterval(() => {
-    const cap = isLoaded ? 100 : 90;
+    const cap = isLoaded ? 100 : 92;
     if (pct < cap) {
-      pct = Math.min(cap, pct + (isLoaded ? 5 : 3));
+      pct = Math.min(cap, pct + (isLoaded ? 8 : 5));
       if (pctEl) pctEl.textContent = `${String(pct).padStart(2, '0')}%`;
       if (barEl && !isLoaded) barEl.style.width = `${pct}%`;
     }
     if (isLoaded && minElapsed && pct >= 100) {
       finishBoot();
     }
-  }, prefersReduced ? 10 : 40);
+  }, 30);
 
-  if (prefersReduced) {
-    pct = 100;
-    isLoaded = true;
-    minElapsed = true;
-    finishBoot();
-    return;
-  }
-
-  setTimeout(() => line1?.classList.add('is-visible'), 80);
-  setTimeout(() => line2?.classList.add('is-visible'), 380);
+  setTimeout(() => line1?.classList.add('is-visible'), 60);
+  setTimeout(() => line2?.classList.add('is-visible'), 220);
   setTimeout(() => {
     minElapsed = true;
     if (isLoaded) triggerReadyPhase();
-  }, 900);
+  }, 450);
 
   if (!isLoaded) {
-    window.addEventListener('load', () => {
-      isLoaded = true;
-      triggerReadyPhase();
-    });
+    window.addEventListener(
+      'load',
+      () => {
+        isLoaded = true;
+        triggerReadyPhase();
+      },
+      { once: true }
+    );
   }
 
-  // Sécurité si un chargement tarde
+  // Sécurité si un chargement externe tarde
   setTimeout(() => {
     isLoaded = true;
     minElapsed = true;
     finishBoot();
-  }, 4500);
+  }, 2200);
 }

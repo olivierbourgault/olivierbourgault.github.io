@@ -32,7 +32,7 @@ export const PORTFOLIO_VERSIONS: PortfolioVersion[] = [
     statusType: 'live',
     featured: true,
     swatches: ['#121316', '#FF6600', '#38BDF8', '#F4F1EA'],
-    stack: ['Astro 6', 'TypeScript', 'Tech Canvas', 'GitHub Actions', '0 Ko Runtime'],
+    stack: ['Astro 6', 'TypeScript', 'Tech Canvas', 'GitHub Actions', 'Zéro Framework JS'],
     description:
       'Refonte architecturale complète sous Astro avec composants réutilisables, polices auto-hébergées (@fontsource), dialogues/menus natifs sans Bootstrap JS ni Isotope, thème unifié zéro-FOUC et déploiement automatisé sur GitHub Pages tout en préservant l’intégrité exacte de V1 à V5.',
     highlights: [

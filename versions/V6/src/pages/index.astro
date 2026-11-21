@@ -1,7 +1,4 @@
 ---
-import 'aos/dist/aos.css';
-import 'glightbox/dist/css/glightbox.min.css';
-
 import BootLoader from '../components/BootLoader.astro';
 import CvDownloadDialog from '../components/CvDownloadDialog.astro';
 import ScrollTop from '../components/ScrollTop.astro';
@@ -43,7 +40,24 @@ const navLinks: NavLinkItem[] = [
 
   <BootLoader />
 
-  <div id="page" class="d-none">
+  <script is:inline>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var skip =
+          params.get('embed') === '1' ||
+          window.self !== window.top ||
+          window.sessionStorage.getItem('ob_v6_boot_seen') === '1' ||
+          (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        if (skip) {
+          var sp = document.getElementById('spinner');
+          if (sp) sp.classList.add('d-none');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <div id="page">
     <SiteHeader
       links={navLinks}
       currentPage="home"

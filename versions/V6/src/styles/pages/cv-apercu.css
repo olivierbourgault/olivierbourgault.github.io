@@ -273,6 +273,11 @@ body.cv-apercu-page .resume-sheet a {
   overflow-wrap: anywhere;
 }
 
+.cv-contact-line .sep,
+.cv-links-line .sep {
+  margin: 0 6px;
+}
+
 .sheet-section {
   border-top: 1px solid var(--sheet-divider, #e5e7eb);
   padding-top: 12px !important;
