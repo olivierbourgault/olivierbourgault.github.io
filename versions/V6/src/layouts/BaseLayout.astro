@@ -53,6 +53,7 @@ const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#121316" />
 
     <!-- Résolution synchrone du thème avant le premier rendu (zéro FOUC) -->
     <script is:inline define:vars={{ themeKey: SITE.themeStorageKey }}>
@@ -69,6 +70,8 @@ const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
         html.classList.toggle('theme-light', !isDark);
         var meta = document.querySelector('meta[name="color-scheme"]');
         if (meta) meta.setAttribute('content', mode);
+        var themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) themeColor.setAttribute('content', isDark ? '#121316' : '#F4F1EA');
       })();
     </script>
     <style is:inline>
@@ -90,9 +93,10 @@ const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
 
-    <!-- Favicons -->
+    <!-- Favicons & Web App Manifest -->
     <link href={withBase('assets/images/logos/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
     <link href={withBase('assets/images/favicon.svg')} rel="alternate icon" type="image/svg+xml" />
+    <link href={withBase('site.webmanifest')} rel="manifest" />
 
     <slot name="head" />
   </head>

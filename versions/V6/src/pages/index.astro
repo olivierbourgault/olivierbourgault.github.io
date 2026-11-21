@@ -33,6 +33,14 @@ const navLinks: NavLinkItem[] = [
   canonicalPath=""
   bodyClass="index-page dark"
 >
+  <noscript slot="head">
+    <style>
+      #spinner { display: none !important; }
+      #page { display: block !important; }
+      [data-aos] { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
   <BootLoader />
 
   <div id="page" class="d-none">

@@ -26,7 +26,10 @@ const MIME_TYPES = {
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
   '.pdf': 'application/pdf',
-  '.txt': 'text/plain; charset=utf-8'
+  '.txt': 'text/plain; charset=utf-8',
+  '.md': 'text/markdown; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.webmanifest': 'application/manifest+json; charset=utf-8'
 };
 
 if (!fs.existsSync(siteDir)) {
@@ -35,25 +38,33 @@ if (!fs.existsSync(siteDir)) {
 }
 
 const server = http.createServer((req, res) => {
-  const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
-  let filePath = path.join(siteDir, urlPath.replace(/^\/+/, ''));
+  let urlPath;
+  try {
+    urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Bad Request');
+    return;
+  }
 
-  if (!filePath.startsWith(siteDir)) {
+  let filePath = path.resolve(siteDir, urlPath.replace(/^\/+/, ''));
+
+  if (filePath !== siteDir && !filePath.startsWith(siteDir + path.sep)) {
     res.writeHead(403);
     res.end('Forbidden');
     return;
   }
 
   try {
-    if (!urlPath.endsWith('/') && fs.existsSync(`${filePath}.html`) && fs.statSync(`${filePath}.html`).isFile()) {
-      filePath = `${filePath}.html`;
-    } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
       if (!urlPath.endsWith('/')) {
         res.writeHead(301, { Location: `${urlPath}/` });
         res.end();
         return;
       }
       filePath = path.join(filePath, 'index.html');
+    } else if (!urlPath.endsWith('/') && fs.existsSync(`${filePath}.html`) && fs.statSync(`${filePath}.html`).isFile()) {
+      filePath = `${filePath}.html`;
     }
 
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {

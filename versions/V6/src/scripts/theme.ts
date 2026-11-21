@@ -19,6 +19,11 @@ export function applyTheme(isDark: boolean, persist = true): void {
     metaColorScheme.content = mode;
   }
 
+  const metaThemeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  if (metaThemeColor) {
+    metaThemeColor.content = isDark ? '#121316' : '#F4F1EA';
+  }
+
   if (body) {
     body.classList.toggle('dark', isDark);
     if (isDark) {

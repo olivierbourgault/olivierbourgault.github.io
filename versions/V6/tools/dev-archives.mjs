@@ -18,7 +18,10 @@ const MIME_TYPES = {
   '.woff2': 'font/woff2',
   '.ttf': 'font/ttf',
   '.pdf': 'application/pdf',
-  '.txt': 'text/plain; charset=utf-8'
+  '.txt': 'text/plain; charset=utf-8',
+  '.md': 'text/markdown; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.webmanifest': 'application/manifest+json; charset=utf-8'
 };
 
 /**
@@ -35,7 +38,7 @@ export default function devArchivesPlugin({ root = '../..' } = {}) {
         if (!req.url) return next();
         const urlPath = req.url.split('?')[0].split('#')[0];
 
-        const archiveMatch = /^\/versions\/(V[1-5](?:\/.*)?|index\.html)?$/i.exec(urlPath);
+        const archiveMatch = /^\/versions\/V[1-5](?:\/.*)?$/i.exec(urlPath);
         if (!archiveMatch) return next();
 
         let rel = urlPath.replace(/^\/+/, '');
@@ -53,8 +56,6 @@ export default function devArchivesPlugin({ root = '../..' } = {}) {
               return;
             }
             targetPath = path.join(targetPath, 'index.html');
-          } else if (urlPath === '/versions' || urlPath === '/versions/') {
-            targetPath = path.join(repoRoot, 'versions', 'index.html');
           }
 
           if (!fs.existsSync(targetPath) || !fs.statSync(targetPath).isFile()) {

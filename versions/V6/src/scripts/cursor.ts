@@ -24,55 +24,110 @@ export function initInteractiveCursor(): void {
   const cursorDot = document.getElementById('laser-dot');
   if (!cursorDot) return;
 
+  let hasFinePointer = true;
   let prefersReducedMotion = false;
   try {
+    hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch {
+    hasFinePointer = true;
     prefersReducedMotion = false;
   }
 
-  let currentX = window.innerWidth / 2;
-  let currentY = window.innerHeight / 2;
-  let targetX = currentX;
-  let targetY = currentY;
+  if (!hasFinePointer) {
+    cursorDot.style.display = 'none';
+    return;
+  }
+
+  let hasMoved = false;
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
   let rafId: number | null = null;
 
+  function applyTransform(): void {
+    cursorDot!.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+  }
+
+  function stopTick(): void {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
   function tick(): void {
+    if (document.hidden) {
+      rafId = null;
+      return;
+    }
+
     if (prefersReducedMotion) {
       currentX = targetX;
       currentY = targetY;
-    } else {
-      currentX += (targetX - currentX) * 0.35;
-      currentY += (targetY - currentY) * 0.35;
+      applyTransform();
+      rafId = null;
+      return;
     }
-    cursorDot!.style.left = `${currentX}px`;
-    cursorDot!.style.top = `${currentY}px`;
+
+    const dx = targetX - currentX;
+    const dy = targetY - currentY;
+    if (Math.hypot(dx, dy) < 0.25) {
+      currentX = targetX;
+      currentY = targetY;
+      applyTransform();
+      rafId = null;
+      return;
+    }
+
+    currentX += dx * 0.35;
+    currentY += dy * 0.35;
+    applyTransform();
     rafId = requestAnimationFrame(tick);
   }
 
-  cursorDot.style.display = 'block';
-  promoteCursorToTopLayer();
-  cursorDot.classList.add('on');
-  document.body.style.cursor = 'none';
-  rafId = requestAnimationFrame(tick);
+  function startTick(): void {
+    if (rafId === null && !document.hidden) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
 
   document.addEventListener(
     'pointermove',
     (e) => {
-      if (e.pointerType === 'touch') return;
+      if (e.pointerType === 'touch') {
+        cursorDot.classList.remove('on');
+        document.body.style.cursor = '';
+        stopTick();
+        return;
+      }
+
       targetX = e.clientX;
       targetY = e.clientY;
+
+      if (!hasMoved) {
+        hasMoved = true;
+        currentX = targetX;
+        currentY = targetY;
+        cursorDot.style.display = 'block';
+        promoteCursorToTopLayer();
+        applyTransform();
+      }
 
       const target = e.target as Element | null;
       const overIframe = Boolean(target?.closest('.device-scale-wrap, .fullscreen-iframe-wrap, iframe'));
       if (overIframe) {
         cursorDot.classList.remove('on');
+        document.body.style.cursor = '';
+        stopTick();
         return;
       }
 
+      document.body.style.cursor = 'none';
       cursorDot.style.display = 'block';
       cursorDot.classList.add('on');
-      if (!rafId) rafId = requestAnimationFrame(tick);
+      startTick();
 
       const isPrecise = Boolean(target?.closest(PRECISE_SELECTORS));
       const isBig = Boolean(!isPrecise && target?.closest(BIG_SELECTORS));
@@ -84,11 +139,18 @@ export function initInteractiveCursor(): void {
 
   document.addEventListener('pointerleave', () => {
     cursorDot.classList.remove('on');
+    stopTick();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopTick();
   });
 
   document.querySelectorAll('.device-scale-wrap, .fullscreen-iframe-wrap').forEach((zone) => {
     zone.addEventListener('pointerenter', () => {
       cursorDot.classList.remove('on');
+      document.body.style.cursor = '';
+      stopTick();
     });
   });
 }

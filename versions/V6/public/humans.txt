@@ -11,4 +11,4 @@ Dernière mise à jour : 2026/11/20
 Langues : Français, English
 Architecture : Astro 6 (100% statique), TypeScript, HTML5, CSS3
 Design System : Tech Canvas (#121316, #F4F1EA, #FF6600, #38BDF8)
-Polices : Space Grotesk, Plus Jakarta Sans, JetBrains Mono
+Polices : Chakra Petch, DM Sans, IBM Plex Mono, Oswald

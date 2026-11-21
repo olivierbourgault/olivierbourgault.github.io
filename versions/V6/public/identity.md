@@ -27,8 +27,9 @@
 | Graphite Surface | `#1A1C20` / `#181A1F` | Cartes néo-brutalistes, panneaux et fenêtres OS |
 | Ivoire Papier | `#F4F1EA` | Fond principal du thème clair avec traits d'encre `#161616` |
 
-## Typographie
+## Typographie (Pack Ingénierie & IA)
 
-- **Titres (`h1`–`h4`)** : `Space Grotesk` (600–800)
-- **Corps de texte** : `Plus Jakarta Sans` (400–800)
-- **Code, badges & métriques** : `JetBrains Mono` (400–700)
+- **Titres & UI (`h1`–`h4`)** : `Chakra Petch` (500 / 600 / 700)
+- **Signature Navbar** : `Oswald` (500 / 600 / 700)
+- **Corps éditorial** : `DM Sans` (400 / 400 italic / 500 / 700)
+- **Code, badges & cotation** : `IBM Plex Mono` (400 / 500 / 600 / 700)

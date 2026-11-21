@@ -30,23 +30,33 @@ export function initNavbar(): void {
   function updateScrollspy(): void {
     if (!isHomePage || !navmenu) return;
     const links = Array.from(navmenu.querySelectorAll<HTMLAnchorElement>('ul > li > a'));
+    if (links.length === 0) return;
+
     const position = window.scrollY + 200;
+    let activeLink: HTMLAnchorElement = links[0];
 
     for (const link of links) {
       if (!link.hash) continue;
       const section = document.querySelector<HTMLElement>(link.hash);
       if (!section) continue;
-      const inBounds =
-        position >= section.offsetTop && position <= section.offsetTop + section.offsetHeight;
-      if (inBounds) {
-        for (const active of links) {
-          active.classList.remove('active');
-          active.removeAttribute('aria-current');
-        }
-        link.classList.add('active');
+      if (position >= section.offsetTop) {
+        activeLink = link;
+      }
+    }
+
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 40
+    ) {
+      activeLink = links[links.length - 1];
+    }
+
+    for (const link of links) {
+      const isActive = link === activeLink;
+      link.classList.toggle('active', isActive);
+      if (isActive) {
         link.setAttribute('aria-current', 'page');
       } else {
-        link.classList.remove('active');
         link.removeAttribute('aria-current');
       }
     }

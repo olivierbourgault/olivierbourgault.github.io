@@ -168,6 +168,23 @@ for (const required of [
   }
 }
 
+// 4. Vérifier qu'aucun dossier/index.html ne redirige en boucle vers son propre chemin sans slash (GitHub Pages)
+for (const entry of fs.readdirSync(siteDir, { withFileTypes: true })) {
+  if (!entry.isDirectory()) continue;
+  const dirIndex = path.join(siteDir, entry.name, 'index.html');
+  if (!fs.existsSync(dirIndex)) continue;
+  const html = fs.readFileSync(dirIndex, 'utf8');
+  const selfRefresh = new RegExp(
+    `<meta[^>]+http-equiv=["']?refresh["']?[^>]+url=/${entry.name}["';\\s>]`,
+    'i'
+  );
+  if (selfRefresh.test(html)) {
+    errors.push(
+      `Boucle de redirection détectée sur GitHub Pages : ${entry.name}/index.html redirige vers /${entry.name}`
+    );
+  }
+}
+
 if (archiveWarnings.length > 0) {
   console.log(`Avertissements internes aux archives V1..V5 (non bloquants) : ${archiveWarnings.length}`);
   for (const w of archiveWarnings.slice(0, 10)) {

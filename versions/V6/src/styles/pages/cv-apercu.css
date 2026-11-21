@@ -994,7 +994,9 @@ html[data-cv-version="portfolio"] body.cv-apercu-page.dark .sheet-footer {
   #footer,
   .footer,
   .ambient-blobs,
+  #tech-bg-canvas,
   #laser-dot,
+  dialog.ob-dialog,
   .scroll-top {
     display: none !important;
   }
@@ -1025,7 +1027,7 @@ html[data-cv-version="portfolio"] body.cv-apercu-page.dark .sheet-footer {
   html[data-cv-version] .page-card,
   html[data-cv-version] body.cv-apercu-page.dark .page-card,
   .resume,
-  .resume-pages {
+  .resume-pages:not([hidden]) {
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -1035,6 +1037,10 @@ html[data-cv-version="portfolio"] body.cv-apercu-page.dark .sheet-footer {
     background-image: none !important;
     box-shadow: none !important;
     display: block !important;
+  }
+
+  .resume-pages[hidden] {
+    display: none !important;
   }
 
   html[data-cv-version] body.cv-apercu-page .resume-sheet,

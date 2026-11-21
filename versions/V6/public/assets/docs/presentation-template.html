@@ -8,12 +8,12 @@
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans & JetBrains Mono (Tech Canvas) -->
+  <!-- Google Fonts: Chakra Petch, DM Sans, IBM Plex Mono & Oswald (Pack Ingénierie & IA — Tech Canvas) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
   <!-- FontAwesome 6 Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous" />
 
   <script>
     tailwind.config = {
@@ -21,9 +21,10 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Chakra Petch', 'sans-serif'],
+            nav: ['Oswald', 'Chakra Petch', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace'],
           },
           colors: {
             tc: {
@@ -90,12 +91,12 @@
       background-color: var(--tc-bg);
       color: var(--tc-text);
       overflow: hidden;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     h1, h2, h3, h4, .font-display {
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
     }
 
     :where(a:any-link, button, input, dfn):focus-visible {
@@ -493,7 +494,7 @@
       display: inline-block;
       padding: 0.1rem 0.38rem;
       border-radius: 0.35rem;
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.7rem;
       font-weight: 700;
       background: var(--tc-surface);
@@ -550,13 +551,10 @@
       </div>
     </div>
 
-    <!-- Centre : Barre de Navigation Directe par Diapositive -->
+    <!-- Centre : Barre de Navigation Directe par Diapositive (dupliquer un bouton par <section class="slide">) -->
     <nav class="hidden lg:flex items-center gap-1.5 tc-pill p-1 shrink-0" id="top-nav" aria-label="Navigation directe des diapositives">
       <button type="button" onclick="goToSlide(0)" class="slide-nav-btn px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap" data-index="0">
-        <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-mono bg-black/25">1</span> {{SLIDE_1_SHORT_TITLE}}
-      </button>
-      <button type="button" onclick="goToSlide(1)" class="slide-nav-btn px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap" data-index="1">
-        <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-mono bg-black/25">2</span> {{SLIDE_2_SHORT_TITLE}}
+        <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-mono bg-black/25">1</span> Design System
       </button>
     </nav>
 
@@ -662,19 +660,23 @@
           <div class="neo-panel p-4">
             <div class="flex items-center gap-2 text-[#FF6600] font-bold text-sm mb-2.5">
               <span class="w-7 h-7 rounded-lg bg-[#FF6600]/15 flex items-center justify-center"><i class="fa-solid fa-font" aria-hidden="true"></i></span>
-              Typographie officielle (3 polices)
+              Typographie officielle (Pack Ingénierie &amp; IA)
             </div>
             <ul class="space-y-1.5 text-xs" style="color: var(--tc-text);">
               <li class="flex items-center justify-between gap-2">
-                <span><strong class="font-display">Space Grotesk</strong> (600–800)</span>
+                <span><strong class="font-display">Chakra Petch</strong> (500–700)</span>
                 <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">Titres h1–h4</code>
               </li>
               <li class="flex items-center justify-between gap-2">
-                <span><strong>Plus Jakarta Sans</strong> (400–800)</span>
+                <span><strong class="font-nav tracking-wide uppercase">Oswald</strong> (500–700)</span>
+                <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">Signature &amp; Nav</code>
+              </li>
+              <li class="flex items-center justify-between gap-2">
+                <span><strong>DM Sans</strong> (400–700)</span>
                 <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">Corps &amp; listes</code>
               </li>
               <li class="flex items-center justify-between gap-2">
-                <span><strong class="font-mono">JetBrains Mono</strong> (400–700)</span>
+                <span><strong class="font-mono">IBM Plex Mono</strong> (400–700)</span>
                 <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">KPIs, code &amp; HUD</code>
               </li>
             </ul>
@@ -925,10 +927,10 @@
     // [TEMPLATE_NOTES] : Définir ici les notes d'orateur de chaque diapositive (ou laisser les attributs data-* des <section>)
     const SPEAKER_NOTES = [
       {
-        title: 'Diapositive 1 — {{SLIDE_1_SHORT_TITLE}}',
+        title: 'Diapositive 1 — Design System Tech Canvas',
         timing: '0:00 → 1:15 (~1 min 15 s)',
-        express: '<strong>Essentiel :</strong> Résumé court affiché lorsque le mode Express (<code>E</code>) est actif.',
-        full: '<strong>1. Contexte :</strong> Notes complètes affichées dans le volet Notes (<code>N</code>) et la Vue Présentateur (<code>P</code>).<br/><strong>2. Message clé :</strong> Argumentaire détaillé sans perte d\'information.'
+        express: '<strong>Essentiel :</strong> Palette Tech Canvas (<code>#FF6600</code>, <code>#38BDF8</code>, <code>#121316</code>, <code>#F4F1EA</code>) + Pack Ingénierie &amp; IA (<code>Chakra Petch</code>, <code>Oswald</code>, <code>DM Sans</code>, <code>IBM Plex Mono</code>).',
+        full: '<strong>1. Identité :</strong> Fiche de référence du Design System Tech Canvas alignée sur le portfolio V6 (Astro).<br/><strong>2. Réutilisation :</strong> Dupliquer <code>&lt;section class="slide"&gt;</code>, ajouter le bouton correspondant dans <code>#top-nav</code> et renseigner <code>SPEAKER_NOTES</code>.'
       }
     ];
 
@@ -1473,12 +1475,14 @@
       else if (k === 'r') replayAnimations();
     });
 
-    // Quadrillage animé réactif Tech Canvas
+    // Quadrillage animé réactif Tech Canvas (respecte prefers-reduced-motion & visibilitychange)
     (function initTechCanvas() {
       const canvas = document.getElementById('tech-bg-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let width = 0, height = 0;
+      let rafId = null;
+      const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
       const mouse = { x: -9999, y: -9999, active: false };
       const gridStep = 48;
       const particles = Array.from({ length: 24 }, (_, i) => ({
@@ -1497,17 +1501,19 @@
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (reducedMotion) drawFrame(0);
       }
 
-      window.addEventListener('resize', resize);
+      window.addEventListener('resize', resize, { passive: true });
       window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         mouse.active = true;
-      });
+      }, { passive: true });
       window.addEventListener('mouseleave', () => { mouse.active = false; });
 
       function warpPoint(x, y, t) {
+        if (reducedMotion) return { x, y };
         const wx = Math.sin(y * 0.01 + t * 0.9) * 3;
         const wy = Math.cos(x * 0.01 + t * 0.75) * 3;
         if (!mouse.active) return { x: x + wx, y: y + wy };
@@ -1522,13 +1528,13 @@
         return { x: x + wx, y: y + wy };
       }
 
-      function render(now) {
+      function drawFrame(now) {
         const t = now * 0.001;
         const isDark = document.documentElement.classList.contains('dark');
         ctx.clearRect(0, 0, width, height);
 
-        const driftX = (t * 10) % gridStep;
-        const driftY = (t * 7) % gridStep;
+        const driftX = reducedMotion ? 0 : (t * 10) % gridStep;
+        const driftY = reducedMotion ? 0 : (t * 7) % gridStep;
         ctx.strokeStyle = isDark ? 'rgba(255, 102, 0, 0.08)' : 'rgba(255, 102, 0, 0.11)';
         ctx.lineWidth = 1;
 
@@ -1550,8 +1556,10 @@
         }
 
         particles.forEach((p) => {
-          p.x = (p.x + p.vx + width) % width;
-          p.y = (p.y + p.vy + height) % height;
+          if (!reducedMotion) {
+            p.x = (p.x + p.vx + width) % width;
+            p.y = (p.y + p.vy + height) % height;
+          }
           ctx.globalAlpha = isDark ? 0.55 : 0.45;
           ctx.fillStyle = p.color;
           ctx.beginPath();
@@ -1559,12 +1567,32 @@
           ctx.fill();
         });
         ctx.globalAlpha = 1;
-
-        requestAnimationFrame(render);
       }
 
+      function render(now) {
+        drawFrame(now);
+        rafId = requestAnimationFrame(render);
+      }
+
+      function startLoop() {
+        if (reducedMotion || rafId !== null) return;
+        rafId = requestAnimationFrame(render);
+      }
+
+      function stopLoop() {
+        if (rafId !== null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopLoop();
+        else startLoop();
+      });
+
       resize();
-      requestAnimationFrame(render);
+      if (!reducedMotion) startLoop();
     })();
 
     updateSlides();

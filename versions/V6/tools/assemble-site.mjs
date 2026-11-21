@@ -21,16 +21,17 @@ fs.mkdirSync(siteDir, { recursive: true });
 fs.cpSync(distDir, siteDir, { recursive: true });
 fs.writeFileSync(path.join(siteDir, '.nojekyll'), '', 'utf8');
 
-// 2. Dossier versions/ + redirection /versions/ -> /versions
+// 2. Dossier versions/ : servir la vraie page Versions à /versions/index.html
+//    (sur GitHub Pages, le dossier /versions/ prime sur /versions.html : évite une boucle de redirection)
 const siteVersionsDir = path.join(siteDir, 'versions');
 fs.mkdirSync(siteVersionsDir, { recursive: true });
 
-const versionsRedirect = path.join(repoRoot, 'versions', 'index.html');
-if (!fs.existsSync(versionsRedirect)) {
-  console.error('Erreur : versions/index.html est introuvable à la racine du dossier versions/.');
+const builtVersionsHtml = path.join(distDir, 'versions.html');
+if (!fs.existsSync(builtVersionsHtml)) {
+  console.error('Erreur : versions/V6/dist/versions.html est introuvable.');
   process.exit(1);
 }
-fs.copyFileSync(versionsRedirect, path.join(siteVersionsDir, 'index.html'));
+fs.copyFileSync(builtVersionsHtml, path.join(siteVersionsDir, 'index.html'));
 
 // 3. Copie octet par octet des archives V1..V5
 for (const ver of ['V1', 'V2', 'V3', 'V4', 'V5']) {

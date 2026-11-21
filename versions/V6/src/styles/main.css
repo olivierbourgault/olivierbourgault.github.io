@@ -306,7 +306,8 @@ h6 {
   pointer-events: none;
   z-index: 100000;
   opacity: 0;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  will-change: transform;
   display: block;
   transition:
     opacity 0.16s ease,
