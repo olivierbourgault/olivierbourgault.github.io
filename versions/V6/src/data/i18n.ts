@@ -15,7 +15,10 @@ export const KEY_EN: Record<string, string> = {
   'contact.label.email': 'Your Email',
   'contact.label.subject': 'Subject',
   'contact.label.message': 'Your Message',
-  'contact.submit': 'Send'
+  'contact.submit': 'Send',
+  'contact.direct.prefix': 'Or email me directly:',
+  'contact.copy.email': 'Copy Email',
+  'footer.credits': 'Designed & built with Astro · Tech Canvas Edition'
 };
 
 /**

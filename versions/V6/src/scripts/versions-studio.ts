@@ -573,6 +573,23 @@ export function initVersionsStudio(): void {
 
   initTablistKeyboardAndScrollHints();
   initAccordionToggleAll();
+
+  // Synchronise dynamiquement le compteur de projets KPI avec le cache portfolio GitHub
+  const kpiProjectsEl = document.getElementById('kpiProjectsCount');
+  if (kpiProjectsEl) {
+    try {
+      const raw = localStorage.getItem('ob_v6_portfolio_tree_v2');
+      if (raw) {
+        const parsed = JSON.parse(raw) as { projects?: unknown[] };
+        if (Array.isArray(parsed?.projects) && parsed.projects.length > 0) {
+          kpiProjectsEl.textContent = `${parsed.projects.length}+`;
+        }
+      }
+    } catch {
+      // Conserver le fallback pré-rendu
+    }
+  }
+
   bindVerticalNavSpy({
     listId: 'vnavVersionsList',
     getTargets: () => Array.from(document.querySelectorAll<HTMLElement>('#versionsTimeline .timeline-version-card')),

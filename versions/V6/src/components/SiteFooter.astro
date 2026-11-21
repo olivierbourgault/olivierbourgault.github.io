@@ -2,6 +2,8 @@
 import LogoOB from './LogoOB.astro';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
+
+const currentYear = new Date().getFullYear();
 ---
 <footer id="footer" class="footer">
   <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
@@ -10,7 +12,7 @@ import { withBase } from '../utils/paths';
   </div>
 
   <div class="copyright text-center">
-    <p>&copy; <span>Copyright</span> <strong class="px-1 sitename">{SITE.author}</strong></p>
+    <p>&copy; {currentYear} <span>Copyright</span> <strong class="px-1 sitename">{SITE.author}</strong></p>
     <span>Tous droits réservés</span>
   </div>
 
@@ -35,8 +37,7 @@ import { withBase } from '../utils/paths';
     </a>
   </div>
 
-  <div class="credits">
-    Designed by{' '}
-    <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
+  <div class="credits" data-i18n="footer.credits">
+    Conçu et développé avec Astro &middot; Direction Tech Canvas
   </div>
 </footer>

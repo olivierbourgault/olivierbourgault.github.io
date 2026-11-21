@@ -1,8 +1,10 @@
 ---
+import { FALLBACK_PROJECTS } from '../../data/projects';
 import { PORTFOLIO_VERSIONS } from '../../data/versions';
 import { withBase } from '../../utils/paths';
 
 const maxNum = PORTFOLIO_VERSIONS.length;
+const fallbackProjectsCount = FALLBACK_PROJECTS.length;
 ---
 <div class="container versions-hero-wrap">
   <section id="versions-hero" class="hero versions-hero section" aria-labelledby="versionsHeroTitle">
@@ -54,7 +56,7 @@ const maxNum = PORTFOLIO_VERSIONS.length;
             <span class="versions-kpi-sub">Desktop · Tab · Mobile</span>
           </div>
           <div class="versions-kpi-card">
-            <span class="versions-kpi-value">59+</span>
+            <span id="kpiProjectsCount" class="versions-kpi-value">{fallbackProjectsCount}+</span>
             <span class="versions-kpi-label">Projets GitHub</span>
             <span class="versions-kpi-sub">Synchronisés en V6</span>
           </div>

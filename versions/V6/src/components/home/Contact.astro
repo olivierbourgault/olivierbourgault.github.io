@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../../data/site';
 import SectionTitle from '../SectionTitle.astro';
 ---
 <section id="contact" class="contact section">
@@ -6,7 +7,7 @@ import SectionTitle from '../SectionTitle.astro';
     <p class="lead mb-4">Un simple courriel et je pourrai contribuer au succès de vos projets.</p>
   </SectionTitle>
 
-  <div class="contact-form card mx-5">
+  <div class="contact-form card mx-0 mx-md-5">
     <div class="card-body p-4 p-lg-5">
       <form id="contactForm" class="email-form">
         <div class="row gy-4">
@@ -31,6 +32,25 @@ import SectionTitle from '../SectionTitle.astro';
           </div>
         </div>
       </form>
+
+      <div class="contact-direct-bar mt-4">
+        <span class="contact-direct-label">
+          <i class="bi bi-envelope-at me-1" aria-hidden="true"></i>
+          <span data-i18n="contact.direct.prefix">Ou écrivez-moi directement :</span>{' '}
+          <a href={`mailto:${SITE.email}`} class="contact-direct-email">{SITE.email}</a>
+        </span>
+        <button
+          id="contactCopyEmailBtn"
+          type="button"
+          class="contact-copy-btn"
+          data-copy-email={SITE.email}
+        >
+          <i class="bi bi-clipboard" aria-hidden="true"></i>
+          <span data-i18n="contact.copy.email">Copier le courriel</span>
+        </button>
+      </div>
+
+      <p id="contactFormStatus" class="contact-form-status" role="status" aria-live="polite"></p>
     </div>
   </div>
 </section>

@@ -23,7 +23,7 @@ const UI_STRINGS: Record<
   fr: {
     backLink: 'Retour au portfolio',
     heading: 'CV - Aperçu',
-    subtitle: 'Curriculum vitae complet (CV_V3) — Olivier Bourgault, Gatineau',
+    subtitle: 'Curriculum vitae complet — Olivier Bourgault, Gatineau',
     translateBtn: 'English (EN)',
     footTranslateBtn: 'Switch to English (EN)',
     printBtn: 'Imprimer',
@@ -35,7 +35,7 @@ const UI_STRINGS: Record<
   en: {
     backLink: 'Back to portfolio',
     heading: 'Resume - Preview',
-    subtitle: 'Complete Curriculum Vitae (CV_V3) — Olivier Bourgault, Gatineau',
+    subtitle: 'Complete Curriculum Vitae — Olivier Bourgault, Gatineau',
     translateBtn: 'Français (FR)',
     footTranslateBtn: 'Passer en français (FR)',
     printBtn: 'Print',

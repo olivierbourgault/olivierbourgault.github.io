@@ -231,8 +231,8 @@ export const CV_SHEET_DATA: CvSheetLocaleData = {
   postalCity: 'J8L 1Y3 | Gatineau',
   email: 'bourgault.olivier8501@gmail.com',
   links: [
-    { label: 'Mon site web', href: 'https://rinoship77.github.io' },
-    { label: 'Mon profil Linkedin', href: 'http://www.linkedin.com/in/olivier-bourgault-5b950428a' },
+    { label: 'Mon site web', href: 'https://olivierbourgault.github.io' },
+    { label: 'Mon profil Linkedin', href: 'https://www.linkedin.com/in/olivier-bourgault-5b950428a' },
     { label: 'Mon dépôt de code', href: 'https://github.com/RinoShip77/MesProjets' }
   ],
   headings: {
@@ -369,8 +369,8 @@ export const CV_SHEET_DATA_EN: CvSheetLocaleData = {
   postalCity: 'J8L 1Y3 | Gatineau',
   email: 'bourgault.olivier8501@gmail.com',
   links: [
-    { label: 'My website', href: 'https://rinoship77.github.io' },
-    { label: 'My Linkedin profile', href: 'http://www.linkedin.com/in/olivier-bourgault-5b950428a' },
+    { label: 'My website', href: 'https://olivierbourgault.github.io' },
+    { label: 'My Linkedin profile', href: 'https://www.linkedin.com/in/olivier-bourgault-5b950428a' },
     { label: 'My code repository', href: 'https://github.com/RinoShip77/MesProjets' }
   ],
   headings: {

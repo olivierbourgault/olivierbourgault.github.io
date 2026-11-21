@@ -224,8 +224,13 @@ textarea {
 .ms-2 { margin-left: 0.5rem !important; }
 .me-1 { margin-right: 0.25rem !important; }
 .me-2 { margin-right: 0.5rem !important; }
+.mx-0 { margin-right: 0 !important; margin-left: 0 !important; }
 .mx-5 { margin-right: 3rem !important; margin-left: 3rem !important; }
 .mx-auto { margin-right: auto !important; margin-left: auto !important; }
+
+@media (min-width: 768px) {
+  .mx-md-5 { margin-right: 3rem !important; margin-left: 3rem !important; }
+}
 
 .p-0 { padding: 0 !important; }
 .p-4 { padding: 1.5rem !important; }
