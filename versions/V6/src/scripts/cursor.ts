@@ -1,3 +1,5 @@
+import { isMotionReduced } from './motion';
+
 const PRECISE_SELECTORS =
   'a, .badge, .btn-outline, .social-links a, .header-social-links a, .studio-palette-chip, .timeline-palette-btn, .vnav-item-btn, .studio-tab, .viewport-btn, .studio-icon-btn, .inspector-tab, .surface-btn, .hero-emblem-btn, .bench-btn, .copy-button, .svg-dl-btn, .hero-anchor-pill, .tech-marquee-item, summary, input, textarea, select, [role="button"]';
 
@@ -39,13 +41,11 @@ export function initInteractiveCursor(): void {
   }
 
   let hasFinePointer = true;
-  let prefersReducedMotion = false;
+  let prefersReducedMotion = isMotionReduced();
   try {
     hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch {
     hasFinePointer = true;
-    prefersReducedMotion = false;
   }
 
   if (!hasFinePointer) {
@@ -110,8 +110,9 @@ export function initInteractiveCursor(): void {
   document.addEventListener(
     'pointermove',
     (e) => {
-      if (e.pointerType === 'touch') {
+      if (prefersReducedMotion || e.pointerType === 'touch') {
         cursorDot.classList.remove('on');
+        cursorDot.style.display = 'none';
         document.body.style.cursor = '';
         stopTick();
         return;
@@ -158,6 +159,16 @@ export function initInteractiveCursor(): void {
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stopTick();
+  });
+
+  window.addEventListener('ob:motionchange', () => {
+    prefersReducedMotion = isMotionReduced();
+    if (prefersReducedMotion) {
+      cursorDot.classList.remove('on');
+      cursorDot.style.display = 'none';
+      document.body.style.cursor = '';
+      stopTick();
+    }
   });
 
   document.querySelectorAll('.device-scale-wrap, .fullscreen-iframe-wrap').forEach((zone) => {

@@ -1,3 +1,4 @@
+import { isMotionReduced } from './motion';
 import { isDarkTheme } from './theme';
 
 interface NodeParticle {
@@ -28,12 +29,7 @@ export function initAnimatedBackground(): void {
   if (!ctx) return;
 
   const embedded = isEmbeddedPreview();
-  let reducedMotion = false;
-  try {
-    reducedMotion = embedded || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch {
-    reducedMotion = embedded;
-  }
+  let reducedMotion = embedded || isMotionReduced();
 
   const STEP = 48;
   const RADIUS = 210;
@@ -301,27 +297,39 @@ export function initAnimatedBackground(): void {
 
   window.addEventListener('resize', resize, { passive: true });
 
-  if (!reducedMotion) {
-    window.addEventListener(
-      'pointermove',
-      (e) => {
-        if (e.pointerType === 'touch') return;
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
-        pointer.active = true;
-      },
-      { passive: true }
-    );
+  window.addEventListener(
+    'pointermove',
+    (e) => {
+      if (reducedMotion || e.pointerType === 'touch') return;
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.active = true;
+    },
+    { passive: true }
+  );
 
-    document.addEventListener('pointerleave', () => {
+  document.addEventListener('pointerleave', () => {
+    pointer.active = false;
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden || reducedMotion) stopLoop();
+    else startLoop();
+  });
+
+  window.addEventListener('ob:motionchange', () => {
+    reducedMotion = embedded || isMotionReduced();
+    if (reducedMotion) {
+      stopLoop();
       pointer.active = false;
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stopLoop();
-      else startLoop();
-    });
-  }
+      pointer.strength = 0;
+      document.documentElement.classList.remove('has-animated-grid');
+      drawFrame(0);
+    } else {
+      document.documentElement.classList.add('has-animated-grid');
+      if (!document.hidden) startLoop();
+    }
+  });
 
   window.addEventListener('ob:themechange', () => {
     darkMode = isDarkTheme();

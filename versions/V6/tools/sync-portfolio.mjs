@@ -1,58 +1,113 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const v6Root = path.resolve(__dirname, '..');
 const outPath = path.join(v6Root, 'public', 'assets', 'data', 'github-projects.json');
+const webpOutDir = path.join(v6Root, 'public', 'assets', 'images', 'projects', 'github');
 
 const OWNER = 'RinoShip77';
 const REPO = 'MesProjets';
 const BRANCH = 'main';
 
-const IGNORED_IMAGE_PATTERNS = [
-  /(?:^|\/)favicon[^/]*$/i,
-  /(?:^|\/)dotnet_bot[^/]*$/i,
-  /(?:^|\/)ic_launcher[^/]*$/i,
-  /(?:^|\/)adaptive-icon[^/]*$/i,
-  /(?:^|\/)appicon[^/]*$/i,
-  /(?:^|\/)splash[^/]*$/i,
-  /(?:^|\/)logo-?react[^/]*$/i,
-  /(?:^|\/)vite\.svg$/i
-];
+const EXPLICIT_PREVIEW_FILE_RX =
+  /^(preview|screenshot|demo|accueil|ecran[-_]?depart|banner|cover|capture)([-_]?\d+)?\.(png|jpe?g|gif|webp)$/i;
+const PREVIEW_FOLDER_RX = /(?:^|\/)(screenshots?|previews?|captures?)\/[^/]+\.(png|jpe?g|gif|webp)$/i;
 
 function encodeGitHubPath(p) {
   return p.split('/').map(encodeURIComponent).join('/');
 }
 
-function findProjectImageInTree(tree, projectPath) {
+function slugifySegment(str) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function previewSortRank(relPath) {
+  const fileName = (relPath.split('/').pop() || '').toLowerCase();
+  const base = fileName.replace(/\.[a-z0-9]+$/i, '');
+  // 1. "preview" exact en tout premier, suivi de preview1, preview2, preview3...
+  if (base === 'preview') return { group: 0, num: 0, base };
+  const previewNumMatch = base.match(/^preview[-_]?(\d+)$/);
+  if (previewNumMatch) {
+    return { group: 0, num: Number(previewNumMatch[1]), base };
+  }
+  // 2. screenshot / demo / accueil / ecran-depart
+  const otherNumMatch = base.match(
+    /^(screenshot|demo|accueil|ecran[-_]?depart|banner|cover|capture)[-_]?(\d+)?$/
+  );
+  if (otherNumMatch) {
+    return { group: 1, num: otherNumMatch[2] ? Number(otherNumMatch[2]) : 0, base };
+  }
+  // 3. Dossier Screenshots/
+  return { group: 2, num: 0, base: relPath.toLowerCase() };
+}
+
+function findProjectPreviewsInTree(tree, projectPath) {
   const prefix = `${projectPath}/`;
-  const imageRegex = /\.(png|jpe?g|gif|webp)$/i;
   const candidates = tree.filter((item) => {
     if (item.type !== 'blob' || !item.path) return false;
-    if (!item.path.startsWith(prefix) || !imageRegex.test(item.path)) return false;
+    if (!item.path.startsWith(prefix)) return false;
     const rel = item.path.slice(prefix.length);
-    return !IGNORED_IMAGE_PATTERNS.some((rx) => rx.test(rel));
+    const fileName = rel.split('/').pop() || '';
+    return EXPLICIT_PREVIEW_FILE_RX.test(fileName) || PREVIEW_FOLDER_RX.test(rel);
   });
-
-  if (candidates.length === 0) return '';
 
   candidates.sort((a, b) => {
     const relA = (a.path || '').slice(prefix.length);
     const relB = (b.path || '').slice(prefix.length);
-    const fileA = (relA.split('/').pop() || '').toLowerCase();
-    const fileB = (relB.split('/').pop() || '').toLowerCase();
-    const priorityRegex = /^(preview|screenshot|demo|accueil|ecran-depart|banner|cover)\./;
-    const prioA = priorityRegex.test(fileA) ? 0 : 1;
-    const prioB = priorityRegex.test(fileB) ? 0 : 1;
-    if (prioA !== prioB) return prioA - prioB;
-    const depthA = relA.split('/').length;
-    const depthB = relB.split('/').length;
-    if (depthA !== depthB) return depthA - depthB;
-    return relA.localeCompare(relB);
+    const rankA = previewSortRank(relA);
+    const rankB = previewSortRank(relB);
+    if (rankA.group !== rankB.group) return rankA.group - rankB.group;
+    if (rankA.num !== rankB.num) return rankA.num - rankB.num;
+    return relA.localeCompare(relB, undefined, { numeric: true, sensitivity: 'base' });
   });
 
-  return `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeGitHubPath(candidates[0].path)}`;
+  return candidates;
+}
+
+async function convertGitHubPreviewToWebp(projectPath, blobItem, index, prevShaMap) {
+  const relInProject = blobItem.path.slice(projectPath.length + 1);
+  const rawBaseName = (relInProject.split('/').pop() || `preview-${index + 1}`).replace(
+    /\.[a-z0-9]+$/i,
+    ''
+  );
+  const projectSlug = slugifySegment(projectPath);
+  const fileSlug = slugifySegment(rawBaseName) || `preview-${index + 1}`;
+  const outFileName = `${projectSlug}-${fileSlug}.webp`;
+  const outFileAbs = path.join(webpOutDir, outFileName);
+  const publicRelPath = `assets/images/projects/github/${outFileName}`;
+
+  if (
+    blobItem.sha &&
+    prevShaMap.get(publicRelPath) === blobItem.sha &&
+    fs.existsSync(outFileAbs)
+  ) {
+    return { publicRelPath, sha: blobItem.sha, cached: true };
+  }
+
+  const rawUrl = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeGitHubPath(blobItem.path)}`;
+  const res = await fetch(rawUrl, {
+    headers: { 'User-Agent': 'olivierbourgault-portfolio-v6-sync' }
+  });
+  if (!res.ok) {
+    throw new Error(`Échec téléchargement ${rawUrl} (HTTP ${res.status})`);
+  }
+  const arrayBuffer = await res.arrayBuffer();
+  const inputBuffer = Buffer.from(arrayBuffer);
+
+  await sharp(inputBuffer, { animated: false })
+    .resize({ width: 1600, withoutEnlargement: true })
+    .webp({ quality: 84, effort: 5 })
+    .toFile(outFileAbs);
+
+  return { publicRelPath, sha: blobItem.sha || '', cached: false };
 }
 
 function inferTechTags(entryPath, tree) {
@@ -90,7 +145,8 @@ function inferTechTags(entryPath, tree) {
     const f = item.path.toLowerCase();
     if (f.endsWith('.py') || f.endsWith('.ipynb')) tags.add('Python');
     if (f.endsWith('.ps1')) tags.add('PowerShell');
-    if (f.endsWith('.cs') || f.endsWith('.csproj') || f.endsWith('.sln') || f.endsWith('.xaml')) tags.add('C# / .NET');
+    if (f.endsWith('.cs') || f.endsWith('.csproj') || f.endsWith('.sln') || f.endsWith('.xaml'))
+      tags.add('C# / .NET');
     if (f.endsWith('.ts') || f.endsWith('.tsx')) tags.add('TypeScript');
     if (f.endsWith('.vue')) tags.add('Vue.js');
     if (f.endsWith('angular.json')) tags.add('Angular');
@@ -109,6 +165,24 @@ function inferTechTags(entryPath, tree) {
 
 async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.mkdirSync(webpOutDir, { recursive: true });
+
+  const prevShaMap = new Map();
+  if (fs.existsSync(outPath)) {
+    try {
+      const prev = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+      for (const proj of prev.projects || []) {
+        if (proj.githubPreviewShas && typeof proj.githubPreviewShas === 'object') {
+          for (const [k, v] of Object.entries(proj.githubPreviewShas)) {
+            prevShaMap.set(k, v);
+          }
+        }
+      }
+    } catch {
+      // Ignorer
+    }
+  }
+
   const treeApiUrl = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
 
   try {
@@ -122,6 +196,9 @@ async function main() {
     const baseRepo = `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}`;
 
     const projects = [];
+    let convertedCount = 0;
+    let cachedCount = 0;
+
     for (const entry of tree) {
       if (entry.type !== 'tree' || !entry.path) continue;
       const parts = entry.path.split('/');
@@ -153,6 +230,27 @@ async function main() {
 
       if (!filterClass) continue;
 
+      const previewBlobs = findProjectPreviewsInTree(tree, entry.path);
+      const githubPreviews = [];
+      const githubPreviewShas = {};
+
+      for (let i = 0; i < previewBlobs.length; i++) {
+        try {
+          const { publicRelPath, sha, cached } = await convertGitHubPreviewToWebp(
+            entry.path,
+            previewBlobs[i],
+            i,
+            prevShaMap
+          );
+          githubPreviews.push(publicRelPath);
+          if (sha) githubPreviewShas[publicRelPath] = sha;
+          if (cached) cachedCount++;
+          else convertedCount++;
+        } catch (convErr) {
+          console.warn(`Avertissement conversion WebP (${entry.path}): ${convErr.message}`);
+        }
+      }
+
       projects.push({
         name,
         path: entry.path,
@@ -160,7 +258,9 @@ async function main() {
         filterClass,
         categoryLabel,
         repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-        imageUrl: findProjectImageInTree(tree, entry.path),
+        imageUrl: githubPreviews[0] || '',
+        githubPreviews,
+        githubPreviewShas,
         hasReadme: blobSet.has(`${entry.path}/README.md`),
         hasParentReadme: blobSet.has(`${parentPath}/README.md`),
         tags: inferTechTags(entry.path, tree)
@@ -173,10 +273,14 @@ async function main() {
       projects
     };
     fs.writeFileSync(outPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
-    console.log(`Catalogue GitHub synchronisé : ${projects.length} projets écrits dans public/assets/data/github-projects.json`);
+    console.log(
+      `Catalogue GitHub synchronisé : ${projects.length} projets, ${convertedCount} previews converties en .webp (${cachedCount} en cache).`
+    );
   } catch (err) {
     if (fs.existsSync(outPath)) {
-      console.warn(`API GitHub indisponible (${err.message}) — conservation du catalogue existant.`);
+      console.warn(
+        `API GitHub indisponible (${err.message}) — conservation du catalogue existant.`
+      );
       return;
     }
     throw err;

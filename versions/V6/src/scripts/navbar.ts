@@ -1,3 +1,5 @@
+import { getScrollBehavior } from './motion';
+
 export function initNavbar(): void {
   const header = document.getElementById('header');
   const navmenu = document.getElementById('navmenu');
@@ -189,7 +191,7 @@ export function initNavbar(): void {
 
   scrollTopBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: getScrollBehavior() });
   });
 
   window.addEventListener(

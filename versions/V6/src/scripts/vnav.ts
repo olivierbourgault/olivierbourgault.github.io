@@ -1,8 +1,10 @@
+import { getScrollBehavior } from './motion';
+
 export function scrollToElement(el: Element | null): void {
   if (!el) return;
   const headerOffset = 94;
   const y = el.getBoundingClientRect().top + window.scrollY - headerOffset;
-  window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  window.scrollTo({ top: Math.max(0, y), behavior: getScrollBehavior() });
 }
 
 interface SidebarConfig {

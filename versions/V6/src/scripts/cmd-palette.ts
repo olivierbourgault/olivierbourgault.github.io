@@ -3,6 +3,7 @@ import { withBase } from '../utils/paths';
 import { copyTextToClipboard } from './clipboard';
 import { promoteCursorToTopLayer } from './cursor';
 import { getSiteLang, setSiteLang } from './i18n';
+import { applyReducedMotion, getScrollBehavior, isMotionReduced } from './motion';
 import { applyTheme, isDarkTheme } from './theme';
 
 interface CommandItem {
@@ -22,7 +23,7 @@ function navigateOrScroll(hashOrUrl: string): void {
   if (hashOrUrl.startsWith('#')) {
     const el = document.querySelector<HTMLElement>(hashOrUrl);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
       return;
     }
     window.location.href = `${withBase('')}${hashOrUrl}`;
@@ -225,6 +226,18 @@ export function initCommandPalette(): void {
       subEn: 'Carbon #121316 ↔ Ivory #F4F1EA',
       keywords: 'theme dark light sombre clair mode couleur',
       run: () => applyTheme(!isDarkTheme(), true)
+    },
+    {
+      id: 'act-toggle-motion',
+      icon: 'bi-pause-circle',
+      groupFr: 'Préférences',
+      groupEn: 'Preferences',
+      labelFr: 'Désactiver / Réactiver toutes les animations',
+      labelEn: 'Disable / Enable All Animations',
+      subFr: 'Stoppe le canvas, le curseur, les transitions et effets de défilement',
+      subEn: 'Stops background canvas, custom cursor, transitions, and motion effects',
+      keywords: 'animation animations motion reduire desactiver pause stop accessible wcag',
+      run: () => applyReducedMotion(!isMotionReduced(), true)
     }
   ];
 

@@ -2,6 +2,7 @@
 import LogoOB from './LogoOB.astro';
 import VersionsHubMenu from './VersionsHubMenu.astro';
 import LangToggle from './LangToggle.astro';
+import MotionToggle from './MotionToggle.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import { SITE, type NavLinkItem } from '../data/site';
 import { withBase } from '../utils/paths';
@@ -79,6 +80,7 @@ const {
             <i class="bi bi-linkedin" aria-hidden="true"></i>
           </a>
           <LangToggle inDrawer={true} />
+          <MotionToggle inDrawer={true} />
           <ThemeToggle inDrawer={true} />
         </div>
       </div>
@@ -106,6 +108,7 @@ const {
           <i class="bi bi-linkedin" aria-hidden="true"></i>
         </a>
         <LangToggle />
+        <MotionToggle />
         <ThemeToggle />
       </div>
       <button class="mobile-nav-toggle menu-btn d-xl-none" type="button" aria-expanded="false" aria-controls="navmenu" aria-label="Ouvrir le menu" title="Ouvrir le menu">

@@ -118,8 +118,8 @@ const structuredData = noindex
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#121316" />
 
-    <!-- Résolution synchrone du thème et de la langue avant le premier rendu (zéro FOUC) -->
-    <script is:inline define:vars={{ themeKey: SITE.themeStorageKey }}>
+    <!-- Résolution synchrone du thème, des animations et de la langue avant le premier rendu (zéro FOUC) -->
+    <script is:inline define:vars={{ themeKey: SITE.themeStorageKey, motionKey: SITE.motionStorageKey }}>
       (function () {
         var mode = 'dark';
         try {
@@ -135,6 +135,21 @@ const structuredData = noindex
         if (meta) meta.setAttribute('content', mode);
         var themeColor = document.querySelector('meta[name="theme-color"]');
         if (themeColor) themeColor.setAttribute('content', isDark ? '#121316' : '#F4F1EA');
+
+        // Résolution synchrone de la préférence d'animations (bouton utilisateur ou OS prefers-reduced-motion)
+        var motionReduced = false;
+        try {
+          var savedMotion = localStorage.getItem(motionKey);
+          if (savedMotion === 'reduced') {
+            motionReduced = true;
+          } else if (savedMotion === 'full') {
+            motionReduced = false;
+          } else if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            motionReduced = true;
+          }
+        } catch (e) {}
+        html.classList.toggle('reduce-motion', motionReduced);
+        html.dataset.motion = motionReduced ? 'reduced' : 'full';
 
         // Résolution synchrone de la langue (évite tout flash FR -> EN sur ?lang=en ou revisite EN)
         var lang = 'fr';
@@ -265,6 +280,7 @@ const structuredData = noindex
 
     <script>
       import { initTheme } from '../scripts/theme';
+      import { initMotionToggle } from '../scripts/motion';
       import { initSiteLang } from '../scripts/i18n';
       import { initNavbar } from '../scripts/navbar';
       import { initAnimatedBackground } from '../scripts/bg-canvas';
@@ -274,6 +290,7 @@ const structuredData = noindex
 
       const runBaseInit = () => {
         initTheme();
+        initMotionToggle();
         initSiteLang();
         initNavbar();
         initAnimatedBackground();

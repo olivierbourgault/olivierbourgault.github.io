@@ -21,5 +21,6 @@ export const SITE = {
   cvEnPdf: 'assets/docs/cv-en.pdf',
   cvFrFilename: 'CV_Olivier_Bourgault_FR.pdf',
   cvEnFilename: 'Resume_Olivier_Bourgault_EN.pdf',
-  themeStorageKey: 'ob_v6_theme'
+  themeStorageKey: 'ob_v6_theme',
+  motionStorageKey: 'ob_v6_reduced_motion'
 } as const;

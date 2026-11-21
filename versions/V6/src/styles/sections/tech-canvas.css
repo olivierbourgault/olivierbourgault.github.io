@@ -824,3 +824,10 @@ body:not(.dark) .badge-tech-orange {
   color: var(--accent-color);
   border: 1px solid rgba(255, 102, 0, 0.4);
 }
+
+.header .header-social-links .motion-switcher-btn.is-reduced,
+.menu-foot-socials .motion-switcher-btn.is-reduced {
+  color: var(--accent-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 86%);
+  border-radius: 8px;
+}

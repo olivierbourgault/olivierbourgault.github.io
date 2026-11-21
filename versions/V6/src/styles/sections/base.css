@@ -438,3 +438,50 @@ h6 {
   outline-offset: 2px;
   transition: none !important;
 }
+
+/* Mode « Animations désactivées » (bouton global + prefers-reduced-motion) */
+html.reduce-motion {
+  scroll-behavior: auto !important;
+}
+
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  animation-play-state: paused !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.reduce-motion [data-aos],
+html.reduce-motion [data-aos].aos-init {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html.reduce-motion .tech-marquee-track {
+  animation: none !important;
+  transform: none !important;
+}
+
+html.reduce-motion .tech-marquee-viewport {
+  overflow-x: auto;
+}
+
+html.reduce-motion .typewriter::after {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+html.reduce-motion .ambient-blobs .blob,
+html.reduce-motion .pulse-dot,
+html.reduce-motion .hero-shape {
+  animation: none !important;
+}
+
+html.reduce-motion #laser-dot {
+  display: none !important;
+}

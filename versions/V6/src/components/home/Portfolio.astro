@@ -1,4 +1,5 @@
 ---
+import githubCatalog from '../../../public/assets/data/github-projects.json';
 import { FALLBACK_PROJECTS, PORTFOLIO_TECH_TAGS } from '../../data/projects';
 import { SITE } from '../../data/site';
 import { withBase } from '../../utils/paths';
@@ -10,6 +11,31 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
   title: p.name,
   sub: p.categoryLabel
 }));
+
+const ghPreviewsByPath = new Map<string, string[]>(
+  (githubCatalog.projects || []).map((p) => [
+    (p.path || '').toLowerCase(),
+    Array.isArray(p.githubPreviews)
+      ? p.githubPreviews
+      : p.imageUrl
+        ? [p.imageUrl]
+        : []
+  ])
+);
+
+function getInitialCarouselImages(projectPath: string, localImage: string): string[] {
+  const ghList = (ghPreviewsByPath.get(projectPath.toLowerCase()) || []).map((img) =>
+    img.startsWith('http') ? img : withBase(img)
+  );
+  const localUrl = withBase(localImage);
+  const merged: string[] = [];
+  for (const url of [...ghList, localUrl]) {
+    if (url && !merged.includes(url)) {
+      merged.push(url);
+    }
+  }
+  return merged;
+}
 ---
 <section id="portfolio" class="portfolio section" data-aos="fade-up" data-aos-delay="100">
   <SectionTitle title="Portfolio">
@@ -100,78 +126,96 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
 
       <div id="portfolioGrid" class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
         {
-          FALLBACK_PROJECTS.map((project, idx) => (
-            <div
-              id={`portfolio-item-${idx}`}
-              class={`col-lg-6 col-md-6 portfolio-item ${project.filterClass}${idx >= 5 ? ' d-none' : ''}`}
-              data-project-path={project.path}
-              data-project-tags={project.badges.join('|')}
-            >
-              <div class="portfolio-card">
-                <div class="portfolio-image">
-                  <img
-                    src={withBase(project.image)}
-                    width={project.width}
-                    height={project.height}
-                    class="img-fluid"
-                    alt={project.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {project.caseStudy && (
-                    <span class="portfolio-casestudy-ribbon" data-i18n="portfolio.casestudy.ribbon">
-                      ÉTUDE DE CAS
-                    </span>
-                  )}
-                  <div class="portfolio-overlay">
-                    <div class="portfolio-actions">
-                      <a
-                        href={withBase(project.image)}
-                        class="glightbox preview-link"
-                        data-gallery={project.gallery}
-                        aria-label={`Agrandir l'aperçu de ${project.name}`}
-                        title={`Agrandir l'aperçu de ${project.name}`}
+          FALLBACK_PROJECTS.map((project, idx) => {
+            const carouselImages = getInitialCarouselImages(project.path, project.image);
+            const localImgUrl = withBase(project.image);
+            return (
+              <div
+                id={`portfolio-item-${idx}`}
+                class={`col-lg-6 col-md-6 portfolio-item ${project.filterClass}${idx >= 5 ? ' d-none' : ''}`}
+                data-project-path={project.path}
+                data-project-tags={project.badges.join('|')}
+                data-local-image={localImgUrl}
+                data-preview-images={JSON.stringify(carouselImages)}
+              >
+                <div class="portfolio-card">
+                  <div class="portfolio-image">
+                    <img
+                      src={localImgUrl}
+                      width={project.width}
+                      height={project.height}
+                      class="img-fluid"
+                      alt={project.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {project.caseStudy && (
+                      <span class="portfolio-casestudy-ribbon" data-i18n="portfolio.casestudy.ribbon">
+                        ÉTUDE DE CAS
+                      </span>
+                    )}
+                    {carouselImages.length > 1 && (
+                      <span
+                        class="portfolio-carousel-badge"
+                        title={`${carouselImages.length} aperçus (.webp)`}
                       >
-                        <i class="bi bi-eye" aria-hidden="true"></i>
-                      </a>
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="details-link"
-                        aria-label={`Voir le code source de ${project.name} sur GitHub`}
-                        title={`Voir le code source de ${project.name} sur GitHub`}
-                      >
-                        <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                      </a>
+                        <i class="bi bi-images" aria-hidden="true"></i>
+                        <span data-carousel-count>{carouselImages.length}</span>
+                      </span>
+                    )}
+                    <div class="portfolio-overlay">
+                      <div class="portfolio-actions">
+                        <a
+                          href={carouselImages[0] || localImgUrl}
+                          class="glightbox preview-link"
+                          data-gallery={project.gallery}
+                          data-project-title={project.name}
+                          data-project-category={project.categoryLabel}
+                          data-preview-images={JSON.stringify(carouselImages)}
+                          aria-label={`Agrandir l'aperçu de ${project.name}`}
+                          title={`Agrandir l'aperçu de ${project.name}`}
+                        >
+                          <i class="bi bi-eye" aria-hidden="true"></i>
+                        </a>
+                        <a
+                          href={project.repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="details-link"
+                          aria-label={`Voir le code source de ${project.name} sur GitHub`}
+                          title={`Voir le code source de ${project.name} sur GitHub`}
+                        >
+                          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="portfolio-content">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                      <span class="category">{project.categoryLabel}</span>
+                      {project.caseStudy && (
+                        <button
+                          type="button"
+                          class="case-study-trigger-btn"
+                          data-case-study={project.name}
+                        >
+                          <i class="bi bi-journal-code" aria-hidden="true"></i>
+                          <span data-i18n="portfolio.casestudy.btn">Étude de cas</span>
+                        </button>
+                      )}
+                    </div>
+                    <h3>{project.name}</h3>
+                    <p class="text-break" set:html={project.descriptionHtml} />
+                    <div class="d-flex flex-wrap gap-1 mt-2">
+                      {project.badges.map((badge) => (
+                        <span class="badge badge-tech">{badge}</span>
+                      ))}
                     </div>
                   </div>
                 </div>
-                <div class="portfolio-content">
-                  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-                    <span class="category">{project.categoryLabel}</span>
-                    {project.caseStudy && (
-                      <button
-                        type="button"
-                        class="case-study-trigger-btn"
-                        data-case-study={project.name}
-                      >
-                        <i class="bi bi-journal-code" aria-hidden="true"></i>
-                        <span data-i18n="portfolio.casestudy.btn">Étude de cas</span>
-                      </button>
-                    )}
-                  </div>
-                  <h3>{project.name}</h3>
-                  <p class="text-break" set:html={project.descriptionHtml} />
-                  <div class="d-flex flex-wrap gap-1 mt-2">
-                    {project.badges.map((badge) => (
-                      <span class="badge badge-tech">{badge}</span>
-                    ))}
-                  </div>
-                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         }
       </div>
 
@@ -191,22 +235,61 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
     </VerticalNav>
   </div>
 
-  <!-- Visionneuse d'aperçu native -->
+  <!-- Visionneuse d'aperçu native avec Carrousel d'images (.webp) -->
   <dialog id="portfolioLightboxDialog" class="ob-dialog ob-lightbox-dialog" closedby="any" aria-labelledby="lightboxDialogTitle">
     <div class="ob-dialog-header">
       <div class="ob-dialog-title-wrap">
-        <span class="ob-dialog-icon" aria-hidden="true"><i class="bi bi-eye"></i></span>
+        <span class="ob-dialog-icon" aria-hidden="true"><i id="lightboxHeaderIcon" class="bi bi-images"></i></span>
         <div>
           <h2 id="lightboxDialogTitle" class="ob-dialog-title">Aperçu du projet</h2>
           <span id="lightboxDialogSub" class="ob-dialog-sub">Portfolio Olivier Bourgault</span>
         </div>
       </div>
-      <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer l'aperçu" title="Fermer l'aperçu" autofocus>
-        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      <div class="d-flex align-items-center gap-2">
+        <span id="lightboxSlideCounter" class="ob-carousel-counter" aria-live="polite">01 / 01</span>
+        <button type="button" class="ob-dialog-close" data-close-dialog aria-label="Fermer l'aperçu" title="Fermer l'aperçu" autofocus>
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="lightboxCarouselStage" class="ob-lightbox-body ob-carousel-stage">
+      <button
+        type="button"
+        id="lightboxPrevBtn"
+        class="ob-carousel-nav ob-carousel-prev d-none"
+        aria-label="Image précédente"
+        title="Image précédente (Flèche gauche)"
+      >
+        <i class="bi bi-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <figure class="ob-carousel-figure">
+        <img id="lightboxDialogImg" class="ob-lightbox-img" src="" alt="" decoding="async" />
+        <figcaption id="lightboxSlideCaption" class="ob-carousel-caption"></figcaption>
+      </figure>
+
+      <button
+        type="button"
+        id="lightboxNextBtn"
+        class="ob-carousel-nav ob-carousel-next d-none"
+        aria-label="Image suivante"
+        title="Image suivante (Flèche droite)"
+      >
+        <i class="bi bi-chevron-right" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="ob-lightbox-body">
-      <img id="lightboxDialogImg" class="ob-lightbox-img" src="" alt="" />
+
+    <div id="lightboxCarouselFooter" class="ob-dialog-footer ob-carousel-footer d-none">
+      <div
+        id="lightboxCarouselThumbs"
+        class="ob-carousel-thumbs"
+        role="group"
+        aria-label="Miniatures du carrousel d'aperçu"
+      ></div>
+      <span class="ob-cmd-hint d-none d-sm-inline-flex">
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd> <span data-i18n="carousel.hint.nav">Parcourir</span>
+      </span>
     </div>
   </dialog>
 

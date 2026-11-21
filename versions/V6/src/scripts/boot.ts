@@ -1,4 +1,5 @@
 import { SITE } from '../data/site';
+import { isMotionReduced } from './motion';
 
 const BOOT_SEEN_KEY = 'ob_v6_boot_seen';
 
@@ -49,13 +50,7 @@ export function initBootSequence(onReady: () => void): void {
   const expEl = document.getElementById('experience');
   if (expEl) expEl.textContent = String(computeYearsSinceStart());
 
-  const prefersReduced = (() => {
-    try {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    } catch {
-      return false;
-    }
-  })();
+  const prefersReduced = isMotionReduced();
 
   const shouldSkipImmediately =
     !spinner ||

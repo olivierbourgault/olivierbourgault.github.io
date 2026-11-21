@@ -1,6 +1,7 @@
 import { initBootSequence } from './boot';
 import { initCollapsibleSections } from './collapsible';
 import { initContactForm } from './contact';
+import { getScrollBehavior } from './motion';
 import { initPortfolio } from './portfolio';
 import { initScrollReveal } from './reveal';
 import { initSkills } from './skills';
@@ -15,7 +16,7 @@ function scrollHashIfPresent(): void {
     const scrollMarginTop = parseInt(getComputedStyle(target).scrollMarginTop, 10) || 0;
     window.scrollTo({
       top: Math.max(0, target.offsetTop - scrollMarginTop),
-      behavior: 'smooth'
+      behavior: getScrollBehavior()
     });
   }, 100);
 }

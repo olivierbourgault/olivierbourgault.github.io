@@ -1,4 +1,5 @@
 import { getSiteLang } from './i18n';
+import { isMotionReduced } from './motion';
 
 const WORDS_FR = [
   'Développeur',
@@ -33,12 +34,7 @@ export function initTypewriter(): void {
   if (!el || el.dataset.twInit === '1') return;
   el.dataset.twInit = '1';
 
-  let reducedMotion = false;
-  try {
-    reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch {
-    reducedMotion = false;
-  }
+  let reducedMotion = isMotionReduced();
 
   let wordIndex = 0;
   let charIndex = getWords()[0].length;
@@ -47,10 +43,16 @@ export function initTypewriter(): void {
 
   el.textContent = getWords()[0];
 
-  function schedule(delayMs: number): void {
+  function clearTimer(): void {
     if (timerId !== null) {
       window.clearTimeout(timerId);
+      timerId = null;
     }
+  }
+
+  function schedule(delayMs: number): void {
+    clearTimer();
+    if (reducedMotion) return;
     timerId = window.setTimeout(tick, delayMs);
   }
 
@@ -89,6 +91,20 @@ export function initTypewriter(): void {
     el.textContent = translatedWord;
     if (!reducedMotion) {
       schedule(1400);
+    }
+  });
+
+  window.addEventListener('ob:motionchange', () => {
+    reducedMotion = isMotionReduced();
+    if (reducedMotion) {
+      clearTimer();
+      const list = getWords();
+      wordIndex = 0;
+      charIndex = list[0].length;
+      isDeleting = true;
+      el.textContent = list[0];
+    } else {
+      schedule(1200);
     }
   });
 

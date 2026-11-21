@@ -1,5 +1,6 @@
 import { copyTextToClipboard } from './clipboard';
 import { getSiteLang } from './i18n';
+import { getScrollBehavior } from './motion';
 import { bindVerticalNavSpy } from './vnav';
 
 const HERO_EMBLEM_META: Record<string, { fr: string; en: string }> = {
@@ -233,6 +234,6 @@ export function initIdentitePage(): void {
   bindVerticalNavSpy({
     listId: 'vnavIdentiteList',
     getTargets: () => Array.from(document.querySelectorAll<HTMLElement>('section.identite-chapter')),
-    onSelect: (target) => target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    onSelect: (target) => target.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' })
   });
 }

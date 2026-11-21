@@ -7,9 +7,9 @@ import { refreshScrollReveal } from './reveal';
 import { renderPortfolioVerticalNav } from './vnav';
 
 const DEFAULT_VISIBLE_PROJECTS = 5;
-const IMAGE_GENERIQUE = withBase('assets/images/projects/phoneword.webp');
+const IMAGE_GENERIQUE = withBase('assets/images/logos/logo-ob-tech.svg');
 const STATIC_CATALOG_URL = withBase('assets/data/github-projects.json');
-const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v2';
+const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v3';
 const PORTFOLIO_CACHE_TTL_MS = 1000 * 60 * 60 * 12; // 12 heures
 
 let portfolioShowAll = false;
@@ -18,6 +18,12 @@ let currentTechTag = '*';
 let currentSearchQuery = '';
 let activeCaseStudyProject: FallbackProject | null = null;
 let lastCountedProjects: Array<{ filterClass: string }> = [];
+
+const LOCAL_IMAGE_BY_PATH = new Map<string, string>(
+  FALLBACK_PROJECTS.map((p): [string, string] => [p.path.toLowerCase(), withBase(p.image)])
+);
+
+const webpBlobCache = new Map<string, string>();
 
 interface GitTreeEntry {
   path?: string;
@@ -32,6 +38,7 @@ interface RawProjectMeta {
   categoryLabel: string;
   repoUrl: string;
   imageUrl: string;
+  githubPreviews?: string[];
   hasReadme: boolean;
   hasParentReadme: boolean;
   tags?: string[];
@@ -49,20 +56,21 @@ interface StaticCatalogPayload {
   projects?: RawProjectMeta[];
 }
 
+interface CarouselState {
+  title: string;
+  category: string;
+  slides: string[];
+  activeIndex: number;
+}
+
 let extraProjects: RawProjectMeta[] = [];
 const renderedPaths = new Set<string>();
 const parentReadmeCache = new Map<string, string>();
+let activeCarouselState: CarouselState | null = null;
 
-const IGNORED_IMAGE_PATTERNS = [
-  /(?:^|\/)favicon[^/]*$/i,
-  /(?:^|\/)dotnet_bot[^/]*$/i,
-  /(?:^|\/)ic_launcher[^/]*$/i,
-  /(?:^|\/)adaptive-icon[^/]*$/i,
-  /(?:^|\/)appicon[^/]*$/i,
-  /(?:^|\/)splash[^/]*$/i,
-  /(?:^|\/)logo-?react[^/]*$/i,
-  /(?:^|\/)vite\.svg$/i
-];
+const EXPLICIT_PREVIEW_FILE_RX =
+  /^(preview|screenshot|demo|accueil|ecran[-_]?depart|banner|cover|capture)([-_]?\d+)?\.(png|jpe?g|gif|webp)$/i;
+const PREVIEW_FOLDER_RX = /(?:^|\/)(screenshots?|previews?|captures?)\/[^/]+\.(png|jpe?g|gif|webp)$/i;
 
 function isEmbeddedPreview(): boolean {
   try {
@@ -76,6 +84,105 @@ function isEmbeddedPreview(): boolean {
 
 function encodeGitHubPath(pathStr: string): string {
   return pathStr.split('/').map(encodeURIComponent).join('/');
+}
+
+function resolveAssetUrl(urlOrPath: string): string {
+  if (!urlOrPath) return '';
+  if (
+    urlOrPath.startsWith('http://') ||
+    urlOrPath.startsWith('https://') ||
+    urlOrPath.startsWith('blob:') ||
+    urlOrPath.startsWith('data:') ||
+    urlOrPath.startsWith('/')
+  ) {
+    return urlOrPath;
+  }
+  return withBase(urlOrPath);
+}
+
+/**
+ * Convertit à la volée toute image distante non-.webp (ex. preview GitHub .png/.jpg)
+ * en blob URL image/webp via un canvas hors écran, avec mise en cache mémoire.
+ */
+async function ensureWebpImageUrl(url: string): Promise<string> {
+  if (!url) return '';
+  const cleanUrl = url.split('?')[0].toLowerCase();
+  if (cleanUrl.endsWith('.webp') || url.startsWith('blob:') || url.startsWith('data:image/webp')) {
+    return url;
+  }
+  const cached = webpBlobCache.get(url);
+  if (cached) return cached;
+
+  return new Promise<string>((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth || img.width || 1280;
+        canvas.height = img.naturalHeight || img.height || 720;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve(url);
+          return;
+        }
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob(
+          (blob) => {
+            if (blob && blob.type === 'image/webp') {
+              const blobUrl = URL.createObjectURL(blob);
+              webpBlobCache.set(url, blobUrl);
+              resolve(blobUrl);
+            } else {
+              resolve(url);
+            }
+          },
+          'image/webp',
+          0.86
+        );
+      } catch {
+        resolve(url);
+      }
+    };
+    img.onerror = () => resolve(url);
+    img.src = url;
+  });
+}
+
+/**
+ * Construit la liste ordonnée des images du carrousel d'un projet :
+ * 1. Toutes les previews GitHub (preview, preview1, preview2, preview3...) en premier
+ * 2. Suivies de l'image locale (.webp) du projet s'il en possède une
+ */
+function buildProjectCarouselImages(
+  projectPath: string,
+  githubPreviews?: string[],
+  fallbackImageUrl?: string
+): string[] {
+  const result: string[] = [];
+  const pushUnique = (rawUrl?: string) => {
+    if (!rawUrl) return;
+    const resolved = resolveAssetUrl(rawUrl);
+    if (resolved && !result.includes(resolved)) {
+      result.push(resolved);
+    }
+  };
+
+  if (Array.isArray(githubPreviews)) {
+    for (const ghImg of githubPreviews) {
+      pushUnique(ghImg);
+    }
+  }
+  if (result.length === 0 && fallbackImageUrl && fallbackImageUrl !== IMAGE_GENERIQUE) {
+    pushUnique(fallbackImageUrl);
+  }
+
+  const localImg = LOCAL_IMAGE_BY_PATH.get(projectPath.toLowerCase());
+  if (localImg) {
+    pushUnique(localImg);
+  }
+
+  return result;
 }
 
 function stripMarkdown(mdText: string): string {
@@ -130,39 +237,30 @@ function extractProjectFromParentReadme(parentReadme: string, projectName: strin
   return '';
 }
 
-function findProjectImageInTree(tree: GitTreeEntry[], projectPath: string): string {
+function findProjectPreviewsInTree(tree: GitTreeEntry[], projectPath: string): string[] {
   const prefix = `${projectPath}/`;
-  const imageRegex = /\.(png|jpe?g|gif|webp)$/i;
   const candidates = tree.filter((item) => {
     if (item.type !== 'blob' || !item.path) return false;
-    if (!item.path.startsWith(prefix) || !imageRegex.test(item.path)) return false;
+    if (!item.path.startsWith(prefix)) return false;
     const rel = item.path.slice(prefix.length);
-    return !IGNORED_IMAGE_PATTERNS.some((rx) => rx.test(rel));
+    const fileName = rel.split('/').pop() || '';
+    return EXPLICIT_PREVIEW_FILE_RX.test(fileName) || PREVIEW_FOLDER_RX.test(rel);
   });
 
-  if (candidates.length > 0) {
-    candidates.sort((a, b) => {
-      const relA = (a.path || '').slice(prefix.length);
-      const relB = (b.path || '').slice(prefix.length);
-      const fileA = (relA.split('/').pop() || '').toLowerCase();
-      const fileB = (relB.split('/').pop() || '').toLowerCase();
+  candidates.sort((a, b) => {
+    const relA = (a.path || '').slice(prefix.length);
+    const relB = (b.path || '').slice(prefix.length);
+    const fileA = (relA.split('/').pop() || '').toLowerCase().replace(/\.[a-z0-9]+$/i, '');
+    const fileB = (relB.split('/').pop() || '').toLowerCase().replace(/\.[a-z0-9]+$/i, '');
+    if (fileA === 'preview' && fileB !== 'preview') return -1;
+    if (fileB === 'preview' && fileA !== 'preview') return 1;
+    return relA.localeCompare(relB, undefined, { numeric: true, sensitivity: 'base' });
+  });
 
-      const priorityRegex = /^(preview|screenshot|demo|accueil|ecran-depart|banner|cover)\./;
-      const prioA = priorityRegex.test(fileA) ? 0 : 1;
-      const prioB = priorityRegex.test(fileB) ? 0 : 1;
-      if (prioA !== prioB) return prioA - prioB;
-
-      const depthA = relA.split('/').length;
-      const depthB = relB.split('/').length;
-      if (depthA !== depthB) return depthA - depthB;
-
-      return relA.localeCompare(relB);
-    });
-
-    return `https://raw.githubusercontent.com/${SITE.githubRepoOwner}/${SITE.githubRepoName}/${SITE.githubBranch}/${encodeGitHubPath(candidates[0].path!)}`;
-  }
-
-  return IMAGE_GENERIQUE;
+  return candidates.map(
+    (c) =>
+      `https://raw.githubusercontent.com/${SITE.githubRepoOwner}/${SITE.githubRepoName}/${SITE.githubBranch}/${encodeGitHubPath(c.path!)}`
+  );
 }
 
 function handleImageError(img: HTMLImageElement): void {
@@ -207,6 +305,8 @@ function extractProjectsFromTree(tree: GitTreeEntry[], blobSet: Set<string>): Ra
 
     if (!filterClass) continue;
 
+    const githubPreviews = findProjectPreviewsInTree(tree, entry.path);
+
     projects.push({
       name,
       path: entry.path,
@@ -214,7 +314,8 @@ function extractProjectsFromTree(tree: GitTreeEntry[], blobSet: Set<string>): Ra
       filterClass,
       categoryLabel,
       repoUrl: `${baseRepo}/${encodeGitHubPath(entry.path)}`,
-      imageUrl: findProjectImageInTree(tree, entry.path),
+      imageUrl: githubPreviews[0] || IMAGE_GENERIQUE,
+      githubPreviews,
       hasReadme: blobSet.has(`${entry.path}/README.md`),
       hasParentReadme: blobSet.has(`${parentPath}/README.md`)
     });
@@ -372,14 +473,53 @@ function syncPortfolioCardsLocale(): void {
   }
 }
 
+function updateCardCarouselData(itemEl: HTMLElement, carouselImages: string[]): void {
+  const serialized = JSON.stringify(carouselImages);
+  itemEl.dataset.previewImages = serialized;
+  const previewLink = itemEl.querySelector<HTMLAnchorElement>('a.preview-link');
+  if (previewLink && carouselImages.length > 0) {
+    previewLink.dataset.previewImages = serialized;
+    previewLink.href = carouselImages[0];
+  }
+
+  const imgWrap = itemEl.querySelector<HTMLElement>('.portfolio-image');
+  if (!imgWrap) return;
+
+  let badge = imgWrap.querySelector<HTMLElement>('.portfolio-carousel-badge');
+  if (carouselImages.length > 1) {
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'portfolio-carousel-badge';
+      badge.innerHTML = `<i class="bi bi-images" aria-hidden="true"></i><span data-carousel-count>${carouselImages.length}</span>`;
+      imgWrap.appendChild(badge);
+    } else {
+      const countEl = badge.querySelector('[data-carousel-count]');
+      if (countEl) countEl.textContent = String(carouselImages.length);
+    }
+    badge.title =
+      getSiteLang() === 'en'
+        ? `${carouselImages.length} WebP previews in carousel`
+        : `${carouselImages.length} aperçus (.webp) dans le carrousel`;
+  } else if (badge) {
+    badge.remove();
+  }
+}
+
 function createPortfolioCardElement(project: RawProjectMeta, index: number): HTMLElement {
   const isEn = getSiteLang() === 'en';
   const displayCategory = localizeCategoryLabel(project.categoryLabel, isEn);
+  const carouselImages = buildProjectCarouselImages(
+    project.path,
+    project.githubPreviews,
+    project.imageUrl
+  );
+
   const itemCol = document.createElement('div');
   itemCol.id = `portfolio-item-${index}`;
   itemCol.className = `col-lg-6 col-md-6 portfolio-item ${project.filterClass}`;
   itemCol.dataset.projectPath = project.path;
   itemCol.dataset.projectTags = (project.tags || []).join('|');
+  itemCol.dataset.previewImages = JSON.stringify(carouselImages);
 
   const card = document.createElement('div');
   card.className = 'portfolio-card';
@@ -388,16 +528,30 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   imageWrapper.className = 'portfolio-image';
 
   const img = document.createElement('img');
-  const resolvedImgUrl = project.imageUrl || IMAGE_GENERIQUE;
-  img.src = resolvedImgUrl;
+  const primaryPreview = carouselImages[0] || resolveAssetUrl(project.imageUrl) || IMAGE_GENERIQUE;
+  img.src = primaryPreview;
   img.alt = isEn ? `${project.name} project preview` : `Aperçu du projet ${project.name}`;
   img.className = 'img-fluid';
-  if (resolvedImgUrl.endsWith(IMAGE_GENERIQUE) || resolvedImgUrl === IMAGE_GENERIQUE) {
+  if (primaryPreview.endsWith(IMAGE_GENERIQUE) || primaryPreview === IMAGE_GENERIQUE) {
     img.classList.add('portfolio-img-generic');
+  } else if (!primaryPreview.toLowerCase().endsWith('.webp')) {
+    void ensureWebpImageUrl(primaryPreview).then((webpUrl) => {
+      img.src = webpUrl;
+    });
   }
   img.loading = 'lazy';
   img.decoding = 'async';
   img.addEventListener('error', () => handleImageError(img));
+
+  if (carouselImages.length > 1) {
+    const badge = document.createElement('span');
+    badge.className = 'portfolio-carousel-badge';
+    badge.title = isEn
+      ? `${carouselImages.length} WebP previews in carousel`
+      : `${carouselImages.length} aperçus (.webp) dans le carrousel`;
+    badge.innerHTML = `<i class="bi bi-images" aria-hidden="true"></i><span data-carousel-count>${carouselImages.length}</span>`;
+    imageWrapper.appendChild(badge);
+  }
 
   const overlay = document.createElement('div');
   overlay.className = 'portfolio-overlay';
@@ -405,12 +559,13 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
   const actions = document.createElement('div');
   actions.className = 'portfolio-actions';
 
-  if (project.imageUrl && project.imageUrl !== IMAGE_GENERIQUE) {
+  if (carouselImages.length > 0) {
     const previewLink = document.createElement('a');
-    previewLink.href = project.imageUrl;
+    previewLink.href = carouselImages[0];
     previewLink.className = 'glightbox preview-link';
     previewLink.setAttribute('data-project-title', project.name);
     previewLink.setAttribute('data-project-category', displayCategory);
+    previewLink.setAttribute('data-preview-images', JSON.stringify(carouselImages));
     const previewLabel = isEn
       ? `Enlarge preview of ${project.name}`
       : `Agrandir l'aperçu de ${project.name}`;
@@ -694,20 +849,199 @@ function initCaseStudyDialog(): void {
   });
 }
 
-function initNativeLightbox(): void {
-  const dialog = document.getElementById('portfolioLightboxDialog') as HTMLDialogElement | null;
+function getSlideCaptionLabel(slideUrl: string, index: number, total: number, isEn: boolean): string {
+  const isGitHubPreview =
+    slideUrl.includes('/projects/github/') || slideUrl.includes('githubusercontent.com');
+  if (isGitHubPreview) {
+    return isEn
+      ? `GitHub Preview (${index + 1}/${total}) · WebP`
+      : `Aperçu GitHub (${index + 1}/${total}) · WebP`;
+  }
+  return isEn
+    ? `Local Curated Preview (${index + 1}/${total}) · WebP`
+    : `Aperçu local (${index + 1}/${total}) · WebP`;
+}
+
+function renderActiveCarouselSlide(): void {
+  if (!activeCarouselState) return;
+  const { title, category, slides, activeIndex } = activeCarouselState;
+  const isEn = getSiteLang() === 'en';
+
   const imgEl = document.getElementById('lightboxDialogImg') as HTMLImageElement | null;
   const titleEl = document.getElementById('lightboxDialogTitle');
   const subEl = document.getElementById('lightboxDialogSub');
+  const counterEl = document.getElementById('lightboxSlideCounter');
+  const captionEl = document.getElementById('lightboxSlideCaption');
+  const prevBtn = document.getElementById('lightboxPrevBtn');
+  const nextBtn = document.getElementById('lightboxNextBtn');
+  const footerEl = document.getElementById('lightboxCarouselFooter');
+  const thumbsEl = document.getElementById('lightboxCarouselThumbs');
+  const headerIconEl = document.getElementById('lightboxHeaderIcon');
+
+  if (!imgEl || slides.length === 0) return;
+
+  const currentUrl = slides[activeIndex] || slides[0];
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  if (titleEl) titleEl.textContent = title;
+  if (subEl) subEl.textContent = category;
+  if (counterEl) counterEl.textContent = `${pad(activeIndex + 1)} / ${pad(slides.length)}`;
+  if (headerIconEl) {
+    headerIconEl.className = slides.length > 1 ? 'bi bi-images' : 'bi bi-eye';
+  }
+
+  const captionText = getSlideCaptionLabel(currentUrl, activeIndex, slides.length, isEn);
+  if (captionEl) captionEl.textContent = captionText;
+
+  imgEl.alt = `${title} — ${captionText}`;
+  if (currentUrl.toLowerCase().endsWith('.webp') || currentUrl.startsWith('blob:')) {
+    imgEl.src = currentUrl;
+  } else {
+    imgEl.src = currentUrl;
+    void ensureWebpImageUrl(currentUrl).then((webpUrl) => {
+      if (activeCarouselState && activeCarouselState.slides[activeCarouselState.activeIndex] === currentUrl) {
+        activeCarouselState.slides[activeCarouselState.activeIndex] = webpUrl;
+        imgEl.src = webpUrl;
+      }
+    });
+  }
+
+  const hasMultiple = slides.length > 1;
+  prevBtn?.classList.toggle('d-none', !hasMultiple);
+  nextBtn?.classList.toggle('d-none', !hasMultiple);
+  footerEl?.classList.toggle('d-none', !hasMultiple);
+
+  if (prevBtn) {
+    const lbl = isEn ? 'Previous image' : 'Image précédente';
+    prevBtn.setAttribute('aria-label', lbl);
+    prevBtn.setAttribute('title', `${lbl} (←)`);
+  }
+  if (nextBtn) {
+    const lbl = isEn ? 'Next image' : 'Image suivante';
+    nextBtn.setAttribute('aria-label', lbl);
+    nextBtn.setAttribute('title', `${lbl} (→)`);
+  }
+
+  if (thumbsEl && hasMultiple) {
+    thumbsEl.innerHTML = slides
+      .map((sUrl, idx) => {
+        const isCurrent = idx === activeIndex;
+        const isGh = sUrl.includes('/projects/github/') || sUrl.includes('githubusercontent.com');
+        const badgeText = isGh ? 'GH' : 'LOCAL';
+        const thumbLabel = isEn
+          ? `View image ${idx + 1} of ${slides.length} (${badgeText})`
+          : `Afficher l'image ${idx + 1} sur ${slides.length} (${badgeText})`;
+        return `
+          <button
+            type="button"
+            class="ob-carousel-thumb${isCurrent ? ' is-active' : ''}"
+            data-carousel-idx="${idx}"
+            aria-label="${thumbLabel}"
+            aria-current="${isCurrent ? 'true' : 'false'}"
+            title="${thumbLabel}"
+          >
+            <img src="${sUrl}" alt="" loading="lazy" decoding="async" />
+            <span class="ob-carousel-thumb-tag">${idx + 1} · ${badgeText}</span>
+          </button>
+        `;
+      })
+      .join('');
+  } else if (thumbsEl) {
+    thumbsEl.innerHTML = '';
+  }
+}
+
+function stepCarousel(delta: number): void {
+  if (!activeCarouselState || activeCarouselState.slides.length <= 1) return;
+  const len = activeCarouselState.slides.length;
+  activeCarouselState.activeIndex = (activeCarouselState.activeIndex + delta + len) % len;
+  renderActiveCarouselSlide();
+}
+
+function initNativeLightbox(): void {
+  const dialog = document.getElementById('portfolioLightboxDialog') as HTMLDialogElement | null;
   const grid = document.getElementById('portfolioGrid');
-  if (!dialog || !imgEl || !grid) return;
+  const prevBtn = document.getElementById('lightboxPrevBtn');
+  const nextBtn = document.getElementById('lightboxNextBtn');
+  const thumbsEl = document.getElementById('lightboxCarouselThumbs');
+  const stageEl = document.getElementById('lightboxCarouselStage');
+  if (!dialog || !grid) return;
+
+  prevBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    stepCarousel(-1);
+  });
+
+  nextBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    stepCarousel(1);
+  });
+
+  thumbsEl?.addEventListener('click', (e) => {
+    const btn = (e.target as Element | null)?.closest<HTMLButtonElement>('[data-carousel-idx]');
+    if (!btn || !activeCarouselState) return;
+    const idx = Number(btn.getAttribute('data-carousel-idx'));
+    if (!Number.isNaN(idx) && idx >= 0 && idx < activeCarouselState.slides.length) {
+      activeCarouselState.activeIndex = idx;
+      renderActiveCarouselSlide();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (!dialog.open || !activeCarouselState || activeCarouselState.slides.length <= 1) return;
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      stepCarousel(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      stepCarousel(1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      activeCarouselState.activeIndex = 0;
+      renderActiveCarouselSlide();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      activeCarouselState.activeIndex = activeCarouselState.slides.length - 1;
+      renderActiveCarouselSlide();
+    }
+  });
+
+  let touchStartX = 0;
+  stageEl?.addEventListener(
+    'touchstart',
+    (e) => {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+      }
+    },
+    { passive: true }
+  );
+  stageEl?.addEventListener(
+    'touchend',
+    (e) => {
+      if (!touchStartX || e.changedTouches.length === 0) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = 0;
+      if (Math.abs(dx) > 40) {
+        stepCarousel(dx < 0 ? 1 : -1);
+      }
+    },
+    { passive: true }
+  );
 
   grid.addEventListener('click', (e) => {
-    const link = (e.target as Element | null)?.closest<HTMLAnchorElement>('a.glightbox.preview-link');
+    const target = e.target as Element | null;
+    if (target?.closest('a.details-link, [data-case-study]')) return;
+    const link =
+      target?.closest<HTMLAnchorElement>('a.glightbox.preview-link') ||
+      target
+        ?.closest<HTMLElement>('.portfolio-image')
+        ?.querySelector<HTMLAnchorElement>('a.glightbox.preview-link');
     if (!link) return;
     e.preventDefault();
 
     const isEn = getSiteLang() === 'en';
+    const itemCol = link.closest<HTMLElement>('.portfolio-item');
     const card = link.closest('.portfolio-card');
     const title =
       link.getAttribute('data-project-title') ||
@@ -718,13 +1052,32 @@ function initNativeLightbox(): void {
       link.getAttribute('data-project-category') ||
       'Portfolio';
 
-    imgEl.src = link.href;
-    imgEl.alt = title;
-    if (titleEl) titleEl.textContent = title;
-    if (subEl) subEl.textContent = category;
+    let slides: string[] = [];
+    const rawJson = link.dataset.previewImages || itemCol?.dataset.previewImages;
+    if (rawJson) {
+      try {
+        const parsed = JSON.parse(rawJson);
+        if (Array.isArray(parsed)) {
+          slides = parsed.filter((u): u is string => typeof u === 'string' && u.length > 0);
+        }
+      } catch {
+        // Ignorer
+      }
+    }
+    if (slides.length === 0 && link.href) {
+      slides = [link.href];
+    }
+
+    activeCarouselState = {
+      title,
+      category,
+      slides,
+      activeIndex: 0
+    };
+    renderActiveCarouselSlide();
 
     if (typeof dialog.showModal === 'function') {
-      dialog.showModal();
+      if (!dialog.open) dialog.showModal();
       promoteCursorToTopLayer();
     }
   });
@@ -734,6 +1087,11 @@ function registerGitHubProjects(projects: RawProjectMeta[]): void {
   const container = document.getElementById('portfolioGrid');
   if (!container) return;
 
+  const ghByPath = new Map<string, RawProjectMeta>();
+  for (const p of projects) {
+    ghByPath.set(p.path.toLowerCase(), p);
+  }
+
   const mergedForCount: Array<{ filterClass: string }> = [];
   const countedPaths = new Set<string>();
 
@@ -742,6 +1100,17 @@ function registerGitHubProjects(projects: RawProjectMeta[]): void {
     if (key) {
       renderedPaths.add(key);
       countedPaths.add(key);
+      const ghMatch = ghByPath.get(key);
+      if (ghMatch) {
+        const carouselImages = buildProjectCarouselImages(
+          ghMatch.path,
+          ghMatch.githubPreviews,
+          ghMatch.imageUrl
+        );
+        if (carouselImages.length > 0) {
+          updateCardCarouselData(item, carouselImages);
+        }
+      }
     }
     const cls = item.classList.contains('filter-personal')
       ? 'filter-personal'
@@ -949,6 +1318,9 @@ export function initPortfolio(): void {
     syncPortfolioCardsLocale();
     if (activeCaseStudyProject) {
       renderCaseStudyModalContent(activeCaseStudyProject);
+    }
+    if (activeCarouselState) {
+      renderActiveCarouselSlide();
     }
     applyPortfolioFilterWithLimit();
     applyDomTranslations(document.getElementById('portfolio') || document.body);

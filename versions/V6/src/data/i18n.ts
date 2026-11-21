@@ -25,7 +25,8 @@ export const KEY_EN: Record<string, string> = {
   'portfolio.casestudy.repo': 'Explore Code on GitHub',
   'portfolio.filter.reset': 'Reset Filters',
   'cmd.hint.nav': 'Navigate',
-  'cmd.hint.exec': 'Execute'
+  'cmd.hint.exec': 'Execute',
+  'carousel.hint.nav': 'Browse'
 };
 
 /**

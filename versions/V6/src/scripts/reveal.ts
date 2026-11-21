@@ -1,25 +1,35 @@
+import { isMotionReduced } from './motion';
+
 /**
  * Révélation légère au défilement via IntersectionObserver (remplace AOS ~14 Ko JS + ~25 Ko CSS).
  */
 let observer: IntersectionObserver | null = null;
+let motionListenerBound = false;
 
 function revealElement(el: HTMLElement): void {
   el.classList.add('aos-animate');
+}
+
+function revealAll(): void {
+  observer?.disconnect();
+  observer = null;
+  document.querySelectorAll<HTMLElement>('[data-aos]').forEach(revealElement);
 }
 
 export function initScrollReveal(): void {
   const nodes = Array.from(document.querySelectorAll<HTMLElement>('[data-aos]'));
   if (nodes.length === 0) return;
 
-  const prefersReduced = (() => {
-    try {
-      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    } catch {
-      return false;
-    }
-  })();
+  if (!motionListenerBound) {
+    motionListenerBound = true;
+    window.addEventListener('ob:motionchange', () => {
+      if (isMotionReduced()) {
+        revealAll();
+      }
+    });
+  }
 
-  if (prefersReduced || !('IntersectionObserver' in window)) {
+  if (isMotionReduced() || !('IntersectionObserver' in window)) {
     nodes.forEach(revealElement);
     return;
   }

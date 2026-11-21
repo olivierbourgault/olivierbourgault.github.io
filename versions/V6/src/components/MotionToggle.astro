@@ -1,0 +1,18 @@
+---
+interface Props {
+  inDrawer?: boolean;
+}
+
+const { inDrawer = false } = Astro.props;
+---
+<button
+  type="button"
+  id={inDrawer ? undefined : 'motionSwitcherBtn'}
+  class="theme-switcher-btn motion-switcher-btn"
+  data-motion-toggle
+  aria-label="Désactiver toutes les animations"
+  title="Désactiver toutes les animations"
+  aria-pressed="false"
+>
+  <i id={inDrawer ? undefined : 'motionSwitcherIcon'} data-motion-icon class="bi bi-pause-circle" aria-hidden="true"></i>
+</button>

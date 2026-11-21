@@ -1,6 +1,7 @@
 import { PORTFOLIO_VERSIONS, type PortfolioVersion } from '../data/versions';
 import { registerDialogHandler } from './dialogs';
 import { getSiteLang } from './i18n';
+import { getScrollBehavior } from './motion';
 import { bindVerticalNavSpy } from './vnav';
 
 type VersionMetaEnMap = Record<string, { title: string; description: string }>;
@@ -308,7 +309,7 @@ export function initVersionsStudio(): void {
           const tabLeft = tab.offsetLeft;
           const tabRight = tabLeft + tab.offsetWidth;
           if (tabLeft < tablist.scrollLeft || tabRight > tablist.scrollLeft + tablist.clientWidth) {
-            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: 'smooth' });
+            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: getScrollBehavior() });
           }
         }
       });
@@ -380,7 +381,7 @@ export function initVersionsStudio(): void {
     }
 
     if (scrollToStudio) {
-      document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('studio')?.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
     }
   }
 
@@ -409,7 +410,7 @@ export function initVersionsStudio(): void {
           const tabLeft = targetTab.offsetLeft;
           const tabRight = tabLeft + targetTab.offsetWidth;
           if (tabLeft < tablist.scrollLeft || tabRight > tablist.scrollLeft + tablist.clientWidth) {
-            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: 'smooth' });
+            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: getScrollBehavior() });
           }
         }
       });
@@ -593,7 +594,7 @@ export function initVersionsStudio(): void {
   bindVerticalNavSpy({
     listId: 'vnavVersionsList',
     getTargets: () => Array.from(document.querySelectorAll<HTMLElement>('#versionsTimeline .timeline-version-card')),
-    onSelect: (target) => target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    onSelect: (target) => target.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' })
   });
 
   let initialVersion: string | null = null;

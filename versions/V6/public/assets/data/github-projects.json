@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T21:12:02.442Z",
+  "generatedAt": "2026-11-21T21:47:46.413Z",
   "totalCount": 59,
   "projects": [
     {
@@ -9,7 +9,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/AccessyHelp",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/AccessyHelp/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-accessyhelp-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-accessyhelp-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-accessyhelp-preview.webp": "8c54dac88ffc80c540bf32bb521dddb1c858af78"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -23,7 +29,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/BenYou",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/BenYou/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-benyou-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-benyou-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-benyou-preview.webp": "28c5f6ace72508f434b24803172f0476bb357b83"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -37,7 +49,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/ChatterBox",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/ChatterBox/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-chatterbox-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-chatterbox-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-chatterbox-preview.webp": "9b06ea4eaf56d6a9ca4c885a5b3d9a61aacd3578"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -52,7 +70,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/CineVerse",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/CineVerse/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-cineverse-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-cineverse-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-cineverse-preview.webp": "67ff58faa7a1490b3732ce36117c305419cf98d5"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -67,7 +91,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/D%26D",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/D%26D/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-d-d-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-d-d-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-d-d-preview.webp": "53a7e20cef2a4c1c6a670f0b79f8df1ed70b5855"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -81,7 +111,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Discoveria",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Discoveria/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-discoveria-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-discoveria-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-discoveria-preview.webp": "12d0e114e1f3a5d5b140918df51c6ddb4db1c896"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -95,7 +131,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/GrindWall",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/GrindWall/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-grindwall-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-grindwall-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-grindwall-preview.webp": "509fefc745a8f520ca34668935c281a63019e4dd"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -110,7 +152,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Homepage",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Homepage/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-homepage-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-homepage-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-homepage-preview.webp": "3e45fa1904b6b591a873716541af490a8d0a6e42"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -125,7 +173,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/HubAI",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/HubAI/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-hubai-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-hubai-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-hubai-preview.webp": "f31e9ad0c6a7b13ba6c74d8e0c17b3829423e40f"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -142,7 +196,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Let'Speech",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Let'Speech/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-let-speech-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-let-speech-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-let-speech-preview.webp": "b95c310f4ef5208a87f460b74241de4c697033b9"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -156,7 +216,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MacroVision",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MacroVision/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-macrovision-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-macrovision-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-macrovision-preview.webp": "480643f1f678a630df86ff0704ee84b57b4376da"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -173,7 +239,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MultiDev",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MultiDev/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-multidev-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-multidev-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-multidev-preview.webp": "3de1b940e7c0eb8e0ce3de65f5049251e63001a9"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -187,7 +259,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/MyBuilder",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/MyBuilder/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-mybuilder-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-mybuilder-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-mybuilder-preview.webp": "e38e3432d78ee05f6ff2e0124041208c3e451b5f"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -204,7 +282,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Nexus",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Nexus/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-nexus-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-nexus-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-nexus-preview.webp": "8d5a87023ef6a160d61625179dec3c0c269a1cf7"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -220,7 +304,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/NoteMaker",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/NoteMaker/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-notemaker-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-notemaker-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-notemaker-preview.webp": "a76b52d48ba58502cdbc1393bde2ee7755f5fdd1"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -234,7 +324,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Phoneword",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Phoneword/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-phoneword-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-phoneword-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-phoneword-preview.webp": "b14c334d46113ec008b69c607356732b90ce6dbf"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -248,7 +344,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Portfolio",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Portfolio/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-portfolio-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-portfolio-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-portfolio-preview.webp": "4b3fa4540c263860acab8b28483916c68b69657f"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -263,7 +365,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/QuickConnect",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/QuickConnect/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-quickconnect-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-quickconnect-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-quickconnect-preview.webp": "ec73aa1b8c6a44dd05f0162f03109f0738320b56"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -277,7 +385,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/SchoolProjects",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/SchoolProjects/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-schoolprojects-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-schoolprojects-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-schoolprojects-preview.webp": "a8d7b37bc1613b849f16fea03aaba9477e312717"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -292,7 +406,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Shopro",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Shopro/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-shopro-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-shopro-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-shopro-preview.webp": "cd5312dce8913d31a4ac6c593fb63dc022bb45f3"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -309,7 +429,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/StickerSmash",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/StickerSmash/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-stickersmash-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-stickersmash-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-stickersmash-preview.webp": "9432a5e4a6bbe39446ccfb5de9ce1115ea9c70fa"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -324,7 +450,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Streamly",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Streamly/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-streamly-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-streamly-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-streamly-preview.webp": "4d5ae6758adfb486503bf3bc254068851c0c3f77"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -341,7 +473,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Superwiki",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/Superwiki/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-superwiki-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-superwiki-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-superwiki-preview.webp": "cda255a9a4b5654c532cda482c4bcd177d92f04d"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -356,7 +494,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/VibeFlow",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/VibeFlow/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-vibeflow-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-vibeflow-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-vibeflow-preview.webp": "e950846b341b964904d4e5908e742613a224e971"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -370,7 +514,13 @@
       "filterClass": "filter-personal",
       "categoryLabel": "Personnels",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Personnels/WinYou",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Personnels/WinYou/preview.png",
+      "imageUrl": "assets/images/projects/github/personnels-winyou-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/personnels-winyou-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/personnels-winyou-preview.webp": "ac00e5af2115199f3bc853b641fd49b029a79d84"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -385,6 +535,8 @@
       "categoryLabel": "Professionnels • HoC-CdC_E23",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Professionnels/HoC-CdC_E23/CompareTools",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -398,7 +550,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A20)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness/images/cell.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -414,6 +568,8 @@
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/SYNTHESE",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -426,6 +582,8 @@
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/TP_1",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -437,7 +595,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1/TP1_Base_Prof/Assets/Icons/icon_add.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -451,7 +611,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese/Classes01_Corrige/Assets/Icons/angry.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -465,7 +627,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/Atlas",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/Atlas/img/affinities/air.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -481,6 +645,8 @@
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/M%C3%A9t%C3%A9omania",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -495,6 +661,8 @@
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/TPSynthese",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -509,6 +677,8 @@
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/Synth%C3%A8se",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -521,6 +691,8 @@
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/TP1",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -534,7 +706,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere/assets/saisieFond.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -549,7 +723,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto/assets/images/dimensions.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -564,7 +740,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie/src/assets/images/changerTache.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -581,7 +759,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker/assets/TP2-Cartes/carreau_as.gif",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -596,7 +776,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib/Electrolib%20(Angular)/src/assets/images/default-book.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -614,7 +796,13 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker/Poker%20(WAMP%20-%20Symfony)/public/images/accueil.png",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp": "be65e34b1ed45c295ce9de11817c3e0c527216bf"
+      },
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -632,7 +820,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia/Electron/public/affinities/air.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -651,6 +841,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BaseDeDonn%C3%A9esRelationnelle_2C4/Synth%C3%A8se",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -665,6 +857,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/Synth%C3%A8se",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -677,6 +871,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TP2Excel",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -689,6 +885,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TPExcel",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -701,6 +899,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP1",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -715,6 +915,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP2",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -729,6 +931,8 @@
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TPSynthese",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -742,7 +946,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium/app/src/main/res/drawable/b.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -756,7 +962,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni/app/src/main/res/drawable/cad.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -770,7 +978,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synth%C3%A8se",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synth%C3%A8se/ES_VA/1875009_UIL/Assets/Images/HomeScreenBackground.jpg",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -785,7 +995,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01/Gestionnaire/bin/Debug/net6.0-windows/Images/10%20days%20in%20Africa.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [
@@ -799,7 +1011,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synth%C3%A8se",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synth%C3%A8se/PartieB/Screenshots/Accueil.png",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp",
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-mattermost.webp",
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-nextcloud.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp": "163d74204857d67d34aa2cffa049dbfc90511ac8",
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-mattermost.webp": "c6a409c3889e563ea1106578503d75f288e2874a",
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-nextcloud.webp": "37dc5514cc2be78a628650ff6eb3dc9e2af63e8d"
+      },
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -811,7 +1033,13 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01/ecran-depart.png",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp": "f96c01fb756435fd0903d684957bb4718cbfb24b"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -827,6 +1055,8 @@
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP02",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": []
@@ -838,7 +1068,9 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL",
-      "imageUrl": "https://raw.githubusercontent.com/RinoShip77/MesProjets/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL/public/icons/myIcon.png",
+      "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
       "tags": [
@@ -857,6 +1089,8 @@
       "categoryLabel": "Scolaires • CSTJ (H24)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H24-SecuriteDesDonnees_5D3/1875009_TP1",
       "imageUrl": "",
+      "githubPreviews": [],
+      "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
       "tags": [

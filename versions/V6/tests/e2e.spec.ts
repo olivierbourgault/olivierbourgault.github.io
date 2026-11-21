@@ -109,6 +109,28 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     // Close Case Study modal
     await csDialog.locator('[data-close-dialog]').click();
     await expect(csDialog).toBeHidden();
+
+    // Open HubAI Preview Carousel modal (GitHub .webp preview first, local .webp preview second)
+    const hubAiPreviewBtn = page
+      .locator('#portfolioGrid .portfolio-item[data-project-path="Personnels/HubAI"] a.preview-link')
+      .first();
+    await hubAiPreviewBtn.click({ force: true });
+    const lbDialog = page.locator('#portfolioLightboxDialog');
+    await expect(lbDialog).toBeVisible();
+    await expect(page.locator('#lightboxSlideCounter')).toHaveText('01 / 02');
+    await expect(page.locator('#lightboxCarouselThumbs .ob-carousel-thumb')).toHaveCount(2);
+    await expect(page.locator('#lightboxDialogImg')).toHaveAttribute(
+      'src',
+      /personnels-hubai-preview\.webp$/
+    );
+
+    // Navigate to Slide 2 (local .webp image)
+    await page.locator('#lightboxNextBtn').click();
+    await expect(page.locator('#lightboxSlideCounter')).toHaveText('02 / 02');
+    await expect(page.locator('#lightboxDialogImg')).toHaveAttribute('src', /hub-ai\.webp$/);
+
+    await lbDialog.locator('[data-close-dialog]').click();
+    await expect(lbDialog).toBeHidden();
   });
 
   test('Command Palette (Ctrl+K) filters commands, closes on single Escape, and i18n switches FR <-> EN live', async ({
@@ -120,7 +142,7 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     await page.locator('#cmdPaletteTriggerBtn').click();
     const cmdDialog = page.locator('#cmdPaletteDialog');
     await expect(cmdDialog).toBeVisible();
-    await expect(page.locator('#cmdPaletteList .ob-cmd-item')).toHaveCount(14);
+    await expect(page.locator('#cmdPaletteList .ob-cmd-item')).toHaveCount(15);
 
     // Type query and verify single Escape closes the dialog immediately
     const cmdInput = page.locator('#cmdPaletteInput');
@@ -129,10 +151,28 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     await cmdInput.press('Escape');
     await expect(cmdDialog).toBeHidden();
 
+    // Disable all animations button (#motionSwitcherBtn) toggles html.reduce-motion & persists
+    const motionBtn = page.locator('#motionSwitcherBtn');
+    await expect(motionBtn).toHaveAttribute('aria-pressed', 'false');
+    await motionBtn.click();
+    await expect(motionBtn).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('html')).toHaveClass(/reduce-motion/);
+    await expect(page.locator('html')).not.toHaveClass(/has-animated-grid/);
+    const storedMotion = await page.evaluate(() => localStorage.getItem('ob_v6_reduced_motion'));
+    expect(storedMotion).toBe('reduced');
+
+    // Re-enable animations
+    await motionBtn.click();
+    await expect(motionBtn).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('html')).not.toHaveClass(/reduce-motion/);
+    const restoredMotion = await page.evaluate(() => localStorage.getItem('ob_v6_reduced_motion'));
+    expect(restoredMotion).toBe('full');
+
     // Live language toggle FR -> EN
     await page.locator('#langSwitcherBtn').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page).toHaveTitle(/Full-Stack Developer, AI & IT Technician/i);
+    await expect(motionBtn).toHaveAttribute('aria-label', 'Disable all animations');
   });
 
   test('Interactive Resume (/resume) hides navigation & background canvas in print media mode', async ({
