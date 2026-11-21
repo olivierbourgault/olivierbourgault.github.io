@@ -1,10 +1,10 @@
 import { getSiteLang } from './i18n';
 import { bindVerticalNavSpy } from './vnav';
 
-const HERO_EMBLEM_META: Record<string, string> = {
-  'ob-tech': 'OB Hexagonal · R 46 · 60°',
-  terminal: 'Terminal </> · R 44 · 74°',
-  neural: 'Nœud Neuronal · R 42 · dash 8/4'
+const HERO_EMBLEM_META: Record<string, { fr: string; en: string }> = {
+  'ob-tech': { fr: 'OB Hexagonal · R 46 · 60°', en: 'OB Hexagonal · R 46 · 60°' },
+  terminal: { fr: 'Terminal </> · R 44 · 74°', en: 'Terminal </> · R 44 · 74°' },
+  neural: { fr: 'Nœud Neuronal · R 42 · dash 8/4', en: 'Neural Node · R 42 · dash 8/4' }
 };
 
 function initHeroBlueprintSwitcher(): void {
@@ -15,8 +15,17 @@ function initHeroBlueprintSwitcher(): void {
 
   const buttons = Array.from(switcher.querySelectorAll<HTMLElement>('[data-hero-emblem]'));
   const groups = Array.from(svg.querySelectorAll<SVGElement>('[data-hero-svg]'));
+  let activeKey = 'ob-tech';
+
+  function syncReadout(): void {
+    const meta = HERO_EMBLEM_META[activeKey];
+    if (readout && meta) {
+      readout.textContent = getSiteLang() === 'en' ? meta.en : meta.fr;
+    }
+  }
 
   function selectEmblem(key: string): void {
+    activeKey = key;
     buttons.forEach((btn) => {
       btn.setAttribute(
         'aria-pressed',
@@ -26,9 +35,7 @@ function initHeroBlueprintSwitcher(): void {
     groups.forEach((g) => {
       g.classList.toggle('is-active', g.getAttribute('data-hero-svg') === key);
     });
-    if (readout && HERO_EMBLEM_META[key]) {
-      readout.textContent = HERO_EMBLEM_META[key];
-    }
+    syncReadout();
   }
 
   switcher.addEventListener('click', (e) => {
@@ -36,6 +43,8 @@ function initHeroBlueprintSwitcher(): void {
     const key = btn?.getAttribute('data-hero-emblem');
     if (key) selectEmblem(key);
   });
+
+  window.addEventListener('ob:langchange', syncReadout);
 }
 
 function initLogoInspectors(): void {

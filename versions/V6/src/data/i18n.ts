@@ -3,6 +3,22 @@ export type SiteLang = 'fr' | 'en';
 export const SITE_LANG_STORAGE_KEY = 'ob_v6_lang';
 
 /**
+ * Explicit data-i18n key dictionary (resilient to copy/punctuation edits).
+ */
+export const KEY_EN: Record<string, string> = {
+  'skip.main': 'Skip to main content',
+  'hero.cta.projects': 'Projects',
+  'hero.cta.contact': 'Contact Me',
+  'hero.stats.years': 'Years of Experience',
+  'hero.stats.projects': 'Completed Projects',
+  'contact.label.name': 'Your Name',
+  'contact.label.email': 'Your Email',
+  'contact.label.subject': 'Subject',
+  'contact.label.message': 'Your Message',
+  'contact.submit': 'Send'
+};
+
+/**
  * Exact trimmed text-node dictionary (FR -> EN).
  * Preserves surrounding whitespace and child/sibling elements (icons, badges, etc.).
  */

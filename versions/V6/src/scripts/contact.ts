@@ -1,4 +1,5 @@
 import { SITE } from '../data/site';
+import { getSiteLang } from './i18n';
 
 export function initContactForm(): void {
   const form = document.getElementById('contactForm') as HTMLFormElement | null;
@@ -17,8 +18,12 @@ export function initContactForm(): void {
     const message = messageInput?.value.trim() || '';
 
     if (message.length > 0) {
+      const mailSubject =
+        getSiteLang() === 'en'
+          ? `Contact from ${name} (${email}): ${subject}`
+          : `Contact de ${name} (${email}) : ${subject}`;
       window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-        `Contact de ${name} (${email}) : ${subject}`
+        mailSubject
       )}&body=${encodeURIComponent(message)}`;
     }
   });

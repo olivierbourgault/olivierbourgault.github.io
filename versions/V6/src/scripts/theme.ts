@@ -1,7 +1,25 @@
 import { SITE } from '../data/site';
+import { getSiteLang } from './i18n';
 
 export function isDarkTheme(): boolean {
   return document.documentElement.classList.contains('dark');
+}
+
+function syncThemeToggleLabels(isDark: boolean): void {
+  const isEn = getSiteLang() === 'en';
+  const label = isDark
+    ? isEn
+      ? 'Switch to light mode'
+      : 'Passer au mode clair'
+    : isEn
+      ? 'Switch to dark mode'
+      : 'Passer au mode sombre';
+
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle], #themeSwitcherBtn').forEach((btn) => {
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+    btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+  });
 }
 
 export function applyTheme(isDark: boolean, persist = true): void {
@@ -38,12 +56,7 @@ export function applyTheme(isDark: boolean, persist = true): void {
     icon.classList.toggle('bi-moon-stars-fill', !isDark);
   });
 
-  const label = isDark ? 'Passer au mode clair' : 'Passer au mode sombre';
-  document.querySelectorAll<HTMLElement>('[data-theme-toggle], #themeSwitcherBtn').forEach((btn) => {
-    btn.setAttribute('aria-label', label);
-    btn.setAttribute('title', label);
-    btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-  });
+  syncThemeToggleLabels(isDark);
 
   if (persist) {
     try {
@@ -70,6 +83,10 @@ export function initTheme(): void {
     btn.addEventListener('click', () => {
       applyTheme(!isDarkTheme(), true);
     });
+  });
+
+  window.addEventListener('ob:langchange', () => {
+    syncThemeToggleLabels(isDarkTheme());
   });
 
   window.addEventListener('storage', (e) => {

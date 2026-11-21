@@ -2,7 +2,6 @@ import { getSiteLang, setSiteLang } from './i18n';
 import { isDarkTheme } from './theme';
 
 type CvLang = 'fr' | 'en';
-const CV_LANG_STORAGE_KEY = 'ob_v6_cv_lang';
 
 let currentLang: CvLang = 'fr';
 
@@ -54,7 +53,7 @@ function syncStatusBadge(): void {
   statusEl.textContent = isDarkTheme() ? copy.statusDark : copy.statusLight;
 }
 
-function applyCvLanguage(lang: CvLang, persist = true): void {
+function applyCvLanguage(lang: CvLang, updateUrl = true): void {
   currentLang = lang;
   const copy = UI_STRINGS[lang];
   const root = document.getElementById('cvResumeRoot');
@@ -99,12 +98,7 @@ function applyCvLanguage(lang: CvLang, persist = true): void {
 
   syncStatusBadge();
 
-  if (persist) {
-    try {
-      localStorage.setItem(CV_LANG_STORAGE_KEY, lang);
-    } catch {
-      // Ignore storage error
-    }
+  if (updateUrl) {
     try {
       const url = new URL(window.location.href);
       url.searchParams.set('lang', lang);
@@ -113,22 +107,6 @@ function applyCvLanguage(lang: CvLang, persist = true): void {
       // Ignore history error
     }
   }
-}
-
-function detectInitialLang(): CvLang {
-  try {
-    const param = new URLSearchParams(window.location.search).get('lang')?.toLowerCase();
-    if (param === 'en' || param === 'fr') return param;
-  } catch {
-    // Ignore
-  }
-  try {
-    const saved = localStorage.getItem(CV_LANG_STORAGE_KEY);
-    if (saved === 'en' || saved === 'fr') return saved;
-  } catch {
-    // Ignore
-  }
-  return 'fr';
 }
 
 export function initCvApercuPage(): void {

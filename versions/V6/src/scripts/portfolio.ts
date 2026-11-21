@@ -317,8 +317,59 @@ function updateProjectCounters(projects: Array<{ filterClass: string }>): void {
   });
 }
 
+function localizeCategoryLabel(frLabel: string, isEn: boolean): string {
+  if (!isEn) return frLabel;
+  return frLabel
+    .replace(/^Personnels\b/, 'Personal')
+    .replace(/^Professionnels\b/, 'Professional')
+    .replace(/^Scolaires\b/, 'Academic')
+    .replace(/• IA\b/, '• AI')
+    .replace(/Chambre des Communes/g, 'House of Commons');
+}
+
+function syncPortfolioCardsLocale(): void {
+  const isEn = getSiteLang() === 'en';
+  document.querySelectorAll<HTMLElement>('#portfolioGrid .portfolio-item').forEach((item) => {
+    const titleEl = item.querySelector<HTMLElement>('h3');
+    const name = titleEl?.textContent?.trim();
+    if (!name) return;
+
+    const img = item.querySelector<HTMLImageElement>('.portfolio-image img');
+    if (img) {
+      img.alt = isEn ? `${name} project preview` : `Aperçu du projet ${name}`;
+    }
+
+    const previewLink = item.querySelector<HTMLAnchorElement>('a.preview-link');
+    if (previewLink) {
+      const previewLabel = isEn ? `Enlarge preview of ${name}` : `Agrandir l'aperçu de ${name}`;
+      previewLink.setAttribute('aria-label', previewLabel);
+      previewLink.setAttribute('title', previewLabel);
+    }
+
+    const detailsLink = item.querySelector<HTMLAnchorElement>('a.details-link');
+    if (detailsLink) {
+      const detailsLabel = isEn
+        ? `View ${name} source code on GitHub`
+        : `Voir le code source de ${name} sur GitHub`;
+      detailsLink.setAttribute('aria-label', detailsLabel);
+      detailsLink.setAttribute('title', detailsLabel);
+    }
+
+    const catEl = item.querySelector<HTMLElement>('.category');
+    if (catEl) {
+      if (!catEl.dataset.frCategory) {
+        catEl.dataset.frCategory = catEl.textContent?.trim() || '';
+      }
+      if (catEl.dataset.frCategory) {
+        catEl.textContent = localizeCategoryLabel(catEl.dataset.frCategory, isEn);
+      }
+    }
+  });
+}
+
 function createPortfolioCardElement(project: RawProjectMeta, index: number): HTMLElement {
   const isEn = getSiteLang() === 'en';
+  const displayCategory = localizeCategoryLabel(project.categoryLabel, isEn);
   const itemCol = document.createElement('div');
   itemCol.id = `portfolio-item-${index}`;
   itemCol.className = `col-lg-6 col-md-6 portfolio-item ${project.filterClass}`;
@@ -352,7 +403,7 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
     previewLink.href = project.imageUrl;
     previewLink.className = 'glightbox preview-link';
     previewLink.setAttribute('data-project-title', project.name);
-    previewLink.setAttribute('data-project-category', project.categoryLabel);
+    previewLink.setAttribute('data-project-category', displayCategory);
     const previewLabel = isEn
       ? `Enlarge preview of ${project.name}`
       : `Agrandir l'aperçu de ${project.name}`;
@@ -390,7 +441,8 @@ function createPortfolioCardElement(project: RawProjectMeta, index: number): HTM
 
   const categorySpan = document.createElement('span');
   categorySpan.className = 'category';
-  categorySpan.textContent = project.categoryLabel;
+  categorySpan.dataset.frCategory = project.categoryLabel;
+  categorySpan.textContent = displayCategory;
 
   const title = document.createElement('h3');
   title.textContent = project.name;
@@ -505,14 +557,15 @@ function initNativeLightbox(): void {
     if (!link) return;
     e.preventDefault();
 
+    const isEn = getSiteLang() === 'en';
     const card = link.closest('.portfolio-card');
     const title =
       link.getAttribute('data-project-title') ||
       card?.querySelector('h3')?.textContent?.trim() ||
-      'Aperçu du projet';
+      (isEn ? 'Project Preview' : 'Aperçu du projet');
     const category =
-      link.getAttribute('data-project-category') ||
       card?.querySelector('.category')?.textContent?.trim() ||
+      link.getAttribute('data-project-category') ||
       'Portfolio';
 
     imgEl.src = link.href;
@@ -589,7 +642,12 @@ async function loadGitHubPortfolio(): Promise<void> {
   const treeApiUrl = `https://api.github.com/repos/${SITE.githubRepoOwner}/${SITE.githubRepoName}/git/trees/${SITE.githubBranch}?recursive=1`;
 
   try {
-    if (statusEl) statusEl.textContent = 'Synchronisation des dépôts GitHub…';
+    if (statusEl) {
+      statusEl.textContent =
+        getSiteLang() === 'en'
+          ? 'Syncing GitHub repositories…'
+          : 'Synchronisation des dépôts GitHub…';
+    }
     const response = await fetch(treeApiUrl);
     if (!response.ok) {
       throw new Error(`GitHub Git Trees API error: ${response.status}`);
@@ -614,7 +672,10 @@ async function loadGitHubPortfolio(): Promise<void> {
     if (statusEl) statusEl.textContent = '';
   } catch {
     if (statusEl) {
-      statusEl.textContent = 'Affichage des projets phares hors ligne (API GitHub indisponible).';
+      statusEl.textContent =
+        getSiteLang() === 'en'
+          ? 'Showing featured projects offline (GitHub API unavailable).'
+          : 'Affichage des projets phares hors ligne (API GitHub indisponible).';
     }
   }
 }
@@ -645,6 +706,7 @@ export function initPortfolio(): void {
   });
 
   initNativeLightbox();
+  syncPortfolioCardsLocale();
   applyPortfolioFilterWithLimit();
   void loadGitHubPortfolio();
 
@@ -652,6 +714,7 @@ export function initPortfolio(): void {
     if (lastCountedProjects.length > 0) {
       updateProjectCounters(lastCountedProjects);
     }
+    syncPortfolioCardsLocale();
     applyPortfolioFilterWithLimit();
     applyDomTranslations(document.getElementById('portfolio') || document.body);
   });

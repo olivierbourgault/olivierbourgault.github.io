@@ -1,5 +1,6 @@
 export type SiteLang = 'fr' | 'en';
 export const SITE_LANG_STORAGE_KEY = 'ob_v6_lang';
+const LEGACY_CV_LANG_STORAGE_KEY = 'ob_v6_cv_lang';
 
 type I18nDictModule = typeof import('../data/i18n');
 
@@ -10,6 +11,7 @@ interface TextBinding {
   trail: string;
 }
 
+const keyBindings = new WeakMap<Element, { fr: string; en: string }>();
 const textNodeBindings = new WeakMap<Text, TextBinding>();
 const htmlBindings = new WeakMap<Element, { fr: string; en: string }>();
 const attrBindings = new WeakMap<Element, Map<string, { fr: string; en: string }>>();
@@ -30,6 +32,10 @@ function loadDict(): Promise<I18nDictModule> {
   return dictPromise;
 }
 
+function clearPendingFoucGuard(): void {
+  document.documentElement.removeAttribute('data-i18n-pending');
+}
+
 export function getSiteLang(): SiteLang {
   return currentLang;
 }
@@ -42,9 +48,15 @@ export function detectInitialSiteLang(): SiteLang {
     // Ignore
   }
   try {
-    const saved =
-      localStorage.getItem(SITE_LANG_STORAGE_KEY) ||
-      localStorage.getItem('ob_v6_cv_lang');
+    let saved = localStorage.getItem(SITE_LANG_STORAGE_KEY);
+    if (!saved) {
+      const legacy = localStorage.getItem(LEGACY_CV_LANG_STORAGE_KEY);
+      if (legacy === 'en' || legacy === 'fr') {
+        saved = legacy;
+        localStorage.setItem(SITE_LANG_STORAGE_KEY, legacy);
+        localStorage.removeItem(LEGACY_CV_LANG_STORAGE_KEY);
+      }
+    }
     if (saved === 'en' || saved === 'fr') return saved;
   } catch {
     // Ignore
@@ -56,6 +68,25 @@ export function detectInitialSiteLang(): SiteLang {
 
 function applyDomTranslationsWithDict(dict: I18nDictModule, root: ParentNode): void {
   const lang = currentLang;
+
+  // 0. Explicit data-i18n key bindings (resilient to punctuation/copy edits)
+  if (dict.KEY_EN) {
+    root.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (!key) return;
+      const enVal = dict.KEY_EN[key];
+      if (!enVal) return;
+      let binding = keyBindings.get(el);
+      if (!binding) {
+        binding = { fr: el.textContent || '', en: enVal };
+        keyBindings.set(el, binding);
+      }
+      const nextText = lang === 'en' ? binding.en : binding.fr;
+      if (el.textContent !== nextText) {
+        el.textContent = nextText;
+      }
+    });
+  }
 
   // 1. Rich HTML selector bindings
   for (const item of dict.SELECTOR_HTML_FR_TO_EN) {
@@ -81,7 +112,7 @@ function applyDomTranslationsWithDict(dict: I18nDictModule, root: ParentNode): v
       if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') {
         return NodeFilter.FILTER_REJECT;
       }
-      if (parent.closest('[data-cv-lang-sheet]')) {
+      if (parent.hasAttribute('data-i18n') || parent.closest('[data-cv-lang-sheet]')) {
         return NodeFilter.FILTER_REJECT;
       }
       return NodeFilter.FILTER_ACCEPT;
@@ -151,16 +182,29 @@ function applyDomTranslationsWithDict(dict: I18nDictModule, root: ParentNode): v
 }
 
 export function applyDomTranslations(root: ParentNode = document.body): void {
-  if (!root) return;
-  // En français avant toute bascule EN : 0 Ko de dictionnaire téléchargé
-  if (currentLang === 'fr' && !cachedDict) return;
-  if (cachedDict) {
-    applyDomTranslationsWithDict(cachedDict, root);
+  if (!root) {
+    clearPendingFoucGuard();
     return;
   }
-  void loadDict().then((dict) => {
-    applyDomTranslationsWithDict(dict, root);
-  });
+  // En français avant toute bascule EN : 0 Ko de dictionnaire téléchargé
+  if (currentLang === 'fr' && !cachedDict) {
+    clearPendingFoucGuard();
+    return;
+  }
+  if (cachedDict) {
+    applyDomTranslationsWithDict(cachedDict, root);
+    clearPendingFoucGuard();
+    window.dispatchEvent(new CustomEvent('ob:langapplied', { detail: { lang: currentLang } }));
+    return;
+  }
+  void loadDict()
+    .then((dict) => {
+      applyDomTranslationsWithDict(dict, root);
+      window.dispatchEvent(new CustomEvent('ob:langapplied', { detail: { lang: currentLang } }));
+    })
+    .finally(() => {
+      clearPendingFoucGuard();
+    });
 }
 
 function syncLangToggleButtons(lang: SiteLang): void {
@@ -207,7 +251,7 @@ export function setSiteLang(lang: SiteLang, persist = true): void {
   if (persist) {
     try {
       localStorage.setItem(SITE_LANG_STORAGE_KEY, lang);
-      localStorage.setItem('ob_v6_cv_lang', lang);
+      localStorage.removeItem(LEGACY_CV_LANG_STORAGE_KEY);
     } catch {
       // Ignore
     }
@@ -235,10 +279,7 @@ export function initSiteLang(): void {
   });
 
   window.addEventListener('storage', (e) => {
-    if (
-      (e.key === SITE_LANG_STORAGE_KEY || e.key === 'ob_v6_cv_lang') &&
-      (e.newValue === 'fr' || e.newValue === 'en')
-    ) {
+    if (e.key === SITE_LANG_STORAGE_KEY && (e.newValue === 'fr' || e.newValue === 'en')) {
       setSiteLang(e.newValue, false);
     }
   });

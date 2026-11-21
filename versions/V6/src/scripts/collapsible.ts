@@ -10,6 +10,32 @@ export function initCollapsibleSections(): void {
     return isExpanded ? (isEn ? 'Collapse' : 'Réduire') : isEn ? 'Expand' : 'Afficher';
   }
 
+  function syncSectionCollapseButton(btn: HTMLButtonElement, headingEl: Element, fallbackId: string): void {
+    const isEn = getSiteLang() === 'en';
+    const sectionName = headingEl.textContent?.trim() ?? fallbackId;
+    btn.setAttribute(
+      'aria-label',
+      isEn
+        ? `Collapse or expand section ${sectionName}`
+        : `Réduire ou développer la section ${sectionName}`
+    );
+    btn.title = isEn ? 'Collapse / Expand section' : 'Réduire / Développer la section';
+  }
+
+  function syncAllCollapsibleLabels(): void {
+    document.querySelectorAll<HTMLButtonElement>('.section-collapse-btn').forEach((btn) => {
+      const heading = btn.closest('.section-title-header')?.querySelector('h2');
+      const secId = btn.closest('section[id]')?.id || '';
+      if (heading) syncSectionCollapseButton(btn, heading, secId);
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('#resume .resume-block-toggle').forEach((btn) => {
+      const isExpanded = btn.getAttribute('aria-expanded') !== 'false';
+      const label = btn.querySelector('.toggle-label');
+      if (label) label.textContent = getCollapseWord(isExpanded);
+    });
+  }
+
   function setWrapState(
     wrap: HTMLElement,
     btn: HTMLElement | null,
@@ -79,8 +105,7 @@ export function initCollapsibleSections(): void {
     btn.className = 'section-collapse-btn';
     btn.setAttribute('aria-expanded', 'true');
     btn.setAttribute('aria-controls', wrap.id);
-    btn.setAttribute('aria-label', `Réduire ou développer la section ${heading.textContent?.trim() ?? id}`);
-    btn.title = 'Réduire / Développer la section';
+    syncSectionCollapseButton(btn, heading, id);
     btn.innerHTML = '<i class="bi bi-chevron-down" aria-hidden="true"></i>';
     headerWrap.appendChild(btn);
 
@@ -130,4 +155,10 @@ export function initCollapsibleSections(): void {
       });
     }
   });
+
+  syncAllCollapsibleLabels();
+  window.addEventListener('ob:langchange', () => {
+    queueMicrotask(syncAllCollapsibleLabels);
+  });
+  window.addEventListener('ob:langapplied', syncAllCollapsibleLabels);
 }

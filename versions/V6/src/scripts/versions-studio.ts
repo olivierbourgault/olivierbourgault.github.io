@@ -204,13 +204,16 @@ export function initVersionsStudio(): void {
     chipsContainer.innerHTML = palettes
       .map((p) => {
         const isSelected = p.key === state.activePaletteKey;
+        const previewTitle = isEn
+          ? `Preview style ${p.name}`
+          : `Tester le style ${p.name}`;
         return `
           <button
             type="button"
             class="studio-palette-chip"
             data-studio-palette="${escapeHtml(p.key)}"
             aria-pressed="${isSelected ? 'true' : 'false'}"
-            title="Tester le style ${escapeHtml(p.name)}"
+            title="${escapeHtml(previewTitle)}"
           >
             <span class="studio-palette-dot" style="background: ${escapeHtml(p.color)};"></span>
             <span>${escapeHtml(p.name)}</span>
@@ -225,32 +228,40 @@ export function initVersionsStudio(): void {
     const metaTitle = document.getElementById('studioMetaTitle');
     const metaDesc = document.getElementById('studioMetaDesc');
     const jumpTimelineBtn = document.getElementById('studioJumpTimeline');
+    const iframe = document.getElementById('studioIframe') as HTMLIFrameElement | null;
 
+    const isEn = getSiteLang() === 'en';
     const displayPath = targetUrl.replace(/^\/+/, '');
     if (addressText) addressText.textContent = `olivierbourgault.github.io/${displayPath}`;
     if (openExternal) {
       openExternal.setAttribute('href', targetUrl);
-      openExternal.setAttribute('title', `Ouvrir ${version.id} dans un nouvel onglet`);
+      openExternal.setAttribute(
+        'title',
+        isEn ? `Open ${version.id} in a new tab` : `Ouvrir ${version.id} dans un nouvel onglet`
+      );
     }
-    const isEn = getSiteLang() === 'en';
     if (isEn) {
       if (cachedVersionMetaEn?.[version.id]) {
         const enMeta = cachedVersionMetaEn[version.id];
         if (metaTitle) metaTitle.textContent = enMeta.title;
         if (metaDesc) metaDesc.textContent = enMeta.description;
+        if (iframe) iframe.setAttribute('title', `Live preview of ${enMeta.title}`);
       } else {
         if (metaTitle) metaTitle.textContent = version.title;
         if (metaDesc) metaDesc.textContent = version.description;
+        if (iframe) iframe.setAttribute('title', `Live preview of ${version.title}`);
         void getVersionMetaEn().then((map) => {
           if (getSiteLang() === 'en' && state.activeVersionId === version.id && map[version.id]) {
             if (metaTitle) metaTitle.textContent = map[version.id].title;
             if (metaDesc) metaDesc.textContent = map[version.id].description;
+            if (iframe) iframe.setAttribute('title', `Live preview of ${map[version.id].title}`);
           }
         });
       }
     } else {
       if (metaTitle) metaTitle.textContent = version.title;
       if (metaDesc) metaDesc.textContent = version.description;
+      if (iframe) iframe.setAttribute('title', `Aperçu en direct de ${version.title}`);
     }
     if (jumpTimelineBtn) jumpTimelineBtn.setAttribute('href', `#version-${version.id}`);
   }
@@ -309,7 +320,12 @@ export function initVersionsStudio(): void {
 
     const iframe = document.getElementById('studioIframe') as HTMLIFrameElement | null;
     if (iframe) {
-      iframe.setAttribute('title', `Aperçu en direct de ${version.title}`);
+      const isEn = getSiteLang() === 'en';
+      const activeTitle = (isEn && cachedVersionMetaEn?.[version.id]?.title) || version.title;
+      iframe.setAttribute(
+        'title',
+        isEn ? `Live preview of ${activeTitle}` : `Aperçu en direct de ${version.title}`
+      );
 
       let switchedLive = false;
       if (
@@ -338,7 +354,11 @@ export function initVersionsStudio(): void {
             // Ignorer
           }
         }
-        showStudioLoader(`Chargement de ${version.id} (${version.shortLabel})…`);
+        showStudioLoader(
+          getSiteLang() === 'en'
+            ? `Loading ${version.id} (${version.shortLabel})…`
+            : `Chargement de ${version.id} (${version.shortLabel})…`
+        );
         const isReloadSameUrl = forceReload && state.loadedVersionId === version.id;
         state.loadedVersionId = version.id;
         state.iframeReady = false;
@@ -458,7 +478,12 @@ export function initVersionsStudio(): void {
 
     const version = getVersionById(state.activeVersionId);
     const fsDisplayPath = state.activeUrl.replace(/^\/+/, '');
-    if (fsTitle) fsTitle.textContent = `Aperçu plein écran — ${version.id} (${version.shortLabel})`;
+    const isEn = getSiteLang() === 'en';
+    if (fsTitle) {
+      fsTitle.textContent = isEn
+        ? `Fullscreen preview — ${version.id} (${version.shortLabel})`
+        : `Aperçu plein écran — ${version.id} (${version.shortLabel})`;
+    }
     if (fsSub) fsSub.textContent = `olivierbourgault.github.io/${fsDisplayPath}`;
     if (fsOpen) fsOpen.setAttribute('href', state.activeUrl);
 

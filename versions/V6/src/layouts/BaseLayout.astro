@@ -117,7 +117,7 @@ const structuredData = noindex
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#121316" />
 
-    <!-- Résolution synchrone du thème avant le premier rendu (zéro FOUC) -->
+    <!-- Résolution synchrone du thème et de la langue avant le premier rendu (zéro FOUC) -->
     <script is:inline define:vars={{ themeKey: SITE.themeStorageKey }}>
       (function () {
         var mode = 'dark';
@@ -134,6 +134,35 @@ const structuredData = noindex
         if (meta) meta.setAttribute('content', mode);
         var themeColor = document.querySelector('meta[name="theme-color"]');
         if (themeColor) themeColor.setAttribute('content', isDark ? '#121316' : '#F4F1EA');
+
+        // Résolution synchrone de la langue (évite tout flash FR -> EN sur ?lang=en ou revisite EN)
+        var lang = 'fr';
+        try {
+          var qLang = new URLSearchParams(window.location.search).get('lang');
+          if (qLang === 'en' || qLang === 'fr') {
+            lang = qLang;
+          } else {
+            var stored = localStorage.getItem('ob_v6_lang');
+            if (!stored) {
+              var legacy = localStorage.getItem('ob_v6_cv_lang');
+              if (legacy === 'en' || legacy === 'fr') {
+                stored = legacy;
+                localStorage.setItem('ob_v6_lang', legacy);
+                localStorage.removeItem('ob_v6_cv_lang');
+              }
+            }
+            if (stored === 'en' || stored === 'fr') lang = stored;
+          }
+        } catch (e) {}
+        html.lang = lang;
+        html.dataset.lang = lang;
+        if (lang === 'en') {
+          html.setAttribute('data-i18n-pending', '1');
+          if (html.dataset.titleEn) document.title = html.dataset.titleEn;
+          window.setTimeout(function () {
+            html.removeAttribute('data-i18n-pending');
+          }, 600);
+        }
       })();
     </script>
     <style is:inline>
@@ -143,6 +172,12 @@ const structuredData = noindex
       }
       html.theme-light {
         background-color: #F4F1EA;
+      }
+      html[data-i18n-pending="1"] body {
+        opacity: 0;
+      }
+      html:not([data-i18n-pending]) body {
+        transition: opacity 0.12s ease;
       }
     </style>
 
@@ -209,7 +244,7 @@ const structuredData = noindex
       })();
     </script>
 
-    <a href="#main-content" class="skip-link visually-hidden-focusable">Aller au contenu principal</a>
+    <a href="#main-content" class="skip-link visually-hidden-focusable" data-i18n="skip.main">Aller au contenu principal</a>
 
     <!-- Curseur interactif Aahil Khan + Halo radial orange -->
     <div id="laser-dot" popover="manual" aria-hidden="true"></div>

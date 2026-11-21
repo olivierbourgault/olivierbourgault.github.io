@@ -43,23 +43,19 @@ export function initTypewriter(): void {
   let wordIndex = 0;
   let charIndex = getWords()[0].length;
   let isDeleting = true;
+  let timerId: number | null = null;
 
   el.textContent = getWords()[0];
 
-  window.addEventListener('ob:langchange', () => {
-    const list = getWords();
-    wordIndex = wordIndex % list.length;
-    if (reducedMotion || isDeleting) {
-      charIndex = list[wordIndex].length;
-      el.textContent = list[wordIndex];
+  function schedule(delayMs: number): void {
+    if (timerId !== null) {
+      window.clearTimeout(timerId);
     }
-  });
-
-  if (reducedMotion) {
-    return;
+    timerId = window.setTimeout(tick, delayMs);
   }
 
   function tick(): void {
+    timerId = null;
     const list = getWords();
     const currentWord = list[wordIndex % list.length];
     if (isDeleting) {
@@ -68,21 +64,37 @@ export function initTypewriter(): void {
       if (charIndex <= 0) {
         isDeleting = false;
         wordIndex = (wordIndex + 1) % list.length;
-        setTimeout(tick, 220);
+        schedule(220);
         return;
       }
-      setTimeout(tick, 45);
+      schedule(45);
     } else {
       charIndex++;
       el!.textContent = currentWord.slice(0, charIndex);
       if (charIndex >= currentWord.length) {
         isDeleting = true;
-        setTimeout(tick, 1800);
+        schedule(1800);
         return;
       }
-      setTimeout(tick, 65 + Math.floor(Math.random() * 40));
+      schedule(65 + Math.floor(Math.random() * 40));
     }
   }
 
-  setTimeout(tick, 1500);
+  window.addEventListener('ob:langchange', () => {
+    const list = getWords();
+    wordIndex = wordIndex % list.length;
+    const translatedWord = list[wordIndex];
+    charIndex = translatedWord.length;
+    isDeleting = true;
+    el.textContent = translatedWord;
+    if (!reducedMotion) {
+      schedule(1400);
+    }
+  });
+
+  if (reducedMotion) {
+    return;
+  }
+
+  schedule(1500);
 }
