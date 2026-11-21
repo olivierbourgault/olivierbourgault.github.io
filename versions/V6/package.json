@@ -15,7 +15,7 @@
     "site:assemble": "node tools/assemble-site.mjs",
     "site:links": "node tools/check-links.mjs",
     "site:serve": "node tools/serve-site.mjs --port 8080",
-    "verify": "npm run check && npm run build && npm run site:assemble && npm run site:links"
+    "verify": "node tools/verify.mjs"
   },
   "dependencies": {
     "@fontsource/chakra-petch": "^5.3.0",

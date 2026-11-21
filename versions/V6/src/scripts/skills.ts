@@ -59,25 +59,6 @@ export function initSkills(): void {
     syncState(!bothOpen);
   });
 
-  // Animation de barres de compétences éventuelles via IntersectionObserver (sans Waypoints)
-  const skillsBars = document.querySelectorAll<HTMLElement>('.skills-animation');
-  if (skillsBars.length > 0 && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.querySelectorAll<HTMLElement>('.progress .progress-bar').forEach((bar) => {
-            const val = bar.getAttribute('aria-valuenow');
-            if (val) bar.style.width = `${val}%`;
-          });
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.2 }
-    );
-    skillsBars.forEach((item) => observer.observe(item));
-  }
-
   window.addEventListener('resize', positionSkills, { passive: true });
   positionSkills();
 }

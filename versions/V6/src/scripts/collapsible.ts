@@ -2,7 +2,7 @@ import { getSiteLang } from './i18n';
 import { refreshScrollReveal } from './reveal';
 
 export function initCollapsibleSections(): void {
-  const sectionIds = ['expertise', 'about', 'skills', 'resume', 'portfolio', 'contact'];
+  const sectionIds = ['expertise', 'about', 'resume', 'portfolio', 'contact'];
   const sectionControllers = new Map<string, () => void>();
 
   function getCollapseWord(isExpanded: boolean): string {

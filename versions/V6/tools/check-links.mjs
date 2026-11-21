@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const v6Root = path.resolve(__dirname, '..');
 const repoRoot = path.resolve(v6Root, '..', '..');
 const siteDir = path.join(v6Root, '.site');
+const SITE_ORIGIN = 'https://olivierbourgault.github.io';
 
 if (!fs.existsSync(siteDir)) {
   console.error('Erreur : versions/V6/.site introuvable. Lancez `npm run site:assemble` d’abord.');
@@ -55,6 +56,33 @@ for (const ver of ['V1', 'V2', 'V3', 'V4', 'V5']) {
 }
 
 // 2. Vérifier tous les liens internes dans le HTML
+function resolveSitePath(rawPath) {
+  const clean = rawPath.split('#')[0].split('?')[0];
+  if (!clean) return { target: path.join(siteDir, 'index.html'), exists: fs.existsSync(path.join(siteDir, 'index.html')) };
+
+  const rel = clean.replace(/^\/+/, '');
+  const candidate = path.join(siteDir, rel);
+
+  if (candidate !== siteDir && !candidate.startsWith(siteDir + path.sep)) {
+    return { target: candidate, exists: false, reason: 'sort du site assemblé' };
+  }
+
+  if (fs.existsSync(candidate)) {
+    const stat = fs.statSync(candidate);
+    if (stat.isFile()) return { target: candidate, exists: true };
+    if (stat.isDirectory()) {
+      if (!clean.endsWith('/') && fs.existsSync(`${candidate}.html`)) {
+        return { target: `${candidate}.html`, exists: true };
+      }
+      const idx = path.join(candidate, 'index.html');
+      return { target: idx, exists: fs.existsSync(idx) };
+    }
+  } else if (!clean.endsWith('/') && fs.existsSync(`${candidate}.html`)) {
+    return { target: `${candidate}.html`, exists: true };
+  }
+  return { target: candidate, exists: false };
+}
+
 function resolveSiteTarget(currentHtmlFile, rawRef) {
   const ref = rawRef.trim();
   if (
@@ -75,14 +103,12 @@ function resolveSiteTarget(currentHtmlFile, rawRef) {
   const clean = ref.split('#')[0].split('?')[0];
   if (!clean) return null;
 
-  let candidate;
   if (clean.startsWith('/')) {
-    candidate = path.join(siteDir, clean.replace(/^\/+/, ''));
-  } else {
-    candidate = path.resolve(path.dirname(currentHtmlFile), clean);
+    return resolveSitePath(clean);
   }
 
-  if (!candidate.startsWith(siteDir)) {
+  const candidate = path.resolve(path.dirname(currentHtmlFile), clean);
+  if (candidate !== siteDir && !candidate.startsWith(siteDir + path.sep)) {
     return { target: candidate, exists: false, reason: 'sort du site assemblé' };
   }
 
@@ -141,7 +167,7 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
-// 3. Vérifier les routes principales et assets à la racine du site assemblé
+// 3. Vérifier les routes principales, standards Web/LLM et assets à la racine du site assemblé
 for (const required of [
   'index.html',
   'versions.html',
@@ -154,10 +180,24 @@ for (const required of [
   'identite.html',
   'logo_proposals.html',
   'cv-apercu.html',
+  'robots.txt',
+  'sitemap.xml',
+  'llms.txt',
+  'llms-full.txt',
+  'index.md',
+  'resume.md',
+  'identity.md',
+  'versions.md',
+  'humans.txt',
+  'site.webmanifest',
+  '.well-known/security.txt',
   'assets/docs/cv-fr.pdf',
   'assets/docs/cv-en.pdf',
+  'assets/docs/presentation-template.html',
   'assets/images/favicon.svg',
   'assets/images/avatar.webp',
+  'assets/images/hero-avatar.webp',
+  'assets/images/og-card.png',
   'assets/images/logos/logo-ob-tech.svg',
   'assets/images/logos/logo-terminal-tech.svg',
   'assets/images/logos/logo-neural-tech.svg'
@@ -168,20 +208,54 @@ for (const required of [
   }
 }
 
-// 4. Vérifier qu'aucun dossier/index.html ne redirige en boucle vers son propre chemin sans slash (GitHub Pages)
+// 4. Vérifier collisions fichier/dossier GitHub Pages & boucles de redirection
 for (const entry of fs.readdirSync(siteDir, { withFileTypes: true })) {
   if (!entry.isDirectory()) continue;
   const dirIndex = path.join(siteDir, entry.name, 'index.html');
-  if (!fs.existsSync(dirIndex)) continue;
-  const html = fs.readFileSync(dirIndex, 'utf8');
-  const selfRefresh = new RegExp(
-    `<meta[^>]+http-equiv=["']?refresh["']?[^>]+url=/${entry.name}["';\\s>]`,
-    'i'
-  );
-  if (selfRefresh.test(html)) {
-    errors.push(
-      `Boucle de redirection détectée sur GitHub Pages : ${entry.name}/index.html redirige vers /${entry.name}`
+  const siblingHtml = path.join(siteDir, `${entry.name}.html`);
+
+  if (fs.existsSync(dirIndex)) {
+    const html = fs.readFileSync(dirIndex, 'utf8');
+    const selfRefresh = new RegExp(
+      `<meta[^>]+http-equiv=["']?refresh["']?[^>]+url=/${entry.name}["';\\s>]`,
+      'i'
     );
+    if (selfRefresh.test(html)) {
+      errors.push(
+        `Boucle de redirection détectée sur GitHub Pages : ${entry.name}/index.html redirige vers /${entry.name}`
+      );
+    }
+  } else if (fs.existsSync(siblingHtml)) {
+    errors.push(
+      `Collision GitHub Pages : le dossier ${entry.name}/ sans index.html masque ${entry.name}.html`
+    );
+  }
+}
+
+// 5. Valider les URLs internes dans sitemap.xml, llms.txt, llms-full.txt et *.md
+let checkedDocUrls = 0;
+const docFilesToCheck = [
+  'sitemap.xml',
+  'llms.txt',
+  'llms-full.txt',
+  'index.md',
+  'resume.md',
+  'identity.md',
+  'versions.md'
+];
+const originUrlRegex = /https:\/\/olivierbourgault\.github\.io(\/[^\s"'<>)\]`]*)/g;
+
+for (const docRel of docFilesToCheck) {
+  const docPath = path.join(siteDir, docRel);
+  if (!fs.existsSync(docPath)) continue;
+  const content = fs.readFileSync(docPath, 'utf8');
+  for (const m of content.matchAll(originUrlRegex)) {
+    const urlPath = m[1].replace(/[.,;:]+$/, '');
+    const res = resolveSitePath(urlPath);
+    checkedDocUrls++;
+    if (!res.exists) {
+      errors.push(`URL interne cassée dans ${docRel} : ${SITE_ORIGIN}${urlPath}`);
+    }
   }
 }
 
@@ -200,4 +274,6 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`OK : ${htmlFiles.length} fichiers HTML vérifiés, ${checkedRefs} références internes valides, intégrité SHA-256 V1..V5 confirmée.`);
+console.log(
+  `OK : ${htmlFiles.length} fichiers HTML vérifiés (${checkedRefs} références internes), ${checkedDocUrls} URLs sitemap/LLM/Markdown valides, standards présents, intégrité SHA-256 V1..V5 confirmée.`
+);

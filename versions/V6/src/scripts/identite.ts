@@ -1,3 +1,4 @@
+import { copyTextToClipboard } from './clipboard';
 import { getSiteLang } from './i18n';
 import { bindVerticalNavSpy } from './vnav';
 
@@ -158,19 +159,6 @@ function initCopyButtons(): void {
   const copyTimers = new WeakMap<HTMLElement, number>();
   let lastCopyMessage = '';
 
-  function legacyCopy(text: string): boolean {
-    const field = Object.assign(document.createElement('textarea'), { value: text });
-    field.setAttribute('readonly', '');
-    field.style.cssText = 'position:fixed;inset-block-start:0;opacity:0';
-    document.body.append(field);
-    field.select();
-    try {
-      return document.execCommand('copy');
-    } finally {
-      field.remove();
-    }
-  }
-
   function reportCopy(button: HTMLElement, ok: boolean): void {
     const tip = button.nextElementSibling as HTMLElement | null;
     const prevTimer = copyTimers.get(button);
@@ -206,24 +194,8 @@ function initCopyButtons(): void {
       : target.innerText.trim();
     if (!text) return;
 
-    try {
-      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-        await navigator.clipboard.writeText(text);
-      } else if (!legacyCopy(text)) {
-        throw new Error('Clipboard unavailable');
-      }
-      reportCopy(button, true);
-    } catch {
-      try {
-        if (legacyCopy(text)) {
-          reportCopy(button, true);
-          return;
-        }
-      } catch {
-        // Ignorer
-      }
-      reportCopy(button, false);
-    }
+    const ok = await copyTextToClipboard(text);
+    reportCopy(button, ok);
   }
 
   if ('CommandEvent' in window) {

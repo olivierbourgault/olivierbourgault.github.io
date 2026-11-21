@@ -4,17 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olivier Bourgault — Redirection vers la version actuelle (V6)</title>
-  <meta name="description" content="Redirection automatique vers la version la plus récente du portfolio d'Olivier Bourgault (V6 Astro).">
-  <link rel="canonical" href="https://olivierbourgault.github.io/versions/V6/">
-  <meta http-equiv="refresh" content="0; url=versions/V6/">
-  <link href="versions/V6/assets/images/logos/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
-  <script>
-    (function () {
-      var target = 'versions/V6/';
-      window.location.replace(target + window.location.search + window.location.hash);
-    })();
-  </script>
+  <meta name="robots" content="noindex, follow">
+  <title>Olivier Bourgault — Portfolio V6 (Astro · Tech Canvas)</title>
+  <meta name="description" content="Dépôt source du portfolio officiel d'Olivier Bourgault déployé à la racine de olivierbourgault.github.io via GitHub Actions.">
+  <link rel="canonical" href="https://olivierbourgault.github.io/">
+  <link href="versions/V6/public/assets/images/logos/logo-ob-tech.svg" rel="icon" type="image/svg+xml">
   <style>
     body {
       margin: 0;
@@ -27,6 +21,23 @@
       text-align: center;
       padding: 24px;
     }
+    main {
+      max-width: 560px;
+      padding: 32px 28px;
+      border-radius: 16px;
+      background: #181A1F;
+      border: 2px solid #FF6600;
+      box-shadow: 6px 6px 0 #000000;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+    }
+    p {
+      margin: 0 0 14px;
+      line-height: 1.6;
+      color: #D1D5DB;
+    }
     a {
       color: #FF6600;
       font-weight: 700;
@@ -36,7 +47,7 @@
       text-decoration: underline;
     }
     .alt {
-      margin-top: 12px;
+      margin: 16px 0 0;
       font-size: 0.9rem;
       color: #9CA3AF;
     }
@@ -45,8 +56,19 @@
 
 <body>
   <main>
-    <p>Redirection vers la version la plus récente du portfolio… <a href="versions/V6/">Accéder à la V6</a></p>
-    <p class="alt">Archive précédente : <a href="versions/V5/">Consulter la V5</a></p>
+    <h1>Olivier Bourgault — Portfolio V6</h1>
+    <p>
+      Le site de production est compilé par GitHub Actions depuis <code>versions/V6/</code> et déployé directement à la racine :
+      <a href="https://olivierbourgault.github.io/">olivierbourgault.github.io</a>.
+    </p>
+    <p class="alt">
+      Archives statiques consultables directement :
+      <a href="versions/V5/">V5</a> &middot;
+      <a href="versions/V4/">V4</a> &middot;
+      <a href="versions/V3/">V3</a> &middot;
+      <a href="versions/V2/">V2</a> &middot;
+      <a href="versions/V1/">V1</a>
+    </p>
   </main>
 </body>
 

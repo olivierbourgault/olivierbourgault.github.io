@@ -1,29 +1,6 @@
 import { SITE } from '../data/site';
+import { copyTextToClipboard } from './clipboard';
 import { getSiteLang } from './i18n';
-
-async function copyText(text: string): Promise<boolean> {
-  if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      // Fallback below
-    }
-  }
-  try {
-    const area = document.createElement('textarea');
-    area.value = text;
-    area.setAttribute('readonly', '');
-    area.style.cssText = 'position:fixed;inset-block-start:0;opacity:0';
-    document.body.appendChild(area);
-    area.select();
-    const ok = document.execCommand('copy');
-    area.remove();
-    return ok;
-  } catch {
-    return false;
-  }
-}
 
 export function initContactForm(): void {
   const form = document.getElementById('contactForm') as HTMLFormElement | null;
@@ -42,7 +19,7 @@ export function initContactForm(): void {
   copyBtn?.addEventListener('click', async () => {
     const email = copyBtn.dataset.copyEmail || SITE.email;
     const isEn = getSiteLang() === 'en';
-    const ok = await copyText(email);
+    const ok = await copyTextToClipboard(email);
     const icon = copyBtn.querySelector('i');
 
     if (ok) {
