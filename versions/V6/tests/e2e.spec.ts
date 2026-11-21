@@ -210,4 +210,50 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     expect(headerDisplay).toBe('none');
     expect(sheetDisplay).not.toBe('none');
   });
+
+  test('Performance & Web Vitals budget: 0 lazy EN dictionary download in FR, 0 failed network requests, and CLS < 0.05', async ({
+    page
+  }) => {
+    const failedResponses: string[] = [];
+    const lazyI18nDownloads: string[] = [];
+
+    page.on('response', async (res) => {
+      if (res.status() >= 400) {
+        failedResponses.push(`${res.status()} ${res.url()}`);
+      }
+      if (/\/_astro\/i18n\..+\.js$/i.test(res.url())) {
+        try {
+          const buf = await res.body();
+          // Le dictionnaire anglais lazy (src/data/i18n.ts) pèse ~41.5 Ko (le runtime src/scripts/i18n.ts pèse ~6.5 Ko)
+          if (buf.byteLength > 15_000) {
+            lazyI18nDownloads.push(`${res.url()} (${buf.byteLength} B)`);
+          }
+        } catch {
+          // Ignorer
+        }
+      }
+    });
+
+    await page.goto('/', { waitUntil: 'networkidle' });
+
+    expect(failedResponses).toEqual([]);
+    expect(lazyI18nDownloads).toEqual([]);
+
+    const metrics = await page.evaluate(() => {
+      const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+      const layoutShifts = performance.getEntriesByType('layout-shift') as Array<
+        PerformanceEntry & { value?: number; hadRecentInput?: boolean }
+      >;
+      const cls = layoutShifts
+        .filter((e) => !e.hadRecentInput)
+        .reduce((sum, e) => sum + (e.value || 0), 0);
+      return {
+        domContentLoadedMs: nav ? nav.domContentLoadedEventEnd - nav.startTime : 0,
+        cls
+      };
+    });
+
+    expect(metrics.domContentLoadedMs).toBeLessThan(2000);
+    expect(metrics.cls).toBeLessThan(0.05);
+  });
 });

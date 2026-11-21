@@ -10,7 +10,8 @@ const steps = [
   ['run', 'check'],
   ['run', 'build'],
   ['run', 'site:assemble'],
-  ['run', 'site:links']
+  ['run', 'site:links'],
+  ['run', 'site:budgets']
 ];
 
 for (const args of steps) {

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build Astro V6 & Assemble Site
+    name: Build Astro V6, Audit Quality & Assemble Site
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -36,7 +36,18 @@ jobs:
         working-directory: versions/V6
         run: npm ci
 
-      - name: Sync GitHub portfolio catalog
+      - name: Cache Playwright Chromium binaries
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('versions/V6/package-lock.json') }}
+
+      - name: Install Playwright Chromium for CV PDF generation, E2E & WCAG 2.1 AA audit
+        working-directory: versions/V6
+        run: npx playwright install --with-deps chromium
+
+      - name: Sync GitHub portfolio catalog & WebP previews
         working-directory: versions/V6
         run: npm run portfolio:sync
 
@@ -52,19 +63,30 @@ jobs:
         working-directory: versions/V6
         run: npm run site:assemble
 
-      - name: Install Playwright Chromium for CV PDF generation, E2E & WCAG 2.1 AA audit
-        working-directory: versions/V6
-        run: npx playwright install --with-deps chromium
-
       - name: Generate CV PDFs (FR & EN) from /resume single source of truth
         working-directory: versions/V6
         run: npm run cv:pdf
+
+      - name: Auto-commit synced GitHub catalog, WebP previews & CV PDFs on cron/manual run
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add versions/V6/public/assets/data/github-projects.json versions/V6/public/assets/images/projects/github versions/V6/public/assets/docs/cv-fr.pdf versions/V6/public/assets/docs/cv-en.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(v6): auto-sync GitHub portfolio catalog, WebP previews & CV PDFs [skip ci]"
+            git push origin HEAD:main
+          fi
 
       - name: Verify archive integrity & internal links
         working-directory: versions/V6
         run: npm run site:links
 
-      - name: Run Playwright E2E & WCAG 2.1 AA accessibility tests
+      - name: Verify bundle size, asset & Lighthouse SEO budgets
+        working-directory: versions/V6
+        run: npm run site:budgets
+
+      - name: Run Playwright E2E, Web Vitals & WCAG 2.1 AA accessibility tests
         working-directory: versions/V6
         run: npm run test:e2e
 
