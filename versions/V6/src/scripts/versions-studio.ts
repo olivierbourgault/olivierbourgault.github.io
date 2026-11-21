@@ -294,14 +294,10 @@ export function initVersionsStudio(): void {
         tab.tabIndex = isCurrent ? 0 : -1;
         if (isCurrent) {
           panel?.setAttribute('aria-labelledby', tab.id);
-          try {
-            tab.scrollIntoView({
-              block: 'nearest',
-              inline: 'nearest',
-              container: 'nearest'
-            } as ScrollIntoViewOptions);
-          } catch {
-            tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          const tabLeft = tab.offsetLeft;
+          const tabRight = tabLeft + tab.offsetWidth;
+          if (tabLeft < tablist.scrollLeft || tabRight > tablist.scrollLeft + tablist.clientWidth) {
+            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: 'smooth' });
           }
         }
       });
@@ -389,14 +385,11 @@ export function initVersionsStudio(): void {
         if (nextIdx !== null) {
           e.preventDefault();
           tabs[nextIdx].focus();
-          try {
-            tabs[nextIdx].scrollIntoView({
-              block: 'nearest',
-              inline: 'nearest',
-              container: 'nearest'
-            } as ScrollIntoViewOptions);
-          } catch {
-            tabs[nextIdx].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+          const targetTab = tabs[nextIdx];
+          const tabLeft = targetTab.offsetLeft;
+          const tabRight = tabLeft + targetTab.offsetWidth;
+          if (tabLeft < tablist.scrollLeft || tabRight > tablist.scrollLeft + tablist.clientWidth) {
+            tablist.scrollTo({ left: Math.max(0, tabLeft - 16), behavior: 'smooth' });
           }
         }
       });

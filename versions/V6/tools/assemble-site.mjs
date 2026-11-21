@@ -53,6 +53,7 @@ fs.writeFileSync(
 <html lang="fr">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, follow">
   <meta http-equiv="refresh" content="0; url=/">
   <link rel="canonical" href="https://olivierbourgault.github.io/">
   <title>Redirection vers Olivier Bourgault</title>

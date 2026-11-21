@@ -12,30 +12,105 @@ import { withBase } from '../utils/paths';
 interface Props {
   title: string;
   description: string;
+  titleEn?: string;
+  descriptionEn?: string;
   keywords?: string;
   canonicalPath?: string;
   bodyClass: string;
   ogTitle?: string;
   ogDescription?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
   isCvPage?: boolean;
+  noindex?: boolean;
 }
 
 const {
   title,
   description,
+  titleEn,
+  descriptionEn,
   keywords,
   canonicalPath = '',
   bodyClass,
   ogTitle = title,
   ogDescription = description,
-  isCvPage = false
+  ogImage = 'assets/images/og-card.png',
+  ogImageAlt = "Olivier Bourgault — Développeur Full-Stack, IA & Technicien TI",
+  isCvPage = false,
+  noindex = false
 } = Astro.props;
 
+const SITE_ORIGIN = 'https://olivierbourgault.github.io';
 const normalizedPath = canonicalPath.replace(/^\/+/, '');
-const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
+const canonicalUrl = `${SITE_ORIGIN}/${normalizedPath}`;
+const enAlternateUrl = `${canonicalUrl}?lang=en`;
+const ogImageUrl = ogImage.startsWith('http')
+  ? ogImage
+  : `${SITE_ORIGIN}/${ogImage.replace(/^\/+/, '')}`;
+
+const structuredData = noindex
+  ? null
+  : {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          '@id': `${SITE_ORIGIN}/#website`,
+          url: `${SITE_ORIGIN}/`,
+          name: 'Olivier Bourgault — Portfolio',
+          inLanguage: ['fr-CA', 'en-CA'],
+          publisher: { '@id': `${SITE_ORIGIN}/#person` }
+        },
+        {
+          '@type': 'Person',
+          '@id': `${SITE_ORIGIN}/#person`,
+          name: SITE.author,
+          jobTitle: SITE.roleTitle,
+          url: `${SITE_ORIGIN}/`,
+          image: `${SITE_ORIGIN}/assets/images/hero-avatar.webp`,
+          email: `mailto:${SITE.email}`,
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Gatineau',
+            addressRegion: 'QC',
+            addressCountry: 'CA'
+          },
+          sameAs: [SITE.githubUrl, SITE.linkedinUrl],
+          knowsLanguage: ['fr-CA', 'en-CA'],
+          knowsAbout: [
+            'Développement Web Full-Stack',
+            'Intelligence Artificielle',
+            'Automatisation TI',
+            'Accessibilité Web (WCAG)',
+            'TypeScript',
+            'Python',
+            'C#',
+            'PowerShell'
+          ]
+        },
+        {
+          '@type': 'WebPage',
+          '@id': `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+          about: { '@id': `${SITE_ORIGIN}/#person` },
+          inLanguage: 'fr-CA'
+        }
+      ]
+    };
 ---
 <!DOCTYPE html>
-<html lang="fr" data-cv-version={isCvPage ? 'portfolio' : undefined}>
+<html
+  lang="fr"
+  data-cv-version={isCvPage ? 'portfolio' : undefined}
+  data-title-fr={title}
+  data-title-en={titleEn}
+  data-desc-fr={description}
+  data-desc-en={descriptionEn}
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -74,11 +149,39 @@ const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+
+    {!noindex && (
+      <>
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hreflang="fr-CA" href={canonicalUrl} />
+        <link rel="alternate" hreflang="en-CA" href={enAlternateUrl} />
+        <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+      </>
+    )}
+
+    <!-- Open Graph & Twitter Card -->
+    <meta property="og:site_name" content={SITE.author} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_CA" />
+    <meta property="og:locale:alternate" content="en_CA" />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:type" content="website" />
+    {!noindex && <meta property="og:url" content={canonicalUrl} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
 
     <!-- Favicons & Web App Manifest -->
     <link href={withBase('assets/images/logos/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />

@@ -11,16 +11,20 @@ import SectionTitle from '../SectionTitle.astro';
       <form id="contactForm" class="email-form">
         <div class="row gy-4">
           <div class="col-md-6">
-            <input type="text" name="name" class="form-control" placeholder="Votre nom" autocomplete="name" required />
+            <label for="contact-name" class="contact-field-label">Votre nom</label>
+            <input id="contact-name" type="text" name="name" class="form-control" placeholder="Votre nom" autocomplete="name" required />
           </div>
           <div class="col-md-6">
-            <input type="email" name="email" class="form-control" placeholder="Votre courriel" autocomplete="email" required />
+            <label for="contact-email" class="contact-field-label">Votre courriel</label>
+            <input id="contact-email" type="email" name="email" class="form-control" placeholder="Votre courriel" autocomplete="email" required />
           </div>
           <div class="col-12">
-            <input type="text" name="subject" class="form-control" placeholder="Sujet" required />
+            <label for="contact-subject" class="contact-field-label">Sujet</label>
+            <input id="contact-subject" type="text" name="subject" class="form-control" placeholder="Sujet" required />
           </div>
           <div class="col-12">
-            <textarea name="message" class="form-control" rows="6" placeholder="Votre message" required></textarea>
+            <label for="contact-message" class="contact-field-label">Votre message</label>
+            <textarea id="contact-message" name="message" class="form-control" rows="6" placeholder="Votre message" required></textarea>
           </div>
           <div class="col-12 text-center">
             <button type="submit" class="btn btn-submit w-100">Envoyer</button>

@@ -9,6 +9,11 @@ export const SITE_LANG_STORAGE_KEY = 'ob_v6_lang';
 export const EXACT_TEXT_FR_TO_EN: Record<string, string> = {
   // Global Navbar, Hub, Skip link & Footer
   'Aller au contenu principal': 'Skip to main content',
+  'Votre nom': 'Your Name',
+  'Votre courriel': 'Your Email',
+  Sujet: 'Subject',
+  'Votre message': 'Your Message',
+  'Filtrer les projets par catégorie': 'Filter projects by category',
   Accueil: 'Home',
   'À propos': 'About',
   CV: 'Resume',
@@ -556,6 +561,7 @@ export const ATTR_FR_TO_EN: Record<string, string> = {
   'Votre courriel': 'Your Email',
   Sujet: 'Subject',
   'Votre message': 'Your Message',
+  'Filtrer les projets par catégorie': 'Filter projects by category',
   'Télécharger mon CV (PDF — Français ou Anglais)': 'Download my Resume (PDF — French or English)',
   'Télécharger mon CV (Français ou Anglais)': 'Download my Resume (French or English)',
   'Afficher ou masquer toutes les compétences': 'Show or hide all skills',

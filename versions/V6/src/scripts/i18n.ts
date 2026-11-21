@@ -179,6 +179,26 @@ function syncLangToggleButtons(lang: SiteLang): void {
   });
 }
 
+function syncHeadMetadata(lang: SiteLang): void {
+  const html = document.documentElement;
+  const nextTitle = lang === 'en' ? html.dataset.titleEn : html.dataset.titleFr;
+  const nextDesc = lang === 'en' ? html.dataset.descEn : html.dataset.descFr;
+
+  if (nextTitle) {
+    document.title = nextTitle;
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', nextTitle);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', nextTitle);
+  }
+  if (nextDesc) {
+    document.querySelector('meta[name="description"]')?.setAttribute('content', nextDesc);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', nextDesc);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', nextDesc);
+  }
+  document
+    .querySelector('meta[property="og:locale"]')
+    ?.setAttribute('content', lang === 'en' ? 'en_CA' : 'fr_CA');
+}
+
 export function setSiteLang(lang: SiteLang, persist = true): void {
   currentLang = lang;
   document.documentElement.lang = lang;
@@ -193,6 +213,7 @@ export function setSiteLang(lang: SiteLang, persist = true): void {
     }
   }
 
+  syncHeadMetadata(lang);
   applyDomTranslations(document.body);
   syncLangToggleButtons(lang);
 

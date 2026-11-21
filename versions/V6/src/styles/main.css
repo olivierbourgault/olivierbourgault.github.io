@@ -409,6 +409,36 @@ h6 {
   transform: translateY(-2px);
 }
 
+/* Lien d'évitement clavier global (WCAG 2.4.1) */
+.skip-link {
+  transition: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed !important;
+  top: 12px !important;
+  left: 12px !important;
+  z-index: 100050 !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: normal !important;
+  border: 0 !important;
+  border-radius: 8px;
+  background: #121316 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: none;
+  outline: 3px solid #FF6600 !important;
+  outline-offset: 2px;
+  transition: none !important;
+}
+
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -1297,7 +1327,9 @@ section,
   margin-bottom: 1.25rem;
 }
 
-.resume-block-header h2 {
+.resume-block-header h2,
+.resume-block-header h3,
+.resume-block-header .resume-block-title {
   margin-bottom: 0 !important;
 }
 
@@ -1553,6 +1585,7 @@ section,
   overflow: visible;
 }
 
+.hero .content h1,
 .hero .content h2 {
   font-size: 3.5rem;
   font-weight: 700;
@@ -1561,6 +1594,7 @@ section,
 }
 
 @media (max-width: 991px) {
+  .hero .content h1,
   .hero .content h2 {
     font-size: 2.5rem;
   }
@@ -1855,13 +1889,15 @@ section,
   margin-bottom: 0;
 }
 
-.resume .resume-wrapper .resume-block h2 {
+.resume .resume-wrapper .resume-block h2,
+.resume .resume-wrapper .resume-block .resume-block-title {
   font-size: 2rem;
   margin-bottom: 0.8rem;
   font-weight: 700;
 }
 
-.resume .resume-wrapper .resume-block h2 span {
+.resume .resume-wrapper .resume-block h2 span,
+.resume .resume-wrapper .resume-block .resume-block-title span {
   color: var(--accent-color);
 }
 
@@ -1903,8 +1939,11 @@ section,
 
 .resume .resume-wrapper .timeline .timeline-item .timeline-left .company {
   color: var(--heading-color);
+  font-family: var(--heading-font);
   font-weight: 600;
   font-size: 1.1rem;
+  line-height: 1.2;
+  margin-top: 0;
   margin-bottom: 0.25rem;
 }
 
@@ -1951,7 +1990,8 @@ section,
 }
 
 @media (max-width: 992px) {
-  .resume .resume-wrapper .resume-block h2 {
+  .resume .resume-wrapper .resume-block h2,
+  .resume .resume-wrapper .resume-block .resume-block-title {
     font-size: 2rem;
   }
 
@@ -2001,6 +2041,12 @@ section,
 }
 
 .portfolio .portfolio-filters li {
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio .portfolio-filters .portfolio-filter-btn {
+  font-family: inherit;
   font-size: 15px;
   font-weight: 500;
   padding: 8px 20px;
@@ -2012,14 +2058,19 @@ section,
   transition: all 0.3s ease-in-out;
 }
 
-.portfolio .portfolio-filters li:hover {
+.portfolio .portfolio-filters .portfolio-filter-btn:hover {
   background-color: color-mix(in srgb, var(--secondary-accent), transparent 85%);
   color: var(--secondary-accent);
   border-color: var(--secondary-accent);
   transform: translateY(-2px);
 }
 
-.portfolio .portfolio-filters li.filter-active {
+.portfolio .portfolio-filters .portfolio-filter-btn:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+.portfolio .portfolio-filters .portfolio-filter-btn.filter-active {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--contrast-color);
@@ -2176,7 +2227,7 @@ section,
 }
 
 @media (max-width: 768px) {
-  .portfolio .portfolio-filters li {
+  .portfolio .portfolio-filters .portfolio-filter-btn {
     font-size: 14px;
     padding: 6px 15px;
   }
@@ -2215,6 +2266,14 @@ section,
   box-shadow: var(--card-shadow);
   border-radius: 16px;
   margin-top: -3em;
+}
+
+.contact .contact-form .contact-field-label {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--heading-color), transparent 15%);
 }
 
 .contact .contact-form .form-control,
@@ -2540,6 +2599,7 @@ body[data-palette="tech-canvas"]:not(.dark) .hero {
 }
 
 /* Cadre de sélection Figma Orange + Poignées carrées (Shabnam) */
+body[data-palette="tech-canvas"] .hero .content h1,
 body[data-palette="tech-canvas"] .hero .content h2 {
   position: relative;
   border: 1.5px solid #FF6600;
@@ -2550,10 +2610,12 @@ body[data-palette="tech-canvas"] .hero .content h2 {
   font-weight: 700;
 }
 
+body[data-palette="tech-canvas"] .hero .content h1::before,
 body[data-palette="tech-canvas"] .hero .content h2::before {
   display: none;
 }
 
+body[data-palette="tech-canvas"] .hero .content h1 .hero-layer-tag,
 body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag {
   position: absolute;
   top: -26px;
@@ -2575,6 +2637,7 @@ body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag {
   text-transform: uppercase;
 }
 
+body[data-palette="tech-canvas"] .hero .content h1 .hero-layer-tag .typewriter,
 body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag .typewriter {
   color: #121316 !important;
   -webkit-text-fill-color: #121316 !important;
@@ -2589,10 +2652,12 @@ body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag .typewriter {
   text-align: left !important;
 }
 
+body[data-palette="tech-canvas"] .hero .content h1 .hero-layer-tag .typewriter::after,
 body[data-palette="tech-canvas"] .hero .content h2 .hero-layer-tag .typewriter::after {
   border-right: 2px solid #121316;
 }
 
+body[data-palette="tech-canvas"] .hero .content h1::after,
 body[data-palette="tech-canvas"] .hero .content h2::after {
   content: "";
   position: absolute;
@@ -2605,6 +2670,7 @@ body[data-palette="tech-canvas"] .hero .content h2::after {
 }
 
 /* Surligneur dynamique orange / ambre (Shabnam + Tech) */
+body[data-palette="tech-canvas"] .hero .content h1 span.hero-title-highlight,
 body[data-palette="tech-canvas"] .hero .content h2 span.hero-title-highlight {
   background-color: #FF6600;
   color: #121316 !important;
@@ -2965,6 +3031,23 @@ body[data-palette="tech-canvas"]:not(.dark) .tech-marquee-item svg {
   padding: 0.65rem 1.4rem;
   border-radius: 50px;
   transition: all 0.25s ease;
+}
+
+#skills-collapsable .skill-pill {
+  display: inline-block;
+  margin: 0.25rem;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  text-align: center;
+  border-radius: 50px;
+  border: 2px solid color-mix(in srgb, var(--secondary-accent), transparent 60%);
+  color: var(--secondary-accent);
+  background: color-mix(in srgb, var(--secondary-accent), transparent 94%);
+  cursor: default;
+  user-select: text;
 }
 
 #btn-toggle-all-skills {

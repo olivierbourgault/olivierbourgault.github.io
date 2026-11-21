@@ -64,7 +64,7 @@ const resumeNavItems: VerticalNavItem[] = RESUME_BLOCKS.map((block, index) => ({
                 data-aos-delay={block.delay}
               >
                 <div class="resume-block-header">
-                  <h2>{block.title}</h2>
+                  <h3 class="resume-block-title">{block.title}</h3>
                   <button
                     type="button"
                     class="resume-block-toggle"
@@ -85,7 +85,7 @@ const resumeNavItems: VerticalNavItem[] = RESUME_BLOCKS.map((block, index) => ({
                       {block.items.map((item) => (
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay={item.delay}>
                           <div class="timeline-left">
-                            <h4 class="company">{item.company}</h4>
+                            <p class="company">{item.company}</p>
                             <span class="period">{item.period}</span>
                           </div>
                           <div class="timeline-dot" aria-hidden="true"></div>
@@ -93,7 +93,7 @@ const resumeNavItems: VerticalNavItem[] = RESUME_BLOCKS.map((block, index) => ({
                             {item.roles.map((role) => (
                               <>
                                 {role.period && <span class="period">{role.period}</span>}
-                                <h3 class="position">{role.position}</h3>
+                                <h4 class="position">{role.position}</h4>
                                 <p class="description" set:html={role.descriptionHtml} />
                               </>
                             ))}

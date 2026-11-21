@@ -626,11 +626,14 @@ export function initPortfolio(): void {
 
   const filtersList = document.getElementById('filters');
   filtersList?.addEventListener('click', (e) => {
-    const li = (e.target as Element | null)?.closest<HTMLElement>('li[data-filter]');
-    if (!li) return;
-    filtersList.querySelectorAll('.filter-active').forEach((el) => el.classList.remove('filter-active'));
-    li.classList.add('filter-active');
-    currentFilter = li.getAttribute('data-filter') || '*';
+    const btn = (e.target as Element | null)?.closest<HTMLButtonElement>('button[data-filter]');
+    if (!btn) return;
+    filtersList.querySelectorAll<HTMLButtonElement>('button[data-filter]').forEach((el) => {
+      const isCurrent = el === btn;
+      el.classList.toggle('filter-active', isCurrent);
+      el.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+    });
+    currentFilter = btn.getAttribute('data-filter') || '*';
     portfolioShowAll = false;
     applyPortfolioFilterWithLimit();
   });

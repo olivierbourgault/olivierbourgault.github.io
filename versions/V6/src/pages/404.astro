@@ -17,8 +17,10 @@ const navLinks: NavLinkItem[] = [
 <BaseLayout
   title="Page introuvable (404) | Olivier Bourgault"
   description="Cette ressource est introuvable sur le portfolio d'Olivier Bourgault."
-  canonicalPath="404.html"
+  titleEn="Page Not Found (404) | Olivier Bourgault"
+  descriptionEn="This resource could not be found on Olivier Bourgault's portfolio."
   bodyClass="error-page dark"
+  noindex={true}
 >
   <SiteHeader links={navLinks} currentPage="404" />
 

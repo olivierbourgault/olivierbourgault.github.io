@@ -28,11 +28,27 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
       items={initialNavItems}
     >
       <div class="portfolio-filters-container" data-aos="fade-up" data-aos-delay="200">
-        <ul class="portfolio-filters isotope-filters" id="filters">
-          <li data-filter="*" class="filter-active">Tout</li>
-          <li data-filter=".filter-school">Scolaires</li>
-          <li data-filter=".filter-professional">Professionnels</li>
-          <li data-filter=".filter-personal">Personnels</li>
+        <ul class="portfolio-filters isotope-filters" id="filters" aria-label="Filtrer les projets par catégorie">
+          <li>
+            <button type="button" data-filter="*" class="portfolio-filter-btn filter-active" aria-pressed="true">
+              Tout
+            </button>
+          </li>
+          <li>
+            <button type="button" data-filter=".filter-school" class="portfolio-filter-btn" aria-pressed="false">
+              Scolaires
+            </button>
+          </li>
+          <li>
+            <button type="button" data-filter=".filter-professional" class="portfolio-filter-btn" aria-pressed="false">
+              Professionnels
+            </button>
+          </li>
+          <li>
+            <button type="button" data-filter=".filter-personal" class="portfolio-filter-btn" aria-pressed="false">
+              Personnels
+            </button>
+          </li>
         </ul>
       </div>
 
