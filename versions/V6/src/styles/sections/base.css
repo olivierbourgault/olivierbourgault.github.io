@@ -1,0 +1,440 @@
+/* ==========================================================================
+   OB TECH CANVAS — STYLES PRINCIPAUX V6
+   Migré depuis versions/V5/assets/css/main.css (direction artistique Tech Canvas exclusive)
+   ========================================================================== */
+/* Fusion Boot Loader (Tracé OB Tech + Nœuds IA + Terminal CLI) */
+.ob-boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--background-color, #121316);
+  transition: opacity 0.16s ease;
+}
+.ob-boot-loader.is-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+.ob-boot-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--surface-color, #181A1F);
+  border: 2px solid #FF6600;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 #000000;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.ob-boot-emblem {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ob-boot-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 102, 0, 0.25), transparent 70%);
+}
+.ob-draw-hex {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 280;
+  animation: obDrawHex 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.ob-draw-b {
+  stroke-dasharray: 240;
+  stroke-dashoffset: 240;
+  animation: obDrawB 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.ob-sat-1 { animation: obSatPulse 1.3s 0s ease-in-out infinite; }
+.ob-sat-2 { animation: obSatPulse 1.3s 0.4s ease-in-out infinite; }
+.ob-sat-3 { animation: obSatPulse 1.3s 0.8s ease-in-out infinite; }
+.ob-edge-1 { animation: obEdgeFlow 1.3s 0.15s ease-in-out infinite; }
+.ob-edge-2 { animation: obEdgeFlow 1.3s 0.5s ease-in-out infinite; }
+.ob-edge-3 { animation: obEdgeFlow 1.3s 0.85s ease-in-out infinite; }
+.ob-boot-terminal {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--coding-font);
+  font-size: 0.78rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ob-boot-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ob-boot-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+}
+.ob-boot-pct {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FF6600;
+}
+.ob-boot-line {
+  color: var(--default-color, #F5F5F7);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ob-boot-line span { color: #38BDF8; }
+.ob-boot-line.is-accent { color: #FF6600; }
+.ob-boot-line.is-visible { opacity: 1; transform: translateY(0); }
+.ob-boot-bar-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.ob-boot-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #FF6600, #38BDF8);
+  transition: width 0.4s ease;
+}
+@keyframes obDrawHex { 0% { stroke-dashoffset: 280; } 70%, 100% { stroke-dashoffset: 0; } }
+@keyframes obDrawB { 0%, 15% { stroke-dashoffset: 240; } 85%, 100% { stroke-dashoffset: 0; } }
+@keyframes obSatPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+@keyframes obEdgeFlow { 0%, 100% { stroke-opacity: 0.25; } 50% { stroke-opacity: 0.95; } }
+@media (max-width: 480px) {
+  .ob-boot-card { flex-direction: column; text-align: center; padding: 18px 16px; }
+  .ob-boot-terminal { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ob-draw-hex, .ob-draw-b { stroke-dashoffset: 0; animation: none; }
+  .ob-sat-1, .ob-sat-2, .ob-sat-3, .ob-edge-1, .ob-edge-2, .ob-edge-3 { animation: none; }
+}
+
+
+/*--------------------------------------------------------------
+# 3. Typewriter effect (JS Vanilla engine + CSS caret)
+--------------------------------------------------------------*/
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.typewriter {
+  color: var(--accent-color);
+  font-family: var(--coding-font);
+  --caret: currentcolor;
+}
+
+.dark .typewriter {
+  text-shadow: 0 0 22px color-mix(in srgb, var(--accent-color), transparent 55%);
+}
+
+.typewriter::after {
+  content: "";
+  border-right: 1px solid var(--caret);
+  animation: blink 0.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter::after {
+    animation: none;
+  }
+}
+
+/*--------------------------------------------------------------
+# 4. General Styling & Shared Classes
+--------------------------------------------------------------*/
+body {
+  color: var(--default-color);
+  background-color: transparent;
+  font-family: var(--default-font);
+  word-wrap: break-word;
+  max-width: 90%;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Animated Interactive Tech Canvas Background */
+#tech-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Masque la grille CSS statique lorsque le canvas animé gère le quadrillage réactif */
+html.has-animated-grid body.dark[data-palette="tech-canvas"]::before,
+html.has-animated-grid body[data-palette="tech-canvas"]:not(.dark)::before {
+  display: none;
+}
+
+/* Ambient Background Blobs (filter: blur(45px)) */
+.ambient-blobs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.ambient-blobs .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(45px);
+}
+
+.ambient-blobs .blob-1 {
+  width: 34rem;
+  height: 34rem;
+  top: -8rem;
+  left: -8rem;
+  background: radial-gradient(circle, var(--blob-primary) 0%, transparent 70%);
+}
+
+.ambient-blobs .blob-2 {
+  width: 38rem;
+  height: 38rem;
+  top: 12%;
+  right: -6rem;
+  background: radial-gradient(circle, var(--blob-secondary) 0%, transparent 70%);
+}
+
+.ambient-blobs .blob-3 {
+  width: 32rem;
+  height: 32rem;
+  bottom: 5%;
+  left: 15%;
+  background: radial-gradient(circle, var(--blob-primary) 0%, transparent 70%);
+}
+
+a {
+  color: var(--secondary-accent);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+.cta-buttons .btn {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.cta-buttons .btn.btn-primary {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--contrast-color);
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--accent-color), transparent 60%);
+}
+
+.cta-buttons .btn.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+  transform: translateY(-2px);
+}
+
+.cta-buttons .btn.btn-secondary-accent {
+  background-color: var(--secondary-accent);
+  border-color: var(--secondary-accent);
+  color: #FFFFFF;
+  box-shadow: 0 6px 22px color-mix(in srgb, var(--secondary-accent), transparent 60%);
+}
+
+.cta-buttons .btn.btn-secondary-accent:hover {
+  background-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
+  border-color: color-mix(in srgb, var(--secondary-accent), transparent 15%);
+  transform: translateY(-2px);
+}
+
+
+/*--------------------------------------------------------------
+# Custom Interactive Cursor / Pointer (Aahil Khan inspired)
+--------------------------------------------------------------*/
+#cursor,
+#laser-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #FF6600;
+  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.45), 0 0 18px rgba(255, 102, 0, 0.65);
+  pointer-events: none;
+  z-index: 100000;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  will-change: transform;
+  display: block;
+  transition:
+    opacity 0.16s ease,
+    width 0.18s cubic-bezier(0, 0, 0.2, 1),
+    height 0.18s cubic-bezier(0, 0, 0.2, 1),
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+#cursor.on,
+#laser-dot.on {
+  opacity: 1;
+}
+
+/* Halo / Glow ambiant orange derrière le pointeur (inspiré de Aahil Khan) */
+#cursor::before,
+#laser-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 102, 0, 0.25) 0%,
+    rgba(255, 102, 0, 0.12) 32%,
+    rgba(255, 102, 0, 0.035) 58%,
+    transparent 74%
+  );
+  pointer-events: none;
+  z-index: -1;
+  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+}
+
+#cursor.big::before,
+#laser-dot.big::before {
+  width: 480px;
+  height: 480px;
+}
+
+/* État Big Ring : Survol de boutons, cartes, onglets et contrôles principaux */
+#cursor.big,
+#laser-dot.big {
+  width: 34px;
+  height: 34px;
+  background: transparent !important;
+  border: 2.5px solid #FF6600;
+  box-shadow:
+    0 0 0 2px rgba(18, 19, 22, 0.7),
+    0 0 18px rgba(255, 102, 0, 0.6),
+    inset 0 0 8px rgba(255, 102, 0, 0.25);
+}
+
+/* État Precise Target : Survol de liens, icônes, tags, puces et champs de texte */
+#cursor.precise,
+#laser-dot.precise {
+  width: 14px;
+  height: 14px;
+  background: #38BDF8 !important; /* Bleu néon OB Tech */
+  border: none;
+  box-shadow:
+    0 0 0 2px #FFFFFF,
+    0 0 0 4.5px rgba(56, 189, 248, 0.65),
+    0 0 20px rgba(56, 189, 248, 0.85);
+}
+
+/* Désactivation automatique sur appareils tactiles */
+@media (hover: none), (pointer: coarse) {
+  #cursor,
+  #laser-dot {
+    display: none !important;
+  }
+}
+
+
+.cta-buttons .btn.btn-outline {
+  border: 2px solid color-mix(in srgb, var(--secondary-accent), transparent 60%);
+  color: var(--secondary-accent);
+  background: transparent;
+}
+
+.cta-buttons .btn.btn-outline:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--contrast-color);
+  transform: translateY(-2px);
+}
+
+/* Lien d'évitement clavier global (WCAG 2.4.1) */
+.skip-link {
+  transition: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  position: fixed !important;
+  top: 12px !important;
+  left: 12px !important;
+  z-index: 100050 !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 10px 16px !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: normal !important;
+  border: 0 !important;
+  border-radius: 8px;
+  background: #121316 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  text-decoration: none;
+  outline: 3px solid #FF6600 !important;
+  outline-offset: 2px;
+  transition: none !important;
+}
