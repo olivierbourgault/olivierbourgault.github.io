@@ -16,6 +16,7 @@
     "site:assemble": "node tools/assemble-site.mjs",
     "site:links": "node tools/check-links.mjs",
     "site:serve": "node tools/serve-site.mjs --port 8080",
+    "test:e2e": "playwright test",
     "verify": "node tools/verify.mjs"
   },
   "dependencies": {
@@ -27,6 +28,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.1",
     "bootstrap-icons": "^1.11.3",
     "typescript": "^5.9.3"
   }

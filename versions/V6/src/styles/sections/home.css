@@ -964,3 +964,8 @@
   background: color-mix(in srgb, var(--surface-color), transparent 30%);
   color: color-mix(in srgb, var(--default-color), transparent 20%);
 }
+
+.portfolio-text a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

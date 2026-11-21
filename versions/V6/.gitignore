@@ -2,9 +2,11 @@
 node_modules/
 .astro/
 
-# Sorties de build
+# Sorties de build & tests
 dist/
 .site/
+test-results/
+playwright-report/
 
 # Divers
 npm-debug.log*

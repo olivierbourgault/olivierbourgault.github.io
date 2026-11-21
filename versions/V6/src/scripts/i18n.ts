@@ -209,6 +209,8 @@ export function applyDomTranslations(root: ParentNode = document.body): void {
 
 function syncLangToggleButtons(lang: SiteLang): void {
   const nextCode = lang === 'fr' ? 'EN' : 'FR';
+  const nextAria =
+    lang === 'fr' ? 'Switch to English — EN' : 'Passer en français — FR';
   const nextTitle =
     lang === 'fr' ? 'Switch to English (EN)' : 'Passer en français (FR)';
 
@@ -217,7 +219,7 @@ function syncLangToggleButtons(lang: SiteLang): void {
   });
 
   document.querySelectorAll<HTMLElement>('[data-toggle-site-lang], #langSwitcherBtn').forEach((btn) => {
-    btn.setAttribute('aria-label', nextTitle);
+    btn.setAttribute('aria-label', nextAria);
     btn.setAttribute('title', nextTitle);
     btn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
   });

@@ -668,16 +668,16 @@ body[data-palette="tech-canvas"]:not(.dark) .tech-marquee-item svg {
 #btn-toggle-all-skills {
   background: #FF6600;
   border: 2px solid #FF6600;
-  color: #ffffff;
+  color: #0b0c0e;
   box-shadow: 4px 4px 0px #000000;
 }
 
 #btn-toggle-all-skills:hover {
-  background: #e55c00;
-  border-color: #e55c00;
+  background: #ff7a1f;
+  border-color: #ff7a1f;
   transform: translateY(-2px);
   box-shadow: 6px 6px 0px #000000;
-  color: #ffffff;
+  color: #0b0c0e;
 }
 
 #btn-toggle-all-skills.active-all {
