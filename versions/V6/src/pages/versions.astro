@@ -17,15 +17,15 @@ const navLinks: NavLinkItem[] = [
   { label: 'Accueil', href: withBase('') },
   { label: 'Studio', href: '#studio', active: true },
   { label: 'Évolution', href: '#timeline' },
-  { label: 'CV', href: withBase('cv-apercu.html') },
-  { label: 'Identité', href: withBase('identite.html') }
+  { label: 'CV', href: withBase('resume') },
+  { label: 'Identité', href: withBase('identity') }
 ];
 ---
 <BaseLayout
   title="Navigateur de versions — Studio Interactif V1 à V6 | Olivier Bourgault"
   description="Explorez et testez en direct toutes les versions du portfolio d'Olivier Bourgault (V1, V2, V3, V4, V5 et V6 Astro) : prévisualisation interactive multi-écrans, bascule de palettes et historique complet."
   keywords="Versions, Historique Portfolio, Olivier Bourgault, V1, V2, V3, V4, V5, V6, Tech Canvas, Studio Interactif"
-  canonicalPath="versions.html"
+  canonicalPath="versions"
   bodyClass="versions-page dark"
 >
   <SiteHeader
@@ -33,7 +33,7 @@ const navLinks: NavLinkItem[] = [
     currentPage="versions"
     drawerExtras={[
       { href: withBase(''), icon: 'bi-house-door', label: 'Portfolio actuel', title: 'Portfolio actuel' },
-      { href: withBase('identite.html'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
+      { href: withBase('identity'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
     ]}
   />
 
@@ -43,7 +43,7 @@ const navLinks: NavLinkItem[] = [
     <Timeline />
   </main>
 
-  <SiteFooter brandText="OB TECH • ARCHIVE STUDIO" creditsMode="subpage" />
+  <SiteFooter />
   <ScrollTop href="#versions-hero" label="Retour en haut de page" />
 
   <CvDownloadDialog />

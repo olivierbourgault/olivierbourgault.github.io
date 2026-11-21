@@ -16,18 +16,12 @@ if (!fs.existsSync(distDir)) {
 fs.rmSync(siteDir, { recursive: true, force: true });
 fs.mkdirSync(siteDir, { recursive: true });
 
-// 1. Racine : index.html, .nojekyll, et 404.html (depuis dist/404.html)
-fs.copyFileSync(path.join(repoRoot, 'index.html'), path.join(siteDir, 'index.html'));
+// 1. Copie du build Astro V6 directement à la racine (.site/) pour des URLs propres :
+//    / , /versions , /identity , /resume , /404.html
+fs.cpSync(distDir, siteDir, { recursive: true });
 fs.writeFileSync(path.join(siteDir, '.nojekyll'), '', 'utf8');
 
-const built404 = path.join(distDir, '404.html');
-if (!fs.existsSync(built404)) {
-  console.error('Erreur : dist/404.html est manquant dans le build Astro.');
-  process.exit(1);
-}
-fs.copyFileSync(built404, path.join(siteDir, '404.html'));
-
-// 2. Dossier versions/ + redirection versions/index.html
+// 2. Dossier versions/ + redirection /versions/ -> /versions
 const siteVersionsDir = path.join(siteDir, 'versions');
 fs.mkdirSync(siteVersionsDir, { recursive: true });
 
@@ -49,8 +43,24 @@ for (const ver of ['V1', 'V2', 'V3', 'V4', 'V5']) {
   fs.cpSync(src, dest, { recursive: true, preserveTimestamps: true });
 }
 
-// 4. Copie du build Astro dans versions/V6/
-const siteV6Dir = path.join(siteVersionsDir, 'V6');
-fs.cpSync(distDir, siteV6Dir, { recursive: true });
+// 4. Alias /versions/V6/ -> / pour rétrocompatibilité des anciens liens
+const legacyV6Dir = path.join(siteVersionsDir, 'V6');
+fs.mkdirSync(legacyV6Dir, { recursive: true });
+fs.writeFileSync(
+  path.join(legacyV6Dir, 'index.html'),
+  `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=/">
+  <link rel="canonical" href="https://olivierbourgault.github.io/">
+  <title>Redirection vers Olivier Bourgault</title>
+  <script>window.location.replace('/' + window.location.search + window.location.hash);</script>
+</head>
+<body><p><a href="/">Accéder au portfolio</a></p></body>
+</html>
+`,
+  'utf8'
+);
 
 console.log('Assemblage du site terminé dans versions/V6/.site/');

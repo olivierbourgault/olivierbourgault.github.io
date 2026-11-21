@@ -45,15 +45,15 @@ const server = http.createServer((req, res) => {
   }
 
   try {
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    if (!urlPath.endsWith('/') && fs.existsSync(`${filePath}.html`) && fs.statSync(`${filePath}.html`).isFile()) {
+      filePath = `${filePath}.html`;
+    } else if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
       if (!urlPath.endsWith('/')) {
         res.writeHead(301, { Location: `${urlPath}/` });
         res.end();
         return;
       }
       filePath = path.join(filePath, 'index.html');
-    } else if (!fs.existsSync(filePath) && fs.existsSync(`${filePath}.html`)) {
-      filePath = `${filePath}.html`;
     }
 
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {

@@ -1,3 +1,5 @@
+import { getSiteLang } from './i18n';
+
 export function initSkills(): void {
   const container = document.querySelector<HTMLElement>('#skills-collapsable > div');
   const toggleBtn = document.getElementById('btn-toggle-all-skills') as HTMLButtonElement | null;
@@ -10,6 +12,18 @@ export function initSkills(): void {
     container.classList.toggle('flex-column', window.innerWidth < 540);
   }
 
+  function updateToggleLabel(isOpen: boolean): void {
+    if (!toggleText) return;
+    const isEn = getSiteLang() === 'en';
+    toggleText.textContent = isOpen
+      ? isEn
+        ? 'Hide All Skills'
+        : 'Masquer tout'
+      : isEn
+        ? 'Show All Skills'
+        : 'Tout afficher (Tous)';
+  }
+
   function syncState(isOpen: boolean): void {
     if (!langEl || !softEl || !toggleBtn || !toggleText) return;
     langEl.classList.toggle('show', isOpen);
@@ -19,12 +33,19 @@ export function initSkills(): void {
 
     toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     toggleBtn.classList.toggle('active-all', isOpen);
-    toggleText.textContent = isOpen ? 'Masquer tout' : 'Tout afficher (Tous)';
+    updateToggleLabel(isOpen);
     const icon = toggleBtn.querySelector('i');
     if (icon) {
       icon.className = isOpen ? 'bi bi-chevron-up me-2' : 'bi bi-grid-3x3-gap-fill me-2';
     }
   }
+
+  window.addEventListener('ob:langchange', () => {
+    const bothOpen =
+      (langEl?.classList.contains('show') ?? false) &&
+      (softEl?.classList.contains('show') ?? false);
+    updateToggleLabel(bothOpen);
+  });
 
   if (langEl && softEl) {
     langEl.inert = !langEl.classList.contains('show');

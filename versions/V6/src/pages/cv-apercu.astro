@@ -1,108 +1,25 @@
 ---
-import '../styles/pages/cv-apercu.css';
-
-import CvDownloadDialog from '../components/CvDownloadDialog.astro';
-import ScrollTop from '../components/ScrollTop.astro';
-import SiteFooter from '../components/SiteFooter.astro';
-import SiteHeader from '../components/SiteHeader.astro';
-import ResumeSheets from '../components/cv/ResumeSheets.astro';
-import { SITE, type NavLinkItem } from '../data/site';
-import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../utils/paths';
 
-const homeBase = withBase('');
-const navLinks: NavLinkItem[] = [
-  { label: 'Accueil', href: `${homeBase}#hero` },
-  { label: 'À propos', href: `${homeBase}#about` },
-  { label: 'CV', href: `${homeBase}#resume`, active: true },
-  { label: 'Portfolio', href: `${homeBase}#portfolio` },
-  { label: 'Contact', href: `${homeBase}#contact` }
-];
+const target = withBase('resume');
+const canonical = 'https://olivierbourgault.github.io/resume';
 ---
-<BaseLayout
-  title="CV - Aperçu | Olivier Bourgault"
-  description="Aperçu complet du curriculum vitae d'Olivier Bourgault (CV_V3), version Web imprimable adaptée au thème Tech Canvas (modes Sombre et Clair)."
-  keywords="CV, Curriculum Vitae, Aperçu, Olivier Bourgault, Technique de l'informatique, Intelligence Artificielle, Développeur, Gatineau"
-  canonicalPath="cv-apercu.html"
-  bodyClass="cv-apercu-page dark"
-  isCvPage={true}
->
-  <SiteHeader
-    links={navLinks}
-    currentPage="cv"
-    stickyTop={true}
-    drawerExtras={[
-      { href: withBase('versions.html'), icon: 'bi-clock-history', label: 'Navigateur de versions', title: 'Navigateur de versions' },
-      { href: withBase('identite.html'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
-    ]}
-  />
-
-  <main id="main-content" class="main" tabindex="-1">
-    <div class="page-card">
-      <div class="resume">
-        <!-- Version & Back Bar -->
-        <div class="cv-version-bar" role="region" aria-label="Navigation du CV">
-          <div class="cv-version-meta">
-            <a href={`${homeBase}#resume`} class="cv-back-link">
-              <i class="bi bi-arrow-left" aria-hidden="true"></i>
-              <span>Retour au portfolio</span>
-            </a>
-            <span class="cv-version-status" id="cvVersionStatus" aria-live="polite">Thème Portfolio (Sombre)</span>
-          </div>
-        </div>
-
-        <!-- Resume Page Header -->
-        <div class="resume-head">
-          <div class="resume-head-title">
-            <h1>CV - Aperçu</h1>
-            <p>Curriculum vitae complet (CV_V3) — Olivier Bourgault, Gatineau</p>
-          </div>
-          <div class="resume-head-actions">
-            <button type="button" class="dl-btn dl-btn-secondary" data-print-cv>
-              <i class="bi bi-printer" aria-hidden="true"></i>
-              <span>Imprimer</span>
-            </button>
-            <button type="button" class="dl-btn dl-btn-secondary" data-open-dialog="cvDownloadDialog">
-              <i class="bi bi-translate" aria-hidden="true"></i>
-              <span>PDF FR / EN</span>
-            </button>
-            <a href={withBase(SITE.cvFrPdf)} class="dl-btn" download={SITE.cvFrFilename}>
-              <i class="bi bi-download" aria-hidden="true"></i>
-              <span>Télécharger PDF</span>
-            </a>
-          </div>
-        </div>
-
-        <ResumeSheets />
-
-        <!-- Resume Bottom CTA -->
-        <div class="resume-foot">
-          <div class="d-flex flex-wrap justify-content-center gap-3">
-            <a href={withBase(SITE.cvFrPdf)} class="dl-btn" download={SITE.cvFrFilename}>
-              <i class="bi bi-download" aria-hidden="true"></i>
-              <span>Télécharger PDF (FR)</span>
-            </a>
-            <button type="button" class="dl-btn dl-btn-secondary" data-open-dialog="cvDownloadDialog">
-              <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
-              <span>Choisir FR ou EN</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <SiteFooter brandText="OB TECH • CV APERÇU" creditsMode="subpage" />
-  <ScrollTop href="#" label="Retour en haut" />
-  <CvDownloadDialog />
-
-  <script>
-    import { initCvApercuPage } from '../scripts/cv-apercu';
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCvApercuPage);
-    } else {
-      initCvApercuPage();
-    }
-  </script>
-</BaseLayout>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Aperçu — Redirection vers /resume</title>
+    <link rel="canonical" href={canonical} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link href={withBase('assets/images/logos/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
+    <script is:inline define:vars={{ target }}>
+      window.location.replace(target + window.location.search + window.location.hash);
+    </script>
+  </head>
+  <body>
+    <main>
+      <p>Redirection vers <a href={target}>/resume</a>…</p>
+    </main>
+  </body>
+</html>

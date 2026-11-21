@@ -26,7 +26,7 @@ export const PORTFOLIO_VERSIONS: PortfolioVersion[] = [
     id: 'V6',
     shortLabel: 'Astro · Tech Canvas',
     title: 'Version 6.0 — Édition Astro · Tech Canvas Componentisée',
-    path: '/versions/V6/',
+    path: '/',
     date: '2026',
     status: 'Actuelle · Recommandée',
     statusType: 'live',
@@ -46,7 +46,7 @@ export const PORTFOLIO_VERSIONS: PortfolioVersion[] = [
       {
         key: 'tech-canvas',
         name: 'Tech Canvas (V6 Astro)',
-        url: '/versions/V6/',
+        url: '/',
         color: 'linear-gradient(135deg, #FF6600, #121316)'
       }
     ]

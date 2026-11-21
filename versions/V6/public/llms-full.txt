@@ -1,0 +1,151 @@
+# Olivier Bourgault — Contexte complet du portfolio (llms-full.txt)
+
+> Développeur Full-Stack, IA & Technicien TI basé à Gatineau / Ottawa, QC (Canada). Ce document rassemble l'intégralité du contenu structuré du portfolio officiel (Version 6 — Astro · Tech Canvas) pour faciliter la lecture par les LLM et agents IA.
+
+---
+
+## 1. Coordonnées et liens officiels
+
+- **Nom**: Olivier Bourgault
+- **Rôle**: Développeur Full-Stack, IA & Technicien TI
+- **Localisation**: Gatineau / Ottawa, QC, Canada
+- **Courriel**: bourgault.olivier8501@gmail.com
+- **Début de parcours en informatique**: 2021-01-25
+- **Portfolio**: https://olivierbourgault.github.io/
+- **Aperçu du CV (Web)**: https://olivierbourgault.github.io/resume
+- **Identité visuelle**: https://olivierbourgault.github.io/identity
+- **Navigateur de versions**: https://olivierbourgault.github.io/versions
+- **Versions Markdown**: https://olivierbourgault.github.io/index.md, `/resume.md`, `/identity.md`, `/versions.md`
+- **CV PDF (FR)**: https://olivierbourgault.github.io/assets/docs/cv-fr.pdf
+- **Resume PDF (EN)**: https://olivierbourgault.github.io/assets/docs/cv-en.pdf
+- **Template de présentation Tech Canvas**: https://olivierbourgault.github.io/assets/docs/presentation-template.html
+- **GitHub**: https://github.com/RinoShip77
+- **Dépôt projets**: https://github.com/RinoShip77/MesProjets
+- **LinkedIn**: https://www.linkedin.com/in/olivier-bourgault-5b950428a
+
+---
+
+## 2. Piliers technologiques
+
+### Développement Full-Stack
+Conception d'applications Web et logicielles réactives, modulaires et accessibles (WCAG). Maîtrise des écosystèmes modernes : C# / .NET MAUI, Angular, Vue, React, Symfony et architectures RESTful.
+
+### Intelligence Artificielle
+Spécialisation avancée (AEC IA au Collège O'Sullivan de Québec). Entraînement et déploiement de modèles de Machine Learning, Deep Learning, pipelines de traitement de données (Python, Pandas, Scikit-Learn) et agents intelligents.
+
+### Systèmes TI & Automatisation
+Rigueur issue d'expériences concrètes (Chambre des communes, Élections Canada). Automatisation de tâches complexes via PowerShell / Batch, gestion d'infrastructures réseaux, Active Directory et contrôle de versions Git.
+
+---
+
+## 3. Compétences techniques
+
+### Langages & Frameworks
+HTML, CSS, JavaScript, TypeScript, Python, C#, C++, PHP, Kotlin, Dart, SQL (MySQL / MariaDB), MongoDB, PowerShell, Batch, YAML, JSON, XAML, Angular, Vue, React, Vite, NodeJS, Symfony, Twig, .NET / .NET MAUI, WPF, Flutter, Expo / React Native, Electron, Bootstrap, jQuery, Docker, Kubernetes, NPM / YARN.
+
+### Logiciels & Environnements
+Visual Studio, Visual Studio Code, Antigravity, GitHub, Azure DevOps, Android Studio, Postman, Mockoon, Node-RED, MongoDB Compass, SQL Developer, phpMyAdmin, WampServer, WordPress, cPanel, Arduino / Arduino IDE, Windows, Linux, Android.
+
+---
+
+## 4. Expériences professionnelles en informatique
+
+### Chambre des Communes - House of Commons (Ottawa | 2023 - 2024)
+- **Été 2024 — Technicien informatique (Accessibilité & Assurance qualité)**
+  Tester des sites et des applications afin d'assurer leur conformité aux directives pour l'accessibilité du contenu Web (WCAG). Consigner les résultats dans Azure DevOps et produire des rapports Excel détaillés pour guider les équipes de développement.
+- **Été 2023 — Technicien informatique (Support & Automatisation)**
+  Assister les utilisateurs via un système de billets, incluant l'analyse de la base de données pour identifier les causes profondes des incidents. Concevoir et mettre en œuvre le script PowerShell *CompareTools* pour automatiser la comparaison de fichiers et accélérer le dépannage par l'équipe de support.
+
+### VIWEB (Saint-Jérôme | 2024)
+- **Développeur Web**
+  Développer mon propre thème sur mesure pour un site WordPress de vente en ligne avec l'extension WooCommerce. Personnaliser le catalogue de produits et automatiser le processus d'achat.
+
+### Cégep de Saint-Jérôme (Saint-Jérôme | 2023 - 2024)
+- **Agent de soutien aux utilisateurs (Tuteur TIC)**
+  Accueillir et soutenir techniquement les étudiants et usagers du cégep, incluant l'assistance à l'impression, l'accès aux services en ligne du collège et l'utilisation de la suite Microsoft 365.
+
+---
+
+## 5. Formation académique
+
+- **Collège O'Sullivan de Québec** (Québec | 2026 - 2027, en cours) — *Attestation d'études collégiales (AEC) en intelligence artificielle*: Spécialisation dans le développement de solutions d'intelligence artificielle, l'apprentissage automatique, l'analyse de données et l'intégration de modèles IA au sein d'applications modernes.
+- **Cégep de Saint-Jérôme** (Saint-Jérôme | 2024) — *Diplôme d'études collégiales (DEC) en technique de l'informatique*: Formation approfondie en développement d'applications Web, mobiles et logicielles, gestion de bases de données, architecture client-serveur et méthodologies agiles.
+- **École secondaire Hormisdas-Gamelin** (Gatineau | 2018) — *Diplôme d'études secondaires*: Parcours réalisé au sein du programme profil sportif.
+
+---
+
+## 6. Autres expériences professionnelles & perfectionnement
+
+- **Élections Canada** (Gatineau | 2025) — *Préposé à l'information*: Accueil et orientation des électeurs, validation des pièces d'identité, gestion des flux, logistique du site de vote, gestion des documents électoraux, dépouillement et application des protocoles d'assistance aux personnes à mobilité réduite.
+- **Sportmax & Club de Tennis de Buckingham** (Gatineau | 2016 - 2022) — *Animateur et Aide-instructeur*: Planification, organisation et animation d'activités pour des groupes d'enfants, sécurité, accueil/départs et supervision.
+- **Cégep de Saint-Jérôme** (Saint-Jérôme | 2020 - 2022) — *Concierge*: Entretien et désinfection rigoureuse des aires communes des résidences étudiantes.
+- **Microsoft Learn** (Gatineau / Ottawa) — *Modules de formation continue*: Autoformation via les parcours techniques Microsoft Learn (.NET, C#, Azure DevOps, développement Web et outils infonuagiques).
+- **Formations complémentaires** (2020 - 2022): Cours en premiers soins (2022), Formation SIMDUT (2020), Cours de secourisme (2020), Permis de conduire Classe 5.
+
+---
+
+## 7. Projets phares (Dépôt GitHub RinoShip77/MesProjets)
+
+1. **HubAI** (`Personnels/HubAI` — Personnels • IA)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Personnels/HubAI
+   - Description: Plateforme modulaire unifiant quatre applications propulsées par l'intelligence artificielle générative. Intégration de modèles de langage (LLM), conception de prompts structurés, traitement de données en temps réel et interface Web réactive.
+   - Technologies: Python, API Gemini / LLM, JavaScript, REST API.
+
+2. **CompareTools** (`Professionnels/HoC-CdC_E23/CompareTools` — Professionnels • Chambre des Communes, 2023)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Professionnels/HoC-CdC_E23/CompareTools
+   - Description: Outil d'automatisation en PowerShell conçu pour comparer finement des fichiers et dossiers ligne par ligne, accélérant le diagnostic des incidents et l'efficacité de l'équipe de support TI.
+   - Technologies: PowerShell, Automatisation, Diagnostic TI.
+
+3. **Electrolib** (`Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib` — Scolaires • 2023)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib
+   - Description: Logiciel complet de gestion d'inventaire destiné à une bibliothèque (Projet de développement 420-5C8-JR), reposant sur une application cliente en Angular et un serveur back-end en Symfony.
+   - Technologies: Angular, TypeScript, Symfony, PHP / SQL.
+
+4. **Kaomia** (`Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia` — Scolaires • 2023)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia
+   - Description: Portail multi-clients de consultation des statistiques d'un jeu (cours 420-5D4-JR), intégrant un client Web en Vue.js, une application mobile en Kotlin et un serveur Node.js.
+   - Technologies: Vue.js, Kotlin (Android), Node.js.
+
+5. **EVOMEAL** (`Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL` — Scolaires • 2023)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL
+   - Description: Plateforme Web de commerce en ligne développée avec le framework Symfony, incluant la gestion dynamique des produits, des commandes et des utilisateurs.
+   - Technologies: Symfony, Twig, PHP, MySQL.
+
+6. **Shopro** (`Personnels/Shopro` — Personnels • E-Commerce)
+   - URL: https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Shopro
+   - Description: Boutique de vente en ligne avec thème personnalisé, catalogue sur mesure et automatisation du parcours d'achat.
+   - Technologies: WordPress, WooCommerce, PHP / CSS.
+
+---
+
+## 8. Identité visuelle « Tech Canvas »
+
+- **Palette principale**:
+  - Carbone (Dark bg): `#121316`
+  - Ivoire (Light bg): `#F4F1EA`
+  - Orange Signal (Accent primaire): `#FF6600`
+  - Bleu Circuit (Accent secondaire): `#38BDF8`
+- **Logos vectoriels OB Tech**:
+  - Monogramme Hexagonal OB Tech (TI / DevOps)
+  - Terminal `</>` (Développement Full-Stack)
+  - Nœud Neuronal (Intelligence Artificielle)
+
+---
+
+## 9. Historique des versions du portfolio
+
+- **V6 (2026 — Actuelle)**: Édition Astro · Tech Canvas componentisée (Astro 6, TypeScript, polices auto-hébergées, dialogues natifs, i18n FR/EN site complet, canvas animé, routage propre `/`, `/versions`, `/identity`, `/resume`).
+- **V5 (2026)**: Édition Tech Canvas & Studio Interactif (`/versions/V5/`).
+- **V4 (2026)**: Édition OB Tech & Identité Vectorielle, 7 palettes commutables (`/versions/V4/`).
+- **V3 (2026)**: Édition Multi-Styles, 6 thèmes commutables (`/versions/V3/`).
+- **V2 (2026)**: Édition IA & Enrichie (`/versions/V2/`).
+- **V1 (2025)**: Archive Initiale (`/versions/V1/`).
+
+---
+
+## 10. Fichiers standards & Ressources complémentaires
+
+- **Index LLM**: `/llms.txt` et `/llms-full.txt`
+- **Versions Markdown des pages**: `/index.md`, `/resume.md`, `/identity.md`, `/versions.md`
+- **Template de présentation Tech Canvas**: `/assets/docs/presentation-template.html` (gabarit HTML autonome avec Design System Tech Canvas, mode sombre/clair `T`, Express `E`, Plan `O`, Notes `N`, Présentateur `P`, Glossaire `G`, FAQ `Q`, Laser `L` et arrière-plan animé `#tech-bg-canvas`)
+- **Métadonnées & découverte Web**: `/robots.txt`, `/sitemap.xml`, `/.well-known/security.txt`, `/humans.txt`, `/site.webmanifest`

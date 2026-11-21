@@ -43,10 +43,10 @@ olivierbourgault.github.io/
 
 ## Pages publiées (V6 active)
 
-- **Accueil Portfolio :** [https://olivierbourgault.github.io/versions/V6/](https://olivierbourgault.github.io/versions/V6/)
-- **Navigateur de versions (Studio live + Frise V6 → V1) :** [https://olivierbourgault.github.io/versions/V6/versions.html](https://olivierbourgault.github.io/versions/V6/versions.html)
-- **Identité visuelle & Charte des 3 logos :** [https://olivierbourgault.github.io/versions/V6/identite.html](https://olivierbourgault.github.io/versions/V6/identite.html) *(alias historique conservé : [`logo_proposals.html`](https://olivierbourgault.github.io/versions/V6/logo_proposals.html))*
-- **CV - Aperçu imprimable :** [https://olivierbourgault.github.io/versions/V6/cv-apercu.html](https://olivierbourgault.github.io/versions/V6/cv-apercu.html)
+- **Accueil Portfolio :** [https://olivierbourgault.github.io](https://olivierbourgault.github.io)
+- **Navigateur de versions (Studio live + Frise V6 → V1) :** [https://olivierbourgault.github.io/versions](https://olivierbourgault.github.io/versions)
+- **Identité visuelle & Charte des 3 logos :** [https://olivierbourgault.github.io/identity](https://olivierbourgault.github.io/identity) *(alias conservés : [`identite.html`](https://olivierbourgault.github.io/identite.html), [`logo_proposals.html`](https://olivierbourgault.github.io/logo_proposals.html))*
+- **CV - Aperçu imprimable (FR / EN) :** [https://olivierbourgault.github.io/resume](https://olivierbourgault.github.io/resume) *(alias conservé : [`cv-apercu.html`](https://olivierbourgault.github.io/cv-apercu.html))*
 
 ---
 

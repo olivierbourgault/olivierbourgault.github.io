@@ -90,9 +90,14 @@ function resolveSiteTarget(currentHtmlFile, rawRef) {
     const stat = fs.statSync(candidate);
     if (stat.isFile()) return { target: candidate, exists: true };
     if (stat.isDirectory()) {
+      if (!clean.endsWith('/') && fs.existsSync(`${candidate}.html`)) {
+        return { target: `${candidate}.html`, exists: true };
+      }
       const idx = path.join(candidate, 'index.html');
       return { target: idx, exists: fs.existsSync(idx) };
     }
+  } else if (!clean.endsWith('/') && fs.existsSync(`${candidate}.html`)) {
+    return { target: `${candidate}.html`, exists: true };
   }
   return { target: candidate, exists: false };
 }
@@ -136,22 +141,26 @@ for (const htmlFile of htmlFiles) {
   }
 }
 
-// 3. Vérifier l'alias logo_proposals -> identite.html et la présence de toutes les pages V6 attendues
+// 3. Vérifier les routes principales et assets à la racine du site assemblé
 for (const required of [
   'index.html',
+  'versions.html',
+  'identity.html',
+  'resume.html',
   '404.html',
   '.nojekyll',
   'versions/index.html',
   'versions/V6/index.html',
-  'versions/V6/versions.html',
-  'versions/V6/identite.html',
-  'versions/V6/logo_proposals.html',
-  'versions/V6/cv-apercu.html',
-  'versions/V6/assets/CV_CL-FR.pdf',
-  'versions/V6/assets/CV_CL-EN.pdf',
-  'versions/V6/assets/img/logo/logo-ob-tech.svg',
-  'versions/V6/assets/img/logo/logo-terminal-tech.svg',
-  'versions/V6/assets/img/logo/logo-neural-tech.svg'
+  'identite.html',
+  'logo_proposals.html',
+  'cv-apercu.html',
+  'assets/docs/cv-fr.pdf',
+  'assets/docs/cv-en.pdf',
+  'assets/images/favicon.svg',
+  'assets/images/avatar.webp',
+  'assets/images/logos/logo-ob-tech.svg',
+  'assets/images/logos/logo-terminal-tech.svg',
+  'assets/images/logos/logo-neural-tech.svg'
 ]) {
   const full = path.join(siteDir, required);
   if (!fs.existsSync(full)) {

@@ -17,8 +17,8 @@ export const SITE = {
   linkedinUrl: 'https://www.linkedin.com/in/olivier-bourgault-5b950428a',
   location: 'Gatineau / Ottawa, QC',
   careerStartDate: '2021-01-25',
-  cvFrPdf: 'assets/CV_CL-FR.pdf',
-  cvEnPdf: 'assets/CV_CL-EN.pdf',
+  cvFrPdf: 'assets/docs/cv-fr.pdf',
+  cvEnPdf: 'assets/docs/cv-en.pdf',
   cvFrFilename: 'CV_Olivier_Bourgault_FR.pdf',
   cvEnFilename: 'Resume_Olivier_Bourgault_EN.pdf',
   themeStorageKey: 'ob_v6_theme'

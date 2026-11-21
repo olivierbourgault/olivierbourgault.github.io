@@ -4,6 +4,22 @@ const PRECISE_SELECTORS =
 const BIG_SELECTORS =
   '.btn, button, .portfolio-card, .tech-pillar-card, .hero-stats .stat-item, .versions-btn-primary, .versions-btn-secondary, .versions-btn-outline, .timeline-version-card, .versions-kpi-card, .identite-btn-primary, .identite-btn-secondary, .identite-btn-outline, .origin-step-card, .logo-chapter-card, .palette-token-card, dialog.ob-dialog, .logo';
 
+export function promoteCursorToTopLayer(): void {
+  const cursorDot = document.getElementById('laser-dot') as (HTMLElement & {
+    showPopover?: () => void;
+    hidePopover?: () => void;
+  }) | null;
+  if (!cursorDot || typeof cursorDot.showPopover !== 'function') return;
+  try {
+    if (cursorDot.matches(':popover-open') && typeof cursorDot.hidePopover === 'function') {
+      cursorDot.hidePopover();
+    }
+    cursorDot.showPopover();
+  } catch {
+    // Ignorer si l'élément n'est pas connecté ou si le navigateur refuse la promotion
+  }
+}
+
 export function initInteractiveCursor(): void {
   const cursorDot = document.getElementById('laser-dot');
   if (!cursorDot) return;
@@ -35,6 +51,7 @@ export function initInteractiveCursor(): void {
   }
 
   cursorDot.style.display = 'block';
+  promoteCursorToTopLayer();
   cursorDot.classList.add('on');
   document.body.style.cursor = 'none';
   rafId = requestAnimationFrame(tick);

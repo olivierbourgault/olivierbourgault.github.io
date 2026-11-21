@@ -1,10 +1,18 @@
+---
+interface Props {
+  inDrawer?: boolean;
+}
+
+const { inDrawer = false } = Astro.props;
+---
 <button
   type="button"
-  id="themeSwitcherBtn"
+  id={inDrawer ? undefined : 'themeSwitcherBtn'}
   class="theme-switcher-btn"
+  data-theme-toggle
   aria-label="Passer au mode clair"
   title="Passer au mode clair"
   aria-pressed="true"
 >
-  <i id="themeSwitcher" class="bi bi-sun-fill" aria-hidden="true"></i>
+  <i id={inDrawer ? undefined : 'themeSwitcher'} data-theme-icon class="bi bi-sun-fill" aria-hidden="true"></i>
 </button>

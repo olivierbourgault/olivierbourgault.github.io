@@ -225,6 +225,10 @@ body.cv-apercu-page .resume-sheet a {
   gap: 24px;
 }
 
+.resume-pages[hidden] {
+  display: none !important;
+}
+
 .resume-sheet {
   min-width: 0;
   max-width: 100%;
@@ -534,16 +538,18 @@ html[data-cv-version="portfolio"] .cv-version-btn {
   font-family: var(--heading-font);
 }
 
-html[data-cv-version="portfolio"] .cv-version-btn:hover {
+html[data-cv-version="portfolio"] .cv-version-btn:not(.active):hover {
   border-color: #FF6600;
   color: #C24E00;
 }
 
-html[data-cv-version="portfolio"] body.cv-apercu-page.dark .cv-version-btn:hover {
+html[data-cv-version="portfolio"] body.cv-apercu-page.dark .cv-version-btn:not(.active):hover {
   color: #FF6600;
 }
 
-html[data-cv-version="portfolio"] .cv-version-btn.active {
+html[data-cv-version="portfolio"] .cv-version-btn.active,
+html[data-cv-version="portfolio"] .cv-version-btn.active:hover,
+html[data-cv-version="portfolio"] body.cv-apercu-page.dark .cv-version-btn.active:hover {
   background: #FF6600;
   border-color: #161616;
   color: #121316;

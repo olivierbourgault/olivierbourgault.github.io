@@ -28,18 +28,17 @@ export function applyTheme(isDark: boolean, persist = true): void {
     }
   }
 
-  const icon = document.getElementById('themeSwitcher');
-  const btn = document.getElementById('themeSwitcherBtn');
-  if (icon) {
+  document.querySelectorAll<HTMLElement>('[data-theme-icon], #themeSwitcher').forEach((icon) => {
     icon.classList.toggle('bi-sun-fill', isDark);
     icon.classList.toggle('bi-moon-stars-fill', !isDark);
-  }
-  if (btn) {
-    const label = isDark ? 'Passer au mode clair' : 'Passer au mode sombre';
+  });
+
+  const label = isDark ? 'Passer au mode clair' : 'Passer au mode sombre';
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle], #themeSwitcherBtn').forEach((btn) => {
     btn.setAttribute('aria-label', label);
     btn.setAttribute('title', label);
     btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-  }
+  });
 
   if (persist) {
     try {
@@ -62,12 +61,11 @@ export function initTheme(): void {
 
   applyTheme(isDark, false);
 
-  const btn = document.getElementById('themeSwitcherBtn');
-  if (btn) {
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle], #themeSwitcherBtn').forEach((btn) => {
     btn.addEventListener('click', () => {
       applyTheme(!isDarkTheme(), true);
     });
-  }
+  });
 
   window.addEventListener('storage', (e) => {
     if (e.key === SITE.themeStorageKey && (e.newValue === 'light' || e.newValue === 'dark')) {

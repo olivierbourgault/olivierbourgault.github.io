@@ -1,8 +1,14 @@
 import AOS from 'aos';
+import { getSiteLang } from './i18n';
 
 export function initCollapsibleSections(): void {
   const sectionIds = ['expertise', 'about', 'skills', 'resume', 'portfolio', 'contact'];
   const sectionControllers = new Map<string, () => void>();
+
+  function getCollapseWord(isExpanded: boolean): string {
+    const isEn = getSiteLang() === 'en';
+    return isExpanded ? (isEn ? 'Collapse' : 'Réduire') : isEn ? 'Expand' : 'Afficher';
+  }
 
   function setWrapState(
     wrap: HTMLElement,
@@ -19,7 +25,7 @@ export function initCollapsibleSections(): void {
     if (btn) {
       btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
       const label = btn.querySelector('.toggle-label');
-      if (label) label.textContent = isExpanded ? 'Réduire' : 'Afficher';
+      if (label) label.textContent = getCollapseWord(isExpanded);
     }
 
     const sectionEl = wrap.closest('section.section');

@@ -1,4 +1,6 @@
-const WORDS = [
+import { getSiteLang } from './i18n';
+
+const WORDS_FR = [
   'Développeur',
   'Programmeur',
   'Technicien',
@@ -10,34 +12,62 @@ const WORDS = [
   'Professionnel'
 ];
 
+const WORDS_EN = [
+  'Developer',
+  'Programmer',
+  'IT Technician',
+  'Integrator',
+  'Designer',
+  'Creator',
+  'Coder',
+  'Computer Scientist',
+  'Professional'
+];
+
+function getWords(): string[] {
+  return getSiteLang() === 'en' ? WORDS_EN : WORDS_FR;
+}
+
 export function initTypewriter(): void {
   const el = document.querySelector<HTMLElement>('.typewriter');
   if (!el || el.dataset.twInit === '1') return;
   el.dataset.twInit = '1';
 
+  let reducedMotion = false;
   try {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      el.textContent = WORDS[0];
-      return;
-    }
+    reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   } catch {
-    // Continuer si matchMedia échoue
+    reducedMotion = false;
   }
 
   let wordIndex = 0;
-  let charIndex = WORDS[0].length;
+  let charIndex = getWords()[0].length;
   let isDeleting = true;
 
-  el.textContent = WORDS[0];
+  el.textContent = getWords()[0];
+
+  window.addEventListener('ob:langchange', () => {
+    const list = getWords();
+    wordIndex = wordIndex % list.length;
+    if (reducedMotion || isDeleting) {
+      charIndex = list[wordIndex].length;
+      el.textContent = list[wordIndex];
+    }
+  });
+
+  if (reducedMotion) {
+    return;
+  }
 
   function tick(): void {
-    const currentWord = WORDS[wordIndex];
+    const list = getWords();
+    const currentWord = list[wordIndex % list.length];
     if (isDeleting) {
       charIndex--;
-      el!.textContent = currentWord.slice(0, charIndex);
+      el!.textContent = currentWord.slice(0, Math.max(0, charIndex));
       if (charIndex <= 0) {
         isDeleting = false;
-        wordIndex = (wordIndex + 1) % WORDS.length;
+        wordIndex = (wordIndex + 1) % list.length;
         setTimeout(tick, 220);
         return;
       }

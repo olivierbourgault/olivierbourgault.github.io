@@ -23,7 +23,7 @@ const { currentPage = 'home' } = Astro.props;
     <li>
       <a
         class={`dropdown-item${currentPage === 'versions' ? ' is-current' : ''}`}
-        href={withBase('versions.html')}
+        href={withBase('versions')}
         aria-current={currentPage === 'versions' ? 'page' : undefined}
       >
         <i class="bi bi-clock-history" aria-hidden="true"></i>
@@ -33,7 +33,7 @@ const { currentPage = 'home' } = Astro.props;
     <li>
       <a
         class={`dropdown-item${currentPage === 'identite' ? ' is-current' : ''}`}
-        href={withBase('identite.html')}
+        href={withBase('identity')}
         aria-current={currentPage === 'identite' ? 'page' : undefined}
       >
         <i class="bi bi-palette2" aria-hidden="true"></i>
@@ -43,7 +43,7 @@ const { currentPage = 'home' } = Astro.props;
     <li>
       <a
         class={`dropdown-item${currentPage === 'cv' ? ' is-current' : ''}`}
-        href={withBase('cv-apercu.html')}
+        href={withBase('resume')}
         aria-current={currentPage === 'cv' ? 'page' : undefined}
       >
         <i class="bi bi-file-earmark-person" aria-hidden="true"></i>

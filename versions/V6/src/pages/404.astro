@@ -9,9 +9,9 @@ import { withBase } from '../utils/paths';
 
 const navLinks: NavLinkItem[] = [
   { label: 'Accueil', href: withBase('') },
-  { label: 'Versions', href: withBase('versions.html') },
-  { label: 'Identité', href: withBase('identite.html') },
-  { label: 'CV - Aperçu', href: withBase('cv-apercu.html') }
+  { label: 'Versions', href: withBase('versions') },
+  { label: 'Identité', href: withBase('identity') },
+  { label: 'CV - Aperçu', href: withBase('resume') }
 ];
 ---
 <BaseLayout
@@ -42,15 +42,15 @@ const navLinks: NavLinkItem[] = [
                   <i class="bi bi-house-door-fill" aria-hidden="true"></i>
                   <span>Accueil V6</span>
                 </a>
-                <a href={withBase('versions.html')} class="versions-btn-secondary">
+                <a href={withBase('versions')} class="versions-btn-secondary">
                   <i class="bi bi-clock-history" aria-hidden="true"></i>
                   <span>Navigateur de versions</span>
                 </a>
-                <a href={withBase('identite.html')} class="versions-btn-outline">
+                <a href={withBase('identity')} class="versions-btn-outline">
                   <i class="bi bi-palette2" aria-hidden="true"></i>
                   <span>Identité visuelle</span>
                 </a>
-                <a href={withBase('cv-apercu.html')} class="versions-btn-outline">
+                <a href={withBase('resume')} class="versions-btn-outline">
                   <i class="bi bi-file-earmark-person" aria-hidden="true"></i>
                   <span>CV - Aperçu</span>
                 </a>
@@ -62,7 +62,7 @@ const navLinks: NavLinkItem[] = [
     </section>
   </main>
 
-  <SiteFooter brandText="OB TECH • 404" creditsMode="subpage" />
+  <SiteFooter />
   <ScrollTop href="#main-content" label="Retour en haut" />
 </BaseLayout>
 

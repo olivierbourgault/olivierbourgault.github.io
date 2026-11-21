@@ -191,7 +191,41 @@ export const RESUME_BLOCKS: ResumeBlockData[] = [
   }
 ];
 
-export const CV_SHEET_DATA = {
+export interface CvSheetLocaleData {
+  lang: 'fr' | 'en';
+  sheet1Aria: string;
+  sheet2Aria: string;
+  name: string;
+  roleLead: string;
+  postalCity: string;
+  email: string;
+  links: Array<{ label: string; href: string }>;
+  headings: {
+    summary: string;
+    skills: string;
+    skillsCaption: string;
+    work: string;
+    workCaption: string;
+    workCols: { name: string; desc: string; ctx: string };
+    exp: string;
+    otherExp: string;
+    edu: string;
+    cert: string;
+  };
+  summary: string[];
+  skillsRows: Array<{ category: string; items: string }>;
+  workRows: Array<{ title: string; description: string; context: string }>;
+  experiences: Array<{ role: string; org: string; dates: string; desc: string }>;
+  otherExperiences: Array<{ role: string; org: string; dates: string; desc: string }>;
+  education: Array<{ degree: string; meta: string }>;
+  certifications: Array<{ name: string; meta: string }>;
+  footerNote: string;
+}
+
+export const CV_SHEET_DATA: CvSheetLocaleData = {
+  lang: 'fr',
+  sheet1Aria: 'Page 1 du CV (Français)',
+  sheet2Aria: 'Page 2 du CV (Français)',
   name: 'OLIVIER BOURGAULT',
   roleLead: 'Diplômé en technique de l’informatique',
   postalCity: 'J8L 1Y3 | Gatineau',
@@ -201,6 +235,18 @@ export const CV_SHEET_DATA = {
     { label: 'Mon profil Linkedin', href: 'http://www.linkedin.com/in/olivier-bourgault-5b950428a' },
     { label: 'Mon dépôt de code', href: 'https://github.com/RinoShip77/MesProjets' }
   ],
+  headings: {
+    summary: 'SOMMAIRE',
+    skills: 'INFORMATIQUE',
+    skillsCaption: 'Compétences en informatique par catégorie',
+    work: 'RÉALISATIONS',
+    workCaption: 'Réalisations techniques et projets',
+    workCols: { name: 'Réalisation', desc: 'Description', ctx: 'Contexte' },
+    exp: 'EXPÉRIENCES PROFESSIONNELLES',
+    otherExp: 'AUTRES EXPÉRIENCES PROFESSIONNELLES',
+    edu: 'FORMATION',
+    cert: 'PERFECTIONNEMENT'
+  },
   summary: [
     'Diplômé en technique de l’informatique',
     'Spécialisé dans la création de nouvelles applications et en optimisation de systèmes existants',
@@ -310,5 +356,146 @@ export const CV_SHEET_DATA = {
     { name: 'Cours de secourismes', meta: ' | 2020 — Sportmax, Gatineau' },
     { name: 'Permis de conduire', meta: ' | Classe 5 — SAAQ, Saint-Jérôme' },
     { name: 'Learn Modules', meta: ' — Microsoft Learn, Gatineau/Ottawa' }
-  ]
-} as const;
+  ],
+  footerNote: 'Références disponibles sur demande'
+};
+
+export const CV_SHEET_DATA_EN: CvSheetLocaleData = {
+  lang: 'en',
+  sheet1Aria: 'Resume Page 1 (English)',
+  sheet2Aria: 'Resume Page 2 (English)',
+  name: 'OLIVIER BOURGAULT',
+  roleLead: 'Graduate in Computer Technology',
+  postalCity: 'J8L 1Y3 | Gatineau',
+  email: 'bourgault.olivier8501@gmail.com',
+  links: [
+    { label: 'My website', href: 'https://rinoship77.github.io' },
+    { label: 'My Linkedin profile', href: 'http://www.linkedin.com/in/olivier-bourgault-5b950428a' },
+    { label: 'My code repository', href: 'https://github.com/RinoShip77/MesProjets' }
+  ],
+  headings: {
+    summary: 'CONTENTS',
+    skills: 'IT',
+    skillsCaption: 'IT skills by category',
+    work: 'ACHIEVEMENTS',
+    workCaption: 'Technical achievements and projects',
+    workCols: { name: 'Achievement', desc: 'Description', ctx: 'Context' },
+    exp: 'PROFESSIONAL EXPERIENCE',
+    otherExp: 'OTHER PROFESSIONAL EXPERIENCE',
+    edu: 'EDUCATION',
+    cert: 'ADVANCED'
+  },
+  summary: [
+    'Graduate in Computer Technology',
+    'Specialized in the creation of new applications and the optimization of existing systems',
+    'Reliable, rigorous, organized, autonomous and responsible',
+    'Strong interest in automation and solving technical problems.'
+  ],
+  skillsRows: [
+    {
+      category: 'Languages',
+      items:
+        'HTML, CSS, JavaScript, Batch/PowerShell, C++, C#, TypeScript, PHP, Kotlin, SQL (MySQL/MariaDB/MongoDB), YAML/JSON, Python, Dart, XAML, etc.'
+    },
+    {
+      category: 'Frameworks & Tools',
+      items:
+        'Bootstrap, jQuery, Angular, NodeJS, Docker/Kubernetes, Symfony, Twig, Electron, Vite (Vue/React), NPM/YARN, Flutter, .NET/.NET MAUI/WPF, Expo, etc.'
+    },
+    {
+      category: 'Software & Environments',
+      items:
+        'Microsoft Office Suite (Word/Excel/PowerPoint/OneDrive/Outlook/Visio/Teams), OS (Windows/Linux/Android), GitHub/Azure DevOps, Arduino, Visual Studio/VS Code, WampServer, phpMyAdmin, MongoDB Compass, SQL Developer, WordPress/cPanel, Postman, Mockoon, Android Studio, Antigravity, Node-RED, etc.'
+    }
+  ],
+  workRows: [
+    {
+      title: 'Electrolib',
+      description:
+        'Development of an inventory management software for a library, as part of the Development Project course (420-5C8-JR). The project includes a client application in Angular and in Symfony server.',
+      context: '2023 — Cégep de Saint-Jérôme, Saint-Jérôme'
+    },
+    {
+      title: 'CompareTools',
+      description:
+        'Developed and implemented a PowerShell script to automate file comparison and help speed up troubleshooting and improve the efficiency of the support team in handling customer queries.',
+      context: '2023 — House of Commons – Chambre des Communes, Ottawa'
+    },
+    {
+      title: 'Kaomia',
+      description:
+        'Creation of a portal for consulting the statistics of a game, as part of the course Multi-client systems project (420-5D4-JR). The project includes a web client in Vue, a mobile application in Kotlin and a server in Node.',
+      context: '2023 — Cégep de Saint-Jérôme, Saint-Jérôme'
+    }
+  ],
+  experiences: [
+    {
+      role: 'Computer Technician',
+      org: 'House of Commons – Chambre des Communes, Ottawa',
+      dates: '2023-2024',
+      desc:
+        'Assist users through a ticketing system, including database analysis to identify the causes of incidents. Test sites and applications to ensure compliance with WCAG guidelines, logging results in Azure DevOps and producing detailed Excel reports.'
+    },
+    {
+      role: 'Web Developer',
+      org: 'VIWEB, Saint-Jérôme',
+      dates: '2024',
+      desc:
+        'Develop my own theme for an online sales Wordpress site with the help of the WooCommerce extension. Customize the catalog and automate the purchasing process.'
+    },
+    {
+      role: 'User Support Agents',
+      org: 'Cégep de Saint-Jérôme, Saint-Jérôme',
+      dates: '2023-2024',
+      desc:
+        "Welcome and provide technical support to CEGEP students, including printing assistance, access to the college's online services and basic use of the Microsoft 365 suite."
+    }
+  ],
+  otherExperiences: [
+    {
+      role: 'Information Officer',
+      org: 'Elections Canada, Gatineau',
+      dates: '2025',
+      desc:
+        'Welcoming and guiding voters, including the validation of identity documents and the management of flows. Participate in the logistics of the voting site (installation, signage, dismantling), the management of electoral documents and the counting. Apply health and assistance protocols for people with reduced mobility.'
+    },
+    {
+      role: 'Facilitator and Assistant Instructor',
+      org: 'Sportmax, Gatineau | 2019-2022 & Buckingham Tennis Club, Gatineau | 2016-2019',
+      dates: '',
+      desc:
+        'Plan, organize, and facilitate activities for a group of children and ensure their safety. Be responsible for the reception and departures of the camp. Supervise my fellow facilitators and assist the coaches in the morning and evening. Clean and disinfect camp equipment throughout the day to limit the spread of the coronavirus.'
+    },
+    {
+      role: 'Concierge',
+      org: 'Cégep de Saint-Jérôme, Saint-Jérôme',
+      dates: '2020-2022',
+      desc:
+        'Clean and disinfect common areas of residences to limit the spread of the coronavirus.'
+    }
+  ],
+  education: [
+    {
+      degree: 'Attestation of College Studies in Artificial Intelligence',
+      meta: " | 2026-2027 (ongoing) — O'Sullivan College in Quebec City, Quebec"
+    },
+    {
+      degree: 'Diploma of College Studies in Computer Technology',
+      meta: ' | 2024 — Cégep de Saint-Jérôme, Saint-Jérôme'
+    },
+    {
+      degree: 'High School Diploma',
+      meta: ' | 2018 — Hormisdas-Gamelin High School, Gatineau'
+    }
+  ],
+  certifications: [
+    { name: 'First Aid Courses', meta: ' | 2022 — Sportmax, Gatineau' },
+    { name: 'WHMIS Training', meta: ' | 2020 — Sportmax, Gatineau' },
+    { name: 'First Aid Courses', meta: ' | 2020 — Sportmax, Gatineau' },
+    { name: "Driver's License", meta: ' | Class 5 — SAAQ, Saint-Jérôme' },
+    { name: 'Learn Modules', meta: ' — Microsoft Learn, Gatineau/Ottawa' }
+  ],
+  footerNote: 'References available on request'
+};
+
+export const CV_SHEETS_BY_LANG = [CV_SHEET_DATA, CV_SHEET_DATA_EN] as const;

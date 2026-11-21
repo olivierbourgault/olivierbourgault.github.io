@@ -10,7 +10,7 @@ Code source Astro de la **Version 6 (V6)** du portfolio [`olivierbourgault.githu
 - **Identité « Tech Canvas » & Pack Ingénierie & IA** :
   - Couleurs : `#FF6600` (Orange Signal), `#38BDF8` (Bleu Circuit), `#121316` (Carbone Studio), `#1A1C20` (Graphite), `#F4F1EA` (Ivoire Papier en mode clair).
   - Polices hébergées localement via `@fontsource` (zéro requête Google Fonts) : `Oswald`, `Chakra Petch`, `DM Sans`, `IBM Plex Mono`.
-  - Trois emblèmes vectoriels SVG officiels réutilisés depuis `public/assets/img/logo/` (`logo-ob-tech.svg`, `logo-terminal-tech.svg`, `logo-neural-tech.svg`).
+  - Trois emblèmes vectoriels SVG officiels réutilisés depuis `public/assets/images/logos/` (`logo-ob-tech.svg`, `logo-terminal-tech.svg`, `logo-neural-tech.svg`).
 - **Dépendances allégées** (par rapport à la V5) :
   - **Conservés :** Bootstrap 5.3 CSS uniquement (grille et utilitaires), `bootstrap-icons`, `aos` (animations au défilement), `glightbox` (visionneuse portfolio), `@fontsource/*`.
   - **Retirés :** Bootstrap JS (remplacé par un menu dropdown accessible natif + `<dialog>`), Isotope & imagesLoaded (remplacés par filtrage DOM et pagination `5` projets / `Voir plus (+N)`), Waypoints, LinkedIn badge CDN, Google Fonts CDN.

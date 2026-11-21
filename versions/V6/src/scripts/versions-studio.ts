@@ -1,5 +1,7 @@
+import { VERSION_META_EN } from '../data/i18n';
 import { PORTFOLIO_VERSIONS, type PortfolioVersion } from '../data/versions';
 import { registerDialogHandler } from './dialogs';
+import { getSiteLang } from './i18n';
 import { bindVerticalNavSpy } from './vnav';
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
@@ -164,8 +166,9 @@ export function initVersionsStudio(): void {
     if (!bar || !chipsContainer || !labelEl) return;
 
     const palettes = version.palettes || [];
+    const isEn = getSiteLang() === 'en';
     if (palettes.length === 0) {
-      labelEl.innerHTML = '<i class="bi bi-droplet-half" aria-hidden="true"></i> ADN Visuel';
+      labelEl.innerHTML = `<i class="bi bi-droplet-half" aria-hidden="true"></i> ${isEn ? 'Visual DNA' : 'ADN Visuel'}`;
       chipsContainer.innerHTML = version.swatches
         .map(
           (hex) => `
@@ -181,7 +184,7 @@ export function initVersionsStudio(): void {
     labelEl.innerHTML =
       palettes.length > 1
         ? `<i class="bi bi-palette2" aria-hidden="true"></i> Styles ${escapeHtml(version.id)} (${palettes.length})`
-        : `<i class="bi bi-palette2" aria-hidden="true"></i> Direction ${escapeHtml(version.id)}`;
+        : `<i class="bi bi-palette2" aria-hidden="true"></i> ${isEn ? 'Theme' : 'Direction'} ${escapeHtml(version.id)}`;
 
     chipsContainer.innerHTML = palettes
       .map((p) => {
@@ -214,10 +217,18 @@ export function initVersionsStudio(): void {
       openExternal.setAttribute('href', targetUrl);
       openExternal.setAttribute('title', `Ouvrir ${version.id} dans un nouvel onglet`);
     }
-    if (metaTitle) metaTitle.textContent = version.title;
-    if (metaDesc) metaDesc.textContent = version.description;
+    const isEn = getSiteLang() === 'en';
+    const enMeta = isEn ? VERSION_META_EN[version.id] : undefined;
+    if (metaTitle) metaTitle.textContent = enMeta ? enMeta.title : version.title;
+    if (metaDesc) metaDesc.textContent = enMeta ? enMeta.description : version.description;
     if (jumpTimelineBtn) jumpTimelineBtn.setAttribute('href', `#version-${version.id}`);
   }
+
+  window.addEventListener('ob:langchange', () => {
+    const activeVer = getVersionById(state.activeVersionId);
+    renderStudioPaletteBar(activeVer);
+    updateStudioChrome(activeVer, state.activeUrl);
+  });
 
   function selectVersionInStudio(
     versionId: string,

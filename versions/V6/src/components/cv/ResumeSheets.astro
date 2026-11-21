@@ -1,173 +1,186 @@
 ---
-import { CV_SHEET_DATA } from '../../data/resume';
+import { CV_SHEETS_BY_LANG } from '../../data/resume';
 ---
-<div class="resume-pages">
-  <!-- ==================== SHEET 1 ==================== -->
-  <article class="resume-sheet" aria-label="Page 1 du CV">
-    <header class="sheet-header">
-      <h2 class="sheet-name">{CV_SHEET_DATA.name}</h2>
-      <p class="sheet-headline">
-        <span class="cv-role-lead">{CV_SHEET_DATA.roleLead}</span>
-      </p>
-      <p class="cv-contact-line">
-        <span>{CV_SHEET_DATA.postalCity}</span>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href={`mailto:${CV_SHEET_DATA.email}`}>{CV_SHEET_DATA.email}</a>
-      </p>
-      <p class="cv-links-line">
-        {
-          CV_SHEET_DATA.links.map((item, idx) => (
-            <>
-              {idx > 0 && <span class="sep" aria-hidden="true">&middot;</span>}
-              <a href={item.href} target="_blank" rel="noopener noreferrer">
-                {item.label}
-              </a>
-            </>
-          ))
-        }
-      </p>
-    </header>
+{
+  CV_SHEETS_BY_LANG.map((data) => {
+    const sfx = data.lang;
+    const isHidden = data.lang !== 'fr';
+    return (
+      <div
+        class="resume-pages"
+        data-cv-lang-sheet={data.lang}
+        lang={data.lang}
+        hidden={isHidden ? true : undefined}
+      >
+        <!-- ==================== SHEET 1 ==================== -->
+        <article class="resume-sheet" aria-label={data.sheet1Aria}>
+          <header class="sheet-header">
+            <h2 class="sheet-name">{data.name}</h2>
+            <p class="sheet-headline">
+              <span class="cv-role-lead">{data.roleLead}</span>
+            </p>
+            <p class="cv-contact-line">
+              <span>{data.postalCity}</span>
+              <span class="sep" aria-hidden="true">|</span>
+              <a href={`mailto:${data.email}`}>{data.email}</a>
+            </p>
+            <p class="cv-links-line">
+              {
+                data.links.map((item, idx) => (
+                  <>
+                    {idx > 0 && <span class="sep" aria-hidden="true">&middot;</span>}
+                    <a href={item.href} target="_blank" rel="noopener noreferrer">
+                      {item.label}
+                    </a>
+                  </>
+                ))
+              }
+            </p>
+          </header>
 
-    <!-- Section 1: SOMMAIRE -->
-    <section class="sheet-section" aria-labelledby="cv-summary-heading">
-      <h3 id="cv-summary-heading" class="sheet-section-title">SOMMAIRE</h3>
-      <div class="cv-summary">
-        {CV_SHEET_DATA.summary.map((line) => <p>{line}</p>)}
-      </div>
-    </section>
+          <!-- Section 1: SOMMAIRE / CONTENTS -->
+          <section class="sheet-section" aria-labelledby={`cv-summary-heading-${sfx}`}>
+            <h3 id={`cv-summary-heading-${sfx}`} class="sheet-section-title">{data.headings.summary}</h3>
+            <div class="cv-summary">
+              {data.summary.map((line) => <p>{line}</p>)}
+            </div>
+          </section>
 
-    <!-- Section 2: INFORMATIQUE -->
-    <section class="sheet-section" aria-labelledby="cv-skills-heading">
-      <h3 id="cv-skills-heading" class="sheet-section-title">INFORMATIQUE</h3>
-      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cv-skills-heading">
-        <table class="cv-skills-table">
-          <caption class="visually-hidden">Compétences en informatique par catégorie</caption>
-          <colgroup>
-            <col class="col-skill-cat" />
-            <col class="col-skill-items" />
-          </colgroup>
-          <tbody>
+          <!-- Section 2: INFORMATIQUE / IT -->
+          <section class="sheet-section" aria-labelledby={`cv-skills-heading-${sfx}`}>
+            <h3 id={`cv-skills-heading-${sfx}`} class="sheet-section-title">{data.headings.skills}</h3>
+            <div class="table-wrap" tabindex="0" role="region" aria-labelledby={`cv-skills-heading-${sfx}`}>
+              <table class="cv-skills-table">
+                <caption class="visually-hidden">{data.headings.skillsCaption}</caption>
+                <colgroup>
+                  <col class="col-skill-cat" />
+                  <col class="col-skill-items" />
+                </colgroup>
+                <tbody>
+                  {
+                    data.skillsRows.map((row) => (
+                      <tr>
+                        <th scope="row">{row.category}</th>
+                        <td>{row.items}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Section 3: RÉALISATIONS / ACHIEVEMENTS -->
+          <section class="sheet-section" aria-labelledby={`cv-work-heading-${sfx}`}>
+            <h3 id={`cv-work-heading-${sfx}`} class="sheet-section-title">{data.headings.work}</h3>
+            <div class="table-wrap" tabindex="0" role="region" aria-labelledby={`cv-work-heading-${sfx}`}>
+              <table class="cv-work-table">
+                <caption class="visually-hidden">{data.headings.workCaption}</caption>
+                <colgroup>
+                  <col class="col-work-name" />
+                  <col class="col-work-desc" />
+                  <col class="col-work-ctx" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">{data.headings.workCols.name}</th>
+                    <th scope="col">{data.headings.workCols.desc}</th>
+                    <th scope="col">{data.headings.workCols.ctx}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    data.workRows.map((row) => (
+                      <tr>
+                        <th scope="row" class="work-title">{row.title}</th>
+                        <td data-label={data.headings.workCols.desc}>{row.description}</td>
+                        <td class="work-context" data-label={data.headings.workCols.ctx}>{row.context}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </article>
+
+        <!-- ==================== SHEET 2 ==================== -->
+        <article class="resume-sheet" aria-label={data.sheet2Aria}>
+          <!-- Section 4: EXPÉRIENCES PROFESSIONNELLES -->
+          <section class="sheet-section sheet-section-first" aria-labelledby={`cv-exp-heading-${sfx}`}>
+            <h3 id={`cv-exp-heading-${sfx}`} class="sheet-section-title">{data.headings.exp}</h3>
             {
-              CV_SHEET_DATA.skillsRows.map((row) => (
-                <tr>
-                  <th scope="row">{row.category}</th>
-                  <td>{row.items}</td>
-                </tr>
+              data.experiences.map((job) => (
+                <article class="job-block">
+                  <div class="job-head">
+                    <h4 class="job-title">
+                      <strong>{job.role}</strong>
+                      <span class="sep" aria-hidden="true">—</span>
+                      <span class="job-org">{job.org}</span>
+                    </h4>
+                    {job.dates && <span class="job-dates">{job.dates}</span>}
+                  </div>
+                  <p class="job-desc">{job.desc}</p>
+                </article>
               ))
             }
-          </tbody>
-        </table>
-      </div>
-    </section>
+          </section>
 
-    <!-- Section 3: RÉALISATIONS -->
-    <section class="sheet-section" aria-labelledby="cv-work-heading">
-      <h3 id="cv-work-heading" class="sheet-section-title">RÉALISATIONS</h3>
-      <div class="table-wrap" tabindex="0" role="region" aria-labelledby="cv-work-heading">
-        <table class="cv-work-table">
-          <caption class="visually-hidden">Réalisations techniques et projets</caption>
-          <colgroup>
-            <col class="col-work-name" />
-            <col class="col-work-desc" />
-            <col class="col-work-ctx" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th scope="col">Réalisation</th>
-              <th scope="col">Description</th>
-              <th scope="col">Contexte</th>
-            </tr>
-          </thead>
-          <tbody>
+          <!-- Section 5: AUTRES EXPÉRIENCES PROFESSIONNELLES -->
+          <section class="sheet-section" aria-labelledby={`cv-other-exp-heading-${sfx}`}>
+            <h3 id={`cv-other-exp-heading-${sfx}`} class="sheet-section-title">{data.headings.otherExp}</h3>
             {
-              CV_SHEET_DATA.workRows.map((row) => (
-                <tr>
-                  <th scope="row" class="work-title">{row.title}</th>
-                  <td data-label="Description">{row.description}</td>
-                  <td class="work-context" data-label="Contexte">{row.context}</td>
-                </tr>
+              data.otherExperiences.map((job) => (
+                <article class="job-block">
+                  <div class="job-head">
+                    <h4 class="job-title">
+                      <strong>{job.role}</strong>
+                      <span class="sep" aria-hidden="true">—</span>
+                      <span class="job-org">{job.org}</span>
+                    </h4>
+                    {job.dates && <span class="job-dates">{job.dates}</span>}
+                  </div>
+                  <p class="job-desc">{job.desc}</p>
+                </article>
               ))
             }
-          </tbody>
-        </table>
+          </section>
+
+          <!-- Section 6: FORMATION / EDUCATION -->
+          <section class="sheet-section" aria-labelledby={`cv-edu-heading-${sfx}`}>
+            <h3 id={`cv-edu-heading-${sfx}`} class="sheet-section-title">{data.headings.edu}</h3>
+            <ul class="cv-edu-list">
+              {
+                data.education.map((edu) => (
+                  <li class="edu-item">
+                    <strong>{edu.degree}</strong>
+                    <span class="edu-meta">{edu.meta}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <!-- Section 7: PERFECTIONNEMENT / ADVANCED -->
+          <section class="sheet-section" aria-labelledby={`cv-cert-heading-${sfx}`}>
+            <h3 id={`cv-cert-heading-${sfx}`} class="sheet-section-title">{data.headings.cert}</h3>
+            <ul class="cv-edu-list">
+              {
+                data.certifications.map((cert) => (
+                  <li class="edu-item">
+                    <strong>{cert.name}</strong>
+                    <span class="edu-meta">{cert.meta}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <footer class="sheet-footer">
+            <p>{data.footerNote}</p>
+          </footer>
+        </article>
       </div>
-    </section>
-  </article>
-
-  <!-- ==================== SHEET 2 ==================== -->
-  <article class="resume-sheet" aria-label="Page 2 du CV">
-    <!-- Section 4: EXPÉRIENCES PROFESSIONNELLES -->
-    <section class="sheet-section sheet-section-first" aria-labelledby="cv-exp-heading">
-      <h3 id="cv-exp-heading" class="sheet-section-title">EXPÉRIENCES PROFESSIONNELLES</h3>
-      {
-        CV_SHEET_DATA.experiences.map((job) => (
-          <article class="job-block">
-            <div class="job-head">
-              <h4 class="job-title">
-                <strong>{job.role}</strong>
-                <span class="sep" aria-hidden="true">—</span>
-                <span class="job-org">{job.org}</span>
-              </h4>
-              {job.dates && <span class="job-dates">{job.dates}</span>}
-            </div>
-            <p class="job-desc">{job.desc}</p>
-          </article>
-        ))
-      }
-    </section>
-
-    <!-- Section 5: AUTRES EXPÉRIENCES PROFESSIONNELLES -->
-    <section class="sheet-section" aria-labelledby="cv-other-exp-heading">
-      <h3 id="cv-other-exp-heading" class="sheet-section-title">AUTRES EXPÉRIENCES PROFESSIONNELLES</h3>
-      {
-        CV_SHEET_DATA.otherExperiences.map((job) => (
-          <article class="job-block">
-            <div class="job-head">
-              <h4 class="job-title">
-                <strong>{job.role}</strong>
-                <span class="sep" aria-hidden="true">—</span>
-                <span class="job-org">{job.org}</span>
-              </h4>
-              {job.dates && <span class="job-dates">{job.dates}</span>}
-            </div>
-            <p class="job-desc">{job.desc}</p>
-          </article>
-        ))
-      }
-    </section>
-
-    <!-- Section 6: FORMATION -->
-    <section class="sheet-section" aria-labelledby="cv-edu-heading">
-      <h3 id="cv-edu-heading" class="sheet-section-title">FORMATION</h3>
-      <ul class="cv-edu-list">
-        {
-          CV_SHEET_DATA.education.map((edu) => (
-            <li class="edu-item">
-              <strong>{edu.degree}</strong>
-              <span class="edu-meta">{edu.meta}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <!-- Section 7: PERFECTIONNEMENT -->
-    <section class="sheet-section" aria-labelledby="cv-cert-heading">
-      <h3 id="cv-cert-heading" class="sheet-section-title">PERFECTIONNEMENT</h3>
-      <ul class="cv-edu-list">
-        {
-          CV_SHEET_DATA.certifications.map((cert) => (
-            <li class="edu-item">
-              <strong>{cert.name}</strong>
-              <span class="edu-meta">{cert.meta}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <footer class="sheet-footer">
-      <p>Références disponibles sur demande</p>
-    </footer>
-  </article>
-</div>
+    );
+  })
+}

@@ -2,6 +2,7 @@ import AOS from 'aos';
 import GLightbox from 'glightbox';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
+import { applyDomTranslations, getSiteLang } from './i18n';
 import { renderPortfolioVerticalNav } from './vnav';
 
 interface GitTreeEntry {
@@ -22,16 +23,16 @@ interface ResolvedProject {
 
 const DEFAULT_VISIBLE_PROJECTS = 5;
 const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_projects_cache';
-const IMAGE_GENERIQUE = withBase('assets/img/logo/dark.png');
+const IMAGE_GENERIQUE = withBase('assets/images/logos/logo-ob-tech.svg');
 
 const LOCAL_PROJECT_IMAGES: Record<string, string> = {
-  electrolib: withBase('assets/img/portfolio/electrolib.png'),
-  comparetools: withBase('assets/img/portfolio/compareTools.png'),
-  hubai: withBase('assets/img/portfolio/hubAI.png'),
-  kaomia: withBase('assets/img/portfolio/kaomia.png'),
-  evomeal: withBase('assets/img/portfolio/evomeal.png'),
-  shopro: withBase('assets/img/portfolio/shopro.png'),
-  phoneword: withBase('assets/img/portfolio/phoneword.png')
+  electrolib: withBase('assets/images/projects/electrolib.webp'),
+  comparetools: withBase('assets/images/projects/compare-tools.webp'),
+  hubai: withBase('assets/images/projects/hub-ai.webp'),
+  kaomia: withBase('assets/images/projects/kaomia.webp'),
+  evomeal: withBase('assets/images/projects/evomeal.webp'),
+  shopro: withBase('assets/images/projects/shopro.webp'),
+  phoneword: withBase('assets/images/projects/phoneword.webp')
 };
 
 let portfolioShowAll = false;
@@ -232,7 +233,10 @@ async function fetchRawGitHubText(repoPath: string): Promise<string> {
   }
 }
 
+let lastCountedProjects: Array<{ filterClass: string }> = [];
+
 function updateProjectCounters(projects: Array<{ filterClass: string }>): void {
+  lastCountedProjects = projects;
   const totalCount = projects.length;
   const schoolCount = projects.filter((p) => p.filterClass === 'filter-school').length;
   const proCount = projects.filter((p) => p.filterClass === 'filter-professional').length;
@@ -243,12 +247,20 @@ function updateProjectCounters(projects: Array<{ filterClass: string }>): void {
     projectCounterEl.textContent = String(totalCount);
   }
 
-  const filterLabels: Record<string, string> = {
-    '*': `Tout (${totalCount})`,
-    '.filter-school': `Scolaires (${schoolCount})`,
-    '.filter-professional': `Professionnels (${proCount})`,
-    '.filter-personal': `Personnels (${personalCount})`
-  };
+  const isEn = getSiteLang() === 'en';
+  const filterLabels: Record<string, string> = isEn
+    ? {
+        '*': `All (${totalCount})`,
+        '.filter-school': `Academic (${schoolCount})`,
+        '.filter-professional': `Professional (${proCount})`,
+        '.filter-personal': `Personal (${personalCount})`
+      }
+    : {
+        '*': `Tout (${totalCount})`,
+        '.filter-school': `Scolaires (${schoolCount})`,
+        '.filter-professional': `Professionnels (${proCount})`,
+        '.filter-personal': `Personnels (${personalCount})`
+      };
 
   document.querySelectorAll<HTMLElement>('#filters [data-filter]').forEach((btn) => {
     const key = btn.getAttribute('data-filter') || '';
@@ -292,6 +304,7 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
     previewLink.className = 'glightbox preview-link';
     previewLink.setAttribute('data-gallery', `portfolio-gallery-${project.filterClass}`);
     previewLink.setAttribute('aria-label', `Agrandir l'aperçu de ${project.name}`);
+    previewLink.setAttribute('title', `Agrandir l'aperçu de ${project.name}`);
     const eyeIcon = document.createElement('i');
     eyeIcon.className = 'bi bi-eye';
     eyeIcon.setAttribute('aria-hidden', 'true');
@@ -305,6 +318,7 @@ function createPortfolioCardElement(project: ResolvedProject, index: number): HT
   detailsLink.rel = 'noopener noreferrer';
   detailsLink.className = 'details-link';
   detailsLink.setAttribute('aria-label', `Voir le code source de ${project.name} sur GitHub`);
+  detailsLink.setAttribute('title', `Voir le code source de ${project.name} sur GitHub`);
   const arrowIcon = document.createElement('i');
   arrowIcon.className = 'bi bi-arrow-right';
   arrowIcon.setAttribute('aria-hidden', 'true');
@@ -368,9 +382,10 @@ function applyPortfolioFilterWithLimit(): void {
     } else {
       btnWrap.classList.remove('d-none');
       const remaining = matching.length - DEFAULT_VISIBLE_PROJECTS;
+      const isEn = getSiteLang() === 'en';
       btn.innerHTML = portfolioShowAll
-        ? '<i class="bi bi-chevron-up me-2" aria-hidden="true"></i>Réduire à 5 projets'
-        : `<i class="bi bi-grid-3x3-gap-fill me-2" aria-hidden="true"></i>Voir plus (+${remaining})`;
+        ? `<i class="bi bi-chevron-up me-2" aria-hidden="true"></i>${isEn ? 'Show Top 5 Projects' : 'Réduire à 5 projets'}`
+        : `<i class="bi bi-grid-3x3-gap-fill me-2" aria-hidden="true"></i>${isEn ? `Show More (+${remaining})` : `Voir plus (+${remaining})`}`;
     }
   }
 
@@ -514,4 +529,12 @@ export function initPortfolio(): void {
   applyPortfolioFilterWithLimit();
   refreshLightbox();
   void loadGitHubPortfolio();
+
+  window.addEventListener('ob:langchange', () => {
+    if (lastCountedProjects.length > 0) {
+      updateProjectCounters(lastCountedProjects);
+    }
+    applyPortfolioFilterWithLimit();
+    applyDomTranslations(document.getElementById('portfolio') || document.body);
+  });
 }

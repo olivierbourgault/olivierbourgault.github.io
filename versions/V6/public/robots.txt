@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olivierbourgault.github.io/sitemap.xml
+# Contexte LLM : https://olivierbourgault.github.io/llms.txt

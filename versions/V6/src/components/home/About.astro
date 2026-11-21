@@ -16,9 +16,11 @@ import SectionTitle from '../SectionTitle.astro';
     <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
       <div class="about-image">
         <img
-          src={withBase('assets/img/profil/Profil_Avatar.png')}
+          src={withBase('assets/images/avatar.webp')}
           alt="Portrait de profil d'Olivier Bourgault"
           class="img-fluid rounded-4"
+          loading="lazy"
+          decoding="async"
         />
       </div>
     </div>

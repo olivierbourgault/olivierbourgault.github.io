@@ -1,3 +1,5 @@
+import { promoteCursorToTopLayer } from './cursor';
+
 /**
  * Contrôleur partagé pour les modales <dialog class="ob-dialog">
  * Conforme Modern Web Guidance (dialog & light-dismiss-a-dialog).
@@ -26,12 +28,14 @@ export function initNativeDialogs(): void {
 
     const handler = customHandlers.get(dialogId);
     if (handler && handler(trigger)) {
+      promoteCursorToTopLayer();
       return;
     }
 
     const dialog = document.getElementById(dialogId) as HTMLDialogElement | null;
     if (dialog && typeof dialog.showModal === 'function') {
       dialog.showModal();
+      promoteCursorToTopLayer();
     }
   });
 

@@ -1,0 +1,14 @@
+/* TEAM */
+Développeur & Auteur : Olivier Bourgault
+Rôle : Développeur Full-Stack, IA & Technicien TI
+Courriel : bourgault.olivier8501@gmail.com
+GitHub : https://github.com/RinoShip77
+LinkedIn : https://www.linkedin.com/in/olivier-bourgault-5b950428a
+Localisation : Gatineau / Ottawa, QC, Canada
+
+/* SITE */
+Dernière mise à jour : 2026/11/20
+Langues : Français, English
+Architecture : Astro 6 (100% statique), TypeScript, HTML5, CSS3
+Design System : Tech Canvas (#121316, #F4F1EA, #FF6600, #38BDF8)
+Polices : Space Grotesk, Plus Jakarta Sans, JetBrains Mono

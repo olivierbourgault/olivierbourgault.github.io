@@ -44,7 +44,8 @@ const {
   isCvPage = false
 } = Astro.props;
 
-const canonicalUrl = `https://olivierbourgault.github.io/versions/V6/${canonicalPath}`;
+const normalizedPath = canonicalPath.replace(/^\/+/, '');
+const canonicalUrl = `https://olivierbourgault.github.io/${normalizedPath}`;
 ---
 <!DOCTYPE html>
 <html lang="fr" data-cv-version={isCvPage ? 'portfolio' : undefined}>
@@ -90,8 +91,8 @@ const canonicalUrl = `https://olivierbourgault.github.io/versions/V6/${canonical
     <meta property="og:type" content="website" />
 
     <!-- Favicons -->
-    <link href={withBase('assets/img/logo/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
-    <link href={withBase('assets/img/favicon.png')} rel="alternate icon" />
+    <link href={withBase('assets/images/logos/logo-ob-tech.svg')} rel="icon" type="image/svg+xml" />
+    <link href={withBase('assets/images/favicon.svg')} rel="alternate icon" type="image/svg+xml" />
 
     <slot name="head" />
   </head>
@@ -117,7 +118,10 @@ const canonicalUrl = `https://olivierbourgault.github.io/versions/V6/${canonical
     <a href="#main-content" class="skip-link visually-hidden-focusable">Aller au contenu principal</a>
 
     <!-- Curseur interactif Aahil Khan + Halo radial orange -->
-    <div id="laser-dot" aria-hidden="true"></div>
+    <div id="laser-dot" popover="manual" aria-hidden="true"></div>
+
+    <!-- Animated Tech Canvas Constellation & Reactive Grid Background -->
+    <canvas id="tech-bg-canvas" aria-hidden="true"></canvas>
 
     <!-- Ambient Background Blobs -->
     <div class="ambient-blobs" aria-hidden="true">
@@ -130,13 +134,17 @@ const canonicalUrl = `https://olivierbourgault.github.io/versions/V6/${canonical
 
     <script>
       import { initTheme } from '../scripts/theme';
+      import { initSiteLang } from '../scripts/i18n';
       import { initNavbar } from '../scripts/navbar';
+      import { initAnimatedBackground } from '../scripts/bg-canvas';
       import { initInteractiveCursor } from '../scripts/cursor';
       import { initNativeDialogs } from '../scripts/dialogs';
 
       const runBaseInit = () => {
         initTheme();
+        initSiteLang();
         initNavbar();
+        initAnimatedBackground();
         initInteractiveCursor();
         initNativeDialogs();
       };

@@ -173,6 +173,22 @@ body {
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
+/* Animated Interactive Tech Canvas Background */
+#tech-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Masque la grille CSS statique lorsque le canvas animé gère le quadrillage réactif */
+html.has-animated-grid body.dark[data-palette="tech-canvas"]::before,
+html.has-animated-grid body[data-palette="tech-canvas"]:not(.dark)::before {
+  display: none;
+}
+
 /* Ambient Background Blobs (filter: blur(45px)) */
 .ambient-blobs {
   position: fixed;
@@ -276,6 +292,12 @@ h6 {
   position: fixed;
   top: 0;
   left: 0;
+  right: auto;
+  bottom: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
   width: 12px;
   height: 12px;
   border-radius: 999px;
@@ -551,6 +573,27 @@ body.scrolled .header .header-container::before {
 .header .header-social-links a#themeSwitcher,
 .header .header-social-links a:has(#themeSwitcher) {
   cursor: pointer;
+}
+
+.header .header-social-links .lang-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.header .header-social-links .lang-switcher-code {
+  font-family: var(--coding-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: rgba(255, 102, 0, 0.16);
+  color: #FF6600;
+  border: 1px solid rgba(255, 102, 0, 0.45);
+  line-height: 1.2;
 }
 
 @media (max-width: 1199px) {
@@ -895,25 +938,45 @@ body.scrolled .header .header-container::before {
 
   .menu-foot-socials {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 14px;
     padding-top: 10px;
     border-top: 1px solid rgba(253, 253, 251, 0.1);
   }
 
-  .menu-foot-socials a {
+  .menu-foot-socials a,
+  .menu-foot-socials button {
     font-size: 1.15rem;
     color: rgba(240, 230, 210, 0.78);
     padding: 6px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     transition: color 180ms ease, transform 180ms ease;
   }
 
-  .menu-foot-socials a:hover {
+  .menu-foot-socials a:hover,
+  .menu-foot-socials button:hover {
     color: var(--accent-color);
     transform: translateY(-2px);
+  }
+
+  .menu-foot-socials .lang-switcher-code {
+    font-family: var(--coding-font);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background: rgba(255, 102, 0, 0.16);
+    color: #FF6600;
+    border: 1px solid rgba(255, 102, 0, 0.45);
+    line-height: 1.2;
   }
 }
 
@@ -2010,7 +2073,7 @@ section,
 }
 
 .portfolio .portfolio-card .portfolio-image img.portfolio-img-generic,
-.portfolio .portfolio-card .portfolio-image img[src*="logo/dark.png"] {
+.portfolio .portfolio-card .portfolio-image img[src*="logos/logo-ob-tech.svg"] {
   object-fit: contain;
   padding: 1.25rem;
   background: rgba(18, 19, 22, 0.75);
@@ -2449,10 +2512,6 @@ body[data-palette="tech-canvas"] .palette-switcher-bar {
 /* Hero Canvas (Shabnam Cutting Mat + Aahil OS Window) */
 body[data-palette="tech-canvas"] .hero {
   background-color: #181A1F;
-  background-image:
-    linear-gradient(to right, rgba(255, 102, 0, 0.11) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 102, 0, 0.11) 1px, transparent 1px);
-  background-size: 56px 56px;
   border-radius: 20px;
   padding: 58px 40px;
   margin-top: 14px;
@@ -2464,9 +2523,6 @@ body[data-palette="tech-canvas"] .hero {
 
 body[data-palette="tech-canvas"]:not(.dark) .hero {
   background-color: #FFFFFF;
-  background-image:
-    linear-gradient(to right, rgba(22, 22, 22, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(22, 22, 22, 0.07) 1px, transparent 1px);
   border: 2px solid #161616;
   box-shadow: 8px 8px 0px #FF6600;
   --default-color: #161616;

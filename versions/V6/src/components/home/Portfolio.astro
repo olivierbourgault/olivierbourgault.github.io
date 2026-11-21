@@ -61,6 +61,7 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
                         class="glightbox preview-link"
                         data-gallery={project.gallery}
                         aria-label={`Agrandir l'aperçu de ${project.name}`}
+                        title={`Agrandir l'aperçu de ${project.name}`}
                       >
                         <i class="bi bi-eye" aria-hidden="true"></i>
                       </a>
@@ -70,6 +71,7 @@ const initialNavItems: VerticalNavItem[] = FALLBACK_PROJECTS.slice(0, 5).map((p,
                         rel="noopener noreferrer"
                         class="details-link"
                         aria-label={`Voir le code source de ${project.name} sur GitHub`}
+                        title={`Voir le code source de ${project.name} sur GitHub`}
                       >
                         <i class="bi bi-arrow-right" aria-hidden="true"></i>
                       </a>

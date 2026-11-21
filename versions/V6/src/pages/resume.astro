@@ -1,0 +1,163 @@
+---
+import '../styles/pages/cv-apercu.css';
+
+import CvDownloadDialog from '../components/CvDownloadDialog.astro';
+import ScrollTop from '../components/ScrollTop.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import ResumeSheets from '../components/cv/ResumeSheets.astro';
+import { SITE, type NavLinkItem } from '../data/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../utils/paths';
+
+const homeBase = withBase('');
+const frPdfUrl = withBase(SITE.cvFrPdf);
+const enPdfUrl = withBase(SITE.cvEnPdf);
+
+const navLinks: NavLinkItem[] = [
+  { label: 'Accueil', href: `${homeBase}#hero` },
+  { label: 'À propos', href: `${homeBase}#about` },
+  { label: 'CV', href: `${homeBase}#resume`, active: true },
+  { label: 'Portfolio', href: `${homeBase}#portfolio` },
+  { label: 'Contact', href: `${homeBase}#contact` }
+];
+---
+<BaseLayout
+  title="CV - Aperçu (FR / EN) | Olivier Bourgault"
+  description="Aperçu complet du curriculum vitae d'Olivier Bourgault en français et en anglais (FR / EN) — version Web imprimable adaptée au thème Tech Canvas."
+  keywords="CV, Resume, Curriculum Vitae, Aperçu, Olivier Bourgault, Technique de l'informatique, Intelligence Artificielle, Développeur, Gatineau"
+  canonicalPath="resume"
+  bodyClass="cv-apercu-page dark"
+  isCvPage={true}
+>
+  <SiteHeader
+    links={navLinks}
+    currentPage="cv"
+    stickyTop={true}
+    drawerExtras={[
+      { href: withBase('versions'), icon: 'bi-clock-history', label: 'Navigateur de versions', title: 'Navigateur de versions' },
+      { href: withBase('identity'), icon: 'bi-palette2', label: 'Identité visuelle et logos', title: 'Identité visuelle' }
+    ]}
+  />
+
+  <main id="main-content" class="main" tabindex="-1">
+    <div class="page-card">
+      <div
+        class="resume"
+        id="cvResumeRoot"
+        data-pdf-fr={frPdfUrl}
+        data-pdf-en={enPdfUrl}
+        data-filename-fr={SITE.cvFrFilename}
+        data-filename-en={SITE.cvEnFilename}
+      >
+        <!-- Version, Back Bar & Quick Language Pills -->
+        <div class="cv-version-bar" role="region" aria-label="Navigation et langue du CV">
+          <div class="cv-version-meta">
+            <a href={`${homeBase}#resume`} class="cv-back-link">
+              <i class="bi bi-arrow-left" aria-hidden="true"></i>
+              <span id="cvBackLinkLabel">Retour au portfolio</span>
+            </a>
+            <span class="cv-version-status" id="cvVersionStatus" aria-live="polite">Thème Portfolio (Sombre)</span>
+          </div>
+
+          <div class="cv-version-btns" role="group" aria-label="Langue du CV / Resume language">
+            <button
+              type="button"
+              class="cv-version-btn active"
+              data-cv-lang-btn="fr"
+              aria-pressed="true"
+              title="Afficher le CV en français"
+            >
+              FR &middot; Français
+            </button>
+            <button
+              type="button"
+              class="cv-version-btn"
+              data-cv-lang-btn="en"
+              aria-pressed="false"
+              title="View Resume in English"
+            >
+              EN &middot; English
+            </button>
+          </div>
+        </div>
+
+        <!-- Resume Page Header -->
+        <div class="resume-head">
+          <div class="resume-head-title">
+            <h1 id="cvMainHeading">CV - Aperçu</h1>
+            <p id="cvMainSubtitle">Curriculum vitae complet (CV_V3) — Olivier Bourgault, Gatineau</p>
+          </div>
+          <div class="resume-head-actions">
+            <button
+              type="button"
+              class="dl-btn dl-btn-secondary"
+              id="cvTranslateToggleBtn"
+              data-toggle-cv-lang
+              title="Basculer la langue du CV (Français / English)"
+            >
+              <i class="bi bi-translate" aria-hidden="true"></i>
+              <span id="cvTranslateBtnLabel">English (EN)</span>
+            </button>
+            <button type="button" class="dl-btn dl-btn-secondary" data-print-cv>
+              <i class="bi bi-printer" aria-hidden="true"></i>
+              <span id="cvPrintBtnLabel">Imprimer</span>
+            </button>
+            <a
+              href={frPdfUrl}
+              class="dl-btn"
+              download={SITE.cvFrFilename}
+              data-cv-direct-download
+            >
+              <i class="bi bi-download" aria-hidden="true"></i>
+              <span data-cv-download-label>Télécharger PDF (FR)</span>
+            </a>
+          </div>
+        </div>
+
+        <ResumeSheets />
+
+        <!-- Resume Bottom CTA -->
+        <div class="resume-foot">
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a
+              href={frPdfUrl}
+              class="dl-btn"
+              download={SITE.cvFrFilename}
+              data-cv-direct-download
+            >
+              <i class="bi bi-download" aria-hidden="true"></i>
+              <span data-cv-download-label>Télécharger PDF (FR)</span>
+            </a>
+            <button
+              type="button"
+              class="dl-btn dl-btn-secondary"
+              data-toggle-cv-lang
+            >
+              <i class="bi bi-translate" aria-hidden="true"></i>
+              <span id="cvFootTranslateLabel">Switch to English (EN)</span>
+            </button>
+            <button type="button" class="dl-btn dl-btn-secondary" data-open-dialog="cvDownloadDialog">
+              <i class="bi bi-file-earmark-pdf-fill" aria-hidden="true"></i>
+              <span id="cvModalBtnLabel">Tous les PDF (FR / EN)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <SiteFooter />
+  <ScrollTop href="#" label="Retour en haut" />
+  <CvDownloadDialog />
+
+  <script>
+    import { initCvApercuPage } from '../scripts/cv-apercu';
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCvApercuPage);
+    } else {
+      initCvApercuPage();
+    }
+  </script>
+</BaseLayout>

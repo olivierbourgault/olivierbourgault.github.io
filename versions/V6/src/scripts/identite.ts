@@ -1,3 +1,4 @@
+import { getSiteLang } from './i18n';
 import { bindVerticalNavSpy } from './vnav';
 
 const HERO_EMBLEM_META: Record<string, string> = {
@@ -169,7 +170,8 @@ function initCopyButtons(): void {
     button.removeAttribute('data-copied');
     button.removeAttribute('data-failed');
 
-    let message = ok ? 'Copié !' : 'Échec';
+    const isEn = getSiteLang() === 'en';
+    let message = ok ? (isEn ? 'Copied!' : 'Copié !') : isEn ? 'Failed' : 'Échec';
     if (message === lastCopyMessage) message += '\u00A0';
     lastCopyMessage = message;
 

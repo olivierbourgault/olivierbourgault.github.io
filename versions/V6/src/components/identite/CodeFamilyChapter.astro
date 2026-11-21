@@ -9,21 +9,21 @@ const benchSlots = [
   {
     type: 'ob' as const,
     title: 'OB Hexagonal Tech',
-    file: 'assets/img/logo/logo-ob-tech.svg',
+    file: 'assets/images/logos/logo-ob-tech.svg',
     filename: 'logo-ob-tech.svg',
     ariaLabel: 'Logo OB Hexagonal Tech'
   },
   {
     type: 'terminal' as const,
     title: 'Terminal Code </>',
-    file: 'assets/img/logo/logo-terminal-tech.svg',
+    file: 'assets/images/logos/logo-terminal-tech.svg',
     filename: 'logo-terminal-tech.svg',
     ariaLabel: 'Logo Terminal Code Tech'
   },
   {
     type: 'neural' as const,
     title: 'Nœud Neuronal IA',
-    file: 'assets/img/logo/logo-neural-tech.svg',
+    file: 'assets/images/logos/logo-neural-tech.svg',
     filename: 'logo-neural-tech.svg',
     ariaLabel: 'Logo Nœud Neuronal IA'
   }
@@ -98,6 +98,7 @@ const benchSlots = [
                   class="copy-button"
                   {...({ command: '--copy', commandfor: token.id } as Record<string, string>)}
                   aria-label={token.ariaLabel}
+                  title={token.ariaLabel}
                 >
                   <i class="bi bi-copy icon-copy" aria-hidden="true"></i>
                   <i class="bi bi-check-lg icon-check" aria-hidden="true"></i>

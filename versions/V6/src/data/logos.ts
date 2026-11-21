@@ -91,21 +91,21 @@ export const IDENTITY_INVARIANTS: IdentityInvariant[] = [
 
 export const FAMILY_COMPARISON_ROWS: FamilyTableRow[] = [
   {
-    logoFile: 'assets/img/logo/logo-ob-tech.svg',
+    logoFile: 'assets/images/logos/logo-ob-tech.svg',
     name: 'OB Hexagonal Tech',
     seen: 'Hexagone orange + monogramme B bleu + pivot central',
     meaning: 'Mon identité officielle & mes systèmes TI',
     hidden: 'Initiales O·B réunies en bouclier matériel et bus de données'
   },
   {
-    logoFile: 'assets/img/logo/logo-terminal-tech.svg',
+    logoFile: 'assets/images/logos/logo-terminal-tech.svg',
     name: 'Terminal Code </>',
     seen: 'Disque orange + chevrons bleus + slash orange à 74°',
     meaning: 'Le langage du développement Full-Stack',
     hidden: 'Dialogue Front / Back symétrique autour de l’impulsion /'
   },
   {
-    logoFile: 'assets/img/logo/logo-neural-tech.svg',
+    logoFile: 'assets/images/logos/logo-neural-tech.svg',
     name: 'Nœud Neuronal IA',
     seen: 'Orbite pointillée orange + triangle de 3 disques bleus',
     meaning: 'Intelligence Artificielle & Agents',

@@ -1,0 +1,17 @@
+{
+  "name": "Olivier Bourgault — Portfolio Tech Canvas",
+  "short_name": "OB Tech",
+  "description": "Portfolio d'Olivier Bourgault : Développeur Full-Stack, IA & Technicien TI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121316",
+  "theme_color": "#FF6600",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

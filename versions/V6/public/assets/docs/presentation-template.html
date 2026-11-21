@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- [TEMPLATE_META] : Adapter le titre du document selon le sujet -->
+  <title>{{PRESENTATION_TITLE}} — {{PRESENTER_NAME}}</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans & JetBrains Mono (Tech Canvas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            tc: {
+              carbon: '#121316',
+              surface: '#181A1F',
+              elevated: '#20232A',
+              ivory: '#F4F1EA',
+              orange: '#FF6600',
+              orangeLight: '#FF8533',
+              sky: '#38BDF8',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --tc-bg: #F4F1EA;
+      --tc-surface: #FFFFFF;
+      --tc-elevated: #EDE9DE;
+      --tc-text: #161616;
+      --tc-heading: #121316;
+      --tc-muted: #52525B;
+      --tc-border: #161616;
+      --tc-border-subtle: rgba(22, 22, 22, 0.16);
+      --tc-shadow: #FF6600;
+      --tc-orange: #FF6600;
+      --tc-sky: #0284C7;
+      --tc-code-bg: #EAE5DA;
+      --tc-header-bg: rgba(244, 241, 234, 0.92);
+    }
+
+    html.dark {
+      color-scheme: dark;
+      --tc-bg: #121316;
+      --tc-surface: #181A1F;
+      --tc-elevated: #20232A;
+      --tc-text: #F5F5F7;
+      --tc-heading: #FFFFFF;
+      --tc-muted: #9CA3AF;
+      --tc-border: #2D313B;
+      --tc-border-subtle: rgba(255, 255, 255, 0.1);
+      --tc-shadow: #000000;
+      --tc-orange: #FF6600;
+      --tc-sky: #38BDF8;
+      --tc-code-bg: rgba(0, 0, 0, 0.42);
+      --tc-header-bg: rgba(18, 19, 22, 0.92);
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    input, textarea, select, .ov-list, code, pre, .selectable {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+
+    body {
+      background-color: var(--tc-bg);
+      color: var(--tc-text);
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    :where(a:any-link, button, input, dfn):focus-visible {
+      outline: 2.5px solid var(--tc-sky);
+      outline-offset: 2px;
+    }
+
+    /* Barre de progression supérieure */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 102, 0, 0.12);
+      z-index: 60;
+      pointer-events: none;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #FF6600, #38BDF8);
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Canvas quadrillé animé Tech Canvas */
+    #tech-bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Halos d'ambiance subtils */
+    .ambient-glow-1 {
+      position: fixed;
+      top: -18%;
+      left: -12%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(255, 102, 0, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      bottom: -22%;
+      right: -12%;
+      width: 46vw;
+      height: 46vw;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.09) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* En-tête et pied de page Tech Canvas */
+    .tc-bar {
+      background: var(--tc-header-bg);
+      backdrop-filter: blur(12px);
+      border-color: var(--tc-border);
+    }
+
+    /* Cartes et panneaux Néo-Brutalistes Tech Canvas */
+    .neo-panel {
+      background-color: var(--tc-surface);
+      border: 2px solid var(--tc-border);
+      box-shadow: 6px 6px 0 var(--tc-shadow);
+      border-radius: 18px;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .neo-card {
+      background-color: var(--tc-surface);
+      border: 2px solid var(--tc-border);
+      box-shadow: 5px 5px 0 var(--tc-shadow);
+      border-radius: 16px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+    }
+
+    .neo-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: #FF6600;
+      box-shadow: 7px 7px 0 #FF6600;
+    }
+
+    .tc-pill {
+      background-color: var(--tc-elevated);
+      border: 1.5px solid var(--tc-border);
+      border-radius: 12px;
+    }
+
+    /* Conteneur de diapositives et transitions 3D fluides */
+    .slide-container {
+      position: relative;
+      width: 100%;
+      perspective: 1600px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(60px, 0, -80px) rotateY(-4deg) scale(0.96);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.25rem;
+      padding: 1rem 2rem;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+      z-index: 10;
+    }
+
+    .slide.prev {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(-60px, 0, -80px) rotateY(4deg) scale(0.96);
+    }
+
+    /* Animations d'entrée échelonnées */
+    .slide.active .stagger-1 { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both; }
+    .slide.active .stagger-2 { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both; }
+    .slide.active .stagger-3 { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both; }
+    .slide.active .stagger-4 { animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .stagger-1, .stagger-2, .stagger-3, .stagger-4 {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Barre de défilement personnalisée */
+    .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 102, 0, 0.4); border-radius: 8px; }
+    .custom-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255, 102, 0, 0.75); }
+
+    /* Pointeur Laser Virtuel OB Tech */
+    #laser-dot {
+      position: fixed;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #FF6600 25%, rgba(255, 102, 0, 0.75) 55%, transparent 80%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 22px 6px rgba(255, 102, 0, 0.7);
+      display: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.14s ease, height 0.14s ease, box-shadow 0.14s ease;
+    }
+    #laser-dot.big {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #FF6600;
+      box-shadow: 0 0 26px 8px rgba(255, 102, 0, 0.85);
+    }
+    #laser-dot.precise {
+      width: 11px;
+      height: 11px;
+      background: radial-gradient(circle, #38BDF8 35%, rgba(56, 189, 248, 0.85) 65%, transparent 90%);
+      box-shadow: 0 0 16px 4px rgba(56, 189, 248, 0.85);
+    }
+    @media (hover: none), (pointer: coarse) {
+      #laser-dot { display: none !important; }
+    }
+
+    /* Mode Focus Visuel (D) */
+    body.focus-visual .zone-main {
+      grid-column: span 12 / span 12 !important;
+    }
+    body.focus-visual .zone-details {
+      display: none !important;
+    }
+
+    /* Mode Express (E) */
+    body.mode-express .detail-extra {
+      display: none !important;
+    }
+
+    /* HUD Controls dans le pied de page */
+    nav.hud {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav.hud button {
+      background: var(--tc-elevated);
+      color: var(--tc-text);
+      border: 1.5px solid var(--tc-border);
+      border-radius: 0.55rem;
+      padding: 0.22rem 0.5rem;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      min-height: 26px;
+      min-width: 26px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+    }
+    nav.hud button:hover {
+      border-color: #FF6600;
+      color: #FF6600;
+    }
+    nav.hud button[aria-pressed="true"] {
+      background: #FF6600;
+      color: #121316;
+      border-color: #121316;
+    }
+
+    /* Overlays, Notes Popover, Tooltip, Toast, Blackout */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(12, 13, 16, 0.74);
+      backdrop-filter: blur(8px);
+    }
+    .overlay.open {
+      display: flex;
+    }
+    .overlay .panel {
+      width: min(860px, 95vw);
+      max-height: 85vh;
+      overflow-y: auto;
+      border-radius: 18px;
+      padding: 1.25rem;
+      background: var(--tc-surface);
+      color: var(--tc-text);
+      border: 2px solid var(--tc-border);
+      box-shadow: 8px 8px 0 var(--tc-shadow);
+    }
+    .overlay .panel h2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--tc-heading);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+      border-bottom: 1.5px solid var(--tc-border-subtle);
+    }
+    .overlay .panel .x {
+      background: var(--tc-elevated);
+      color: var(--tc-text);
+      border: 1.5px solid var(--tc-border);
+      border-radius: 0.55rem;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .overlay .panel .x:hover {
+      border-color: #FF6600;
+      color: #FF6600;
+    }
+    .overlay .keys {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      margin-bottom: 0.85rem;
+    }
+    .overlay .keys > div {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.6rem;
+      background: var(--tc-elevated);
+      border: 1.5px solid var(--tc-border-subtle);
+    }
+    .overlay input[type="search"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.65rem;
+      background: var(--tc-elevated);
+      color: var(--tc-heading);
+      border: 1.5px solid var(--tc-border);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+    .overlay .ov-list {
+      display: grid;
+      gap: 0.55rem;
+      max-height: 55vh;
+      overflow-y: auto;
+    }
+    .overlay .thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .notes-pop {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 4.1rem;
+      width: min(460px, 92vw);
+      max-height: 52vh;
+      overflow-y: auto;
+      z-index: 70;
+      display: none;
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      background: var(--tc-surface);
+      color: var(--tc-text);
+      border: 2px solid #FF6600;
+      box-shadow: 6px 6px 0 var(--tc-shadow);
+    }
+    .notes-pop.open { display: block; }
+
+    .tip {
+      position: fixed;
+      z-index: 95;
+      display: none;
+      max-width: 320px;
+      padding: 0.6rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.74rem;
+      line-height: 1.4;
+      background: var(--tc-surface);
+      color: var(--tc-text);
+      border: 1.5px solid var(--tc-border);
+      border-left: 4px solid #FF6600;
+      box-shadow: 5px 5px 0 var(--tc-shadow);
+      pointer-events: none;
+    }
+    .tip.open { display: block; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 4.25rem;
+      transform: translateX(-50%);
+      z-index: 90;
+      display: none;
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      background: var(--tc-surface);
+      color: var(--tc-heading);
+      border: 2px solid #FF6600;
+      box-shadow: 4px 4px 0 var(--tc-shadow);
+    }
+    .toast.open { display: block; }
+
+    .blackout {
+      position: fixed;
+      inset: 0;
+      z-index: 9500;
+      background: #000000;
+      display: none;
+    }
+    .blackout.open { display: block; }
+
+    dfn {
+      border-bottom: 1.5px dotted var(--tc-sky);
+      color: var(--tc-sky);
+      cursor: help;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 0.1rem 0.38rem;
+      border-radius: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--tc-surface);
+      color: var(--tc-heading);
+      border: 1px solid var(--tc-border);
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col justify-between relative">
+
+  <!-- Barre de progression supérieure -->
+  <div class="progress" aria-hidden="true"><div class="progress-fill" id="top-progress-fill"></div></div>
+
+  <!-- Arrière-plan animé Tech Canvas -->
+  <canvas id="tech-bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Pointeur Laser -->
+  <div id="laser-dot" aria-hidden="true"></div>
+
+  <!-- Halos d'ambiance -->
+  <div class="ambient-glow-1" id="glow1" aria-hidden="true"></div>
+  <div class="ambient-glow-2" id="glow2" aria-hidden="true"></div>
+
+  <!-- ================= EN-TÊTE FIXE TECH CANVAS ================= -->
+  <header id="app-header" class="tc-bar relative z-20 px-4 xl:px-8 py-2.5 border-b-2 flex items-center justify-between gap-3 shrink-0">
+    <!-- Gauche : Monogramme OB Tech + Identité & Titre -->
+    <div class="flex items-center gap-3 min-w-0">
+      <button
+        type="button"
+        onclick="goToSlide(0)"
+        title="Retour à la Diapositive 1"
+        aria-label="Retour à la Diapositive 1"
+        class="w-10 h-10 xl:w-11 xl:h-11 rounded-xl border-2 border-[#FF6600] p-1.5 flex items-center justify-center shrink-0 transition-transform hover:-translate-y-0.5 cursor-pointer"
+        style="background: var(--tc-surface); box-shadow: 3px 3px 0 var(--tc-shadow);"
+      >
+        <svg viewBox="0 0 100 100" class="w-full h-full" aria-hidden="true">
+          <polygon points="50,6 90,29 90,75 50,98 10,75 10,29" fill="none" stroke="#FF6600" stroke-width="7" stroke-linejoin="round" />
+          <path d="M38,30 L38,70 M38,30 L56,30 C64,30 68,36 68,42 C68,48 62,50 56,50 M38,50 L58,50 C66,50 72,56 72,62 C72,70 64,70 56,70 L38,70" fill="none" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" />
+          <circle cx="50" cy="50" r="4" fill="#FF6600" />
+        </svg>
+      </button>
+
+      <div class="min-w-0">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-[11px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[#FF6600]/15 text-[#FF6600] border border-[#FF6600]/50 font-bold whitespace-nowrap">
+            {{PRESENTATION_BADGE}}
+          </span>
+          <span class="text-xs xl:text-sm font-bold tracking-tight whitespace-nowrap" style="color: var(--tc-heading);">{{PRESENTER_NAME}}</span>
+          <span class="text-xs hidden xl:inline truncate" style="color: var(--tc-muted);">| {{PRESENTER_ROLE}}</span>
+        </div>
+        <h1 class="text-xs md:text-sm xl:text-base font-extrabold tracking-tight mt-0.5 truncate" style="color: var(--tc-heading);">
+          {{PRESENTATION_MAIN_TITLE}}
+        </h1>
+      </div>
+    </div>
+
+    <!-- Centre : Barre de Navigation Directe par Diapositive -->
+    <nav class="hidden lg:flex items-center gap-1.5 tc-pill p-1 shrink-0" id="top-nav" aria-label="Navigation directe des diapositives">
+      <button type="button" onclick="goToSlide(0)" class="slide-nav-btn px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap" data-index="0">
+        <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-mono bg-black/25">1</span> {{SLIDE_1_SHORT_TITLE}}
+      </button>
+      <button type="button" onclick="goToSlide(1)" class="slide-nav-btn px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap" data-index="1">
+        <span class="w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-mono bg-black/25">2</span> {{SLIDE_2_SHORT_TITLE}}
+      </button>
+    </nav>
+
+    <!-- Droite : Outils de l'Orateur -->
+    <div class="flex items-center gap-1.5 shrink-0">
+      <!-- Chronomètre -->
+      <div class="flex items-center gap-1.5 tc-pill px-2.5 py-1" title="Chronomètre de présentation">
+        <i class="fa-regular fa-clock text-[#FF6600] text-xs" aria-hidden="true"></i>
+        <span id="timer-display" class="font-mono text-xs font-bold" style="color: var(--tc-heading);">00:00</span>
+        <button type="button" onclick="toggleTimer()" class="hover:text-[#FF6600] transition-colors text-xs ml-0.5" style="color: var(--tc-muted);" aria-label="Démarrer ou mettre en pause le chronomètre">
+          <i class="fa-solid fa-play" id="timer-icon" aria-hidden="true"></i>
+        </button>
+        <button type="button" onclick="resetTimer()" class="hover:text-[#FF6600] transition-colors text-xs" style="color: var(--tc-muted);" aria-label="Réinitialiser le chronomètre">
+          <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Bascule Split-Screen / Focus Visuel -->
+      <button type="button" onclick="toggleFocusMode()" id="focus-btn" class="tc-pill px-2.5 py-1 hover:border-[#FF6600] text-xs font-semibold flex items-center gap-1.5 transition-all whitespace-nowrap" style="color: var(--tc-text);" title="Basculer Split-Screen / Focus Visuel (Touche D)">
+        <i class="fa-solid fa-columns text-[#FF6600]" aria-hidden="true"></i>
+        <span class="hidden sm:inline" id="focus-label">Split-Screen</span>
+      </button>
+
+      <!-- Pointeur Laser -->
+      <button type="button" onclick="toggleLaser()" id="laser-btn" class="tc-pill p-1.5 hover:border-[#FF6600] text-xs transition-all" style="color: var(--tc-text);" title="Pointeur laser (Touche L)" aria-label="Activer le pointeur laser">
+        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+      </button>
+
+      <!-- Plein Écran -->
+      <button type="button" onclick="toggleFullscreen()" class="px-2.5 py-1.5 rounded-xl bg-[#FF6600] hover:bg-[#FF8533] text-[#121316] font-bold text-xs transition-all border-2 border-[#121316]" style="box-shadow: 2px 2px 0 var(--tc-shadow);" title="Plein Écran (Touche F)" aria-label="Plein écran">
+        <i class="fa-solid fa-expand" id="fs-icon" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= CONTENEUR PRINCIPAL DES DIAPOSITIVES ================= -->
+  <main id="app-main" class="slide-container flex-1 min-h-0 z-10">
+
+    <!-- ================================================================= -->
+    <!-- DIAPOSITIVE 1 : RÉFÉRENCE DESIGN SYSTEM — TECH CANVAS             -->
+    <!-- (À conserver comme guide ou à dupliquer/adapter pour vos slides)  -->
+    <!-- ================================================================= -->
+    <section class="slide active" id="slide-0" data-short-title="Design System" data-timing="~1 min 15 s">
+
+      <!-- 1. VOLET VISUEL (GAUCHE - 7 COLONNES) : Couleurs, Polices & Composants -->
+      <div class="zone-main col-span-12 lg:col-span-7 flex flex-col justify-between gap-3.5 h-full min-h-0 overflow-hidden p-2">
+
+        <!-- En-tête de la diapositive -->
+        <div class="stagger-1">
+          <div class="inline-flex items-center gap-2.5 text-[#FF6600] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
+            <span class="relative flex h-2.5 w-2.5 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF6600] opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF6600]"></span>
+            </span>
+            Diapositive 01 • Référence Design System — Tech Canvas
+          </div>
+          <h2 class="text-2xl xl:text-4xl font-extrabold tracking-tight leading-tight" style="color: var(--tc-heading);">
+            Identité visuelle &amp; règles du <span class="text-[#FF6600]">template Tech Canvas</span>
+          </h2>
+        </div>
+
+        <!-- Bloc 1 : Palette officielle Tech Canvas (4 Swatches) -->
+        <div class="grid grid-cols-2 xl:grid-cols-4 gap-3 stagger-2">
+          <div class="neo-card p-3.5 border-l-4" style="border-left-color: #FF6600;">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono font-bold" style="color: var(--tc-muted);">ACCENT 01</span>
+              <span class="w-4 h-4 rounded-md border border-black/30" style="background: #FF6600;"></span>
+            </div>
+            <div class="text-base xl:text-lg font-black font-mono text-[#FF6600]">#FF6600</div>
+            <p class="text-[11px] font-semibold mt-1" style="color: var(--tc-text);">Orange Signal • CTA &amp; ombres clair</p>
+          </div>
+
+          <div class="neo-card p-3.5 border-l-4" style="border-left-color: #38BDF8;">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono font-bold" style="color: var(--tc-muted);">ACCENT 02</span>
+              <span class="w-4 h-4 rounded-md border border-black/30" style="background: #38BDF8;"></span>
+            </div>
+            <div class="text-base xl:text-lg font-black font-mono" style="color: var(--tc-sky);">#38BDF8</div>
+            <p class="text-[11px] font-semibold mt-1" style="color: var(--tc-text);">Bleu Circuit • Liens, &lt;dfn&gt; &amp; code</p>
+          </div>
+
+          <div class="neo-card p-3.5 border-l-4" style="border-left-color: #121316;">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono font-bold" style="color: var(--tc-muted);">SOMBRE</span>
+              <span class="w-4 h-4 rounded-md border border-white/25" style="background: #121316;"></span>
+            </div>
+            <div class="text-base xl:text-lg font-black font-mono" style="color: var(--tc-heading);">#121316</div>
+            <p class="text-[11px] font-semibold mt-1" style="color: var(--tc-text);">Carbone • Surface #181A1F</p>
+          </div>
+
+          <div class="neo-card p-3.5 border-l-4" style="border-left-color: #F4F1EA;">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] font-mono font-bold" style="color: var(--tc-muted);">CLAIR</span>
+              <span class="w-4 h-4 rounded-md border border-black/30" style="background: #F4F1EA;"></span>
+            </div>
+            <div class="text-base xl:text-lg font-black font-mono" style="color: var(--tc-heading);">#F4F1EA</div>
+            <p class="text-[11px] font-semibold mt-1" style="color: var(--tc-text);">Ivoire • Surface #FFFFFF</p>
+          </div>
+        </div>
+
+        <!-- Bloc 2 : Typographie & Signature Néo-Brutaliste -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 stagger-3">
+          <div class="neo-panel p-4">
+            <div class="flex items-center gap-2 text-[#FF6600] font-bold text-sm mb-2.5">
+              <span class="w-7 h-7 rounded-lg bg-[#FF6600]/15 flex items-center justify-center"><i class="fa-solid fa-font" aria-hidden="true"></i></span>
+              Typographie officielle (3 polices)
+            </div>
+            <ul class="space-y-1.5 text-xs" style="color: var(--tc-text);">
+              <li class="flex items-center justify-between gap-2">
+                <span><strong class="font-display">Space Grotesk</strong> (600–800)</span>
+                <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">Titres h1–h4</code>
+              </li>
+              <li class="flex items-center justify-between gap-2">
+                <span><strong>Plus Jakarta Sans</strong> (400–800)</span>
+                <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">Corps &amp; listes</code>
+              </li>
+              <li class="flex items-center justify-between gap-2">
+                <span><strong class="font-mono">JetBrains Mono</strong> (400–700)</span>
+                <code class="font-mono text-[10px] px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">KPIs, code &amp; HUD</code>
+              </li>
+            </ul>
+          </div>
+
+          <div class="neo-panel p-4" style="border-color: #FF6600;">
+            <div class="flex items-center gap-2 text-[#FF6600] font-bold text-sm mb-2.5">
+              <span class="w-7 h-7 rounded-lg bg-[#FF6600]/15 flex items-center justify-center"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+              Composants &amp; Motifs Tech Canvas
+            </div>
+            <ul class="space-y-1.5 text-xs" style="color: var(--tc-text);">
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-[#FF6600] mt-0.5" aria-hidden="true"></i><span><strong>Néo-Brutalisme :</strong> bordure <code>2px</code>, rayon <code>16–18px</code>, ombre dure <code>5–6px</code>.</span></li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-[#38BDF8] mt-0.5" aria-hidden="true"></i><span><strong>Canvas 48×48 px :</strong> quadrillage réactif au curseur + particules.</span></li>
+              <li class="flex items-start gap-2"><i class="fa-solid fa-check text-[#FF6600] mt-0.5" aria-hidden="true"></i><span><strong>OB Tech :</strong> monogramme hexagonal SVG + laser orange (<code>L</code>).</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bloc 3 : Bandeau récapitulatif inférieur -->
+        <div class="neo-panel p-3.5 stagger-4 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#FF6600]/15 border border-[#FF6600]/50 flex items-center justify-center text-[#FF6600] shrink-0">
+              <i class="fa-solid fa-wand-magic-sparkles text-lg" aria-hidden="true"></i>
+            </div>
+            <div>
+              <div class="text-xs font-mono uppercase text-[#FF6600] font-bold">Mode d'emploi du gabarit</div>
+              <div class="text-xs" style="color: var(--tc-muted);">
+                Dupliquer <code class="font-mono text-[11px]" style="color: var(--tc-sky);">&lt;section class="slide"&gt;</code> + renseigner <dfn tabindex="0" data-term="Tech Canvas" data-def="Direction artistique combinant fond carbone (#121316) ou ivoire (#F4F1EA), quadrillage réactif 48 px, cartes néo-brutalistes et accents #FF6600 / #38BDF8.">Tech Canvas</dfn> &amp; <code>SPEAKER_NOTES</code>.
+              </div>
+            </div>
+          </div>
+          <span class="px-3 py-1.5 rounded-full border border-[#38BDF8]/60 bg-[#38BDF8]/10 text-xs font-mono font-bold shrink-0" style="color: var(--tc-sky);">
+            V6 • Référence
+          </span>
+        </div>
+
+      </div>
+
+      <!-- 2. VOLET EXPLICATIF (DROITE - 5 COLONNES) : Règles & Variables CSS -->
+      <aside class="zone-details col-span-12 lg:col-span-5 neo-panel p-6 flex flex-col justify-between h-full min-h-0 overflow-y-auto custom-scroll stagger-3 border-t-4" style="border-top-color: #FF6600;">
+        <div>
+          <div class="flex items-center justify-between pb-3 mb-4 border-b" style="border-color: var(--tc-border-subtle);">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-palette text-[#FF6600]" aria-hidden="true"></i>
+              <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--tc-heading);">Spécifications du Gabarit</h3>
+            </div>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full border border-[#FF6600]/40 text-[#FF6600] bg-[#FF6600]/10">Portfolio V6</span>
+          </div>
+
+          <!-- Section détaillée 1 -->
+          <div class="mb-4">
+            <h4 class="text-sm font-bold text-[#FF6600] flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#FF6600]"></span>
+              Variables CSS &amp; Thèmes (Sombre / Clair)
+            </h4>
+            <ul class="space-y-1.5 text-xs xl:text-sm leading-relaxed pl-4 border-l-2" style="color: var(--tc-text); border-color: var(--tc-border-subtle);">
+              <li>Utiliser <code class="font-mono text-xs px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">var(--tc-bg)</code>, <code class="font-mono text-xs px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">var(--tc-surface)</code>, <code class="font-mono text-xs px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">var(--tc-heading)</code> et <code class="font-mono text-xs px-1.5 py-0.5 rounded" style="background: var(--tc-code-bg); color: var(--tc-sky);">var(--tc-shadow)</code> pour rester compatible avec la bascule <strong>T</strong>.</li>
+              <li>Classes prêtes à l'emploi : <code>.neo-card</code> (KPIs interactifs), <code>.neo-panel</code> (blocs &amp; comparaisons), <code>.tc-pill</code> (badges &amp; boutons).</li>
+            </ul>
+          </div>
+
+          <!-- Section détaillée 2 (masquée automatiquement en mode Express via touche E) -->
+          <div class="detail-extra">
+            <h4 class="text-sm font-bold text-[#FF6600] flex items-center gap-2 mb-2">
+              <span class="w-2 h-2 rounded-full bg-[#38BDF8]"></span>
+              Contrôles intégrés &amp; Raccourcis (masqué en Express)
+            </h4>
+            <p class="text-xs xl:text-sm leading-relaxed pl-4 border-l-2" style="color: var(--tc-text); border-color: var(--tc-border-subtle);">
+              Navigation <kbd>←</kbd> <kbd>→</kbd> <kbd>1</kbd>–<kbd>9</kbd>, Focus <kbd>D</kbd>, Express <kbd>E</kbd>, Plan <kbd>O</kbd>, Notes <kbd>N</kbd>, Présentateur <kbd>P</kbd>, Glossaire <kbd>G</kbd>, FAQ <kbd>Q</kbd>, Laser <kbd>L</kbd>, Thème <kbd>T</kbd>, Plein écran <kbd>F</kbd>, Pause noire <kbd>B</kbd>, Rejouer <kbd>R</kbd> et Aide <kbd>?</kbd>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pied du volet explicatif -->
+        <div class="mt-4 pt-3 border-t flex items-center justify-between text-[11px]" style="border-color: var(--tc-border-subtle); color: var(--tc-muted);">
+          <span><i class="fa-solid fa-layer-group text-[#FF6600] mr-1" aria-hidden="true"></i> Grille 12 cols : 7 Visuel / 5 Détails</span>
+          <span class="font-mono font-bold text-[#FF6600]">Design System</span>
+        </div>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- ================= PIED DE PAGE : PROGRESSION, HUD & CONTRÔLES ================= -->
+  <footer id="app-footer" class="tc-bar relative z-20 px-4 xl:px-8 py-2.5 border-t-2 flex items-center justify-between gap-3 shrink-0">
+    <!-- Compteur + Barre de progression -->
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span id="slide-counter" class="text-xs font-mono font-bold text-[#FF6600] whitespace-nowrap">01 / 01</span>
+      <div class="w-20 xl:w-32 h-2.5 tc-pill overflow-hidden hidden sm:block">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-[#FF6600] to-[#38BDF8] transition-all duration-300" style="width: 100%;"></div>
+      </div>
+    </div>
+
+    <!-- Barre HUD harmonisée -->
+    <nav class="hud" aria-label="Contrôles de la présentation">
+      <button type="button" data-a="prev" title="Diapo précédente (←)" aria-label="Diapo précédente">◀</button>
+      <button type="button" data-a="next" title="Diapo suivante (→)" aria-label="Diapo suivante">▶</button>
+      <span class="chap text-[11px] font-mono hidden xl:inline max-w-[160px] truncate px-1.5" style="color: var(--tc-muted);">{{SLIDE_1_SHORT_TITLE}}</span>
+      <button type="button" data-a="express" title="Parcours express ou complet (E)" aria-pressed="false"><span class="mode">Complet</span></button>
+      <span class="count text-[11px] font-mono text-[#FF6600] font-bold px-1">1 / 1</span>
+      <button type="button" data-a="plan" title="Plan et annexes (O)">Plan</button>
+      <button type="button" data-a="notes" title="Notes d'orateur (N)" aria-pressed="false">Notes</button>
+      <button type="button" data-a="pres" title="Vue présentateur (P)">Présentateur</button>
+      <button type="button" data-a="glossaire" title="Glossaire (G)">G</button>
+      <button type="button" data-a="faq" title="Questions fréquentes (Q)">Q</button>
+      <button type="button" data-a="theme" title="Thème clair ou sombre (T)">◐</button>
+      <button type="button" data-a="full" title="Plein écran (F)">⛶</button>
+      <button type="button" data-a="aide" title="Aide et raccourcis (?)">?</button>
+    </nav>
+
+    <!-- Boutons Précédent / Suivant -->
+    <div class="flex items-center gap-2 shrink-0">
+      <button type="button" onclick="prevSlide()" id="btn-prev" class="tc-pill px-3 py-1 hover:border-[#FF6600] text-xs font-bold transition-all flex items-center gap-1.5 disabled:opacity-40 whitespace-nowrap" style="color: var(--tc-text);">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> <span class="hidden md:inline">Précédent</span>
+      </button>
+      <button type="button" onclick="nextSlide()" id="btn-next" class="px-3.5 py-1 rounded-xl bg-[#FF6600] hover:bg-[#FF8533] text-[#121316] text-xs font-extrabold transition-all flex items-center gap-1.5 border-2 border-[#121316] whitespace-nowrap" style="box-shadow: 3px 3px 0 var(--tc-shadow);">
+        Suivant <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ================= PANNEAUX & OVERLAYS ================= -->
+  <div class="overlay" id="ov-aide" role="dialog" aria-modal="true" aria-labelledby="ov-aide-title">
+    <div class="panel">
+      <h2 id="ov-aide-title">Raccourcis de la présentation <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <div class="keys">
+        <div><kbd>→</kbd><kbd>Espace</kbd> Diapo suivante</div>
+        <div><kbd>←</kbd> Diapo précédente</div>
+        <div><kbd>1</kbd>–<kbd>9</kbd> Accès direct diapo</div>
+        <div><kbd>Début</kbd><kbd>Fin</kbd> Première / dernière diapo</div>
+        <div><kbd>P</kbd> Vue présentateur (minuteur, notes, suivante)</div>
+        <div><kbd>N</kbd> Notes dans cette fenêtre</div>
+        <div><kbd>E</kbd> Parcours express ou complet</div>
+        <div><kbd>O</kbd> Plan : diapositives &amp; annexes</div>
+        <div><kbd>Q</kbd> Questions fréquentes, avec recherche</div>
+        <div><kbd>G</kbd> Glossaire des mots techniques</div>
+        <div><kbd>D</kbd> Mode Split-Screen / Focus visuel</div>
+        <div><kbd>L</kbd> Pointeur laser interactif</div>
+        <div><kbd>F</kbd> Plein écran</div>
+        <div><kbd>B</kbd> Écran noir (pause)</div>
+        <div><kbd>T</kbd> Thème clair ou sombre</div>
+        <div><kbd>R</kbd> Rejouer animations &amp; compteurs</div>
+        <div><kbd>?</kbd> Afficher cette aide</div>
+        <div><kbd>Échap</kbd> Fermer un panneau / annexe</div>
+      </div>
+      <p class="text-xs" style="color: var(--tc-muted);">Les mots soulignés en pointillé (<code>&lt;dfn&gt;</code>) affichent une définition au survol, au focus clavier ou au clic.</p>
+    </div>
+  </div>
+
+  <div class="overlay" id="ov-plan" role="dialog" aria-modal="true" aria-labelledby="ov-plan-title">
+    <div class="panel">
+      <h2 id="ov-plan-title">Plan de la présentation &amp; annexes <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <div id="plan-main-view" class="space-y-4">
+        <div class="thumbs" id="plan-thumbs"></div>
+        <div class="pt-3 border-t" style="border-color: var(--tc-border-subtle);">
+          <div class="text-xs font-bold mb-2" style="color: var(--tc-muted);">Annexes à la demande (optionnel) :</div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" class="annex-btn tc-pill px-3 py-1.5 hover:border-[#FF6600] text-xs font-bold" data-annex="annex-a" style="color: var(--tc-heading);">Annexe A : {{ANNEX_A_TITLE}}</button>
+            <button type="button" class="annex-btn tc-pill px-3 py-1.5 hover:border-[#FF6600] text-xs font-bold" data-annex="annex-b" style="color: var(--tc-heading);">Annexe B : {{ANNEX_B_TITLE}}</button>
+          </div>
+        </div>
+      </div>
+      <div id="plan-annex-view" class="hidden space-y-3">
+        <div class="flex items-center justify-between">
+          <button type="button" onclick="closePlanAnnex()" class="tc-pill px-3 py-1 hover:border-[#FF6600] text-xs font-bold" style="color: var(--tc-heading);">← Retour au plan (Échap)</button>
+          <span id="plan-annex-badge" class="font-mono text-xs text-[#FF6600]"></span>
+        </div>
+        <div id="plan-annex-body" class="text-xs space-y-2" style="color: var(--tc-text);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="ov-glossaire" role="dialog" aria-modal="true" aria-labelledby="ov-glossaire-title">
+    <div class="panel">
+      <h2 id="ov-glossaire-title">Glossaire technique <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <input type="search" id="glossaire-search" placeholder="Chercher un mot…" aria-label="Chercher dans le glossaire" />
+      <div class="ov-list" id="glossaire-list">
+        <!-- Ajouter / adapter les termes du glossaire -->
+        <div class="ov-item p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);" data-search="tech canvas direction artistique carbone ivoire orange signal bleu circuit">
+          <div class="text-sm font-bold text-[#FF6600]">Tech Canvas</div>
+          <p class="text-xs mt-1 leading-relaxed" style="color: var(--tc-text);">Direction artistique combinant fond carbone (#121316) ou ivoire (#F4F1EA), quadrillage réactif 48 px, cartes néo-brutalistes et accents #FF6600 / #38BDF8.</p>
+        </div>
+        <div class="empty-state hidden p-4 text-center text-xs" style="color: var(--tc-muted);">Aucun résultat trouvé dans le glossaire.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="ov-faq" role="dialog" aria-modal="true" aria-labelledby="ov-faq-title">
+    <div class="panel">
+      <h2 id="ov-faq-title">Questions fréquentes <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <input type="search" id="faq-search" placeholder="Chercher…" aria-label="Chercher dans la FAQ" />
+      <div class="ov-list" id="faq-list">
+        <!-- Ajouter / adapter les questions fréquentes -->
+        <div class="ov-item p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);" data-search="comment utiliser les raccourcis clavier navigation notes présentateur">
+          <div class="text-sm font-bold flex items-start gap-2" style="color: var(--tc-heading);"><span class="text-[#FF6600] font-mono">Q.</span><span>{{FAQ_1_QUESTION}}</span></div>
+          <p class="text-xs mt-1.5 leading-relaxed pl-5" style="color: var(--tc-text);">{{FAQ_1_ANSWER}}</p>
+        </div>
+        <div class="empty-state hidden p-4 text-center text-xs" style="color: var(--tc-muted);">Aucune question trouvée.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="ov-pres" role="dialog" aria-modal="true" aria-labelledby="ov-pres-title">
+    <div class="panel">
+      <h2 id="ov-pres-title">Vue présentateur <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div class="md:col-span-5 space-y-2.5">
+          <div class="p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);">
+            <div class="text-[10px] font-mono uppercase" style="color: var(--tc-muted);">Minuteur de soutenance</div>
+            <div class="flex items-center justify-between mt-1">
+              <span id="pres-timer" class="font-mono text-2xl font-black text-[#FF6600]">00:00</span>
+              <div class="flex items-center gap-1.5">
+                <button type="button" onclick="toggleTimer()" class="tc-pill px-2.5 py-1 text-xs font-bold" style="color: var(--tc-heading);">Démarrer / Pause</button>
+                <button type="button" onclick="resetTimer()" class="tc-pill px-2.5 py-1 text-xs" style="color: var(--tc-muted);">Zéro</button>
+              </div>
+            </div>
+          </div>
+          <div class="p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);">
+            <div class="text-[10px] font-mono uppercase" style="color: var(--tc-muted);">Aperçu diapo suivante</div>
+            <div id="pres-next-preview" class="text-xs font-bold mt-1" style="color: var(--tc-heading);"></div>
+            <div class="flex items-center gap-2 mt-2">
+              <button type="button" onclick="prevSlide()" class="tc-pill px-2.5 py-1 text-xs font-bold" style="color: var(--tc-heading);">◀ Précédente</button>
+              <button type="button" onclick="nextSlide()" class="px-2.5 py-1 rounded-lg bg-[#FF6600] text-xs font-extrabold text-[#121316]">Suivante ▶</button>
+            </div>
+          </div>
+        </div>
+        <div class="md:col-span-7 p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-bold text-[#FF6600]">Notes d'orateur actives</span>
+            <span id="pres-timing-badge" class="font-mono text-[10px]" style="color: var(--tc-sky);"></span>
+          </div>
+          <div id="pres-notes" class="text-xs leading-relaxed space-y-1.5" style="color: var(--tc-text);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes-pop" id="notes-pop" aria-live="polite"></div>
+  <div class="tip" id="dfn-tip" role="tooltip"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="blackout" id="blackout" aria-hidden="true"></div>
+
+  <!-- ================= MOTEUR JAVASCRIPT DE PRÉSENTATION & CANVAS ================= -->
+  <script>
+    const slides = Array.from(document.querySelectorAll('section.slide'));
+
+    // [TEMPLATE_NOTES] : Définir ici les notes d'orateur de chaque diapositive (ou laisser les attributs data-* des <section>)
+    const SPEAKER_NOTES = [
+      {
+        title: 'Diapositive 1 — {{SLIDE_1_SHORT_TITLE}}',
+        timing: '0:00 → 1:15 (~1 min 15 s)',
+        express: '<strong>Essentiel :</strong> Résumé court affiché lorsque le mode Express (<code>E</code>) est actif.',
+        full: '<strong>1. Contexte :</strong> Notes complètes affichées dans le volet Notes (<code>N</code>) et la Vue Présentateur (<code>P</code>).<br/><strong>2. Message clé :</strong> Argumentaire détaillé sans perte d\'information.'
+      }
+    ];
+
+    const ANNEXES = {
+      'annex-a': {
+        badge: 'Annexe A • {{ANNEX_A_TITLE}}',
+        html: '<div class="p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);"><strong class="text-[#FF6600]">{{ANNEX_A_TITLE}}</strong><p class="mt-1">{{ANNEX_A_CONTENT}}</p></div>'
+      },
+      'annex-b': {
+        badge: 'Annexe B • {{ANNEX_B_TITLE}}',
+        html: '<div class="p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);"><strong class="text-[#FF6600]">{{ANNEX_B_TITLE}}</strong><p class="mt-1">{{ANNEX_B_CONTENT}}</p></div>'
+      }
+    };
+
+    const STATE = {
+      slide: 0,
+      total: slides.length,
+      theme: 'dark',
+      express: false,
+      focusVisual: false,
+      laser: false,
+      notesOpen: false,
+      blackout: false,
+      activeOverlay: null,
+      planAnnex: null,
+      lastFocused: null,
+      timerSeconds: 0,
+      timerId: null
+    };
+
+    let toastTimer = null;
+    let animHandles = [];
+
+    function escHtml(v) {
+      return String(v ?? '').replace(/[&<>"']/g, (ch) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[ch]));
+    }
+
+    function formatNumber(num) {
+      return String(num).padStart(2, '0');
+    }
+
+    function getSlideMeta(index) {
+      const el = slides[index];
+      const h2 = el ? el.querySelector('h2')?.textContent?.trim() : '';
+      const shortTitle = el?.getAttribute('data-short-title') || h2 || `Diapo ${index + 1}`;
+      const timing = el?.getAttribute('data-timing') || '';
+      const note = SPEAKER_NOTES[index] || {
+        title: `Diapositive ${index + 1} — ${shortTitle}`,
+        timing: timing || '—',
+        express: `<strong>Essentiel :</strong> ${escHtml(h2 || shortTitle)}`,
+        full: `<strong>Notes :</strong> ${escHtml(h2 || shortTitle)}`
+      };
+      return { shortTitle, timing, note };
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('open');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('open'), 2200);
+    }
+
+    function hideTip() {
+      const tip = document.getElementById('dfn-tip');
+      if (tip) tip.classList.remove('open');
+    }
+
+    function showTipFor(dfnEl) {
+      const tip = document.getElementById('dfn-tip');
+      if (!tip || !dfnEl) return;
+      const term = dfnEl.getAttribute('data-term') || dfnEl.textContent.trim();
+      const def = dfnEl.getAttribute('data-def') || '';
+      tip.innerHTML = `<strong class="text-[#FF6600]">${escHtml(term)}</strong><br/><span>${escHtml(def)}</span>`;
+      tip.classList.add('open');
+      const rect = dfnEl.getBoundingClientRect();
+      const tRect = tip.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const left = Math.max(8, Math.min(rect.left, vw - tRect.width - 8));
+      const top = (rect.bottom + tRect.height + 10 <= vh)
+        ? rect.bottom + 6
+        : Math.max(8, rect.top - tRect.height - 6);
+      tip.style.left = `${Math.round(left)}px`;
+      tip.style.top = `${Math.round(top)}px`;
+    }
+
+    function syncInertBackground(isModalOpen) {
+      ['app-header', 'app-main', 'app-footer'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (isModalOpen) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      });
+    }
+
+    function renderNotesContent() {
+      const { note } = getSlideMeta(STATE.slide);
+      const bodyHtml = STATE.express ? note.express : note.full;
+      const pop = document.getElementById('notes-pop');
+      if (pop) {
+        pop.innerHTML = `
+          <div class="flex items-center justify-between gap-2 pb-1.5 mb-2 border-b" style="border-color: var(--tc-border-subtle);">
+            <strong class="text-xs text-[#FF6600]">${escHtml(note.title)}</strong>
+            <span class="font-mono text-[10px]" style="color: var(--tc-sky);">${escHtml(note.timing)}</span>
+          </div>
+          <div class="text-xs leading-relaxed" style="color: var(--tc-text);">${bodyHtml}</div>
+        `;
+      }
+      const presNotes = document.getElementById('pres-notes');
+      const presTiming = document.getElementById('pres-timing-badge');
+      const presNext = document.getElementById('pres-next-preview');
+      if (presNotes) presNotes.innerHTML = bodyHtml;
+      if (presTiming) presTiming.textContent = note.timing;
+      if (presNext) {
+        const nextIdx = (STATE.slide + 1) % STATE.total;
+        if (STATE.total <= 1 || nextIdx === 0) {
+          presNext.textContent = 'Fin de la présentation (retour Diapo 1)';
+        } else {
+          const nextMeta = getSlideMeta(nextIdx);
+          presNext.textContent = `${nextMeta.note.title} (${nextMeta.note.timing})`;
+        }
+      }
+    }
+
+    function renderPlanThumbs() {
+      const wrap = document.getElementById('plan-thumbs');
+      if (!wrap) return;
+      wrap.innerHTML = slides.map((_, idx) => {
+        const { shortTitle, timing } = getSlideMeta(idx);
+        const active = idx === STATE.slide;
+        return `
+          <button type="button" class="thumb text-left p-3 rounded-xl border-2 transition-all" data-slide="${idx}"
+            style="background: var(--tc-elevated); border-color: ${active ? '#FF6600' : 'var(--tc-border)'};">
+            <div class="text-[10px] font-mono text-[#FF6600] font-bold">DIAPO ${idx + 1}${timing ? ' • ' + escHtml(timing) : ''}</div>
+            <div class="text-sm font-bold mt-0.5" style="color: var(--tc-heading);">${escHtml(shortTitle)}</div>
+          </button>
+        `;
+      }).join('');
+      wrap.querySelectorAll('[data-slide]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          goToSlide(Number(btn.getAttribute('data-slide')));
+          closeOverlays();
+        });
+      });
+    }
+
+    function updateSlides() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev');
+        if (index === STATE.slide) slide.classList.add('active');
+        else if (index < STATE.slide) slide.classList.add('prev');
+      });
+
+      document.querySelectorAll('#top-nav .slide-nav-btn').forEach((btn, idx) => {
+        if (idx === STATE.slide) {
+          btn.className = 'slide-nav-btn px-3 py-1 rounded-lg text-xs font-extrabold transition-all flex items-center gap-1.5 whitespace-nowrap bg-[#FF6600] text-[#121316]';
+          btn.style.color = '#121316';
+        } else {
+          btn.className = 'slide-nav-btn px-3 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 whitespace-nowrap opacity-75 hover:opacity-100';
+          btn.style.color = 'var(--tc-text)';
+        }
+      });
+
+      const pct = ((STATE.slide + 1) / Math.max(1, STATE.total)) * 100;
+      const bar = document.getElementById('progress-bar');
+      const topFill = document.getElementById('top-progress-fill');
+      if (bar) bar.style.width = `${pct}%`;
+      if (topFill) topFill.style.width = `${pct}%`;
+
+      const sc = document.getElementById('slide-counter');
+      if (sc) sc.textContent = `${formatNumber(STATE.slide + 1)} / ${formatNumber(STATE.total)}`;
+
+      const hudCount = document.querySelector('nav.hud .count');
+      const hudChap = document.querySelector('nav.hud .chap');
+      if (hudCount) hudCount.textContent = `${STATE.slide + 1} / ${STATE.total}`;
+      if (hudChap) hudChap.textContent = `${STATE.slide + 1}. ${getSlideMeta(STATE.slide).shortTitle}`;
+
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      if (btnPrev) btnPrev.disabled = STATE.slide === 0;
+      if (btnNext) {
+        btnNext.innerHTML = STATE.slide === STATE.total - 1
+          ? 'Recommencer <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>'
+          : 'Suivant <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>';
+      }
+
+      const g1 = document.getElementById('glow1');
+      const g2 = document.getElementById('glow2');
+      if (g1) g1.style.transform = `translate(${STATE.slide * 5}%, ${STATE.slide * 3}%)`;
+      if (g2) g2.style.transform = `translate(-${STATE.slide * 4}%, -${STATE.slide * 3}%)`;
+
+      hideTip();
+      renderNotesContent();
+    }
+
+    function goToSlide(index) {
+      STATE.slide = Math.max(0, Math.min(STATE.total - 1, Number(index)));
+      updateSlides();
+    }
+
+    function nextSlide() {
+      STATE.slide = STATE.slide < STATE.total - 1 ? STATE.slide + 1 : 0;
+      updateSlides();
+    }
+
+    function prevSlide() {
+      if (STATE.slide > 0) {
+        STATE.slide--;
+        updateSlides();
+      }
+    }
+
+    function toggleFocusMode() {
+      STATE.focusVisual = !STATE.focusVisual;
+      document.body.classList.toggle('focus-visual', STATE.focusVisual);
+      const lbl = document.getElementById('focus-label');
+      if (lbl) lbl.textContent = STATE.focusVisual ? 'Focus Visuel' : 'Split-Screen';
+      showToast(STATE.focusVisual ? 'Mode Focus Visuel activé' : 'Mode Split-Screen restauré');
+    }
+
+    function toggleTheme() {
+      STATE.theme = STATE.theme === 'dark' ? 'light' : 'dark';
+      const isDark = STATE.theme === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.dataset.theme = STATE.theme;
+      showToast(isDark ? 'Thème sombre activé' : 'Thème clair activé');
+    }
+
+    function toggleLaser() {
+      STATE.laser = !STATE.laser;
+      const dot = document.getElementById('laser-dot');
+      const btn = document.getElementById('laser-btn');
+      if (dot) dot.style.display = STATE.laser ? 'block' : 'none';
+      if (btn) {
+        btn.style.borderColor = STATE.laser ? '#FF6600' : '';
+        btn.style.color = STATE.laser ? '#FF6600' : 'var(--tc-text)';
+      }
+      showToast(STATE.laser ? 'Pointeur laser activé' : 'Pointeur laser désactivé');
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      if (!STATE.laser) return;
+      const dot = document.getElementById('laser-dot');
+      if (!dot) return;
+      dot.style.left = `${e.clientX}px`;
+      dot.style.top = `${e.clientY}px`;
+      const hitPrecise = e.target && e.target.closest('button, a, input, dfn, .slide-nav-btn');
+      dot.classList.toggle('precise', Boolean(hitPrecise));
+      dot.classList.toggle('big', !hitPrecise);
+    });
+
+    function syncTimerDisplays() {
+      const mins = formatNumber(Math.floor(STATE.timerSeconds / 60));
+      const secs = formatNumber(STATE.timerSeconds % 60);
+      const text = `${mins}:${secs}`;
+      const disp = document.getElementById('timer-display');
+      const presDisp = document.getElementById('pres-timer');
+      if (disp) {
+        disp.textContent = text;
+        if (STATE.timerSeconds >= 360 && STATE.timerSeconds < 420) {
+          disp.style.color = '#FACC15';
+        } else if (STATE.timerSeconds >= 420) {
+          disp.style.color = '#EF4444';
+        } else {
+          disp.style.color = 'var(--tc-heading)';
+        }
+      }
+      if (presDisp) presDisp.textContent = text;
+    }
+
+    function toggleTimer() {
+      const icon = document.getElementById('timer-icon');
+      if (STATE.timerId) {
+        clearInterval(STATE.timerId);
+        STATE.timerId = null;
+        if (icon) icon.className = 'fa-solid fa-play';
+      } else {
+        if (icon) icon.className = 'fa-solid fa-pause';
+        STATE.timerId = setInterval(() => {
+          STATE.timerSeconds++;
+          syncTimerDisplays();
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      if (STATE.timerId) {
+        clearInterval(STATE.timerId);
+        STATE.timerId = null;
+      }
+      STATE.timerSeconds = 0;
+      const icon = document.getElementById('timer-icon');
+      if (icon) icon.className = 'fa-solid fa-play';
+      syncTimerDisplays();
+    }
+
+    function toggleFullscreen() {
+      const icon = document.getElementById('fs-icon');
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.().catch(() => {});
+        if (icon) icon.className = 'fa-solid fa-compress';
+      } else {
+        document.exitFullscreen?.().catch(() => {});
+        if (icon) icon.className = 'fa-solid fa-expand';
+      }
+    }
+
+    function toggleExpress() {
+      STATE.express = !STATE.express;
+      document.body.classList.toggle('mode-express', STATE.express);
+      const modeSpan = document.querySelector('nav.hud .mode');
+      if (modeSpan) modeSpan.textContent = STATE.express ? 'Express' : 'Complet';
+      const btn = document.querySelector('nav.hud [data-a="express"]');
+      if (btn) btn.setAttribute('aria-pressed', String(STATE.express));
+      renderNotesContent();
+      showToast(STATE.express ? 'Parcours Express activé' : 'Parcours Complet activé');
+    }
+
+    function toggleNotes(force) {
+      STATE.notesOpen = typeof force === 'boolean' ? force : !STATE.notesOpen;
+      const pop = document.getElementById('notes-pop');
+      if (pop) pop.classList.toggle('open', STATE.notesOpen);
+      const btn = document.querySelector('nav.hud [data-a="notes"]');
+      if (btn) btn.setAttribute('aria-pressed', String(STATE.notesOpen));
+      renderNotesContent();
+    }
+
+    function toggleBlackout(force) {
+      STATE.blackout = typeof force === 'boolean' ? force : !STATE.blackout;
+      const el = document.getElementById('blackout');
+      if (el) el.classList.toggle('open', STATE.blackout);
+      showToast(STATE.blackout ? 'Écran noir (pause)' : 'Reprise de la présentation');
+    }
+
+    function openOverlay(id) {
+      if (STATE.activeOverlay === id) {
+        closeOverlays();
+        return;
+      }
+      STATE.lastFocused = document.activeElement;
+      document.querySelectorAll('.overlay.open').forEach((ov) => ov.classList.remove('open'));
+      hideTip();
+      STATE.activeOverlay = id;
+      if (id === 'ov-plan') {
+        closePlanAnnex();
+        renderPlanThumbs();
+      }
+      if (id === 'ov-pres') renderNotesContent();
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('open');
+        syncInertBackground(true);
+        const focusEl = target.querySelector('input[type="search"], button.x');
+        if (focusEl) focusEl.focus();
+      }
+    }
+
+    function closeOverlays() {
+      document.querySelectorAll('.overlay.open').forEach((ov) => ov.classList.remove('open'));
+      STATE.activeOverlay = null;
+      STATE.planAnnex = null;
+      syncInertBackground(false);
+      if (STATE.lastFocused && typeof STATE.lastFocused.focus === 'function') {
+        STATE.lastFocused.focus();
+      }
+      STATE.lastFocused = null;
+    }
+
+    function openPlanAnnex(annexKey) {
+      STATE.planAnnex = annexKey;
+      const mainView = document.getElementById('plan-main-view');
+      const annexView = document.getElementById('plan-annex-view');
+      const badge = document.getElementById('plan-annex-badge');
+      const body = document.getElementById('plan-annex-body');
+      const data = ANNEXES[annexKey];
+      if (!mainView || !annexView || !body || !data) return;
+      mainView.classList.add('hidden');
+      annexView.classList.remove('hidden');
+      if (badge) badge.textContent = data.badge;
+      body.innerHTML = data.html;
+    }
+
+    function closePlanAnnex() {
+      STATE.planAnnex = null;
+      document.getElementById('plan-main-view')?.classList.remove('hidden');
+      document.getElementById('plan-annex-view')?.classList.add('hidden');
+    }
+
+    function handleEscape() {
+      if (STATE.blackout) { toggleBlackout(false); return; }
+      if (STATE.activeOverlay === 'ov-plan' && STATE.planAnnex !== null) { closePlanAnnex(); return; }
+      if (STATE.activeOverlay !== null) { closeOverlays(); return; }
+      if (STATE.notesOpen) { toggleNotes(false); return; }
+      hideTip();
+    }
+
+    function replayAnimations() {
+      animHandles.forEach((h) => cancelAnimationFrame(h));
+      animHandles = [];
+
+      const activeSlide = slides[STATE.slide];
+      if (activeSlide) {
+        activeSlide.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4').forEach((el) => {
+          el.style.animation = 'none';
+          void el.offsetWidth;
+          el.style.animation = '';
+        });
+
+        activeSlide.querySelectorAll('.count-up').forEach((el) => {
+          const target = Number(el.getAttribute('data-count-to'));
+          if (!Number.isFinite(target)) return;
+          const decimals = Number(el.getAttribute('data-decimals') || 0);
+          const suffix = el.getAttribute('data-suffix') || '';
+          const start = performance.now();
+          const dur = 550;
+          function tick(now) {
+            const p = Math.min(1, (now - start) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const val = (target * eased).toFixed(decimals).replace('.', ',');
+            el.textContent = val + suffix;
+            if (p < 1) animHandles.push(requestAnimationFrame(tick));
+          }
+          animHandles.push(requestAnimationFrame(tick));
+        });
+      }
+      showToast('Animations et compteurs rejoués');
+    }
+
+    /* ================= LIAISONS HUD, RECHERCHE, DFN & CLAVIER ================= */
+    document.querySelectorAll('nav.hud [data-a]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-a');
+        if (action === 'prev') prevSlide();
+        else if (action === 'next') nextSlide();
+        else if (action === 'express') toggleExpress();
+        else if (action === 'plan') openOverlay('ov-plan');
+        else if (action === 'notes') toggleNotes();
+        else if (action === 'pres') openOverlay('ov-pres');
+        else if (action === 'glossaire') openOverlay('ov-glossaire');
+        else if (action === 'faq') openOverlay('ov-faq');
+        else if (action === 'theme') toggleTheme();
+        else if (action === 'full') toggleFullscreen();
+        else if (action === 'aide') openOverlay('ov-aide');
+      });
+    });
+
+    document.querySelectorAll('#ov-plan [data-annex]').forEach((btn) => {
+      btn.addEventListener('click', () => openPlanAnnex(btn.getAttribute('data-annex')));
+    });
+
+    document.querySelectorAll('.overlay').forEach((ov) => {
+      ov.addEventListener('click', (e) => {
+        if (e.target === ov) closeOverlays();
+      });
+    });
+
+    function wireSearch(inputId, listId) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !list) return;
+      input.addEventListener('input', () => {
+        const q = input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const items = Array.from(list.querySelectorAll('.ov-item'));
+        let visible = 0;
+        items.forEach((it) => {
+          const hay = (it.getAttribute('data-search') || it.textContent || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const match = !q || hay.includes(q);
+          it.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        const empty = list.querySelector('.empty-state');
+        if (empty) {
+          empty.classList.toggle('hidden', visible > 0);
+          empty.style.display = visible === 0 ? 'block' : 'none';
+        }
+      });
+    }
+    wireSearch('glossaire-search', 'glossaire-list');
+    wireSearch('faq-search', 'faq-list');
+
+    document.querySelectorAll('dfn').forEach((el) => {
+      el.addEventListener('mouseenter', () => showTipFor(el));
+      el.addEventListener('focus', () => showTipFor(el));
+      el.addEventListener('click', (e) => { e.stopPropagation(); showTipFor(el); });
+      el.addEventListener('mouseleave', hideTip);
+      el.addEventListener('blur', hideTip);
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('dfn')) hideTip();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      const tag = e.target?.tagName ? e.target.tagName.toUpperCase() : '';
+      const inEditable = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || Boolean(e.target?.isContentEditable);
+      if (inEditable) {
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          e.target.blur();
+          handleEscape();
+        }
+        return;
+      }
+
+      if (e.key === ' ') {
+        if (e.target?.closest('button, a[href], summary, [role="button"]')) return;
+        e.preventDefault();
+        nextSlide();
+        return;
+      }
+
+      if (e.key === 'Escape') { e.preventDefault(); handleEscape(); return; }
+      if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); return; }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); return; }
+      if (e.key === 'Home') { e.preventDefault(); goToSlide(0); return; }
+      if (e.key === 'End') { e.preventDefault(); goToSlide(STATE.total - 1); return; }
+      if (e.key === '?') { e.preventDefault(); openOverlay('ov-aide'); return; }
+
+      if (e.key >= '1' && e.key <= '9') {
+        const targetIdx = parseInt(e.key, 10) - 1;
+        if (targetIdx < STATE.total) goToSlide(targetIdx);
+        return;
+      }
+
+      const k = e.key.toLowerCase();
+      if (k === 'd') toggleFocusMode();
+      else if (k === 'l') toggleLaser();
+      else if (k === 'f') toggleFullscreen();
+      else if (k === 'p') openOverlay('ov-pres');
+      else if (k === 'n') toggleNotes();
+      else if (k === 'o') openOverlay('ov-plan');
+      else if (k === 'g') openOverlay('ov-glossaire');
+      else if (k === 'q') openOverlay('ov-faq');
+      else if (k === 'e') toggleExpress();
+      else if (k === 't') toggleTheme();
+      else if (k === 'b') toggleBlackout();
+      else if (k === 'r') replayAnimations();
+    });
+
+    // Quadrillage animé réactif Tech Canvas
+    (function initTechCanvas() {
+      const canvas = document.getElementById('tech-bg-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0;
+      const mouse = { x: -9999, y: -9999, active: false };
+      const gridStep = 48;
+      const particles = Array.from({ length: 24 }, (_, i) => ({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: 1.4 + Math.random() * 1.4,
+        color: i % 3 === 0 ? '#38BDF8' : '#FF6600'
+      }));
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
+      window.addEventListener('mouseleave', () => { mouse.active = false; });
+
+      function warpPoint(x, y, t) {
+        const wx = Math.sin(y * 0.01 + t * 0.9) * 3;
+        const wy = Math.cos(x * 0.01 + t * 0.75) * 3;
+        if (!mouse.active) return { x: x + wx, y: y + wy };
+        const dx = x - mouse.x;
+        const dy = y - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        const radius = 170;
+        if (dist > 0 && dist < radius) {
+          const force = Math.pow(1 - dist / radius, 2) * 26;
+          return { x: x + wx + (dx / dist) * force, y: y + wy + (dy / dist) * force };
+        }
+        return { x: x + wx, y: y + wy };
+      }
+
+      function render(now) {
+        const t = now * 0.001;
+        const isDark = document.documentElement.classList.contains('dark');
+        ctx.clearRect(0, 0, width, height);
+
+        const driftX = (t * 10) % gridStep;
+        const driftY = (t * 7) % gridStep;
+        ctx.strokeStyle = isDark ? 'rgba(255, 102, 0, 0.08)' : 'rgba(255, 102, 0, 0.11)';
+        ctx.lineWidth = 1;
+
+        for (let x = -gridStep + driftX; x <= width + gridStep; x += gridStep) {
+          ctx.beginPath();
+          for (let y = 0; y <= height; y += 24) {
+            const p = warpPoint(x, y, t);
+            y === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+          }
+          ctx.stroke();
+        }
+        for (let y = -gridStep + driftY; y <= height + gridStep; y += gridStep) {
+          ctx.beginPath();
+          for (let x = 0; x <= width; x += 24) {
+            const p = warpPoint(x, y, t);
+            x === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+          }
+          ctx.stroke();
+        }
+
+        particles.forEach((p) => {
+          p.x = (p.x + p.vx + width) % width;
+          p.y = (p.y + p.vy + height) % height;
+          ctx.globalAlpha = isDark ? 0.55 : 0.45;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+
+        requestAnimationFrame(render);
+      }
+
+      resize();
+      requestAnimationFrame(render);
+    })();
+
+    updateSlides();
+    syncTimerDisplays();
+  </script>
+</body>
+</html>

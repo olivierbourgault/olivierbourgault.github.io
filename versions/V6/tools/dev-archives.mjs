@@ -35,12 +35,6 @@ export default function devArchivesPlugin({ root = '../..' } = {}) {
         if (!req.url) return next();
         const urlPath = req.url.split('?')[0].split('#')[0];
 
-        if (urlPath === '/' || urlPath === '/index.html') {
-          res.writeHead(302, { Location: '/versions/V6/' });
-          res.end();
-          return;
-        }
-
         const archiveMatch = /^\/versions\/(V[1-5](?:\/.*)?|index\.html)?$/i.exec(urlPath);
         if (!archiveMatch) return next();
 
