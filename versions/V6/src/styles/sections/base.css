@@ -478,6 +478,7 @@ html.reduce-motion .typewriter::after {
 
 html.reduce-motion .ambient-blobs .blob,
 html.reduce-motion .pulse-dot,
+html.reduce-motion .availability-dot,
 html.reduce-motion .hero-shape {
   animation: none !important;
 }

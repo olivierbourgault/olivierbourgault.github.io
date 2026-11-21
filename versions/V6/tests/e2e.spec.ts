@@ -173,6 +173,18 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page).toHaveTitle(/Full-Stack Developer, AI & IT Technician/i);
     await expect(motionBtn).toHaveAttribute('aria-label', 'Disable all animations');
+    await expect(page.locator('.hero-availability-badge')).toContainText('Open to opportunities');
+
+    // Contact form pre-fills Gmail & Outlook Web compose URLs dynamically
+    await page.locator('#contact-name').fill('Jane Recruiter');
+    await page.locator('#contact-subject').fill('Full-Stack Role');
+    await page.locator('#contact-message').fill('Hello Olivier');
+    await expect(page.locator('#contactGmailLink')).toHaveAttribute('href', /Full-Stack%20Role/);
+    await expect(page.locator('#contactOutlookLink')).toHaveAttribute('href', /Hello%20Olivier/);
+
+    // Verify PWA service worker script is served
+    const swRes = await page.request.get('/sw.js');
+    expect(swRes.status()).toBe(200);
   });
 
   test('Interactive Resume (/resume) hides navigation & background canvas in print media mode', async ({

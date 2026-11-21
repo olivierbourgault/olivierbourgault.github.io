@@ -991,3 +991,118 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* Hero & Contact Availability Badge + Webmail Quick Launchers */
+.hero-availability-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+}
+
+.hero-availability-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(16, 185, 129, 0.55);
+  background: color-mix(in srgb, var(--surface-color), transparent 10%);
+  color: var(--heading-color);
+  font-family: var(--coding-font);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.35);
+  transition: transform 0.16s ease, border-color 0.16s ease;
+}
+
+.hero-availability-badge:hover {
+  border-color: #FF6600;
+  color: var(--heading-color);
+  transform: translateY(-1px);
+}
+
+.availability-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  flex-shrink: 0;
+  animation: tech-pulse-dot 2s ease-in-out infinite;
+}
+
+.availability-sep,
+.availability-meta {
+  color: color-mix(in srgb, var(--default-color), transparent 22%);
+}
+
+.contact-recruiter-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--card-border);
+  background: color-mix(in srgb, var(--background-color), transparent 15%);
+  font-family: var(--coding-font);
+  font-size: 0.78rem;
+}
+
+.contact-recruiter-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.contact-recruiter-sla {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 102, 0, 0.14);
+  border: 1px solid rgba(255, 102, 0, 0.45);
+  color: var(--heading-color);
+  font-weight: 700;
+}
+
+.contact-recruiter-sla i {
+  color: #FF6600;
+}
+
+.contact-quick-actions {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.contact-webmail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.36rem 0.72rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--card-border);
+  background: var(--background-color);
+  color: var(--heading-color);
+  font-family: var(--coding-font);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.contact-webmail-btn:hover,
+.contact-webmail-btn.is-highlighted {
+  border-color: #FF6600;
+  color: var(--heading-color);
+  transform: translateY(-1px);
+}

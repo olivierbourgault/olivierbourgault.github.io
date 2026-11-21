@@ -287,6 +287,7 @@ const structuredData = noindex
       import { initInteractiveCursor } from '../scripts/cursor';
       import { initNativeDialogs } from '../scripts/dialogs';
       import { initCommandPalette } from '../scripts/cmd-palette';
+      import { initPwaAndAnalytics } from '../scripts/analytics';
 
       const runBaseInit = () => {
         initTheme();
@@ -297,6 +298,7 @@ const structuredData = noindex
         initInteractiveCursor();
         initNativeDialogs();
         initCommandPalette();
+        initPwaAndAnalytics();
       };
 
       if (document.readyState === 'loading') {

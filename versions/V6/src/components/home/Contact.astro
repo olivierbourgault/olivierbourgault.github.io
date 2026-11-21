@@ -1,6 +1,10 @@
 ---
 import { SITE } from '../../data/site';
 import SectionTitle from '../SectionTitle.astro';
+
+const defaultSubjectFr = 'Opportunité professionnelle — Portfolio Olivier Bourgault';
+const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SITE.email)}&su=${encodeURIComponent(defaultSubjectFr)}`;
+const outlookComposeUrl = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(SITE.email)}&subject=${encodeURIComponent(defaultSubjectFr)}`;
 ---
 <section id="contact" class="contact section">
   <SectionTitle title="Contact">
@@ -9,7 +13,25 @@ import SectionTitle from '../SectionTitle.astro';
 
   <div class="contact-form card mx-0 mx-md-5">
     <div class="card-body p-4 p-lg-5">
-      <form id="contactForm" class="email-form">
+      {SITE.availability.enabled && (
+        <div class="contact-recruiter-banner mb-4">
+          <div class="contact-recruiter-status">
+            <span class="availability-dot" aria-hidden="true"></span>
+            <span data-i18n="contact.banner.status">{SITE.availability.statusFr}</span>
+          </div>
+          <span class="contact-recruiter-sla">
+            <i class="bi bi-lightning-charge-fill" aria-hidden="true"></i>
+            <span data-i18n="contact.banner.sla">Réponse rapide (&lt; 24 h)</span>
+          </span>
+        </div>
+      )}
+
+      <form
+        id="contactForm"
+        class="email-form"
+        data-web3forms-key={SITE.contact.web3formsAccessKey}
+        data-formspree-endpoint={SITE.contact.formspreeEndpoint}
+      >
         <input type="text" name="_gotcha" class="d-none" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="row gy-4">
           <div class="col-md-6">
@@ -29,7 +51,9 @@ import SectionTitle from '../SectionTitle.astro';
             <textarea id="contact-message" name="message" class="form-control" rows="6" placeholder="Votre message" required></textarea>
           </div>
           <div class="col-12 text-center">
-            <button type="submit" class="btn btn-submit w-100" data-i18n="contact.submit">Envoyer</button>
+            <button id="contactSubmitBtn" type="submit" class="btn btn-submit w-100" data-i18n="contact.submit">
+              Envoyer
+            </button>
           </div>
         </div>
       </form>
@@ -40,15 +64,41 @@ import SectionTitle from '../SectionTitle.astro';
           <span data-i18n="contact.direct.prefix">Ou écrivez-moi directement :</span>{' '}
           <a href={`mailto:${SITE.email}`} class="contact-direct-email">{SITE.email}</a>
         </span>
-        <button
-          id="contactCopyEmailBtn"
-          type="button"
-          class="contact-copy-btn"
-          data-copy-email={SITE.email}
-        >
-          <i class="bi bi-clipboard" aria-hidden="true"></i>
-          <span data-i18n="contact.copy.email">Copier le courriel</span>
-        </button>
+        <div class="contact-quick-actions">
+          <button
+            id="contactCopyEmailBtn"
+            type="button"
+            class="contact-copy-btn"
+            data-copy-email={SITE.email}
+          >
+            <i class="bi bi-clipboard" aria-hidden="true"></i>
+            <span data-i18n="contact.copy.email">Copier le courriel</span>
+          </button>
+          <a
+            id="contactGmailLink"
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-webmail-btn"
+            data-webmail="gmail"
+            title="Ouvrir Gmail avec le message pré-rempli"
+          >
+            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+            <span>Gmail</span>
+          </a>
+          <a
+            id="contactOutlookLink"
+            href={outlookComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-webmail-btn"
+            data-webmail="outlook"
+            title="Ouvrir Outlook Web avec le message pré-rempli"
+          >
+            <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+            <span>Outlook Web</span>
+          </a>
+        </div>
       </div>
 
       <p id="contactFormStatus" class="contact-form-status" role="status" aria-live="polite"></p>

@@ -22,5 +22,22 @@ export const SITE = {
   cvFrFilename: 'CV_Olivier_Bourgault_FR.pdf',
   cvEnFilename: 'Resume_Olivier_Bourgault_EN.pdf',
   themeStorageKey: 'ob_v6_theme',
-  motionStorageKey: 'ob_v6_reduced_motion'
+  motionStorageKey: 'ob_v6_reduced_motion',
+  availability: {
+    enabled: true,
+    statusFr: 'Ouvert aux opportunités — Stage / Poste TI · Full-Stack · IA',
+    statusEn: 'Open to opportunities — IT · Full-Stack · AI Internship / Role',
+    metaFr: 'Gatineau / Ottawa · Hybride ou Télétravail',
+    metaEn: 'Gatineau / Ottawa · Hybrid or Remote'
+  },
+  contact: {
+    // Clé publique Web3Forms (https://web3forms.com) ou URL endpoint Formspree optionnelle
+    web3formsAccessKey: '',
+    formspreeEndpoint: ''
+  },
+  analytics: {
+    // Analytics sans cookies optionnels (ex: code GoatCounter "olivierbourgault" ou token Cloudflare)
+    goatcounterCode: '',
+    cloudflareToken: ''
+  }
 } as const;

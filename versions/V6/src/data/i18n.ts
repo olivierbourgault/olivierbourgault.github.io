@@ -7,10 +7,14 @@ export const SITE_LANG_STORAGE_KEY = 'ob_v6_lang';
  */
 export const KEY_EN: Record<string, string> = {
   'skip.main': 'Skip to main content',
+  'hero.availability.status': 'Open to opportunities — IT · Full-Stack · AI Internship / Role',
+  'hero.availability.meta': 'Gatineau / Ottawa · Hybrid or Remote',
   'hero.cta.projects': 'Projects',
   'hero.cta.contact': 'Contact Me',
   'hero.stats.years': 'Years of Experience',
   'hero.stats.projects': 'Completed Projects',
+  'contact.banner.status': 'Open to opportunities — IT · Full-Stack · AI Internship / Role',
+  'contact.banner.sla': 'Fast response (< 24h)',
   'contact.label.name': 'Your Name',
   'contact.label.email': 'Your Email',
   'contact.label.subject': 'Subject',

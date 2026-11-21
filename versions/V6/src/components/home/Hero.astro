@@ -5,6 +5,20 @@ import { withBase } from '../../utils/paths';
 <section id="hero" class="hero section" data-aos="fade-up" data-aos-delay="100">
   <div class="row align-items-center content">
     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+      {SITE.availability.enabled && (
+        <div class="hero-availability-wrap">
+          <a href="#contact" class="hero-availability-badge">
+            <span class="availability-dot" aria-hidden="true"></span>
+            <span class="availability-status" data-i18n="hero.availability.status">
+              {SITE.availability.statusFr}
+            </span>
+            <span class="availability-sep d-none d-sm-inline" aria-hidden="true">&middot;</span>
+            <span class="availability-meta d-none d-sm-inline" data-i18n="hero.availability.meta">
+              {SITE.availability.metaFr}
+            </span>
+          </a>
+        </div>
+      )}
       <h1>
         <span class="hero-layer-tag" aria-hidden="true">
           <i class="bi bi-terminal me-1" aria-hidden="true"></i>
