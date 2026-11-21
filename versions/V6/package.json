@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "check": "astro check",
     "build": "astro build",
+    "cv:pdf": "node tools/generate-cv-pdfs.mjs",
     "preview": "astro preview",
     "portfolio:sync": "node tools/sync-portfolio.mjs",
     "site:assemble": "node tools/assemble-site.mjs",

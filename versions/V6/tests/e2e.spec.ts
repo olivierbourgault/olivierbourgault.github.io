@@ -105,6 +105,12 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     await expect(csDialog).toBeVisible();
     await expect(page.locator('#caseStudyDialogTitle')).toContainText('HubAI');
     await expect(csDialog.locator('.cs-card')).toHaveCount(4);
+    await expect(csDialog.locator('.cs-hero-thumb')).toHaveCount(2);
+    await expect(page).toHaveURL(/#case-study=HubAI$/);
+
+    // Switch Case Study hero image from GitHub .webp to Local .webp inside the modal
+    await csDialog.locator('.cs-hero-thumb[data-cs-slide-idx="1"]').click();
+    await expect(page.locator('#caseStudyHeroImg')).toHaveAttribute('src', /hub-ai\.webp$/);
 
     // Close Case Study modal
     await csDialog.locator('[data-close-dialog]').click();
@@ -142,7 +148,7 @@ test.describe('Portfolio V6 — E2E & WCAG 2.1 AA Suite', () => {
     await page.locator('#cmdPaletteTriggerBtn').click();
     const cmdDialog = page.locator('#cmdPaletteDialog');
     await expect(cmdDialog).toBeVisible();
-    await expect(page.locator('#cmdPaletteList .ob-cmd-item')).toHaveCount(15);
+    await expect(page.locator('#cmdPaletteList .ob-cmd-item')).toHaveCount(18);
 
     // Type query and verify single Escape closes the dialog immediately
     const cmdInput = page.locator('#cmdPaletteInput');

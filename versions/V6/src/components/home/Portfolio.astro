@@ -310,16 +310,26 @@ function getInitialCarouselImages(projectPath: string, localImage: string): stri
     <div id="caseStudyDialogBody" class="ob-dialog-body ob-casestudy-body"></div>
     <div class="ob-dialog-footer">
       <span id="caseStudyDialogBadges" class="d-flex flex-wrap gap-1"></span>
-      <a
-        id="caseStudyDialogRepoLink"
-        href={SITE.githubProjectsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="versions-btn-primary ob-dialog-btn-sm"
-      >
-        <i class="bi bi-github" aria-hidden="true"></i>
-        <span data-i18n="portfolio.casestudy.repo">Explorer le code sur GitHub</span>
-      </a>
+      <div class="d-flex align-items-center flex-wrap gap-2">
+        <button
+          type="button"
+          id="caseStudyCopyLinkBtn"
+          class="versions-btn-outline ob-dialog-btn-sm"
+        >
+          <i class="bi bi-link-45deg" aria-hidden="true"></i>
+          <span id="caseStudyCopyLinkLabel" data-i18n="portfolio.casestudy.copylink">Copier le lien</span>
+        </button>
+        <a
+          id="caseStudyDialogRepoLink"
+          href={SITE.githubProjectsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="versions-btn-primary ob-dialog-btn-sm"
+        >
+          <i class="bi bi-github" aria-hidden="true"></i>
+          <span data-i18n="portfolio.casestudy.repo">Explorer le code sur GitHub</span>
+        </a>
+      </div>
     </div>
   </dialog>
 </section>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T21:47:46.413Z",
+  "generatedAt": "2026-11-21T22:28:35.323Z",
   "totalCount": 59,
   "projects": [
     {
@@ -18,6 +18,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "AccessyHelp est un outil en PowerShell doté d'une interface graphique Windows Forms permettant d'analyser l'accessibilité d'un site web selon les critères WCAG. Ce projet propose un formulaire interactif permettant de saisir l'URL d'un site web, des identif...",
+      "readmeSha": "c37a3735be73698aba1de7f53e765f9eed726eb8:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "PowerShell"
       ]
@@ -38,6 +40,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "BenYou est une version en HTML, CSS et JS du site web YouTube dont j'ai modifié, réorganisé et adapté le visuel à la conception Bento UI. Ce projet réinvente l'interface classique de YouTube en organisant ses différentes sections (navigation principale, vid...",
+      "readmeSha": "69fc781671fc47c6229bb1f2c6a731b3c60f4b5a:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS"
       ]
@@ -58,6 +62,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "ChatterBox est une application web de messagerie instantanée en temps réel propulsée par Node.js et Socket.IO. Ce projet met en place un salon de discussion interactif où plusieurs utilisateurs peuvent se connecter simultanément, choisir un pseudonyme et éc...",
+      "readmeSha": "a749ee0d0061297da390df6ae87fb7ec9ee797ad:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "JavaScript",
         "HTML / CSS"
@@ -79,6 +85,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "CineVerse est une application web de recherche et de découverte de films reposant sur un serveur Express et l'API IMDb. Ce projet offre une interface moderne et rapide permettant de rechercher des œuvres cinématographiques en interrogeant un point de termin...",
+      "readmeSha": "6f02f4108731d1794c0b56c07bf4a931b06f4131:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "JavaScript",
         "HTML / CSS"
@@ -100,6 +108,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "D&D est un site web en HTML, CSS et JavaScript regroupant des fiches de personnages et un simulateur de lancer de dés pour Donjons et Dragons (5e édition). Ce projet sert de compagnon numérique pour des campagnes de jeu de rôle sur table, offrant un accès r...",
+      "readmeSha": "1a5be4db1082b6a409fa57a1f20e11c3e2228f5a:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS"
       ]
@@ -120,6 +130,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Discoveria est un site web éducatif en HTML, CSS et Bootstrap dédié à l'exploration du système solaire et de l'espace. Ce projet propose une vitrine immersive inspirée des ressources de la NASA Solar System Exploration, permettant aux visiteurs de parcourir...",
+      "readmeSha": "6fcd2cf5993886d4dbd7dfef1af67b8bd9009d3a:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS"
       ]
@@ -140,6 +152,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "GrindWall est une application multiplateforme en .NET MAUI qui combine le blocage d'applications de divertissement avec un système gamifié d'exercices physiques. Ce projet transforme le temps d'écran en récompense : l'application surveille et bloque l'accès...",
+      "readmeSha": "c2032bb9b49ae6bfc603bf36a759350cd4fcbe0c:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "C# / .NET",
         "HTML / CSS"
@@ -161,6 +175,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Homepage est un site web personnel en HTML, CSS et JavaScript servant de page d'accueil et de premier portfolio académique. Ce projet présente mon profil d'étudiant en techniques de l'informatique au Cégep de Saint-Jérôme et agit comme portail central perme...",
+      "readmeSha": "f87352caa51236332cabe405be22562400549290:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -182,6 +198,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "HubAI est une plateforme web en HTML, CSS et JavaScript regroupant quatre mini-applications interactives conçues avec l'assistance de Microsoft Copilot. Ce projet rassemble dans un portail unique plusieurs outils du quotidien accessibles en un clic, tout en...",
+      "readmeSha": "c7ed342febde6a30330f8be9b9a8f782f2c04c7d:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Python",
         "IA",
@@ -205,6 +223,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Let'Speech est une application de bureau en Python dotée d'une interface graphique Tkinter qui convertit du texte écrit en synthèse vocale (Text-to-Speech). Ce projet permet à l'utilisateur de saisir ou de coller un texte en anglais dans une fenêtre dédiée,...",
+      "readmeSha": "bdf2ec92d519d2062ce6be49c57cd08fa3d59e78:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Python"
       ]
@@ -225,6 +245,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "MacroVision est une application mobile multiplateforme développée avec Flutter qui utilise l'intelligence artificielle Gemini de Google pour analyser des photos de repas et estimer leur valeur nutritionnelle. Ce projet facilite le suivi alimentaire quotidie...",
+      "readmeSha": "3db18b08aae2e802b3763222d121faf13bba2125:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Kotlin",
         "C++",
@@ -248,6 +270,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "MultiDev est une application d'introduction développée en .NET MAUI illustrant la création d'une interface multiplateforme adaptative. Ce projet constitue une première expérimentation avec l'environnement .NET Multi-platform App UI (.NET MAUI), mettant en œ...",
+      "readmeSha": "991a3617e4c91f67eb9753542dabad0e15c1d332:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "C# / .NET"
       ]
@@ -268,6 +292,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "MyBuilder est une plateforme web de commerce électronique permettant de configurer, visualiser et commander un ordinateur sur mesure, déclinée à travers plusieurs frameworks frontend et un serveur backend Node.js. Ce projet sépare l'application en une API R...",
+      "readmeSha": "779f423caad6f56effc8a69f08c84a2c89831cc3:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "SQL",
         "JavaScript",
@@ -291,6 +317,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Nexus est une application web de réseau social moderne de type Single-Page Application (SPA) développée avec Angular et Firebase. Ce projet propose une plateforme sociale complète avec mises à jour en temps réel, authentification sécurisée et système de ges...",
+      "readmeSha": "55e7d09b2f06448abab311544f68b2fc04c42acf:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Angular",
         "HTML / CSS",
@@ -313,6 +341,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "NoteMaker est un éditeur de texte moderne en Python avec interface CustomTkinter intégrant la dictée vocale, la synthèse vocale et la correction grammaticale. Ce projet revisite le bloc-notes classique en lui apportant une interface à onglets soignée (avec...",
+      "readmeSha": "b07d985d20456ad57a535473db0f062d016947f1:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Python"
       ]
@@ -333,6 +363,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Phoneword est une application multiplateforme développée en .NET MAUI qui convertit des numéros de téléphone alphanumériques en numéros standards et permet de lancer l'appel. Ce projet traduit les mnémoniques téléphoniques (comme 1-555-NETMAUI) en leur équi...",
+      "readmeSha": "200eae99c9fcaeb7d915bc52d7d2ec7880f7513e:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "C# / .NET"
       ]
@@ -353,6 +385,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Portfolio est mon site web personnel en HTML, CSS et JavaScript servant de vitrine professionnelle pour présenter mon parcours, mes compétences et mes réalisations. Ce projet met en valeur mon profil de développeur à travers une interface moderne et animée...",
+      "readmeSha": "1e41d397b945af50834d50e634fb7264fbb32c36:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -374,6 +408,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "QuickConnect est une application de bureau en Python avec interface CustomTkinter permettant de mesurer la vitesse et les performances de sa connexion Internet. Ce projet offre un tableau de bord visuel doté d'un cadran analogique (jauge de vitesse) qui exé...",
+      "readmeSha": "b229f2e52e82dad55c2fcc973c24934bc0085386:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Python"
       ]
@@ -394,6 +430,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "SchoolProjects est un site web en HTML, CSS et JavaScript répertoriant mes cours et projets réalisés au cours de ma formation collégiale en techniques de l'informatique. Ce projet présente une vue organisée par année et par session académique au Cégep de Sa...",
+      "readmeSha": "e9d05911db4cf2639154905dabae6f904624fbe4:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -415,6 +453,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Shopro est une boutique en ligne fictive développée en HTML, CSS et JavaScript permettant de parcourir un catalogue de produits, de filtrer par catégorie et de gérer un panier d'achats. Ce projet simule une expérience complète de commerce électronique en ré...",
+      "readmeSha": "c5d272bcae291beb31a739683a7bf2db78548d1e:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "WordPress",
         "PHP",
@@ -438,6 +478,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "StickerSmash est une application mobile multiplateforme développée avec React Native et Expo permettant de personnaliser des photos en y ajoutant des autocollants (emojis). Ce projet offre un éditeur d'images intuitif où l'utilisateur peut sélectionner une...",
+      "readmeSha": "86fcc292c45051d22708e255bde3f5d71d96438e:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "TypeScript",
         "JavaScript"
@@ -459,6 +501,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Streamly est une plateforme web complète de streaming vidéo reposant sur une interface React et une API REST Node.js/Express connectée à une base de données MySQL. Ce projet propose une expérience de vidéo à la demande (VOD) avec sélection de profil utilisa...",
+      "readmeSha": "410dcfc6f908e723efd8c6b6c80d29b640c77b3b:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "JavaScript",
         "PowerShell",
@@ -482,6 +526,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Superwiki est une plateforme web modulaire en HTML, CSS et JavaScript regroupant cinq outils thématiques qui exploitent différentes API publiques. Ce projet centralise au sein d'une interface unique plusieurs mini-applications permettant de consulter des ba...",
+      "readmeSha": "40577ab5260db26c3ee9d702d0feb754ad9328f6:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "JavaScript",
         "HTML / CSS"
@@ -503,6 +549,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "VibeFlow est un assistant de développement intelligent en Python propulsé par le modèle Gemini de Google, accessible aussi bien en ligne de commande (CLI) que via une API REST FastAPI. Ce projet met en place un agent conversationnel doté d'une mémoire de se...",
+      "readmeSha": "b3a3ffcbd321350bd513183f007eb292592b14a7:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "Python"
       ]
@@ -523,6 +571,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "WinYou est un générateur de formulaires graphiques dynamiques en PowerShell utilisant Windows Forms. Ce projet permet de concevoir et d'afficher des fenêtres Windows Forms entièrement personnalisables à partir de fichiers de configuration modulaires (config...",
+      "readmeSha": "1cb91ea5575175fc66ad1fb12bfa3bb6e9fda68c:e54da285db61b717ccc09daf37f5cb4499cb5c10",
       "tags": [
         "PowerShell"
       ]
@@ -539,6 +589,8 @@
       "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "SHORT DESCRIPTION: Contains all Subdirectories. LONG DESCRIPTION:",
+      "readmeSha": "24df53c58bbabb136900dbc887c24aee56ad45a5:51fba29354cf52328aedff3946205c59f875a7ff",
       "tags": [
         "PowerShell"
       ]
@@ -555,6 +607,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2020. C'est un site web qui démontre les aptitudes que j'ai acquis durant le cours d'interface web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https://1875009.techinfo-cstj.ca/Sch...",
+      "readmeSha": ":514c7a0b28a27d56bd576dbcd2be3d798e42f369",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -572,6 +626,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "",
+      "readmeSha": ":f045094cc47f0c7c09c15562ee48ce24d11c6c23",
       "tags": []
     },
     {
@@ -586,6 +642,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2021. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'objets connectés.",
+      "readmeSha": ":f045094cc47f0c7c09c15562ee48ce24d11c6c23",
       "tags": []
     },
     {
@@ -600,6 +658,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet d'équipe que nous avons développé en automne 2021. C'est une application WPF qui démontre les aptitudes que nous avons acquis durant le cours de programmation d'interfaces graphiques.",
+      "readmeSha": ":c97ed1cf2df243128c8291d3b6927d2e6b08586e",
       "tags": [
         "C# / .NET"
       ]
@@ -616,6 +676,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "",
+      "readmeSha": ":c97ed1cf2df243128c8291d3b6927d2e6b08586e",
       "tags": [
         "C# / .NET"
       ]
@@ -632,6 +694,8 @@
       "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Prénom: Olivier Nom: Bourgault Matricule: 1875009",
+      "readmeSha": "23c8299dd1c45dac1d066278e4dce0b0d64c19dc:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -649,6 +713,8 @@
       "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Nom: Olivier Bourgault Matricule: 1875009",
+      "readmeSha": "6b7b8cda8dbdd90f08e9b7f432b2160ab94019b9:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "JavaScript"
       ]
@@ -665,6 +731,8 @@
       "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Nom: Bourgault Prénom: Olivier Matricule: 1875009",
+      "readmeSha": "c7e68291dc16c279d69605b5b6183b281e5409f6:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "JavaScript"
       ]
@@ -681,6 +749,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'internet des objets.",
+      "readmeSha": ":aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
       "tags": []
     },
     {
@@ -695,6 +765,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'internet des objets.",
+      "readmeSha": ":aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
       "tags": [
         "C++"
       ]
@@ -711,6 +783,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
+      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -728,6 +802,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
+      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -745,6 +821,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript avec une partie serveur en PHP qui démontre les aptitudes que",
+      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "PHP",
         "SQL",
@@ -764,6 +842,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
+      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -781,6 +861,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "1. Electrolib est un projet d'équipe dans le cadre du cours de projet de développement (420-5C8-JR) du Cégep de Saint-Jérôme pour la session d'automne 2023. Le projet est divisé en deux parties. Une version pour le client (Angular) ainsi qu'une version serv...",
+      "readmeSha": ":074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
       "tags": [
         "Angular",
         "Symfony",
@@ -805,6 +887,8 @@
       },
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "1. Poker est un projet que j'ai développé en automne 2023. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de projet de développement. Le projet est divisé en deux parties. Une version pour le client (A...",
+      "readmeSha": ":074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
       "tags": [
         "Angular",
         "Symfony",
@@ -825,6 +909,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "1. Kaomia est un projet d'équipe dans le cadre du cours de projet de systèmes multiclients (420-5D4-JR) du Cégep de Saint-Jérôme pour la session d'automne 2023. Le projet est divisé en trois parties. Une version pour le client (Electron), une version pour t...",
+      "readmeSha": ":c20c7b48371d79210d416f0e123d1279553d8e32",
       "tags": [
         "Vue.js",
         "Kotlin",
@@ -845,6 +931,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "Ce projet contient des fichiers pour effectuer des opérations fictives et je l'ai développé en hiver 2021. Ce sont plusieurs requêtes SQL qui intéragissent avec une base de données locale qui démontre les aptitudes que j'ai acquis durant le cours de base de...",
+      "readmeSha": ":aba6aa74ddc945ba5c2491ec2515492ca0309263",
       "tags": [
         "SQL"
       ]
@@ -861,6 +949,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui gère les inscriptions pour un camp de vacance en se basant sur des données sources qui démontre les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
+      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -875,6 +965,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui contient des données pour des étudiants selon des données sources. Ce classeur est pour démonterer les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
+      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -889,6 +981,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui effectue le calcul les taxes selon des données sources qui démontre les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
+      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -903,6 +997,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2021. C'est une solution en C# pour Visual Studio qui démontre les aptitudes que j'ai acquis durant le cours de programmation orientée objet.",
+      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -919,6 +1015,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2021. C'est une solution en C# pour Visual Studio qui démontre les aptitudes que j'ai acquis durant le cours de programmation orientée objet.",
+      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -935,6 +1033,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "",
+      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -951,6 +1051,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour mobiles (Android) en Kotlin qui démontre les aptitudes que j'ai acquis durant le cours de applications mobiles.",
+      "readmeSha": ":d2d86bc03282add2bdb00d4e39a5adf469d4763b",
       "tags": [
         "Kotlin"
       ]
@@ -967,6 +1069,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour mobiles (Android) en Kotlin qui démontre les aptitudes que j'ai acquis durant le cours de applications mobiles.",
+      "readmeSha": ":d2d86bc03282add2bdb00d4e39a5adf469d4763b",
       "tags": [
         "Kotlin"
       ]
@@ -983,6 +1087,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application WPF en C# qui démontre les aptitudes que j'ai acquis durant le cours d'évolutions des applications.",
+      "readmeSha": ":81514baee55f3dd9b991027ecc51fc125016039e",
       "tags": [
         "C# / .NET",
         "SQL"
@@ -1000,6 +1106,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application WPF en C# qui démontre les aptitudes que j'ai acquis durant le cours d'évolutions des applications.",
+      "readmeSha": ":81514baee55f3dd9b991027ecc51fc125016039e",
       "tags": [
         "C# / .NET"
       ]
@@ -1024,6 +1132,8 @@
       },
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour un conteneur Docker et elle démontre les aptitudes que j'ai acquis durant le cours de déploiement de serveurs internet.",
+      "readmeSha": ":96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": []
     },
     {
@@ -1042,6 +1152,8 @@
       },
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "1) J'ai renseigné le fichier docker-compose.yml et le fichier .env, ainsi que créé deux réseaux privés 'reseauWP' et 'reseauPMM'. 1.2) Pour le réseau privé 'reseauWP': 1.2.1) Premièrement, j'ai déployé le service 'TP01' qui est un serveur web NGINX fait ave...",
+      "readmeSha": "28d5b2c0319b1ed6423dd9a01140c9c2fb5f53d2:96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -1059,6 +1171,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour un conteneur Docker et elle démontre les aptitudes que j'ai acquis durant le cours de déploiement de serveurs internet.",
+      "readmeSha": ":96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": []
     },
     {
@@ -1073,6 +1187,8 @@
       "githubPreviewShas": {},
       "hasReadme": true,
       "hasParentReadme": true,
+      "description": "Mon URL pour accéder à mon site : https://4d6.1875009.techinfo-cstj.ca/ Mon site est aussi accessible par le billet de mon site d'accueil sur le serveur cPanel du Cégep via l'URL : https://1875009.techinfo-cstj.ca/",
+      "readmeSha": "6a87e1067b50604b2929d95475f0dbba5e0474ed:3a9cf7c867fdc1f60b86e89050546eaca068c357",
       "tags": [
         "Symfony",
         "PHP",
@@ -1093,6 +1209,8 @@
       "githubPreviewShas": {},
       "hasReadme": false,
       "hasParentReadme": true,
+      "description": "1. Ce dossier contient les tables, requêtes , procédures et fonctions stockées et déclancheurs MySQL pour mon travail pratique 1 dans le cadre du cours de sécurité des données (420-5D3-JR) du Cégep de Saint-Jérôme pour la session d'hiver 2024.",
+      "readmeSha": ":43358054dda9a8d9b75edf270487a465224743c1",
       "tags": [
         "SQL"
       ]

@@ -485,12 +485,47 @@ dialog.ob-casestudy-dialog {
   margin-bottom: 1.15rem;
 }
 
+.cs-hero-media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .cs-hero-img {
   width: 100%;
-  max-height: 220px;
+  max-height: 240px;
   object-fit: cover;
   border-radius: 12px;
   border: 1.5px solid var(--card-border);
+}
+
+.cs-hero-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cs-hero-thumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--card-border);
+  background: var(--background-color);
+  color: var(--dialog-muted);
+  font-family: var(--coding-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.cs-hero-thumb:hover,
+.cs-hero-thumb.is-active {
+  border-color: #FF6600;
+  color: var(--heading-color);
 }
 
 .cs-tagline {

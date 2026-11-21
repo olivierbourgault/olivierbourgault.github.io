@@ -26,6 +26,7 @@ export const KEY_EN: Record<string, string> = {
   'portfolio.tech.all': 'All Tech',
   'portfolio.casestudy.ribbon': 'CASE STUDY',
   'portfolio.casestudy.btn': 'Case Study',
+  'portfolio.casestudy.copylink': 'Copy Link',
   'portfolio.casestudy.repo': 'Explore Code on GitHub',
   'portfolio.filter.reset': 'Reset Filters',
   'cmd.hint.nav': 'Navigate',

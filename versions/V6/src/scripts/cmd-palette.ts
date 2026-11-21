@@ -40,7 +40,7 @@ function triggerCaseStudy(projectName: string): void {
     existingBtn.click();
     return;
   }
-  window.location.href = `${withBase('')}#portfolio`;
+  window.location.href = `${withBase('')}#case-study=${encodeURIComponent(projectName)}`;
 }
 
 export function initCommandPalette(): void {
@@ -160,6 +160,42 @@ export function initCommandPalette(): void {
       subEn: 'Angular • TypeScript • Symfony • MySQL',
       keywords: 'electrolib etude de cas case study angular typescript symfony php sql',
       run: () => triggerCaseStudy('Electrolib')
+    },
+    {
+      id: 'cs-kaomia',
+      icon: 'bi-journal-code',
+      groupFr: 'Études de cas (Projets phares)',
+      groupEn: 'Case Studies (Flagship Projects)',
+      labelFr: 'Étude de cas : Kaomia (Vue.js + Kotlin + Node.js)',
+      labelEn: 'Case Study: Kaomia (Vue.js + Kotlin + Node.js)',
+      subFr: 'Vue.js • Kotlin (Android) • Node.js • Electron',
+      subEn: 'Vue.js • Kotlin (Android) • Node.js • Electron',
+      keywords: 'kaomia etude de cas case study vue kotlin android nodejs electron',
+      run: () => triggerCaseStudy('Kaomia')
+    },
+    {
+      id: 'cs-evomeal',
+      icon: 'bi-journal-code',
+      groupFr: 'Études de cas (Projets phares)',
+      groupEn: 'Case Studies (Flagship Projects)',
+      labelFr: 'Étude de cas : EVOMEAL (Symfony + MySQL)',
+      labelEn: 'Case Study: EVOMEAL (Symfony + MySQL)',
+      subFr: 'Symfony • Twig • PHP • MySQL',
+      subEn: 'Symfony • Twig • PHP • MySQL',
+      keywords: 'evomeal etude de cas case study symfony twig php mysql ecommerce',
+      run: () => triggerCaseStudy('EVOMEAL')
+    },
+    {
+      id: 'cs-shopro',
+      icon: 'bi-journal-code',
+      groupFr: 'Études de cas (Projets phares)',
+      groupEn: 'Case Studies (Flagship Projects)',
+      labelFr: 'Étude de cas : Shopro (WordPress + WooCommerce)',
+      labelEn: 'Case Study: Shopro (WordPress + WooCommerce)',
+      subFr: 'WordPress • WooCommerce • PHP / CSS',
+      subEn: 'WordPress • WooCommerce • PHP / CSS',
+      keywords: 'shopro etude de cas case study wordpress woocommerce php css ecommerce',
+      run: () => triggerCaseStudy('Shopro')
     },
     {
       id: 'act-cv-fr',

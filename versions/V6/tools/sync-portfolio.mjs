@@ -29,23 +29,91 @@ function slugifySegment(str) {
     .replace(/^-+|-+$/g, '');
 }
 
+function stripMarkdown(mdText) {
+  if (!mdText) return '';
+  let text = mdText
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s+/gm, '')
+    .replace(/[*_~]/g, '')
+    .replace(/\|/g, ' ')
+    .replace(/\r?\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (text.length > 260) {
+    text = `${text.substring(0, 257).trim()}...`;
+  }
+  return text;
+}
+
+function cleanReadmeDescription(rawReadme) {
+  if (!rawReadme) return '';
+  const lines = rawReadme
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(
+      (line) =>
+        line.length > 0 &&
+        !line.startsWith('#') &&
+        !line.startsWith('![') &&
+        !line.startsWith('---')
+    );
+
+  if (lines.length === 0) return '';
+  return stripMarkdown(lines.slice(0, 3).join(' '));
+}
+
+function extractProjectFromParentReadme(parentReadme, projectName) {
+  if (!parentReadme || !projectName) return '';
+  const lines = parentReadme.split(/\r?\n/);
+  const escaped = projectName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`\\b${escaped}\\b`, 'i');
+
+  for (let i = 0; i < lines.length; i++) {
+    if (regex.test(lines[i])) {
+      let snippet = lines[i].replace(regex, '').replace(/^[\s\-:*•|]+/, '');
+      if (snippet.length < 25 && i + 1 < lines.length) {
+        snippet += ` ${lines[i + 1]}`;
+      }
+      const cleaned = stripMarkdown(snippet);
+      if (cleaned.length > 15) return cleaned;
+    }
+  }
+  return '';
+}
+
+async function fetchRawGitHubText(repoPath) {
+  try {
+    const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${encodeGitHubPath(repoPath)}`;
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'olivierbourgault-portfolio-v6-sync' }
+    });
+    if (!res.ok) return '';
+    return await res.text();
+  } catch {
+    return '';
+  }
+}
+
 function previewSortRank(relPath) {
   const fileName = (relPath.split('/').pop() || '').toLowerCase();
   const base = fileName.replace(/\.[a-z0-9]+$/i, '');
-  // 1. "preview" exact en tout premier, suivi de preview1, preview2, preview3...
   if (base === 'preview') return { group: 0, num: 0, base };
   const previewNumMatch = base.match(/^preview[-_]?(\d+)$/);
   if (previewNumMatch) {
     return { group: 0, num: Number(previewNumMatch[1]), base };
   }
-  // 2. screenshot / demo / accueil / ecran-depart
   const otherNumMatch = base.match(
     /^(screenshot|demo|accueil|ecran[-_]?depart|banner|cover|capture)[-_]?(\d+)?$/
   );
   if (otherNumMatch) {
     return { group: 1, num: otherNumMatch[2] ? Number(otherNumMatch[2]) : 0, base };
   }
-  // 3. Dossier Screenshots/
   return { group: 2, num: 0, base: relPath.toLowerCase() };
 }
 
@@ -168,6 +236,7 @@ async function main() {
   fs.mkdirSync(webpOutDir, { recursive: true });
 
   const prevShaMap = new Map();
+  const prevDescMap = new Map();
   if (fs.existsSync(outPath)) {
     try {
       const prev = JSON.parse(fs.readFileSync(outPath, 'utf8'));
@@ -176,6 +245,12 @@ async function main() {
           for (const [k, v] of Object.entries(proj.githubPreviewShas)) {
             prevShaMap.set(k, v);
           }
+        }
+        if (proj.path && proj.description && proj.readmeSha) {
+          prevDescMap.set(proj.path, {
+            description: proj.description,
+            readmeSha: proj.readmeSha
+          });
         }
       }
     } catch {
@@ -192,12 +267,16 @@ async function main() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const tree = Array.isArray(data.tree) ? data.tree : [];
-    const blobSet = new Set(tree.filter((i) => i.type === 'blob' && i.path).map((i) => i.path));
+    const blobShaByPath = new Map(
+      tree.filter((i) => i.type === 'blob' && i.path).map((i) => [i.path, i.sha || ''])
+    );
+    const parentReadmeTextCache = new Map();
     const baseRepo = `https://github.com/${OWNER}/${REPO}/tree/${BRANCH}`;
 
     const projects = [];
     let convertedCount = 0;
     let cachedCount = 0;
+    let readmeSyncedCount = 0;
 
     for (const entry of tree) {
       if (entry.type !== 'tree' || !entry.path) continue;
@@ -251,6 +330,35 @@ async function main() {
         }
       }
 
+      const ownReadmePath = `${entry.path}/README.md`;
+      const parentReadmePath = `${parentPath}/README.md`;
+      const hasReadme = blobShaByPath.has(ownReadmePath);
+      const hasParentReadme = blobShaByPath.has(parentReadmePath);
+      const combinedReadmeSha = `${blobShaByPath.get(ownReadmePath) || ''}:${blobShaByPath.get(parentReadmePath) || ''}`;
+
+      let description = '';
+      const prevDesc = prevDescMap.get(entry.path);
+      if (prevDesc && prevDesc.readmeSha === combinedReadmeSha) {
+        description = prevDesc.description;
+      } else {
+        if (hasReadme) {
+          description = cleanReadmeDescription(await fetchRawGitHubText(ownReadmePath));
+        }
+        if (!description && hasParentReadme) {
+          if (!parentReadmeTextCache.has(parentReadmePath)) {
+            parentReadmeTextCache.set(
+              parentReadmePath,
+              await fetchRawGitHubText(parentReadmePath)
+            );
+          }
+          description = extractProjectFromParentReadme(
+            parentReadmeTextCache.get(parentReadmePath) || '',
+            name
+          );
+        }
+        if (description) readmeSyncedCount++;
+      }
+
       projects.push({
         name,
         path: entry.path,
@@ -261,8 +369,10 @@ async function main() {
         imageUrl: githubPreviews[0] || '',
         githubPreviews,
         githubPreviewShas,
-        hasReadme: blobSet.has(`${entry.path}/README.md`),
-        hasParentReadme: blobSet.has(`${parentPath}/README.md`),
+        hasReadme,
+        hasParentReadme,
+        description,
+        readmeSha: combinedReadmeSha,
         tags: inferTechTags(entry.path, tree)
       });
     }
@@ -274,7 +384,7 @@ async function main() {
     };
     fs.writeFileSync(outPath, JSON.stringify(payload, null, 2) + '\n', 'utf8');
     console.log(
-      `Catalogue GitHub synchronisé : ${projects.length} projets, ${convertedCount} previews converties en .webp (${cachedCount} en cache).`
+      `Catalogue GitHub synchronisé : ${projects.length} projets, ${convertedCount} previews .webp (${cachedCount} en cache), ${readmeSyncedCount} descriptions README extraites.`
     );
   } catch (err) {
     if (fs.existsSync(outPath)) {

@@ -187,7 +187,37 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia',
     descriptionHtml:
       "Portail multi-clients de consultation des statistiques d'un jeu (cours 420-5D4-JR), intégrant un client Web en <strong>Vue.js</strong>, une application mobile en <strong>Kotlin</strong> et un serveur <strong>Node.js</strong>.",
-    badges: ['Vue.js', 'Kotlin (Android)', 'Node.js']
+    badges: ['Vue.js', 'Kotlin (Android)', 'Node.js'],
+    caseStudy: {
+      fr: {
+        tagline: 'Écosystème multi-clients (Web Vue.js, desktop Electron & mobile Android Kotlin) propulsé par Node.js',
+        challenge:
+          'Permettre aux joueurs de consulter leur inventaire, leurs statistiques d’exploration et leurs créatures en temps réel depuis un navigateur Web, un client lourd Electron ou un téléphone Android sans désynchronisation des données.',
+        architecture:
+          'API REST centrale en Node.js / Express avec persistance MongoDB, consommée simultanément par une SPA Vue.js / Electron et une application mobile native Android écrite en Kotlin.',
+        highlights: [
+          'Contrat d’API RESTful unifié garantissant une parité fonctionnelle entre le portail Vue.js et le client Android Kotlin',
+          'Authentification par jetons JWT et synchronisation de la progression des joueurs entre mobile et ordinateur',
+          'Tableaux de bord visuels des affinités élémentaires, inventaires et statistiques de jeu temps réel'
+        ],
+        impact:
+          'Démonstration complète d’une architecture distribuée multi-plateformes (Web, Desktop, Mobile) reposant sur un socle dorsal unique.'
+      },
+      en: {
+        tagline: 'Multi-client ecosystem (Vue.js Web, Electron Desktop & Kotlin Android) powered by a unified Node.js API',
+        challenge:
+          'Enable players to inspect their inventory, exploration metrics, and creatures seamlessly across a Web browser, an Electron desktop client, and a native Android phone without data desynchronization.',
+        architecture:
+          'Central Node.js / Express REST API backed by MongoDB, consumed concurrently by a Vue.js / Electron SPA and a native Android application built in Kotlin.',
+        highlights: [
+          'Unified RESTful API contract ensuring feature parity across the Vue.js Web portal and Kotlin Android client',
+          'JWT token authentication and cross-device player progression synchronization between mobile and desktop',
+          'Interactive dashboards visualizing elemental affinities, inventories, and real-time game statistics'
+        ],
+        impact:
+          'Delivered a complete cross-platform distributed architecture (Web, Desktop, Mobile) sharing a single back-end service.'
+      }
+    }
   },
   {
     name: 'EVOMEAL',
@@ -202,7 +232,37 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL',
     descriptionHtml:
       'Plateforme Web de commerce en ligne développée avec le framework <strong>Symfony</strong>, incluant la gestion dynamique des produits, des commandes et des utilisateurs.',
-    badges: ['Symfony', 'Twig', 'PHP', 'MySQL']
+    badges: ['Symfony', 'Twig', 'PHP', 'MySQL'],
+    caseStudy: {
+      fr: {
+        tagline: 'Plateforme e-commerce MVC en Symfony / MySQL avec panier dynamique et panneau d’administration',
+        challenge:
+          'Bâtir une boutique en ligne de prêt-à-manger fiable gérant les catégories, les stocks, le panier transactionnel, les profils clients et le suivi des commandes avec validation stricte côté serveur.',
+        architecture:
+          'Architecture MVC Symfony (PHP 8 / Twig / Doctrine ORM) adossée à une base relationnelle MySQL, avec gestion des sessions sécurisées, contrôle d’accès par rôle (`ROLE_USER`, `ROLE_ADMIN`) et requêtes AJAX.',
+        highlights: [
+          'Modélisation relationnelle complète (produits, catégories, commandes, lignes de commande, utilisateurs) via Doctrine ORM',
+          'Panier interactif avec mise à jour dynamique des quantités, calcul des taxes et validation transactionnelle des stocks',
+          'Back-office d’administration sécurisé permettant la gestion du catalogue et le suivi de l’état des commandes'
+        ],
+        impact:
+          'Conception d’un flux e-commerce complet de bout en bout illustrant la sécurité serveur, l’intégrité relationnelle SQL et l’ergonomie Web.'
+      },
+      en: {
+        tagline: 'Symfony / MySQL MVC e-commerce platform with transactional cart and admin back-office',
+        challenge:
+          'Build a reliable meal-delivery online store handling product categories, inventory levels, transactional shopping carts, customer profiles, and order tracking with strict server-side validation.',
+        architecture:
+          'Symfony MVC architecture (PHP 8 / Twig / Doctrine ORM) backed by a MySQL relational database, featuring secure session management, role-based access control (`ROLE_USER`, `ROLE_ADMIN`), and AJAX updates.',
+        highlights: [
+          'Complete relational schema (products, categories, orders, order items, users) managed through Doctrine ORM',
+          'Interactive shopping cart with live quantity updates, tax calculation, and transactional stock validation',
+          'Secured administrative back-office for catalog CRUD operations and real-time order status management'
+        ],
+        impact:
+          'Engineered an end-to-end e-commerce workflow demonstrating server-side security, SQL relational integrity, and clean Web UX.'
+      }
+    }
   },
   {
     name: 'Shopro',
@@ -217,6 +277,36 @@ export const FALLBACK_PROJECTS: FallbackProject[] = [
     repoUrl: 'https://github.com/RinoShip77/MesProjets/tree/main/Personnels/Shopro',
     descriptionHtml:
       "Boutique de vente en ligne avec thème personnalisé, catalogue sur mesure et automatisation du parcours d'achat.",
-    badges: ['WordPress', 'WooCommerce', 'PHP / CSS']
+    badges: ['WordPress', 'WooCommerce', 'PHP / CSS'],
+    caseStudy: {
+      fr: {
+        tagline: 'Thème e-commerce WordPress / WooCommerce sur mesure et automatisation du tunnel de commande',
+        challenge:
+          'Remplacer un gabarit générique lourd par un thème WordPress / WooCommerce développé sur mesure offrant une identité visuelle distinctive, un catalogue filtrable rapide et un tunnel d’achat simplifié.',
+        architecture:
+          'Thème PHP WordPress sur mesure intégrant les hooks/filtres natifs WooCommerce, des gabarits de fiches produits personnalisés et une feuille de style CSS modulaire optimisée pour le mobile.',
+        highlights: [
+          'Développement d’un thème WordPress de zéro en PHP/CSS sans surcharge de constructeurs de pages tiers',
+          'Personnalisation des hooks WooCommerce pour automatiser et raccourcir les étapes du panier au paiement',
+          'Mise en page responsive soignée mettant en valeur les visuels produits, les promotions et la navigation par catégorie'
+        ],
+        impact:
+          'Expérience d’achat fluide et temps de chargement réduit grâce à un thème léger maîtrisé de bout en bout.'
+      },
+      en: {
+        tagline: 'Custom-built WordPress / WooCommerce theme and automated checkout funnel',
+        challenge:
+          'Replace a bloated generic template with a custom-engineered WordPress / WooCommerce theme delivering a distinct brand identity, fast catalog browsing, and a streamlined checkout flow.',
+        architecture:
+          'Custom PHP WordPress theme leveraging native WooCommerce hooks and filters, tailored product page templates, and a modular mobile-first CSS stylesheet.',
+        highlights: [
+          'Developed a bespoke WordPress theme from scratch in PHP/CSS without heavy third-party page-builder overhead',
+          'Customized WooCommerce hooks to automate and shorten the journey from cart to checkout',
+          'Responsive storefront layout highlighting product imagery, promotions, and category navigation'
+        ],
+        impact:
+          'Delivered a fast, cohesive shopping experience powered by a lightweight custom theme built end to end.'
+      }
+    }
   }
 ];

@@ -1,6 +1,7 @@
 import { FALLBACK_PROJECTS, type FallbackProject } from '../data/projects';
 import { SITE } from '../data/site';
 import { withBase } from '../utils/paths';
+import { copyTextToClipboard } from './clipboard';
 import { promoteCursorToTopLayer } from './cursor';
 import { applyDomTranslations, getSiteLang } from './i18n';
 import { refreshScrollReveal } from './reveal';
@@ -9,7 +10,7 @@ import { renderPortfolioVerticalNav } from './vnav';
 const DEFAULT_VISIBLE_PROJECTS = 5;
 const IMAGE_GENERIQUE = withBase('assets/images/logos/logo-ob-tech.svg');
 const STATIC_CATALOG_URL = withBase('assets/data/github-projects.json');
-const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v3';
+const PORTFOLIO_CACHE_KEY = 'ob_v6_portfolio_tree_v4';
 const PORTFOLIO_CACHE_TTL_MS = 1000 * 60 * 60 * 12; // 12 heures
 
 let portfolioShowAll = false;
@@ -760,7 +761,25 @@ function applyPortfolioFilterWithLimit(): void {
   refreshScrollReveal();
 }
 
-function renderCaseStudyModalContent(project: FallbackProject): void {
+function getCaseStudyProjectSlides(project: FallbackProject): string[] {
+  const domCard = document.querySelector<HTMLElement>(
+    `#portfolioGrid .portfolio-item[data-project-path="${project.path}"]`
+  );
+  const rawJson = domCard?.dataset.previewImages;
+  if (rawJson) {
+    try {
+      const parsed = JSON.parse(rawJson);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.filter((u): u is string => typeof u === 'string' && u.length > 0);
+      }
+    } catch {
+      // Ignorer
+    }
+  }
+  return [withBase(project.image)];
+}
+
+function renderCaseStudyModalContent(project: FallbackProject, activeSlideIdx = 0): void {
   const isEn = getSiteLang() === 'en';
   const cs = isEn ? project.caseStudy?.en : project.caseStudy?.fr;
   if (!cs) return;
@@ -770,6 +789,7 @@ function renderCaseStudyModalContent(project: FallbackProject): void {
   const bodyEl = document.getElementById('caseStudyDialogBody');
   const badgesEl = document.getElementById('caseStudyDialogBadges');
   const repoLink = document.getElementById('caseStudyDialogRepoLink') as HTMLAnchorElement | null;
+  const copyLinkLabel = document.getElementById('caseStudyCopyLinkLabel');
 
   if (titleEl) {
     titleEl.textContent = isEn ? `Case Study — ${project.name}` : `Étude de cas — ${project.name}`;
@@ -780,20 +800,48 @@ function renderCaseStudyModalContent(project: FallbackProject): void {
   if (repoLink) {
     repoLink.href = project.repoUrl;
   }
+  if (copyLinkLabel) {
+    copyLinkLabel.textContent = isEn ? 'Copy Link' : 'Copier le lien';
+  }
   if (badgesEl) {
     badgesEl.innerHTML = project.badges
       .map((b) => `<span class="badge badge-tech">${b}</span>`)
       .join('');
   }
   if (bodyEl) {
+    const slides = getCaseStudyProjectSlides(project);
+    const safeIdx = Math.max(0, Math.min(activeSlideIdx, slides.length - 1));
+    const currentImg = slides[safeIdx] || withBase(project.image);
+
     const lblChallenge = isEn ? '1. Context & Problem' : '1. Contexte & Problématique';
     const lblArch = isEn ? '2. Architecture & Stack' : '2. Architecture & Stack technique';
     const lblHighlights = isEn ? '3. Key Engineering Decisions' : '3. Défis & Solutions d’ingénierie';
     const lblImpact = isEn ? '4. Measurable Results & Impact' : '4. Résultats & Impact mesurable';
 
+    const thumbsHtml =
+      slides.length > 1
+        ? `<div class="cs-hero-thumbs" role="group" aria-label="${isEn ? 'Case study images' : 'Images de l’étude de cas'}">
+            ${slides
+              .map((sUrl, idx) => {
+                const isGh =
+                  sUrl.includes('/projects/github/') || sUrl.includes('githubusercontent.com');
+                const tag = isGh ? 'GH · WEBP' : 'LOCAL · WEBP';
+                const activeCls = idx === safeIdx ? ' is-active' : '';
+                return `<button type="button" class="cs-hero-thumb${activeCls}" data-cs-slide-idx="${idx}" aria-pressed="${idx === safeIdx ? 'true' : 'false'}">
+                  <i class="bi bi-image" aria-hidden="true"></i>
+                  <span>${idx + 1}/${slides.length} · ${tag}</span>
+                </button>`;
+              })
+              .join('')}
+          </div>`
+        : '';
+
     bodyEl.innerHTML = `
       <div class="cs-hero-banner">
-        <img src="${withBase(project.image)}" alt="${project.alt}" class="cs-hero-img" loading="lazy" />
+        <div class="cs-hero-media">
+          <img id="caseStudyHeroImg" src="${currentImg}" alt="${project.alt}" class="cs-hero-img" loading="lazy" />
+          ${thumbsHtml}
+        </div>
         <p class="cs-tagline">${cs.tagline}</p>
       </div>
       <div class="cs-grid">
@@ -820,7 +868,7 @@ function renderCaseStudyModalContent(project: FallbackProject): void {
   }
 }
 
-export function openCaseStudyByName(projectName: string): boolean {
+export function openCaseStudyByName(projectName: string, updateUrlHash = true): boolean {
   const project = FALLBACK_PROJECTS.find(
     (p) => p.name.toLowerCase() === projectName.toLowerCase() && p.caseStudy
   );
@@ -828,25 +876,93 @@ export function openCaseStudyByName(projectName: string): boolean {
   if (!project || !dialog) return false;
 
   activeCaseStudyProject = project;
-  renderCaseStudyModalContent(project);
+  renderCaseStudyModalContent(project, 0);
   if (typeof dialog.showModal === 'function') {
     if (!dialog.open) dialog.showModal();
     promoteCursorToTopLayer();
+    if (updateUrlHash) {
+      try {
+        history.replaceState(null, '', `#case-study=${encodeURIComponent(project.name)}`);
+      } catch {
+        // Ignorer
+      }
+    }
     return true;
   }
   return false;
 }
 
+function checkCaseStudyUrlParam(): void {
+  try {
+    const hash = window.location.hash || '';
+    const hashMatch = hash.match(/^#case-study=(.+)$/i);
+    if (hashMatch && hashMatch[1]) {
+      openCaseStudyByName(decodeURIComponent(hashMatch[1]), false);
+      return;
+    }
+    const qParam = new URLSearchParams(window.location.search).get('case-study');
+    if (qParam) {
+      openCaseStudyByName(qParam, false);
+    }
+  } catch {
+    // Ignorer
+  }
+}
+
 function initCaseStudyDialog(): void {
+  const dialog = document.getElementById('caseStudyDialog') as HTMLDialogElement | null;
+  const bodyEl = document.getElementById('caseStudyDialogBody');
+  const copyLinkBtn = document.getElementById('caseStudyCopyLinkBtn');
+  const copyLinkLabel = document.getElementById('caseStudyCopyLinkLabel');
+
   document.addEventListener('click', (e) => {
     const btn = (e.target as Element | null)?.closest<HTMLElement>('[data-case-study]');
     if (!btn) return;
     const name = btn.getAttribute('data-case-study');
     if (name) {
       e.preventDefault();
-      openCaseStudyByName(name);
+      openCaseStudyByName(name, true);
     }
   });
+
+  bodyEl?.addEventListener('click', (e) => {
+    const thumbBtn = (e.target as Element | null)?.closest<HTMLButtonElement>('[data-cs-slide-idx]');
+    if (!thumbBtn || !activeCaseStudyProject) return;
+    const idx = Number(thumbBtn.getAttribute('data-cs-slide-idx'));
+    if (!Number.isNaN(idx)) {
+      renderCaseStudyModalContent(activeCaseStudyProject, idx);
+    }
+  });
+
+  copyLinkBtn?.addEventListener('click', async () => {
+    if (!activeCaseStudyProject) return;
+    const isEn = getSiteLang() === 'en';
+    const shareUrl = `${window.location.origin}${withBase('')}#case-study=${encodeURIComponent(
+      activeCaseStudyProject.name
+    )}`;
+    const ok = await copyTextToClipboard(shareUrl);
+    if (ok && copyLinkLabel) {
+      copyLinkLabel.textContent = isEn ? 'Link Copied!' : 'Lien copié !';
+      window.setTimeout(() => {
+        if (copyLinkLabel) {
+          copyLinkLabel.textContent = getSiteLang() === 'en' ? 'Copy Link' : 'Copier le lien';
+        }
+      }, 2000);
+    }
+  });
+
+  dialog?.addEventListener('close', () => {
+    if (window.location.hash.toLowerCase().startsWith('#case-study=')) {
+      try {
+        history.replaceState(null, '', `${window.location.pathname}${window.location.search}#portfolio`);
+      } catch {
+        // Ignorer
+      }
+    }
+  });
+
+  window.addEventListener('hashchange', checkCaseStudyUrlParam);
+  checkCaseStudyUrlParam();
 }
 
 function getSlideCaptionLabel(slideUrl: string, index: number, total: number, isEn: boolean): string {

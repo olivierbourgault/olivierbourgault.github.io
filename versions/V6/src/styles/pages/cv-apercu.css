@@ -977,21 +977,33 @@ html[data-cv-version="portfolio"] body.cv-apercu-page.dark .sheet-footer {
     display: none !important;
   }
 
+  :root,
   html,
+  html.dark,
   body,
   body.dark,
   body.cv-apercu-page,
   body.cv-apercu-page.dark,
   html[data-cv-version] body.cv-apercu-page,
   html[data-cv-version] body.cv-apercu-page.dark {
+    color-scheme: light !important;
     --sheet-divider: #d1d5db !important;
     background: #ffffff !important;
+    background-color: #ffffff !important;
     background-image: none !important;
     color: #1f2328 !important;
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+  }
+
+  #main-content,
+  main.main {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
   }
 
   body.cv-apercu-page::before,
