@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T22:28:35.323Z",
+  "generatedAt": "2026-11-23T19:42:30.117Z",
   "totalCount": 59,
   "projects": [
     {
@@ -584,13 +584,17 @@
       "filterClass": "filter-professional",
       "categoryLabel": "Professionnels • HoC-CdC_E23",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Professionnels/HoC-CdC_E23/CompareTools",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
+      "imageUrl": "assets/images/projects/github/professionnels-hoc-cdc-e23-comparetools-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/professionnels-hoc-cdc-e23-comparetools-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/professionnels-hoc-cdc-e23-comparetools-preview.webp": "ff9de686b522867937f1b96e0b07f38a6b17248d"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "SHORT DESCRIPTION: Contains all Subdirectories. LONG DESCRIPTION:",
-      "readmeSha": "24df53c58bbabb136900dbc887c24aee56ad45a5:51fba29354cf52328aedff3946205c59f875a7ff",
+      "description": "CompareTools est une suite d'outils en PowerShell dotée d'interfaces graphiques Windows Forms permettant de comparer le contenu et l'intégrité de deux répertoires ou de deux environnements applicatifs. Réalisé lors d'un stage à la Chambre des communes du Ca...",
+      "readmeSha": "deb9eb69d18404c4e5da8af750dbf64c0659f5e7:51fba29354cf52328aedff3946205c59f875a7ff",
       "tags": [
         "PowerShell"
       ]
@@ -602,13 +606,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A20)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A20-InterfaceWeb_1D4/PowerFitness",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a20-interfaceweb-1d4-powerfitness-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a20-interfaceweb-1d4-powerfitness-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a20-interfaceweb-1d4-powerfitness-preview.webp": "145c7e26fc770f9bc8894fafb0043c8f76937c30"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2020. C'est un site web qui démontre les aptitudes que j'ai acquis durant le cours d'interface web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https://1875009.techinfo-cstj.ca/Sch...",
-      "readmeSha": ":514c7a0b28a27d56bd576dbcd2be3d798e42f369",
+      "description": "PowerFitness est un site web vitrine en HTML, CSS et JavaScript dédié à un centre de conditionnement physique, réalisé dans le cadre du cours d'Interface Web. Développé à l'automne 2020 au Cégep de Saint-Jérôme, ce projet présente les services, les abonneme...",
+      "readmeSha": "a70bcfcff3a3edd38a65d0762fcef41242bd20e4:514c7a0b28a27d56bd576dbcd2be3d798e42f369",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -621,13 +629,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/SYNTHESE",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-synthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-synthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-synthese-preview.webp": "b0b1e0cb4bb8ce42c1545210eafdb46340af8d07"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "",
-      "readmeSha": ":f045094cc47f0c7c09c15562ee48ce24d11c6c23",
+      "description": "Ce projet synthèse est un système d'alarme intelligent programmé en C/C++ pour microcontrôleurs Arduino Uno et Arduino Mega. Réalisé à l'automne 2021 dans le cadre de l'épreuve synthèse du cours d'Objets connectés, ce système assure la surveillance d'un env...",
+      "readmeSha": "5b8ecd6c1074b77e4a0af65b7b8f49dd4e853d44:f045094cc47f0c7c09c15562ee48ce24d11c6c23",
       "tags": []
     },
     {
@@ -637,13 +649,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ObjetsConnect%C3%A9s_1C4/TP_1",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-tp-1-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-tp-1-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-objetsconnectes-1c4-tp-1-preview.webp": "44efa508c1d4632fba0a252335399cbb6340bb7b"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2021. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'objets connectés.",
-      "readmeSha": ":f045094cc47f0c7c09c15562ee48ce24d11c6c23",
+      "description": "TP1 est un programme embarqué en C/C++ pour Arduino permettant de contrôler la fréquence de clignotement d'une DEL externe à l'aide d'un bouton-poussoir et d'un potentiomètre. Développé à l'automne 2021 pour le cours d'Objets connectés, ce montage électroni...",
+      "readmeSha": "03060a85935c2ac02c97fb59db9fa572d49630d7:f045094cc47f0c7c09c15562ee48ce24d11c6c23",
       "tags": []
     },
     {
@@ -653,13 +669,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TP1",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tp1-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tp1-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tp1-preview.webp": "16945412d7cf940305dacdb9da3074f6d05a857a"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet d'équipe que nous avons développé en automne 2021. C'est une application WPF qui démontre les aptitudes que nous avons acquis durant le cours de programmation d'interfaces graphiques.",
-      "readmeSha": ":c97ed1cf2df243128c8291d3b6927d2e6b08586e",
+      "description": "TP1 est une application de bureau Windows développée en C# et WPF permettant l'authentification des utilisateurs et la gestion d'un catalogue de produits informatiques. Réalisé en équipe à l'automne 2021 dans le cadre du cours de Programmation d'interfaces...",
+      "readmeSha": "6e50d3a35d6137463b5996116cce021604ebe7b8:c97ed1cf2df243128c8291d3b6927d2e6b08586e",
       "tags": [
         "C# / .NET"
       ]
@@ -671,13 +691,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ProgrammationInterfacesGraphiques_3C4/TPSynthese",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tpsynthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tpsynthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-programmationinterfacesgraphiques-3c4-tpsynthese-preview.webp": "1ee0cc0ba75630eb5fa6e87d7a6f18c2d208525e"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "",
-      "readmeSha": ":c97ed1cf2df243128c8291d3b6927d2e6b08586e",
+      "description": "TPSynthèse est une application de bureau en C# et WPF reproduisant un mur de publications sociales et un espace Marketplace à partir de données Excel. Développé à l'automne 2021 pour l'épreuve synthèse du cours de Programmation d'interfaces graphiques, ce p...",
+      "readmeSha": "b595c2baf1943c38ba7cf19dd493ec2586eb76aa:c97ed1cf2df243128c8291d3b6927d2e6b08586e",
       "tags": [
         "C# / .NET"
       ]
@@ -689,13 +713,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/Atlas",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-atlas-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-atlas-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-atlas-preview.webp": "a39a99189bd84a16a872b9d84d4a880c0408797e"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "Prénom: Olivier Nom: Bourgault Matricule: 1875009",
-      "readmeSha": "23c8299dd1c45dac1d066278e4dce0b0d64c19dc:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
+      "description": "Atlas est une application web cliente en HTML, Bootstrap, jQuery et Axios permettant de consulter un bestiaire de monstres issu d'un service web REST. Développé à l'automne 2021 dans le cadre du cours de Service d'échange de données, ce projet interroge une...",
+      "readmeSha": "ff1db158006a6dc2bf2e17f5939d0a9dea47677b:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -708,13 +736,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/M%C3%A9t%C3%A9omania",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-meteomania-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-meteomania-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-meteomania-preview.webp": "b67600fc7b5dc7f9843a8792c48dd4d0bc607ac9"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "Nom: Olivier Bourgault Matricule: 1875009",
-      "readmeSha": "6b7b8cda8dbdd90f08e9b7f432b2160ab94019b9:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
+      "description": "Météomania est une API RESTful en Node.js, Express et MongoDB permettant de collecter et de consulter des observations météorologiques. Réalisé à l'automne 2021 pour le cours de Service d'échange de données, ce serveur backend expose des routes REST structu...",
+      "readmeSha": "a704d6a5d60669279d0f01c07ea28b8034bcb648:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "JavaScript"
       ]
@@ -726,13 +758,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A21-ServiceEchangeDeDonn%C3%A9es_3E4/TPSynthese",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-tpsynthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-tpsynthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a21-serviceechangededonnees-3e4-tpsynthese-preview.webp": "8ba9970d5f2bba7fe6dc79c9215282a4cde2174c"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "Nom: Bourgault Prénom: Olivier Matricule: 1875009",
-      "readmeSha": "c7e68291dc16c279d69605b5b6183b281e5409f6:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
+      "description": "Ce projet synthèse est un service web RESTful complet en Node.js, Express et MongoDB gérant un réseau de pizzerias, leurs clients et leurs commandes. Développé en équipe à l'automne 2021 pour l'épreuve synthèse du cours de Service d'échange de données, ce s...",
+      "readmeSha": "259e1cf0ed0886766e941a1a129ecaa4a6e439f3:36aa8ed76d81709be56534fd0f2d5cbacc2d4b8b",
       "tags": [
         "JavaScript"
       ]
@@ -744,13 +780,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/Synth%C3%A8se",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-synthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-synthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-synthese-preview.webp": "6e8a4b01aea1c132a748d221c7e6e3c984363ec6"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'internet des objets.",
-      "readmeSha": ":aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
+      "description": "Ce projet synthèse est un système domotique complet programmé en C/C++ faisant collaborer deux cartes Arduino (ArduinoMaison et ArduinoMega) pour automatiser une maison connectée. Réalisé à l'automne 2022 dans le cadre du cours d'Internet des objets, ce pro...",
+      "readmeSha": "a63334c95c3974923bb426fc4147aa7cdba84731:aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
       "tags": []
     },
     {
@@ -760,13 +800,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-InternetDesObjets_5C4/TP1",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-tp1-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-tp1-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-internetdesobjets-5c4-tp1-preview.webp": "9ddf424bf7fb91d84bd5438b013ea7c5a0728e5a"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est un programme pour un Arduino qui démontre les aptitudes que j'ai acquis durant le cours d'internet des objets.",
-      "readmeSha": ":aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
+      "description": "TP1 est un programme modulaire en C/C++ pour Arduino assurant la gestion des accès, des capteurs et des alertes sonores d'une maquette de maison connectée. Développé à l'automne 2022 dans le cadre du cours d'Internet des objets, ce projet structure le code...",
+      "readmeSha": "aae333e305c54b832b46c873958f664f107bbc43:aae6a7ca782fc3263d8d6a35aac432ca37a7cb57",
       "tags": [
         "C++"
       ]
@@ -778,13 +822,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/CitationMystere",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-citationmystere-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-citationmystere-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-citationmystere-preview.webp": "467aec4573c9bff3c15cb5c4830053a5cb5a985c"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
-      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
+      "description": "CitationMystere est un jeu web interactif de décryptage de citations développé avec Angular et TypeScript. Réalisé à l'automne 2022 dans le cadre du cours de Technologies Web (TP1), ce projet propose une grille de lettres mélangées où le joueur doit reconst...",
+      "readmeSha": "aa70bd4a3e05386ba67480fb129b3d064b5c6435:11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -797,13 +845,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Converto",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-converto-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-converto-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-converto-preview.webp": "955c9d354f96db0a4a035064d6d6d8aeef111243"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
-      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
+      "description": "Converto est une application web de conversion d'unités et de dimensions développée avec Angular et TypeScript. Développé à l'automne 2022 dans le cadre du cours de Technologies Web (TP2), ce projet permet de convertir instantanément des valeurs entre diffé...",
+      "readmeSha": "585a8e9dbbed0d4d1965057ae1a4a2580f08169d:11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -816,13 +868,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/JourVie",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-jourvie-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-jourvie-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-jourvie-preview.webp": "29bcca9711abed48c5ac34f3495c173dbcef5a6d"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript avec une partie serveur en PHP qui démontre les aptitudes que",
-      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
+      "description": "JourVie est une application web full-stack combinant un client Angular en TypeScript et un serveur backend en PHP. Réalisé à l'automne 2022 comme travail synthèse (TP3) du cours de Technologies Web, ce projet met en place une plateforme interactive communiq...",
+      "readmeSha": "c1866ed8a004876ed6f3b422ecb63ff034bb0cdb:11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "PHP",
         "SQL",
@@ -837,13 +893,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A22-TechnologieWeb_3D4/Poker",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-poker-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-poker-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a22-technologieweb-3d4-poker-preview.webp": "03639f0fabb13736e0b6b51eec88937b61b7542e"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en automne 2022. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de technologies web. Pour voir ce projet en action, vous pouvez retrouvez celui-ci à l'addresse : https:...",
-      "readmeSha": ":11d8529a73fe634da8bbd405d90be3e7c259812c",
+      "description": "Poker est un jeu de cartes interactif développé avec Angular et TypeScript simulant des rondes de poker et l'évaluation automatique des mains. Développé à l'automne 2022 dans le cadre du cours de Technologies Web, ce projet modélise en programmation orienté...",
+      "readmeSha": "681436a69392cd03c43cb181d49635da84ae21a2:11d8529a73fe634da8bbd405d90be3e7c259812c",
       "tags": [
         "HTML / CSS",
         "TypeScript"
@@ -856,13 +916,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Electrolib",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-electrolib-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-electrolib-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-electrolib-preview.webp": "77a06e0d785ec6bbb4088062f8d69b0280bb63f2"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "1. Electrolib est un projet d'équipe dans le cadre du cours de projet de développement (420-5C8-JR) du Cégep de Saint-Jérôme pour la session d'automne 2023. Le projet est divisé en deux parties. Une version pour le client (Angular) ainsi qu'une version serv...",
-      "readmeSha": ":074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
+      "description": "Electrolib est une plateforme complète de bibliothèque numérique composée d'une application cliente Angular/Electron et d'une API backend Symfony. Réalisé en équipe à l'automne 2023 dans le cadre du cours de Projet de développement au Cégep de Saint-Jérôme,...",
+      "readmeSha": "29c00c535b70e4832df71175b0a954a72a4e51a9:074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
       "tags": [
         "Angular",
         "Symfony",
@@ -878,17 +942,19 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-ProjetDeDeveloppement_5C8/Poker",
-      "imageUrl": "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-preview.webp",
       "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-preview.webp",
         "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp"
       ],
       "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-preview.webp": "1e903265241cd03bba90ea6734583a84fce7407a",
         "assets/images/projects/github/scolaires-cstj-a23-projetdedeveloppement-5c8-poker-accueil.webp": "be65e34b1ed45c295ce9de11817c3e0c527216bf"
       },
-      "hasReadme": false,
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "1. Poker est un projet que j'ai développé en automne 2023. C'est une application Angular en Typescript qui démontre les aptitudes que j'ai acquis durant le cours de projet de développement. Le projet est divisé en deux parties. Une version pour le client (A...",
-      "readmeSha": ":074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
+      "description": "Poker est une application web full-stack de jeu de poker associant une interface cliente Angular en TypeScript à un serveur backend Symfony. Développé à l'automne 2023 en introduction au cours de Projet de développement, ce projet fait évoluer le jeu de pok...",
+      "readmeSha": "133bb51d0caeba0fb0f4c3a14cdde229b5810365:074cd58ce7e3b0a836f40cb5e9668b83206eb10f",
       "tags": [
         "Angular",
         "Symfony",
@@ -904,13 +970,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (A23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/A23-SystemesMulticlients_5D4/Kaomia",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-a23-systemesmulticlients-5d4-kaomia-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-a23-systemesmulticlients-5d4-kaomia-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-a23-systemesmulticlients-5d4-kaomia-preview.webp": "f9550a3a361446326b6a73cbf63da20546d1ed7c"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "1. Kaomia est un projet d'équipe dans le cadre du cours de projet de systèmes multiclients (420-5D4-JR) du Cégep de Saint-Jérôme pour la session d'automne 2023. Le projet est divisé en trois parties. Une version pour le client (Electron), une version pour t...",
-      "readmeSha": ":c20c7b48371d79210d416f0e123d1279553d8e32",
+      "description": "Kaomia est un écosystème applicatif multiclient composé d'un client de bureau Electron (Vue 3), d'une application mobile Android (Kotlin) et d'un serveur central Node.js. Réalisé en équipe à l'automne 2023 dans le cadre du cours de Systèmes multiclients au...",
+      "readmeSha": "2d9ee413f3c09d94859d354101ef37fcf5669538:c20c7b48371d79210d416f0e123d1279553d8e32",
       "tags": [
         "Vue.js",
         "Kotlin",
@@ -926,13 +996,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BaseDeDonn%C3%A9esRelationnelle_2C4/Synth%C3%A8se",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-basededonneesrelationnelle-2c4-synthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-basededonneesrelationnelle-2c4-synthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-basededonneesrelationnelle-2c4-synthese-preview.webp": "97019104094c9eadba43b7f6210a777fc57f18cc"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "Ce projet contient des fichiers pour effectuer des opérations fictives et je l'ai développé en hiver 2021. Ce sont plusieurs requêtes SQL qui intéragissent avec une base de données locale qui démontre les aptitudes que j'ai acquis durant le cours de base de...",
-      "readmeSha": ":aba6aa74ddc945ba5c2491ec2515492ca0309263",
+      "description": "Ce projet synthèse regroupe les scripts SQL de création, de peuplement et de manipulation d'une base de données relationnelle pour la gestion d'un CLSC. Développé à l'hiver 2021 dans le cadre du cours de Base de données relationnelle, ce projet modélise les...",
+      "readmeSha": "31240fbc11a0f03c5bc8f55076209d064c4f8750:aba6aa74ddc945ba5c2491ec2515492ca0309263",
       "tags": [
         "SQL"
       ]
@@ -944,13 +1018,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/Synth%C3%A8se",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-synthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-synthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-synthese-preview.webp": "885a82a9f0052c2e6e43042a4d17789fe7eafd8b"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui gère les inscriptions pour un camp de vacance en se basant sur des données sources qui démontre les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
-      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
+      "description": "Ce projet synthèse est un classeur Microsoft Excel automatisant la gestion des inscriptions et la facturation pour le camp de vacances Loisirs Montcalm. Réalisé à l'hiver 2021 dans le cadre du cours de Bureautique pour informaticien, ce classeur exploite de...",
+      "readmeSha": "140801f29ca3699ec4478ea16c86600a7b1a9ba2:279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -960,13 +1038,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TP2Excel",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tp2excel-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tp2excel-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tp2excel-preview.webp": "766354befeba6fff2befe09d06a957bf953fabe9"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui contient des données pour des étudiants selon des données sources. Ce classeur est pour démonterer les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
-      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
+      "description": "TP2Excel est un classeur Microsoft Excel dédié à l'analyse, au filtrage et au suivi des résultats académiques d'une cohorte d'étudiants. Développé à l'hiver 2021 pour le cours de Bureautique pour informaticien, ce fichier (OB-ListeDesEtudiants.xlsx) organis...",
+      "readmeSha": "abe8b456624b29ef7191a431fb3e0cb14081c25a:279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -976,13 +1058,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-BureautiquePourInformaticien_2D4/TPExcel",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tpexcel-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tpexcel-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-bureautiquepourinformaticien-2d4-tpexcel-preview.webp": "9e51245aad80bff52e911aa8fb25241940b13a99"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un classeur Excel que j'ai développé en hiver 2021. C'est un classeur qui effectue le calcul les taxes selon des données sources qui démontre les aptitudes que j'ai acquis durant le cours de bureautique pour informaticien.",
-      "readmeSha": ":279cffe131192aa56c9ede399991d70932c98ba0",
+      "description": "TPExcel est un ensemble de classeurs Microsoft Excel automatisant le calcul des taxes (TPS/TVQ), des remises et des totaux à partir de données sources. Réalisé à l'hiver 2021 dans le cadre du cours de Bureautique pour informaticien, ce travail pratique met...",
+      "readmeSha": "4c8f89e7649cb0d399d27060d3b06df89e662256:279cffe131192aa56c9ede399991d70932c98ba0",
       "tags": []
     },
     {
@@ -992,13 +1078,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP1",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp1-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp1-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp1-preview.webp": "281791ae9dbd112918dcae2ede9b9f7eb8d55fb3"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2021. C'est une solution en C# pour Visual Studio qui démontre les aptitudes que j'ai acquis durant le cours de programmation orientée objet.",
-      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
+      "description": "TP1 est une application console en C# modélisant un jeu de plateau avec joueurs, pions colorés, gobelet et dés à jouer selon les principes de la programmation orientée objet. Développé à l'hiver 2021 dans le cadre du cours de Programmation orientée objet, c...",
+      "readmeSha": "ffe52e98fcc75c5953a6f6ff48ddcdf60a7490f4:746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -1010,13 +1100,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TP2",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp2-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp2-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tp2-preview.webp": "6f16bea652f5524f136b7dea3e6a69890cdc547e"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2021. C'est une solution en C# pour Visual Studio qui démontre les aptitudes que j'ai acquis durant le cours de programmation orientée objet.",
-      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
+      "description": "TP2 est une application en C# illustrant l'héritage et la gestion de collections à travers un système de suivi des médecins et des patients. Réalisé à l'hiver 2021 pour le cours de Programmation orientée objet, ce projet met en œuvre une classe de base Pers...",
+      "readmeSha": "04da833473f87b69c5eb9f59382b79a4885a7f5a:746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -1028,13 +1122,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H21)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H21-ProgrammationOrient%C3%A9eObjet_2C6/TPSynthese",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tpsynthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tpsynthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h21-programmationorienteeobjet-2c6-tpsynthese-preview.webp": "055bba2c53acc3e0012571f4ea5cb90442ae5442"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "",
-      "readmeSha": ":746a8510517aed4cf88e61faecfc25884b7e3108",
+      "description": "TPSynthèse est une application console en C# permettant de gérer, rechercher et analyser une bibliothèque musicale complète (artistes, albums, chansons et interprétations). Développé à l'hiver 2021 pour l'épreuve synthèse du cours de Programmation orientée...",
+      "readmeSha": "d0716a37d0db3b2e2079306b42d2f8dcf9ee689f:746a8510517aed4cf88e61faecfc25884b7e3108",
       "tags": [
         "C# / .NET"
       ]
@@ -1046,13 +1144,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Consortium",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-consortium-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-consortium-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-consortium-preview.webp": "f402abdb8d6109dbeea846c6bcac617fb9e46b4c"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour mobiles (Android) en Kotlin qui démontre les aptitudes que j'ai acquis durant le cours de applications mobiles.",
-      "readmeSha": ":d2d86bc03282add2bdb00d4e39a5adf469d4763b",
+      "description": "Consortium est une application mobile native Android développée en Kotlin permettant de gérer un commerçant (Trader) et ses livraisons de ressources. Réalisé à l'hiver 2022 dans le cadre du cours d'Applications mobiles, ce projet met en œuvre l'architecture...",
+      "readmeSha": "6bacc7eb7de329ef5366c15876f75bd8caf465c4:d2d86bc03282add2bdb00d4e39a5adf469d4763b",
       "tags": [
         "Kotlin"
       ]
@@ -1064,13 +1166,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-ApplicationsMobiles_4C6/Tenretni",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-tenretni-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-tenretni-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h22-applicationsmobiles-4c6-tenretni-preview.webp": "0f28d04ad7916920d48043ce37a63de277b41fc0"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour mobiles (Android) en Kotlin qui démontre les aptitudes que j'ai acquis durant le cours de applications mobiles.",
-      "readmeSha": ":d2d86bc03282add2bdb00d4e39a5adf469d4763b",
+      "description": "Tenretni est une application mobile Android en Kotlin destinée aux techniciens réseau pour superviser des passerelles (Gateways), des billets de support (Tickets), des clients et la topologie réseau. Développé à l'hiver 2022 dans le cadre du cours d'Applica...",
+      "readmeSha": "71cf175f94fd1c42566404d7aaccaa94c07028a5:d2d86bc03282add2bdb00d4e39a5adf469d4763b",
       "tags": [
         "Kotlin"
       ]
@@ -1082,13 +1188,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/Synth%C3%A8se",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-synthese-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-synthese-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-synthese-preview.webp": "a5ec462539db44f7d11b4688b13a5320d3d83c63"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application WPF en C# qui démontre les aptitudes que j'ai acquis durant le cours d'évolutions des applications.",
-      "readmeSha": ":81514baee55f3dd9b991027ecc51fc125016039e",
+      "description": "Ce projet synthèse (ESVA) est une application de gestion de ventes automobiles en C# et WPF structurée selon une architecture multicouche (UI, BLL, DAL) connectée à une base de données SQL. Réalisé à l'hiver 2022 pour l'épreuve synthèse du cours d'Évolution...",
+      "readmeSha": "67375270cff598126dbd37c7edad67a45c2a5cb8:81514baee55f3dd9b991027ecc51fc125016039e",
       "tags": [
         "C# / .NET",
         "SQL"
@@ -1101,13 +1211,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H22)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H22-EvolutionsDesApplications_4C4/TP01",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-tp01-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-tp01-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h22-evolutionsdesapplications-4c4-tp01-preview.webp": "c0fd1a03009efc4186913374a9a34e85da186f41"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application WPF en C# qui démontre les aptitudes que j'ai acquis durant le cours d'évolutions des applications.",
-      "readmeSha": ":81514baee55f3dd9b991027ecc51fc125016039e",
+      "description": "TP01 est une application de bureau en C# et WPF permettant d'administrer un catalogue de jeux vidéo et leurs catégories. Développé à l'hiver 2022 dans le cadre du cours d'Évolution des applications, ce projet (Gestionnaire) offre une fenêtre principale mult...",
+      "readmeSha": "35000f2e3d9d3f31b431bde086cabed408be295f:81514baee55f3dd9b991027ecc51fc125016039e",
       "tags": [
         "C# / .NET"
       ]
@@ -1119,21 +1233,23 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/Synth%C3%A8se",
-      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-preview.webp",
       "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-preview.webp",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-mattermost.webp",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-nextcloud.webp"
       ],
       "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-preview.webp": "10fadf9be557eca752889912a855c6cb7ce60f2a",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-accueil.webp": "163d74204857d67d34aa2cffa049dbfc90511ac8",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-mattermost.webp": "c6a409c3889e563ea1106578503d75f288e2874a",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-synthese-nextcloud.webp": "37dc5514cc2be78a628650ff6eb3dc9e2af63e8d"
       },
-      "hasReadme": false,
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour un conteneur Docker et elle démontre les aptitudes que j'ai acquis durant le cours de déploiement de serveurs internet.",
-      "readmeSha": ":96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
+      "description": "Ce projet synthèse déploie une infrastructure infonuagique complète sous Kubernetes regroupant Nextcloud, Mattermost, un cluster de 10 serveurs PHP, MetalLB et un contrôleur Ingress NGINX. Réalisé à l'hiver 2023 pour l'épreuve synthèse du cours de Déploieme...",
+      "readmeSha": "e89e79d9c9f15d63960a652ea834ac0ded0a8e1a:96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": []
     },
     {
@@ -1143,17 +1259,19 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP01",
-      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp",
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-preview.webp",
       "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-preview.webp",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp"
       ],
       "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-preview.webp": "214714492b218734e45929ce0840f18879067191",
         "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp01-ecran-depart.webp": "f96c01fb756435fd0903d684957bb4718cbfb24b"
       },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "1) J'ai renseigné le fichier docker-compose.yml et le fichier .env, ainsi que créé deux réseaux privés 'reseauWP' et 'reseauPMM'. 1.2) Pour le réseau privé 'reseauWP': 1.2.1) Premièrement, j'ai déployé le service 'TP01' qui est un serveur web NGINX fait ave...",
-      "readmeSha": "28d5b2c0319b1ed6423dd9a01140c9c2fb5f53d2:96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
+      "description": "TP01 est une infrastructure multi-conteneurs orchestrée avec Docker Compose réunissant NGINX, WordPress, MariaDB, phpMyAdmin, PostgreSQL, pgAdmin 4 et Percona Monitoring (PMM). Développé à l'hiver 2023 dans le cadre du cours de Déploiement de serveurs Inter...",
+      "readmeSha": "152eb9b0eb7f8d72507599c6c5338abed8216c29:96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": [
         "HTML / CSS",
         "JavaScript"
@@ -1166,13 +1284,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeploiementDeServeursInternet_4D4/TP02",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp02-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp02-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-deploiementdeserveursinternet-4d4-tp02-preview.webp": "e1c6bdc0f72ae4d536c568ed5e19594b07f7c983"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "est un projet que j'ai développé en hiver 2022. C'est une application pour un conteneur Docker et elle démontre les aptitudes que j'ai acquis durant le cours de déploiement de serveurs internet.",
-      "readmeSha": ":96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
+      "description": "TP02 est un manifeste Kubernetes déployant un courtier MQTT Eclipse Mosquitto et une instance Node-RED préconfigurée avec volumes, ConfigMaps et Secrets. Réalisé à l'hiver 2023 dans le cadre du cours de Déploiement de serveurs Internet, le fichier 420-4d4-t...",
+      "readmeSha": "3a24e9d3f7876dc9d663883f83aca77c8c67d5cd:96c40d9ea80ff9d55a89a924c647b7ba15da8f4d",
       "tags": []
     },
     {
@@ -1182,13 +1304,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H23)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H23-DeveloppementWeb_4D6/EVOMEAL",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h23-developpementweb-4d6-evomeal-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h23-developpementweb-4d6-evomeal-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h23-developpementweb-4d6-evomeal-preview.webp": "02f66dc5d3220e2fe5d74193359318da974fc80d"
+      },
       "hasReadme": true,
       "hasParentReadme": true,
-      "description": "Mon URL pour accéder à mon site : https://4d6.1875009.techinfo-cstj.ca/ Mon site est aussi accessible par le billet de mon site d'accueil sur le serveur cPanel du Cégep via l'URL : https://1875009.techinfo-cstj.ca/",
-      "readmeSha": "6a87e1067b50604b2929d95475f0dbba5e0474ed:3a9cf7c867fdc1f60b86e89050546eaca068c357",
+      "description": "EVOMEAL est une application web de commerce électronique alimentaire développée avec le framework PHP Symfony, le moteur de gabarits Twig et une base de données MySQL. Réalisé à l'hiver 2023 dans le cadre du cours de Développement Web, ce projet propose un...",
+      "readmeSha": "573fc2a984b1707adf0dce0cff8f8e9347dee53e:3a9cf7c867fdc1f60b86e89050546eaca068c357",
       "tags": [
         "Symfony",
         "PHP",
@@ -1204,13 +1330,17 @@
       "filterClass": "filter-school",
       "categoryLabel": "Scolaires • CSTJ (H24)",
       "repoUrl": "https://github.com/RinoShip77/MesProjets/tree/main/Scolaires/CSTJ/H24-SecuriteDesDonnees_5D3/1875009_TP1",
-      "imageUrl": "",
-      "githubPreviews": [],
-      "githubPreviewShas": {},
-      "hasReadme": false,
+      "imageUrl": "assets/images/projects/github/scolaires-cstj-h24-securitedesdonnees-5d3-1875009-tp1-preview.webp",
+      "githubPreviews": [
+        "assets/images/projects/github/scolaires-cstj-h24-securitedesdonnees-5d3-1875009-tp1-preview.webp"
+      ],
+      "githubPreviewShas": {
+        "assets/images/projects/github/scolaires-cstj-h24-securitedesdonnees-5d3-1875009-tp1-preview.webp": "dc3da2bd4cf3ae4b557f8961da04fca717733c48"
+      },
+      "hasReadme": true,
       "hasParentReadme": true,
-      "description": "1. Ce dossier contient les tables, requêtes , procédures et fonctions stockées et déclancheurs MySQL pour mon travail pratique 1 dans le cadre du cours de sécurité des données (420-5D3-JR) du Cégep de Saint-Jérôme pour la session d'hiver 2024.",
-      "readmeSha": ":43358054dda9a8d9b75edf270487a465224743c1",
+      "description": "1875009TP1 est un ensemble de scripts SQL avancés pour MySQL mettant en œuvre la journalisation d'audit, des déclencheurs (triggers), des procédures/fonctions stockées et des requêtes analytiques. Développé à l'hiver 2024 dans le cadre du cours de Sécurité...",
+      "readmeSha": "df87a54bce589b1e2ea79343a4f51e6a6aa74504:43358054dda9a8d9b75edf270487a465224743c1",
       "tags": [
         "SQL"
       ]
