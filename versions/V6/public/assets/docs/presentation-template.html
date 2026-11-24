@@ -297,36 +297,165 @@
       display: none !important;
     }
 
-    /* HUD Controls dans le pied de page */
+    /* HUD Controls par chapitres & outils (harmonisé aec-ia + Tech Canvas) */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
     nav.hud {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
-      flex-wrap: wrap;
+      gap: 0.4rem;
+      min-width: 0;
+      flex: 1;
       justify-content: center;
     }
+    nav.hud .hud-tools {
+      display: flex;
+      align-items: center;
+      gap: 0.22rem;
+      flex: none;
+    }
     nav.hud button {
-      background: var(--tc-elevated);
+      background: transparent;
       color: var(--tc-text);
-      border: 1.5px solid var(--tc-border);
-      border-radius: 0.55rem;
-      padding: 0.22rem 0.5rem;
-      font-size: 11px;
-      font-weight: 700;
-      line-height: 1.2;
-      min-height: 26px;
-      min-width: 26px;
+      border: 1.5px solid transparent;
+      padding: 0;
       cursor: pointer;
       transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
     }
-    nav.hud button:hover {
+    nav.hud [data-a] {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 0.55rem;
+      background: var(--tc-elevated);
+      border-color: var(--tc-border);
+    }
+    nav.hud [data-a]:hover {
       border-color: #FF6600;
       color: #FF6600;
     }
-    nav.hud button[aria-pressed="true"] {
+    nav.hud [aria-pressed="true"],
+    nav.hud [aria-expanded="true"] {
       background: #FF6600;
       color: #121316;
       border-color: #121316;
+    }
+    nav.hud svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    nav.hud .count {
+      white-space: nowrap;
+      font: 700 11px/1 'IBM Plex Mono', monospace;
+      color: #FF6600;
+      padding: 0 0.25rem;
+    }
+    .hud-chapters {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      flex: 1;
+      max-width: 560px;
+      padding: 0 0.25rem;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--tc-border) transparent;
+    }
+    .hud-chapter {
+      flex: none;
+    }
+    .hud-label {
+      display: block;
+      font: 700 9px/1.2 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tc-muted);
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    .hud-chapter:has([aria-current="step"]) .hud-label {
+      color: #FF6600;
+    }
+    .hud-segments {
+      display: flex;
+      align-items: center;
+    }
+    nav.hud .hud-marker {
+      display: grid;
+      place-items: center;
+      width: 17px;
+      height: 18px;
+      border-radius: 3px;
+      border: 0;
+    }
+    .hud-marker::before {
+      content: "";
+      width: 13px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--tc-muted);
+      opacity: 0.5;
+      transition: background-color 0.15s ease, opacity 0.15s ease, transform 0.15s ease;
+    }
+    .hud-marker.visited::before {
+      background: var(--tc-heading);
+      opacity: 0.85;
+    }
+    .hud-marker.optional:not([aria-current])::before {
+      background: transparent;
+      border: 1.5px solid var(--tc-muted);
+      opacity: 0.75;
+    }
+    .hud-marker[aria-current="step"]::before,
+    .hud-marker:hover::before {
+      background: #FF6600;
+      opacity: 1;
+      transform: scaleY(1.2);
+    }
+    nav.hud button:focus-visible {
+      outline: 2px solid #FF6600;
+      outline-offset: 1px;
+    }
+    @media (max-width: 760px) {
+      #app-footer {
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+      nav.hud {
+        flex-wrap: wrap;
+        order: -1;
+        flex: 1 0 100%;
+      }
+      .hud-chapters {
+        order: -1;
+        flex: 1 0 100%;
+        max-width: none;
+      }
+      nav.hud .hud-tools {
+        margin-left: auto;
+      }
+      nav.hud [data-a] {
+        width: 28px;
+        height: 28px;
+      }
     }
 
     /* Overlays, Notes Popover, Tooltip, Toast, Blackout */
@@ -418,6 +547,18 @@
       grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 0.75rem;
     }
+    .overlay .thumbs h3 {
+      grid-column: 1 / -1;
+      font: 700 11px/1 'IBM Plex Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FF6600;
+      margin: 0.4rem 0 0;
+    }
+    .overlay .thumb.is-skipped {
+      opacity: 0.5;
+      border-style: dashed;
+    }
 
     .notes-pop {
       position: fixed;
@@ -500,6 +641,161 @@
       background: var(--tc-surface);
       color: var(--tc-heading);
       border: 1px solid var(--tc-border);
+    }
+
+    /* Vue présentateur (fenêtre séparée ?presentateur) */
+    body.presenter {
+      overflow: auto;
+      background: #121316;
+      color: #E2E8F0;
+    }
+    .pv {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 16px;
+      padding: 18px;
+      height: 100vh;
+      box-sizing: border-box;
+    }
+    .pv-top {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #181A1F;
+      border: 2px solid #2A2E38;
+      box-shadow: 4px 4px 0 #090A0D;
+      font: 600 13px/1 'IBM Plex Mono', monospace;
+      color: #94A3B8;
+    }
+    .pv-top .pv-badge {
+      color: #FF6600;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .pv-top .timer {
+      font-size: 26px;
+      font-weight: 900;
+      color: #FF6600;
+    }
+    .pv-top .clock {
+      margin-left: auto;
+      color: #38BDF8;
+      font-weight: 700;
+    }
+    .pv-top button {
+      background: #1F222A;
+      border: 1.5px solid #2A2E38;
+      color: #F8FAFC;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font: 700 12px/1 'DM Sans', sans-serif;
+      cursor: pointer;
+    }
+    .pv-top button:hover {
+      border-color: #FF6600;
+      color: #FF6600;
+    }
+    .pv-top button.pv-primary {
+      background: #FF6600;
+      color: #121316;
+      border-color: #121316;
+    }
+    .pv-left,
+    .pv-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+    .pv-label {
+      font: 700 11px/1 'IBM Plex Mono', monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94A3B8;
+    }
+    .pv-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid #2A2E38;
+      background: #181A1F;
+      box-shadow: 4px 4px 0 #090A0D;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pv-left .cur {
+      flex: 1;
+      border-color: #FF6600;
+    }
+    .pv-right .next {
+      min-height: 150px;
+      opacity: 0.88;
+    }
+    .pv-preview-kicker {
+      font: 700 11px/1.2 'IBM Plex Mono', monospace;
+      color: #FF6600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .pv-preview-title {
+      font: 800 24px/1.2 'Chakra Petch', sans-serif;
+      color: #F8FAFC;
+      margin-top: 8px;
+    }
+    .pv-right .next .pv-preview-title {
+      font-size: 17px;
+    }
+    .pv-preview-meta {
+      font: 500 12px/1.4 'IBM Plex Mono', monospace;
+      color: #38BDF8;
+      margin-top: 10px;
+    }
+    .pv-notes {
+      flex: 1;
+      overflow: auto;
+      background: #181A1F;
+      border: 2px solid #2A2E38;
+      border-left: 4px solid #FF6600;
+      border-radius: 14px;
+      padding: 16px 18px;
+      font: 400 16px/1.6 'DM Sans', sans-serif;
+      color: #E2E8F0;
+    }
+    .pv-notes ul { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+    .pv-notes li { margin-bottom: 0.45rem; }
+
+    /* Impression / PDF : une diapo par page */
+    @media print {
+      @page { size: landscape; margin: 0; }
+      html, body { overflow: visible !important; height: auto !important; background: var(--tc-bg) !important; }
+      #tech-bg-canvas, .ambient-glow-1, .ambient-glow-2, .progress, #laser-dot,
+      #app-header, #app-footer, .overlay, .notes-pop, .tip, .toast, .blackout {
+        display: none !important;
+      }
+      #app-main {
+        position: static !important;
+        overflow: visible !important;
+        height: auto !important;
+      }
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: none !important;
+        min-height: 100vh;
+        page-break-after: always;
+        break-after: page;
+        padding: 20px !important;
+      }
     }
   </style>
 </head>
@@ -597,7 +893,7 @@
     <!-- DIAPOSITIVE 1 : RÉFÉRENCE DESIGN SYSTEM — TECH CANVAS             -->
     <!-- (À conserver comme guide ou à dupliquer/adapter pour vos slides)  -->
     <!-- ================================================================= -->
-    <section class="slide active" id="slide-0" data-short-title="Design System" data-timing="~1 min 15 s">
+    <section class="slide active" id="slide-0" data-chapitre="Design System" data-short-title="Design System" data-timing="~1 min 15 s">
 
       <!-- 1. VOLET VISUEL (GAUCHE - 7 COLONNES) : Couleurs, Polices & Composants -->
       <div class="zone-main col-span-12 lg:col-span-7 flex flex-col justify-between gap-3.5 h-full min-h-0 overflow-hidden p-2">
@@ -745,7 +1041,7 @@
               Contrôles intégrés &amp; Raccourcis (masqué en Express)
             </h4>
             <p class="text-xs xl:text-sm leading-relaxed pl-4 border-l-2" style="color: var(--tc-text); border-color: var(--tc-border-subtle);">
-              Navigation <kbd>←</kbd> <kbd>→</kbd> <kbd>1</kbd>–<kbd>9</kbd>, Focus <kbd>D</kbd>, Express <kbd>E</kbd>, Plan <kbd>O</kbd>, Notes <kbd>N</kbd>, Présentateur <kbd>P</kbd>, Glossaire <kbd>G</kbd>, FAQ <kbd>Q</kbd>, Laser <kbd>L</kbd>, Thème <kbd>T</kbd>, Plein écran <kbd>F</kbd>, Pause noire <kbd>B</kbd>, Rejouer <kbd>R</kbd> et Aide <kbd>?</kbd>.
+              Barre par chapitres (<code>data-chapitre</code>), saut Express (<code>data-express="non"</code>), annexes (<code>data-annexe</code>), vue présentateur synchronisée (<kbd>P</kbd>), balayage tactile, URL <code>#id</code>, impression PDF et raccourcis <kbd>←</kbd> <kbd>→</kbd> <kbd>PgDn</kbd> <kbd>D</kbd> <kbd>E</kbd> <kbd>O</kbd> <kbd>N</kbd> <kbd>G</kbd> <kbd>Q</kbd> <kbd>L</kbd> <kbd>T</kbd> <kbd>F</kbd> <kbd>B</kbd> <kbd>.</kbd> <kbd>R</kbd> <kbd>?</kbd>.
             </p>
           </div>
         </div>
@@ -761,31 +1057,58 @@
 
   </main>
 
+  <!-- Annonces lecteur d'écran -->
+  <div class="sr-only" id="sr-live" role="status" aria-live="polite"></div>
+
   <!-- ================= PIED DE PAGE : PROGRESSION, HUD & CONTRÔLES ================= -->
-  <footer id="app-footer" class="tc-bar relative z-20 px-4 xl:px-8 py-2.5 border-t-2 flex items-center justify-between gap-3 shrink-0">
+  <footer id="app-footer" class="tc-bar relative z-20 px-4 xl:px-8 py-2 border-t-2 flex items-center justify-between gap-3 shrink-0">
     <!-- Compteur + Barre de progression -->
     <div class="flex items-center gap-2.5 shrink-0">
       <span id="slide-counter" class="text-xs font-mono font-bold text-[#FF6600] whitespace-nowrap">01 / 01</span>
-      <div class="w-20 xl:w-32 h-2.5 tc-pill overflow-hidden hidden sm:block">
+      <div class="w-16 xl:w-28 h-2.5 tc-pill overflow-hidden hidden sm:block">
         <div id="progress-bar" class="h-full bg-gradient-to-r from-[#FF6600] to-[#38BDF8] transition-all duration-300" style="width: 100%;"></div>
       </div>
     </div>
 
-    <!-- Barre HUD harmonisée -->
-    <nav class="hud" aria-label="Contrôles de la présentation">
-      <button type="button" data-a="prev" title="Diapo précédente (←)" aria-label="Diapo précédente">◀</button>
-      <button type="button" data-a="next" title="Diapo suivante (→)" aria-label="Diapo suivante">▶</button>
-      <span class="chap text-[11px] font-mono hidden xl:inline max-w-[160px] truncate px-1.5" style="color: var(--tc-muted);">{{SLIDE_1_SHORT_TITLE}}</span>
-      <button type="button" data-a="express" title="Parcours express ou complet (E)" aria-pressed="false"><span class="mode">Complet</span></button>
-      <span class="count text-[11px] font-mono text-[#FF6600] font-bold px-1">1 / 1</span>
-      <button type="button" data-a="plan" title="Plan et annexes (O)">Plan</button>
-      <button type="button" data-a="notes" title="Notes d'orateur (N)" aria-pressed="false">Notes</button>
-      <button type="button" data-a="pres" title="Vue présentateur (P)">Présentateur</button>
-      <button type="button" data-a="glossaire" title="Glossaire (G)">G</button>
-      <button type="button" data-a="faq" title="Questions fréquentes (Q)">Q</button>
-      <button type="button" data-a="theme" title="Thème clair ou sombre (T)">◐</button>
-      <button type="button" data-a="full" title="Plein écran (F)">⛶</button>
-      <button type="button" data-a="aide" title="Aide et raccourcis (?)">?</button>
+    <!-- Barre HUD par chapitres & outils (icônes SVG harmonisées) -->
+    <nav class="hud" aria-label="Navigation de la présentation">
+      <button type="button" data-a="prev" title="Diapo précédente (←)" aria-label="Diapo précédente (←)">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="hud-chapters" role="group" aria-label="Diapositives par thème"></div>
+      <span class="count" title="Parcours complet">1 / 1</span>
+      <button type="button" data-a="next" title="Diapo suivante (→)" aria-label="Diapo suivante (→)">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <div class="hud-tools">
+        <button type="button" data-a="plan" title="Plan des diapositives et annexes (O)" aria-label="Plan des diapositives et annexes (O)">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        </button>
+        <button type="button" data-a="notes" title="Notes de présentation (N)" aria-label="Notes de présentation (N)" aria-expanded="false" aria-controls="notes-pop">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h4"/></svg>
+        </button>
+        <button type="button" data-a="express" title="Parcours express (E)" aria-label="Parcours express (E)" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m3 6 8 6-8 6zm10 0 8 6-8 6z"/></svg>
+        </button>
+        <button type="button" data-a="glossaire" title="Glossaire des termes techniques (G)" aria-label="Glossaire des termes techniques (G)">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </button>
+        <button type="button" data-a="faq" title="Questions fréquentes (Q)" aria-label="Questions fréquentes (Q)">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <button type="button" data-a="theme" title="Thème clair ou sombre (T)" aria-label="Thème clair ou sombre (T)" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18 7 7 0 010-18z"/></svg>
+        </button>
+        <button type="button" data-a="pres" title="Vue présentateur (P)" aria-label="Vue présentateur (P)">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="1"/><path d="M8 21h8"/></svg>
+        </button>
+        <button type="button" data-a="full" title="Plein écran (F)" aria-label="Plein écran (F)" aria-pressed="false">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+        <button type="button" data-a="aide" title="Aide et raccourcis (?)" aria-label="Aide et raccourcis (?)">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.5M12 17h.01"/></svg>
+        </button>
+      </div>
     </nav>
 
     <!-- Boutons Précédent / Suivant -->
@@ -804,26 +1127,26 @@
     <div class="panel">
       <h2 id="ov-aide-title">Raccourcis de la présentation <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
       <div class="keys">
-        <div><kbd>→</kbd><kbd>Espace</kbd> Diapo suivante</div>
-        <div><kbd>←</kbd> Diapo précédente</div>
+        <div><kbd>→</kbd><kbd>PgDn</kbd><kbd>Espace</kbd> Diapo suivante</div>
+        <div><kbd>←</kbd><kbd>PgUp</kbd><kbd>Maj</kbd>+<kbd>Espace</kbd> Diapo précédente</div>
         <div><kbd>1</kbd>–<kbd>9</kbd> Accès direct diapo</div>
         <div><kbd>Début</kbd><kbd>Fin</kbd> Première / dernière diapo</div>
-        <div><kbd>P</kbd> Vue présentateur (minuteur, notes, suivante)</div>
+        <div><kbd>P</kbd> Vue présentateur (fenêtre séparée synchronisée)</div>
         <div><kbd>N</kbd> Notes dans cette fenêtre</div>
-        <div><kbd>E</kbd> Parcours express ou complet</div>
-        <div><kbd>O</kbd> Plan : diapositives &amp; annexes</div>
+        <div><kbd>E</kbd> Parcours express (saute <code>data-express="non"</code>) ou complet</div>
+        <div><kbd>O</kbd> Plan : diapositives par chapitre &amp; annexes</div>
         <div><kbd>Q</kbd> Questions fréquentes, avec recherche</div>
         <div><kbd>G</kbd> Glossaire des mots techniques</div>
         <div><kbd>D</kbd> Mode Split-Screen / Focus visuel</div>
         <div><kbd>L</kbd> Pointeur laser interactif</div>
         <div><kbd>F</kbd> Plein écran</div>
-        <div><kbd>B</kbd> Écran noir (pause)</div>
-        <div><kbd>T</kbd> Thème clair ou sombre</div>
+        <div><kbd>B</kbd><kbd>.</kbd> Écran noir (pause — toute touche reprend)</div>
+        <div><kbd>T</kbd> Thème clair ou sombre (mémorisé)</div>
         <div><kbd>R</kbd> Rejouer animations &amp; compteurs</div>
-        <div><kbd>?</kbd> Afficher cette aide</div>
-        <div><kbd>Échap</kbd> Fermer un panneau / annexe</div>
+        <div><kbd>?</kbd><kbd>H</kbd> Afficher cette aide</div>
+        <div><kbd>Échap</kbd> Fermer un panneau / quitter une annexe</div>
       </div>
-      <p class="text-xs" style="color: var(--tc-muted);">Les mots soulignés en pointillé (<code>&lt;dfn&gt;</code>) affichent une définition au survol, au focus clavier ou au clic.</p>
+      <p class="text-xs" style="color: var(--tc-muted);">Les mots soulignés en pointillé (<code>&lt;dfn&gt;</code>) affichent une définition au survol, au focus clavier ou au clic. Balayage tactile horizontal pris en charge. Les diapos marquées <code>data-express="non"</code> sont sautées en parcours express.</p>
     </div>
   </div>
 
@@ -882,7 +1205,13 @@
 
   <div class="overlay" id="ov-pres" role="dialog" aria-modal="true" aria-labelledby="ov-pres-title">
     <div class="panel">
-      <h2 id="ov-pres-title">Vue présentateur <button type="button" class="x" onclick="closeOverlays()">Fermer</button></h2>
+      <h2 id="ov-pres-title">
+        <span>Vue présentateur</span>
+        <span class="flex items-center gap-2">
+          <button type="button" class="x" onclick="openPresenterWindow(true)">Fenêtre séparée ↗</button>
+          <button type="button" class="x" onclick="closeOverlays()">Fermer</button>
+        </span>
+      </h2>
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
         <div class="md:col-span-5 space-y-2.5">
           <div class="p-3 rounded-xl border" style="background: var(--tc-elevated); border-color: var(--tc-border-subtle);">
@@ -922,15 +1251,33 @@
 
   <!-- ================= MOTEUR JAVASCRIPT DE PRÉSENTATION & CANVAS ================= -->
   <script>
+    const params = new URLSearchParams(location.search);
+    const IS_PRESENTER = params.has('presentateur');
     const slides = Array.from(document.querySelectorAll('section.slide'));
+    const byId = {};
+    slides.forEach((s, i) => { if (s.id) byId[s.id] = i; });
 
-    // [TEMPLATE_NOTES] : Définir ici les notes d'orateur de chaque diapositive (ou laisser les attributs data-* des <section>)
+    const store = {
+      get(k, d) {
+        try {
+          const v = localStorage.getItem('ob-pres-' + k);
+          return v === null ? d : v;
+        } catch (e) {
+          return d;
+        }
+      },
+      set(k, v) {
+        try { localStorage.setItem('ob-pres-' + k, v); } catch (e) { /* stockage indisponible */ }
+      }
+    };
+
+    // [TEMPLATE_NOTES] : Définir ici les notes d'orateur de chaque diapositive (ou utiliser <div class="notes hidden"> dans chaque <section>)
     const SPEAKER_NOTES = [
       {
         title: 'Diapositive 1 — Design System Tech Canvas',
         timing: '0:00 → 1:15 (~1 min 15 s)',
         express: '<strong>Essentiel :</strong> Palette Tech Canvas (<code>#FF6600</code>, <code>#38BDF8</code>, <code>#121316</code>, <code>#F4F1EA</code>) + Pack Ingénierie &amp; IA (<code>Chakra Petch</code>, <code>Oswald</code>, <code>DM Sans</code>, <code>IBM Plex Mono</code>).',
-        full: '<strong>1. Identité :</strong> Fiche de référence du Design System Tech Canvas alignée sur le portfolio V6 (Astro).<br/><strong>2. Réutilisation :</strong> Dupliquer <code>&lt;section class="slide"&gt;</code>, ajouter le bouton correspondant dans <code>#top-nav</code> et renseigner <code>SPEAKER_NOTES</code>.'
+        full: '<strong>1. Identité :</strong> Fiche de référence du Design System Tech Canvas alignée sur le portfolio V6 (Astro).<br/><strong>2. Réutilisation :</strong> Dupliquer <code>&lt;section class="slide" data-chapitre="..."&gt;</code>, ajouter le bouton correspondant dans <code>#top-nav</code> et renseigner <code>SPEAKER_NOTES</code>.'
       }
     ];
 
@@ -948,21 +1295,27 @@
     const STATE = {
       slide: 0,
       total: slides.length,
-      theme: 'dark',
-      express: false,
+      theme: store.get('theme', 'dark'),
+      express: store.get('express', '0') === '1',
       focusVisual: false,
       laser: false,
       notesOpen: false,
       blackout: false,
       activeOverlay: null,
       planAnnex: null,
+      returnTo: null,
       lastFocused: null,
       timerSeconds: 0,
       timerId: null
     };
 
+    const visited = new Set();
+    let presenterWin = null;
     let toastTimer = null;
     let animHandles = [];
+    const hud = document.querySelector('nav.hud');
+    const chaptersEl = hud ? hud.querySelector('.hud-chapters') : null;
+    const hudMarkers = [];
 
     function escHtml(v) {
       return String(v ?? '').replace(/[&<>"']/g, (ch) => ({
@@ -974,18 +1327,42 @@
       return String(num).padStart(2, '0');
     }
 
+    function isAnnexe(i) {
+      return Boolean(slides[i] && slides[i].dataset.annexe !== undefined);
+    }
+
+    function inPath(i) {
+      if (!slides[i] || isAnnexe(i)) return false;
+      if (STATE.express && slides[i].dataset.express === 'non') return false;
+      return true;
+    }
+
+    function getPath() {
+      const p = slides.map((_, i) => i).filter(inPath);
+      return p.length ? p : slides.map((_, i) => i);
+    }
+
+    function nearestInPath(i) {
+      const p = getPath();
+      let best = p[0] ?? 0;
+      p.forEach((j) => { if (j <= i) best = j; });
+      return best;
+    }
+
     function getSlideMeta(index) {
       const el = slides[index];
       const h2 = el ? el.querySelector('h2')?.textContent?.trim() : '';
-      const shortTitle = el?.getAttribute('data-short-title') || h2 || `Diapo ${index + 1}`;
+      const shortTitle = el?.getAttribute('data-short-title') || el?.getAttribute('data-titre') || h2 || `Diapo ${index + 1}`;
+      const chapitre = el?.getAttribute('data-chapitre') || (isAnnexe(index) ? 'Annexes' : 'Présentation');
       const timing = el?.getAttribute('data-timing') || '';
+      const inlineNotes = el?.querySelector('.notes')?.innerHTML?.trim() || '';
       const note = SPEAKER_NOTES[index] || {
         title: `Diapositive ${index + 1} — ${shortTitle}`,
         timing: timing || '—',
-        express: `<strong>Essentiel :</strong> ${escHtml(h2 || shortTitle)}`,
-        full: `<strong>Notes :</strong> ${escHtml(h2 || shortTitle)}`
+        express: inlineNotes || `<strong>Essentiel :</strong> ${escHtml(h2 || shortTitle)}`,
+        full: inlineNotes || `<strong>Notes :</strong> ${escHtml(h2 || shortTitle)}`
       };
-      return { shortTitle, timing, note };
+      return { shortTitle, chapitre, timing, h2, note };
     }
 
     function showToast(msg) {
@@ -995,6 +1372,19 @@
       el.classList.add('open');
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => el.classList.remove('open'), 2200);
+    }
+
+    function announceSlide(index) {
+      const srLive = document.getElementById('sr-live');
+      if (!srLive || !slides[index]) return;
+      const p = getPath();
+      const pos = p.indexOf(index);
+      const { shortTitle } = getSlideMeta(index);
+      srLive.textContent = (isAnnexe(index)
+        ? 'Annexe : '
+        : pos >= 0
+          ? `Diapo ${pos + 1} sur ${p.length} : `
+          : '') + shortTitle;
     }
 
     function hideTip() {
@@ -1049,8 +1439,10 @@
       if (presNotes) presNotes.innerHTML = bodyHtml;
       if (presTiming) presTiming.textContent = note.timing;
       if (presNext) {
-        const nextIdx = (STATE.slide + 1) % STATE.total;
-        if (STATE.total <= 1 || nextIdx === 0) {
+        const p = getPath();
+        const pos = p.indexOf(STATE.slide);
+        const nextIdx = pos >= 0 ? p[(pos + 1) % p.length] : nearestInPath(STATE.slide);
+        if (p.length <= 1 || nextIdx === p[0]) {
           presNext.textContent = 'Fin de la présentation (retour Diapo 1)';
         } else {
           const nextMeta = getSlideMeta(nextIdx);
@@ -1059,33 +1451,155 @@
       }
     }
 
+    function buildChapterBar() {
+      if (!chaptersEl) return;
+      chaptersEl.innerHTML = '';
+      hudMarkers.length = 0;
+      let lastChapter = null;
+      let row = null;
+      slides.forEach((slide, i) => {
+        if (isAnnexe(i)) return;
+        const name = getSlideMeta(i).chapitre;
+        if (name !== lastChapter) {
+          const group = document.createElement('div');
+          group.className = 'hud-chapter';
+          group.setAttribute('role', 'group');
+          group.setAttribute('aria-label', name);
+          const label = document.createElement('span');
+          label.className = 'hud-label';
+          label.textContent = name;
+          row = document.createElement('div');
+          row.className = 'hud-segments';
+          group.append(label, row);
+          chaptersEl.appendChild(group);
+          lastChapter = name;
+        }
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.className = 'hud-marker';
+        marker.dataset.slideIndex = String(i);
+        marker.tabIndex = -1;
+        row.appendChild(marker);
+        hudMarkers.push(marker);
+      });
+    }
+
+    function updateHud() {
+      if (!hud) return;
+      const p = getPath();
+      const shown = isAnnexe(STATE.slide) ? (STATE.returnTo ?? nearestInPath(STATE.slide)) : STATE.slide;
+      const pos = p.indexOf(shown);
+      const count = hud.querySelector('.count');
+      if (count) {
+        count.title = pos < 0 ? 'Diapo hors parcours express' : STATE.express ? 'Parcours express' : 'Parcours complet';
+        count.textContent = pos >= 0 ? `${pos + 1} / ${p.length}` : `${shown + 1} / ${Math.max(1, hudMarkers.length)}`;
+      }
+      hud.querySelector('[data-a="express"]')?.setAttribute('aria-pressed', String(STATE.express));
+      hud.querySelector('[data-a="theme"]')?.setAttribute('aria-pressed', String(STATE.theme === 'light'));
+      hud.querySelector('[data-a="notes"]')?.setAttribute('aria-expanded', String(STATE.notesOpen));
+      hud.querySelector('[data-a="full"]')?.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
+
+      hudMarkers.forEach((marker, position) => {
+        const i = Number(marker.dataset.slideIndex);
+        const optional = !inPath(i);
+        const title = `Diapo ${position + 1} · ${getSlideMeta(i).shortTitle}${optional ? ' (hors express)' : ''}`;
+        marker.title = title;
+        marker.setAttribute('aria-label', title);
+        marker.classList.toggle('visited', visited.has(i));
+        marker.classList.toggle('optional', optional);
+        if (i === shown) {
+          marker.setAttribute('aria-current', 'step');
+          marker.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        } else {
+          marker.removeAttribute('aria-current');
+        }
+        marker.tabIndex = i === shown ? 0 : -1;
+      });
+    }
+
     function renderPlanThumbs() {
       const wrap = document.getElementById('plan-thumbs');
       if (!wrap) return;
-      wrap.innerHTML = slides.map((_, idx) => {
-        const { shortTitle, timing } = getSlideMeta(idx);
-        const active = idx === STATE.slide;
-        return `
-          <button type="button" class="thumb text-left p-3 rounded-xl border-2 transition-all" data-slide="${idx}"
-            style="background: var(--tc-elevated); border-color: ${active ? '#FF6600' : 'var(--tc-border)'};">
-            <div class="text-[10px] font-mono text-[#FF6600] font-bold">DIAPO ${idx + 1}${timing ? ' • ' + escHtml(timing) : ''}</div>
+      wrap.innerHTML = '';
+      let lastChap = null;
+      const groups = [
+        slides.map((_, i) => i).filter((i) => !isAnnexe(i)),
+        slides.map((_, i) => i).filter(isAnnexe)
+      ];
+      groups.forEach((group, gi) => {
+        group.forEach((idx) => {
+          const { shortTitle, chapitre, timing } = getSlideMeta(idx);
+          const chapLabel = gi === 1 ? 'Annexes (à la demande)' : chapitre;
+          if (chapLabel !== lastChap) {
+            const h = document.createElement('h3');
+            h.textContent = chapLabel;
+            wrap.appendChild(h);
+            lastChap = chapLabel;
+          }
+          const active = idx === STATE.slide;
+          const skipped = gi === 0 && !inPath(idx);
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `thumb text-left p-3 rounded-xl border-2 transition-all${active ? ' is-current' : ''}${skipped ? ' is-skipped' : ''}`;
+          btn.dataset.slide = String(idx);
+          btn.style.background = 'var(--tc-elevated)';
+          btn.style.borderColor = active ? '#FF6600' : 'var(--tc-border)';
+          btn.innerHTML = `
+            <div class="text-[10px] font-mono text-[#FF6600] font-bold">
+              ${gi === 1 ? 'ANNEXE' : `DIAPO ${idx + 1}`}${timing ? ' • ' + escHtml(timing) : ''}${skipped ? ' • hors express' : ''}
+            </div>
             <div class="text-sm font-bold mt-0.5" style="color: var(--tc-heading);">${escHtml(shortTitle)}</div>
-          </button>
-        `;
-      }).join('');
-      wrap.querySelectorAll('[data-slide]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          goToSlide(Number(btn.getAttribute('data-slide')));
-          closeOverlays();
+          `;
+          btn.addEventListener('click', () => {
+            closeOverlays();
+            if (isAnnexe(idx)) openAnnexe(slides[idx].id);
+            else { STATE.returnTo = null; goToSlide(idx); }
+          });
+          wrap.appendChild(btn);
         });
       });
     }
 
-    function updateSlides() {
+    function syncPresenter() {
+      if (presenterWin && !presenterWin.closed) {
+        try {
+          presenterWin.postMessage({ obPres: 'etat', index: STATE.slide, express: STATE.express }, '*');
+        } catch (e) { /* fenêtre fermée */ }
+      }
+    }
+
+    function openPresenterWindow(fromModal) {
+      if (fromModal) closeOverlays();
+      const slideId = slides[STATE.slide]?.id || `slide-${STATE.slide}`;
+      const url = location.href.split('#')[0].split('?')[0] + '?presentateur#' + slideId;
+      presenterWin = window.open(url, 'ob-presentateur', 'width=1280,height=800');
+      if (!presenterWin) {
+        showToast('Fenêtre surgissante bloquée : ouverture en vue intégrée');
+        openOverlay('ov-pres');
+      }
+    }
+
+    function isMyPresenter(src) {
+      if (!src) return false;
+      if (src === presenterWin) return true;
+      try { return src.opener === window; } catch (e) { return false; }
+    }
+
+    function updateSlides(opts) {
+      opts = opts || {};
+      visited.add(STATE.slide);
+
       slides.forEach((slide, index) => {
         slide.classList.remove('active', 'prev');
-        if (index === STATE.slide) slide.classList.add('active');
-        else if (index < STATE.slide) slide.classList.add('prev');
+        if (index === STATE.slide) {
+          slide.classList.add('active');
+          slide.removeAttribute('aria-hidden');
+          slide.inert = false;
+        } else {
+          if (index < STATE.slide) slide.classList.add('prev');
+          slide.setAttribute('aria-hidden', 'true');
+          slide.inert = true;
+        }
       });
 
       document.querySelectorAll('#top-nav .slide-nav-btn').forEach((btn, idx) => {
@@ -1098,25 +1612,28 @@
         }
       });
 
-      const pct = ((STATE.slide + 1) / Math.max(1, STATE.total)) * 100;
+      const p = getPath();
+      const pos = p.indexOf(STATE.slide);
+      const ratio = pos >= 0 ? (pos + 1) / Math.max(1, p.length) : (STATE.slide + 1) / Math.max(1, STATE.total);
+      const pct = ratio * 100;
       const bar = document.getElementById('progress-bar');
       const topFill = document.getElementById('top-progress-fill');
       if (bar) bar.style.width = `${pct}%`;
       if (topFill) topFill.style.width = `${pct}%`;
 
       const sc = document.getElementById('slide-counter');
-      if (sc) sc.textContent = `${formatNumber(STATE.slide + 1)} / ${formatNumber(STATE.total)}`;
-
-      const hudCount = document.querySelector('nav.hud .count');
-      const hudChap = document.querySelector('nav.hud .chap');
-      if (hudCount) hudCount.textContent = `${STATE.slide + 1} / ${STATE.total}`;
-      if (hudChap) hudChap.textContent = `${STATE.slide + 1}. ${getSlideMeta(STATE.slide).shortTitle}`;
+      if (sc) {
+        sc.textContent = pos >= 0
+          ? `${formatNumber(pos + 1)} / ${formatNumber(p.length)}`
+          : `${formatNumber(STATE.slide + 1)} / ${formatNumber(STATE.total)}`;
+      }
 
       const btnPrev = document.getElementById('btn-prev');
       const btnNext = document.getElementById('btn-next');
-      if (btnPrev) btnPrev.disabled = STATE.slide === 0;
+      if (btnPrev) btnPrev.disabled = p.length <= 1;
       if (btnNext) {
-        btnNext.innerHTML = STATE.slide === STATE.total - 1
+        const isLast = pos === p.length - 1;
+        btnNext.innerHTML = isLast
           ? 'Recommencer <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>'
           : 'Suivant <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>';
       }
@@ -1126,25 +1643,75 @@
       if (g1) g1.style.transform = `translate(${STATE.slide * 5}%, ${STATE.slide * 3}%)`;
       if (g2) g2.style.transform = `translate(-${STATE.slide * 4}%, -${STATE.slide * 3}%)`;
 
+      const currentId = slides[STATE.slide]?.id;
+      if (!opts.noHash && currentId && location.hash.slice(1) !== currentId) {
+        try { history.replaceState(null, '', '#' + currentId); } catch (e) { /* file:// restreint */ }
+      }
+
       hideTip();
+      updateHud();
       renderNotesContent();
+      syncPresenter();
+      announceSlide(STATE.slide);
     }
 
-    function goToSlide(index) {
-      STATE.slide = Math.max(0, Math.min(STATE.total - 1, Number(index)));
-      updateSlides();
+    function goToSlide(index, opts) {
+      const idx = Math.max(0, Math.min(STATE.total - 1, Number(index)));
+      if (!Number.isFinite(idx)) return;
+      STATE.slide = idx;
+      updateSlides(opts);
+    }
+
+    function stepSlide(dir) {
+      if (isAnnexe(STATE.slide)) {
+        const back = STATE.returnTo !== null ? STATE.returnTo : nearestInPath(STATE.slide);
+        STATE.returnTo = null;
+        goToSlide(back);
+        return;
+      }
+      const p = getPath();
+      if (!inPath(STATE.slide)) {
+        let j = dir > 0
+          ? p.find((x) => x > STATE.slide)
+          : p.slice().reverse().find((x) => x < STATE.slide);
+        if (j === undefined) j = dir > 0 ? p[0] : p[p.length - 1];
+        goToSlide(j);
+        return;
+      }
+      const pos = p.indexOf(STATE.slide);
+      goToSlide(p[(pos + dir + p.length) % p.length]);
     }
 
     function nextSlide() {
-      STATE.slide = STATE.slide < STATE.total - 1 ? STATE.slide + 1 : 0;
-      updateSlides();
+      stepSlide(1);
     }
 
     function prevSlide() {
-      if (STATE.slide > 0) {
-        STATE.slide--;
-        updateSlides();
+      stepSlide(-1);
+    }
+
+    function openAnnexe(id) {
+      if (byId[id] !== undefined) {
+        if (!isAnnexe(STATE.slide)) STATE.returnTo = STATE.slide;
+        goToSlide(byId[id]);
+      } else if (ANNEXES[id]) {
+        openOverlay('ov-plan');
+        openPlanAnnex(id);
       }
+    }
+
+    function applyTheme(t, silent) {
+      STATE.theme = t === 'light' ? 'light' : 'dark';
+      const isDark = STATE.theme === 'dark';
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.dataset.theme = STATE.theme;
+      store.set('theme', STATE.theme);
+      updateHud();
+      if (!silent) showToast(isDark ? 'Thème sombre activé' : 'Thème clair activé');
+    }
+
+    function toggleTheme() {
+      applyTheme(STATE.theme === 'dark' ? 'light' : 'dark', false);
     }
 
     function toggleFocusMode() {
@@ -1153,14 +1720,6 @@
       const lbl = document.getElementById('focus-label');
       if (lbl) lbl.textContent = STATE.focusVisual ? 'Focus Visuel' : 'Split-Screen';
       showToast(STATE.focusVisual ? 'Mode Focus Visuel activé' : 'Mode Split-Screen restauré');
-    }
-
-    function toggleTheme() {
-      STATE.theme = STATE.theme === 'dark' ? 'light' : 'dark';
-      const isDark = STATE.theme === 'dark';
-      document.documentElement.classList.toggle('dark', isDark);
-      document.documentElement.dataset.theme = STATE.theme;
-      showToast(isDark ? 'Thème sombre activé' : 'Thème clair activé');
     }
 
     function toggleLaser() {
@@ -1232,33 +1791,43 @@
     }
 
     function toggleFullscreen() {
-      const icon = document.getElementById('fs-icon');
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen?.().catch(() => {});
-        if (icon) icon.className = 'fa-solid fa-compress';
       } else {
         document.exitFullscreen?.().catch(() => {});
-        if (icon) icon.className = 'fa-solid fa-expand';
+      }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+      const isFs = Boolean(document.fullscreenElement);
+      const icon = document.getElementById('fs-icon');
+      if (icon) icon.className = isFs ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
+      updateHud();
+    });
+
+    function applyExpress(enabled, silent) {
+      STATE.express = Boolean(enabled);
+      document.body.classList.toggle('mode-express', STATE.express);
+      store.set('express', STATE.express ? '1' : '0');
+      updateHud();
+      renderNotesContent();
+      syncPresenter();
+      if (!silent) {
+        showToast(STATE.express
+          ? 'Parcours Express : diapos optionnelles et détails masqués'
+          : 'Parcours Complet activé');
       }
     }
 
     function toggleExpress() {
-      STATE.express = !STATE.express;
-      document.body.classList.toggle('mode-express', STATE.express);
-      const modeSpan = document.querySelector('nav.hud .mode');
-      if (modeSpan) modeSpan.textContent = STATE.express ? 'Express' : 'Complet';
-      const btn = document.querySelector('nav.hud [data-a="express"]');
-      if (btn) btn.setAttribute('aria-pressed', String(STATE.express));
-      renderNotesContent();
-      showToast(STATE.express ? 'Parcours Express activé' : 'Parcours Complet activé');
+      applyExpress(!STATE.express, false);
     }
 
     function toggleNotes(force) {
       STATE.notesOpen = typeof force === 'boolean' ? force : !STATE.notesOpen;
       const pop = document.getElementById('notes-pop');
       if (pop) pop.classList.toggle('open', STATE.notesOpen);
-      const btn = document.querySelector('nav.hud [data-a="notes"]');
-      if (btn) btn.setAttribute('aria-pressed', String(STATE.notesOpen));
+      updateHud();
       renderNotesContent();
     }
 
@@ -1269,12 +1838,33 @@
       showToast(STATE.blackout ? 'Écran noir (pause)' : 'Reprise de la présentation');
     }
 
+    function trapTab(e, overlay) {
+      const focusables = Array.from(
+        overlay.querySelectorAll('button, input, a[href], [tabindex]:not([tabindex="-1"])')
+      ).filter((el) => el.offsetParent !== null && !el.disabled);
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!overlay.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
     function openOverlay(id) {
       if (STATE.activeOverlay === id) {
         closeOverlays();
         return;
       }
-      STATE.lastFocused = document.activeElement;
+      if (!STATE.activeOverlay && document.activeElement && document.activeElement !== document.body) {
+        STATE.lastFocused = document.activeElement;
+      }
       document.querySelectorAll('.overlay.open').forEach((ov) => ov.classList.remove('open'));
       hideTip();
       STATE.activeOverlay = id;
@@ -1288,19 +1878,24 @@
         target.classList.add('open');
         syncInertBackground(true);
         const focusEl = target.querySelector('input[type="search"], button.x');
-        if (focusEl) focusEl.focus();
+        if (focusEl) setTimeout(() => focusEl.focus(), 20);
       }
     }
 
     function closeOverlays() {
-      document.querySelectorAll('.overlay.open').forEach((ov) => ov.classList.remove('open'));
+      let had = false;
+      document.querySelectorAll('.overlay.open').forEach((ov) => {
+        ov.classList.remove('open');
+        had = true;
+      });
       STATE.activeOverlay = null;
       STATE.planAnnex = null;
       syncInertBackground(false);
-      if (STATE.lastFocused && typeof STATE.lastFocused.focus === 'function') {
-        STATE.lastFocused.focus();
+      if (had && STATE.lastFocused && document.contains(STATE.lastFocused)) {
+        try { STATE.lastFocused.focus(); } catch (e) { /* élément disparu */ }
       }
-      STATE.lastFocused = null;
+      if (had) STATE.lastFocused = null;
+      return had;
     }
 
     function openPlanAnnex(annexKey) {
@@ -1328,6 +1923,7 @@
       if (STATE.activeOverlay === 'ov-plan' && STATE.planAnnex !== null) { closePlanAnnex(); return; }
       if (STATE.activeOverlay !== null) { closeOverlays(); return; }
       if (STATE.notesOpen) { toggleNotes(false); return; }
+      if (isAnnexe(STATE.slide)) { stepSlide(-1); return; }
       hideTip();
     }
 
@@ -1363,240 +1959,438 @@
       showToast('Animations et compteurs rejoués');
     }
 
-    /* ================= LIAISONS HUD, RECHERCHE, DFN & CLAVIER ================= */
-    document.querySelectorAll('nav.hud [data-a]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const action = btn.getAttribute('data-a');
-        if (action === 'prev') prevSlide();
-        else if (action === 'next') nextSlide();
-        else if (action === 'express') toggleExpress();
-        else if (action === 'plan') openOverlay('ov-plan');
-        else if (action === 'notes') toggleNotes();
-        else if (action === 'pres') openOverlay('ov-pres');
-        else if (action === 'glossaire') openOverlay('ov-glossaire');
-        else if (action === 'faq') openOverlay('ov-faq');
-        else if (action === 'theme') toggleTheme();
-        else if (action === 'full') toggleFullscreen();
-        else if (action === 'aide') openOverlay('ov-aide');
+    /* ================= MODE PRÉSENTATEUR (FENÊTRE SÉPARÉE ?presentateur) ================= */
+    if (IS_PRESENTER) {
+      document.body.className = 'presenter';
+      ['app-header', 'app-main', 'app-footer', 'tech-bg-canvas', 'glow1', 'glow2', 'laser-dot'].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
       });
-    });
+      const topProg = document.querySelector('.progress');
+      if (topProg) topProg.style.display = 'none';
 
-    document.querySelectorAll('#ov-plan [data-annex]').forEach((btn) => {
-      btn.addEventListener('click', () => openPlanAnnex(btn.getAttribute('data-annex')));
-    });
+      const pv = document.createElement('div');
+      pv.className = 'pv';
+      pv.innerHTML =
+        '<div class="pv-top">' +
+          '<span class="pv-badge">VUE PRÉSENTATEUR</span>' +
+          '<span class="timer">00:00</span>' +
+          '<button type="button" data-a="pause">Pause</button>' +
+          '<button type="button" data-a="zero">Remettre à zéro</button>' +
+          '<span class="pos"></span>' +
+          '<span class="clock"></span>' +
+          '<button type="button" data-a="prev">◀ Précédente</button>' +
+          '<button type="button" data-a="next" class="pv-primary">Suivante ▶</button>' +
+        '</div>' +
+        '<div class="pv-left">' +
+          '<div class="pv-label">Diapo en cours</div>' +
+          '<div class="pv-frame cur"></div>' +
+        '</div>' +
+        '<div class="pv-right">' +
+          '<div class="pv-label">Suivante</div>' +
+          '<div class="pv-frame next"></div>' +
+          '<div class="pv-label">Notes d\'orateur</div>' +
+          '<div class="pv-notes"></div>' +
+        '</div>';
+      document.body.appendChild(pv);
 
-    document.querySelectorAll('.overlay').forEach((ov) => {
-      ov.addEventListener('click', (e) => {
-        if (e.target === ov) closeOverlays();
+      let start = Date.now(), paused = false, pausedAt = 0;
+      setInterval(() => {
+        const ms = paused ? pausedAt - start : Date.now() - start;
+        const m = Math.floor(ms / 60000), s = Math.floor(ms / 1000) % 60;
+        pv.querySelector('.timer').textContent = `${formatNumber(m)}:${formatNumber(s)}`;
+        pv.querySelector('.clock').textContent = new Date().toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' });
+      }, 500);
+
+      function sendNav(dir) {
+        if (window.opener) window.opener.postMessage({ obPres: 'nav', dir }, '*');
+      }
+
+      pv.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-a]');
+        if (!btn) return;
+        const a = btn.dataset.a;
+        if (a === 'pause') {
+          if (paused) { start += Date.now() - pausedAt; paused = false; btn.textContent = 'Pause'; }
+          else { paused = true; pausedAt = Date.now(); btn.textContent = 'Reprendre'; }
+        } else if (a === 'zero') {
+          start = Date.now(); pausedAt = start;
+        } else if (a === 'prev') sendNav(-1);
+        else if (a === 'next') sendNav(1);
       });
-    });
 
-    function wireSearch(inputId, listId) {
-      const input = document.getElementById(inputId);
-      const list = document.getElementById(listId);
-      if (!input || !list) return;
-      input.addEventListener('input', () => {
-        const q = input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const items = Array.from(list.querySelectorAll('.ov-item'));
-        let visible = 0;
-        items.forEach((it) => {
-          const hay = (it.getAttribute('data-search') || it.textContent || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-          const match = !q || hay.includes(q);
-          it.style.display = match ? '' : 'none';
-          if (match) visible++;
-        });
-        const empty = list.querySelector('.empty-state');
-        if (empty) {
-          empty.classList.toggle('hidden', visible > 0);
-          empty.style.display = visible === 0 ? 'block' : 'none';
+      function renderPresenter(index) {
+        STATE.slide = Math.max(0, Math.min(STATE.total - 1, index));
+        const curMeta = getSlideMeta(STATE.slide);
+        const p = getPath();
+        const pos = p.indexOf(STATE.slide);
+        const nextIdx = pos >= 0 ? p[(pos + 1) % p.length] : nearestInPath(STATE.slide);
+        const nextMeta = getSlideMeta(nextIdx);
+
+        pv.querySelector('.cur').innerHTML =
+          `<div><div class="pv-preview-kicker">${escHtml(curMeta.chapitre)} • ${isAnnexe(STATE.slide) ? 'ANNEXE' : `DIAPO ${STATE.slide + 1}`}</div>` +
+          `<div class="pv-preview-title">${escHtml(curMeta.h2 || curMeta.shortTitle)}</div></div>` +
+          `<div class="pv-preview-meta">${escHtml(curMeta.note.timing)}</div>`;
+
+        pv.querySelector('.next').innerHTML = (p.length <= 1 || nextIdx === p[0])
+          ? '<div style="display:grid;place-items:center;height:100%;color:#94A3B8;font-family:\'IBM Plex Mono\',monospace;font-size:13px;">Fin de la présentation (retour Diapo 1)</div>'
+          : `<div><div class="pv-preview-kicker">À suivre • ${escHtml(nextMeta.chapitre)}</div>` +
+            `<div class="pv-preview-title">${escHtml(nextMeta.h2 || nextMeta.shortTitle)}</div></div>` +
+            `<div class="pv-preview-meta">${escHtml(nextMeta.note.timing)}</div>`;
+
+        pv.querySelector('.pv-notes').innerHTML = STATE.express ? curMeta.note.express : curMeta.note.full;
+        pv.querySelector('.pos').textContent =
+          `${pos >= 0 ? `${pos + 1} / ${p.length}` : 'annexe'} · ${curMeta.shortTitle}${STATE.express ? ' · express' : ''}`;
+      }
+
+      window.addEventListener('message', (e) => {
+        if (e.source !== window.opener) return;
+        if (e.data && e.data.obPres === 'etat' && typeof e.data.index === 'number' && slides[e.data.index]) {
+          STATE.express = Boolean(e.data.express);
+          renderPresenter(e.data.index);
         }
       });
-    }
-    wireSearch('glossaire-search', 'glossaire-list');
-    wireSearch('faq-search', 'faq-list');
+      document.addEventListener('keydown', (e) => {
+        if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); sendNav(1); }
+        if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); sendNav(-1); }
+      });
 
-    document.querySelectorAll('dfn').forEach((el) => {
-      el.addEventListener('mouseenter', () => showTipFor(el));
-      el.addEventListener('focus', () => showTipFor(el));
-      el.addEventListener('click', (e) => { e.stopPropagation(); showTipFor(el); });
-      el.addEventListener('mouseleave', hideTip);
-      el.addEventListener('blur', hideTip);
-    });
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('dfn')) hideTip();
-    });
+      const startId = location.hash.slice(1);
+      renderPresenter(byId[startId] !== undefined ? byId[startId] : 0);
+      if (window.opener) window.opener.postMessage({ obPres: 'bonjour' }, '*');
+    } else {
+      /* ================= LIAISONS HUD, CHAPITRES, RECHERCHE, DFN, TACTILE & CLAVIER ================= */
+      buildChapterBar();
 
-    window.addEventListener('keydown', (e) => {
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-      const tag = e.target?.tagName ? e.target.tagName.toUpperCase() : '';
-      const inEditable = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || Boolean(e.target?.isContentEditable);
-      if (inEditable) {
-        if (e.key === 'Escape') {
+      if (chaptersEl) {
+        chaptersEl.addEventListener('keydown', (e) => {
+          const marker = e.target.closest('.hud-marker');
+          if (!marker) return;
+          const i = hudMarkers.indexOf(marker);
+          let next = i;
+          if (e.key === 'ArrowLeft') next = Math.max(0, i - 1);
+          else if (e.key === 'ArrowRight') next = Math.min(hudMarkers.length - 1, i + 1);
+          else if (e.key === 'Home') next = 0;
+          else if (e.key === 'End') next = hudMarkers.length - 1;
+          else return;
           e.preventDefault();
-          e.target.blur();
-          handleEscape();
-        }
-        return;
-      }
-
-      if (e.key === ' ') {
-        if (e.target?.closest('button, a[href], summary, [role="button"]')) return;
-        e.preventDefault();
-        nextSlide();
-        return;
-      }
-
-      if (e.key === 'Escape') { e.preventDefault(); handleEscape(); return; }
-      if (e.key === 'ArrowRight') { e.preventDefault(); nextSlide(); return; }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); return; }
-      if (e.key === 'Home') { e.preventDefault(); goToSlide(0); return; }
-      if (e.key === 'End') { e.preventDefault(); goToSlide(STATE.total - 1); return; }
-      if (e.key === '?') { e.preventDefault(); openOverlay('ov-aide'); return; }
-
-      if (e.key >= '1' && e.key <= '9') {
-        const targetIdx = parseInt(e.key, 10) - 1;
-        if (targetIdx < STATE.total) goToSlide(targetIdx);
-        return;
-      }
-
-      const k = e.key.toLowerCase();
-      if (k === 'd') toggleFocusMode();
-      else if (k === 'l') toggleLaser();
-      else if (k === 'f') toggleFullscreen();
-      else if (k === 'p') openOverlay('ov-pres');
-      else if (k === 'n') toggleNotes();
-      else if (k === 'o') openOverlay('ov-plan');
-      else if (k === 'g') openOverlay('ov-glossaire');
-      else if (k === 'q') openOverlay('ov-faq');
-      else if (k === 'e') toggleExpress();
-      else if (k === 't') toggleTheme();
-      else if (k === 'b') toggleBlackout();
-      else if (k === 'r') replayAnimations();
-    });
-
-    // Quadrillage animé réactif Tech Canvas (respecte prefers-reduced-motion & visibilitychange)
-    (function initTechCanvas() {
-      const canvas = document.getElementById('tech-bg-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let width = 0, height = 0;
-      let rafId = null;
-      const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-      const mouse = { x: -9999, y: -9999, active: false };
-      const gridStep = 48;
-      const particles = Array.from({ length: 24 }, (_, i) => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: 1.4 + Math.random() * 1.4,
-        color: i % 3 === 0 ? '#38BDF8' : '#FF6600'
-      }));
-
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        if (reducedMotion) drawFrame(0);
-      }
-
-      window.addEventListener('resize', resize, { passive: true });
-      window.addEventListener('mousemove', (e) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-        mouse.active = true;
-      }, { passive: true });
-      window.addEventListener('mouseleave', () => { mouse.active = false; });
-
-      function warpPoint(x, y, t) {
-        if (reducedMotion) return { x, y };
-        const wx = Math.sin(y * 0.01 + t * 0.9) * 3;
-        const wy = Math.cos(x * 0.01 + t * 0.75) * 3;
-        if (!mouse.active) return { x: x + wx, y: y + wy };
-        const dx = x - mouse.x;
-        const dy = y - mouse.y;
-        const dist = Math.hypot(dx, dy);
-        const radius = 170;
-        if (dist > 0 && dist < radius) {
-          const force = Math.pow(1 - dist / radius, 2) * 26;
-          return { x: x + wx + (dx / dist) * force, y: y + wy + (dy / dist) * force };
-        }
-        return { x: x + wx, y: y + wy };
-      }
-
-      function drawFrame(now) {
-        const t = now * 0.001;
-        const isDark = document.documentElement.classList.contains('dark');
-        ctx.clearRect(0, 0, width, height);
-
-        const driftX = reducedMotion ? 0 : (t * 10) % gridStep;
-        const driftY = reducedMotion ? 0 : (t * 7) % gridStep;
-        ctx.strokeStyle = isDark ? 'rgba(255, 102, 0, 0.08)' : 'rgba(255, 102, 0, 0.11)';
-        ctx.lineWidth = 1;
-
-        for (let x = -gridStep + driftX; x <= width + gridStep; x += gridStep) {
-          ctx.beginPath();
-          for (let y = 0; y <= height; y += 24) {
-            const p = warpPoint(x, y, t);
-            y === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
-          }
-          ctx.stroke();
-        }
-        for (let y = -gridStep + driftY; y <= height + gridStep; y += gridStep) {
-          ctx.beginPath();
-          for (let x = 0; x <= width; x += 24) {
-            const p = warpPoint(x, y, t);
-            x === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
-          }
-          ctx.stroke();
-        }
-
-        particles.forEach((p) => {
-          if (!reducedMotion) {
-            p.x = (p.x + p.vx + width) % width;
-            p.y = (p.y + p.vy + height) % height;
-          }
-          ctx.globalAlpha = isDark ? 0.55 : 0.45;
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
+          e.stopPropagation();
+          hudMarkers[next].focus();
         });
-        ctx.globalAlpha = 1;
       }
 
-      function render(now) {
-        drawFrame(now);
-        rafId = requestAnimationFrame(render);
+      if (hud) {
+        hud.addEventListener('click', (e) => {
+          const btn = e.target.closest('button');
+          if (!btn) return;
+          if (btn.dataset.slideIndex !== undefined) {
+            STATE.returnTo = null;
+            goToSlide(Number(btn.dataset.slideIndex));
+            if (e.detail > 0) btn.blur();
+            return;
+          }
+          const action = btn.dataset.a;
+          if (action === 'prev') prevSlide();
+          else if (action === 'next') nextSlide();
+          else if (action === 'express') toggleExpress();
+          else if (action === 'plan') openOverlay('ov-plan');
+          else if (action === 'notes') toggleNotes();
+          else if (action === 'pres') openPresenterWindow();
+          else if (action === 'glossaire') openOverlay('ov-glossaire');
+          else if (action === 'faq') openOverlay('ov-faq');
+          else if (action === 'theme') toggleTheme();
+          else if (action === 'full') toggleFullscreen();
+          else if (action === 'aide') openOverlay('ov-aide');
+          if (e.detail > 0) btn.blur();
+        });
       }
 
-      function startLoop() {
-        if (reducedMotion || rafId !== null) return;
-        rafId = requestAnimationFrame(render);
-      }
-
-      function stopLoop() {
-        if (rafId !== null) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      }
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopLoop();
-        else startLoop();
+      document.querySelectorAll('#ov-plan [data-annex]').forEach((btn) => {
+        btn.addEventListener('click', () => openPlanAnnex(btn.getAttribute('data-annex')));
       });
 
-      resize();
-      if (!reducedMotion) startLoop();
-    })();
+      document.querySelectorAll('.overlay').forEach((ov) => {
+        ov.addEventListener('click', (e) => {
+          if (e.target === ov) closeOverlays();
+        });
+      });
 
-    updateSlides();
-    syncTimerDisplays();
+      document.addEventListener('click', (e) => {
+        const sb = e.detail > 0 && e.target.closest('.slide button');
+        if (sb) setTimeout(() => { if (document.activeElement === sb) sb.blur(); }, 0);
+        const gotoEl = e.target.closest('[data-goto]');
+        if (gotoEl) { e.preventDefault(); openAnnexe(gotoEl.dataset.goto); }
+        const backEl = e.target.closest('[data-retour]');
+        if (backEl) { e.preventDefault(); stepSlide(-1); }
+        const ovEl = e.target.closest('[data-overlay]');
+        if (ovEl) { e.preventDefault(); openOverlay(ovEl.dataset.overlay); }
+        if (!e.target.closest('dfn')) hideTip();
+      });
+
+      window.addEventListener('message', (e) => {
+        const d = e.data;
+        if (!d || !d.obPres || !isMyPresenter(e.source)) return;
+        if (d.obPres === 'bonjour') { presenterWin = e.source; syncPresenter(); }
+        if (d.obPres === 'nav' && (d.dir === 1 || d.dir === -1)) stepSlide(d.dir);
+      });
+
+      window.addEventListener('hashchange', () => {
+        const idx = byId[location.hash.slice(1)];
+        if (idx !== undefined && idx !== STATE.slide) goToSlide(idx, { noHash: true });
+      });
+
+      function wireSearch(inputId, listId) {
+        const input = document.getElementById(inputId);
+        const list = document.getElementById(listId);
+        if (!input || !list) return;
+        input.addEventListener('input', () => {
+          const q = input.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const items = Array.from(list.querySelectorAll('.ov-item'));
+          let visible = 0;
+          items.forEach((it) => {
+            const hay = (it.getAttribute('data-search') || it.textContent || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const match = !q || hay.includes(q);
+            it.style.display = match ? '' : 'none';
+            if (match) visible++;
+          });
+          const empty = list.querySelector('.empty-state');
+          if (empty) {
+            empty.classList.toggle('hidden', visible > 0);
+            empty.style.display = visible === 0 ? 'block' : 'none';
+          }
+        });
+      }
+      wireSearch('glossaire-search', 'glossaire-list');
+      wireSearch('faq-search', 'faq-list');
+
+      document.querySelectorAll('dfn').forEach((el) => {
+        el.tabIndex = 0;
+        el.addEventListener('mouseenter', () => showTipFor(el));
+        el.addEventListener('focus', () => showTipFor(el));
+        el.addEventListener('click', (e) => { e.stopPropagation(); showTipFor(el); });
+        el.addEventListener('mouseleave', hideTip);
+        el.addEventListener('blur', hideTip);
+      });
+
+      /* ---------- Balayage tactile ---------- */
+      let touchX = null, touchY = null;
+      document.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+      }, { passive: true });
+      document.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        if (STATE.activeOverlay) { touchX = null; return; }
+        const dx = e.changedTouches[0].clientX - touchX;
+        const dy = e.changedTouches[0].clientY - touchY;
+        if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5 && !e.target.closest('canvas, .hud')) {
+          stepSlide(dx < 0 ? 1 : -1);
+        }
+        touchX = null;
+      }, { passive: true });
+
+      /* ---------- Clavier ---------- */
+      window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        const openOv = document.querySelector('.overlay.open');
+        if (openOv && e.key === 'Tab') {
+          trapTab(e, openOv);
+          return;
+        }
+
+        const tag = e.target?.tagName ? e.target.tagName.toUpperCase() : '';
+        const inEditable = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || Boolean(e.target?.isContentEditable);
+        if (inEditable) {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            e.target.blur();
+            handleEscape();
+          }
+          return;
+        }
+
+        const k = e.key.toLowerCase();
+        if (STATE.blackout && k !== 'b' && e.key !== '.') {
+          e.preventDefault();
+          toggleBlackout(false);
+          return;
+        }
+
+        if (openOv && ['ArrowRight', 'ArrowLeft', 'PageDown', 'PageUp', ' ', 'Home', 'End'].includes(e.key)) {
+          return;
+        }
+
+        if (e.key === ' ') {
+          if (e.target?.closest('button, a[href], summary, [role="button"]')) return;
+          e.preventDefault();
+          stepSlide(e.shiftKey ? -1 : 1);
+          return;
+        }
+
+        if (e.key === 'Escape') { e.preventDefault(); handleEscape(); return; }
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); return; }
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); return; }
+        if (e.key === 'Home') { e.preventDefault(); goToSlide(getPath()[0] ?? 0); return; }
+        if (e.key === 'End') { e.preventDefault(); const p = getPath(); goToSlide(p[p.length - 1] ?? (STATE.total - 1)); return; }
+        if (e.key === '?' || k === 'h') { e.preventDefault(); openOverlay('ov-aide'); return; }
+
+        if (e.key >= '1' && e.key <= '9') {
+          const targetIdx = parseInt(e.key, 10) - 1;
+          if (targetIdx < STATE.total) goToSlide(targetIdx);
+          return;
+        }
+
+        if (k === 'd') toggleFocusMode();
+        else if (k === 'l') toggleLaser();
+        else if (k === 'f') toggleFullscreen();
+        else if (k === 'p') openPresenterWindow();
+        else if (k === 'n') toggleNotes();
+        else if (k === 'o') openOverlay('ov-plan');
+        else if (k === 'g') { e.preventDefault(); openOverlay('ov-glossaire'); }
+        else if (k === 'q') { e.preventDefault(); openOverlay('ov-faq'); }
+        else if (k === 'e') toggleExpress();
+        else if (k === 't') toggleTheme();
+        else if (k === 'b' || e.key === '.') toggleBlackout();
+        else if (k === 'r') replayAnimations();
+      });
+
+      // Quadrillage animé réactif Tech Canvas (respecte prefers-reduced-motion & visibilitychange)
+      (function initTechCanvas() {
+        const canvas = document.getElementById('tech-bg-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width = 0, height = 0;
+        let rafId = null;
+        const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+        const mouse = { x: -9999, y: -9999, active: false };
+        const gridStep = 48;
+        const particles = Array.from({ length: 24 }, (_, i) => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: 1.4 + Math.random() * 1.4,
+          color: i % 3 === 0 ? '#38BDF8' : '#FF6600'
+        }));
+
+        function resize() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          if (reducedMotion) drawFrame(0);
+        }
+
+        window.addEventListener('resize', resize, { passive: true });
+        window.addEventListener('mousemove', (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+          mouse.active = true;
+        }, { passive: true });
+        window.addEventListener('mouseleave', () => { mouse.active = false; });
+
+        function warpPoint(x, y, t) {
+          if (reducedMotion) return { x, y };
+          const wx = Math.sin(y * 0.01 + t * 0.9) * 3;
+          const wy = Math.cos(x * 0.01 + t * 0.75) * 3;
+          if (!mouse.active) return { x: x + wx, y: y + wy };
+          const dx = x - mouse.x;
+          const dy = y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+          const radius = 170;
+          if (dist > 0 && dist < radius) {
+            const force = Math.pow(1 - dist / radius, 2) * 26;
+            return { x: x + wx + (dx / dist) * force, y: y + wy + (dy / dist) * force };
+          }
+          return { x: x + wx, y: y + wy };
+        }
+
+        function drawFrame(now) {
+          const t = now * 0.001;
+          const isDark = document.documentElement.classList.contains('dark');
+          ctx.clearRect(0, 0, width, height);
+
+          const driftX = reducedMotion ? 0 : (t * 10) % gridStep;
+          const driftY = reducedMotion ? 0 : (t * 7) % gridStep;
+          ctx.strokeStyle = isDark ? 'rgba(255, 102, 0, 0.08)' : 'rgba(255, 102, 0, 0.11)';
+          ctx.lineWidth = 1;
+
+          for (let x = -gridStep + driftX; x <= width + gridStep; x += gridStep) {
+            ctx.beginPath();
+            for (let y = 0; y <= height; y += 24) {
+              const p = warpPoint(x, y, t);
+              y === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+            }
+            ctx.stroke();
+          }
+          for (let y = -gridStep + driftY; y <= height + gridStep; y += gridStep) {
+            ctx.beginPath();
+            for (let x = 0; x <= width; x += 24) {
+              const p = warpPoint(x, y, t);
+              x === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+            }
+            ctx.stroke();
+          }
+
+          particles.forEach((p) => {
+            if (!reducedMotion) {
+              p.x = (p.x + p.vx + width) % width;
+              p.y = (p.y + p.vy + height) % height;
+            }
+            ctx.globalAlpha = isDark ? 0.55 : 0.45;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+        }
+
+        function render(now) {
+          drawFrame(now);
+          rafId = requestAnimationFrame(render);
+        }
+
+        function startLoop() {
+          if (reducedMotion || rafId !== null) return;
+          rafId = requestAnimationFrame(render);
+        }
+
+        function stopLoop() {
+          if (rafId !== null) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) stopLoop();
+          else startLoop();
+        });
+
+        resize();
+        if (!reducedMotion) startLoop();
+      })();
+
+      window.Deck = {
+        goTo: goToSlide,
+        step: stepSlide,
+        openAnnexe,
+        openPresenter: openPresenterWindow,
+        current: () => slides[STATE.slide],
+        toast: showToast
+      };
+
+      applyTheme(STATE.theme, true);
+      applyExpress(STATE.express, true);
+      const startIdx = byId[location.hash.slice(1)];
+      goToSlide(startIdx !== undefined ? startIdx : 0, { noHash: startIdx === undefined });
+      syncTimerDisplays();
+    }
   </script>
 </body>
 </html>
